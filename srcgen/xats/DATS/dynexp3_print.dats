@@ -55,7 +55,7 @@ FP0 = "./../SATS/filpath.sats"
 overload fprint with fprint_stamp
 //
 (* ****** ****** *)
-
+//
 #staload "./../SATS/xlabel0.sats"
 //
 #staload "./../SATS/lexing0.sats"
@@ -179,7 +179,7 @@ implement
 fprint_d3pat
   (out, x0) =
 (
-case- x0.node() of
+case+ x0.node() of
 //
 | D3Pnil() =>
   fprint!(out, "D3Pnil()")
@@ -614,6 +614,11 @@ x0.node() of
   fprint!
   ( out
   , "D3Eanno(", d3e1, "; ", s2e2, ")")
+//
+| D3Eexist1(s2es, d3e1) =>
+  fprint!
+  ( out
+  , "D3Eexist1(", s2es, "; ", d3e1, ")")
 //
 | D3Elcast(d3e1, lab2) =>
   fprint!
