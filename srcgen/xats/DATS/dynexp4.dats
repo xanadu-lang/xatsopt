@@ -105,6 +105,50 @@ end // end of [local]
 
 (* ****** ****** *)
 
+implement
+d4pat_none1
+( d3p0 ) =
+d4pat_make_node
+( loc0
+, s2e0, t2p0, node) where
+{
+  val loc0 = d3p0.loc()
+  val t2p0 = d3p0.type()
+  val s2e0 =
+  the_s2exp_none0(*void*)
+  val node = D4Pnone1(d3p0)
+}
+
+(* ****** ****** *)
+
+local
+
+absimpl
+f4arg_tbox = $rec{
+  f4arg_loc= loc_t
+, f4arg_node= f4arg_node
+} (* f4arg_tbox *)
+
+in (* in-of-local *)
+
+implement
+f4arg_get_loc(x0) = x0.f4arg_loc
+implement
+f4arg_get_node(x0) = x0.f4arg_node
+
+(* ****** ****** *)
+
+implement
+f4arg_make_node
+(loc, node) = $rec
+{
+  f4arg_loc= loc, f4arg_node= node
+} (* end of [f4arg_make_node] *)
+
+end // end of [local]
+
+(* ****** ****** *)
+
 local
 //
 absimpl
