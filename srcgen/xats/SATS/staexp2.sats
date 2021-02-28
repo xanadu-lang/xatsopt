@@ -719,6 +719,10 @@ datatype
 s2exp_node =
 //
 | S2Eint of (int) // integer
+(*
+| S2Eirp of string // intrep
+*)
+//
 | S2Ebtf of (bool) // boolean
 | S2Echr of (char) // character
 //
@@ -817,15 +821,28 @@ s2exp_btf(b0: bool): s2exp
 fun
 s2exp_chr(c0: char): s2exp
 //
+(* ****** ****** *)
+//
 fun
-s2exp_str(s0: string): s2exp
+s2exp_irp(rep: string): s2exp
+//
+fun
+s2exp_str(str: string): s2exp
 //
 (* ****** ****** *)
 //
 fun
 s2exp_cst(s2c: s2cst): s2exp
+//
+(* ****** ****** *)
+//
 fun
 s2exp_var(s2v: s2var): s2exp
+//
+(* ****** ****** *)
+//
+fun
+s2exp_xtv(xtv: s2xtv): s2exp
 //
 (* ****** ****** *)
 //
@@ -871,9 +888,13 @@ s2exp_app2
 fun
 s2exp_any(knd: int): s2exp
 //
+(* ****** ****** *)
+//
 fun
 s2exp_top
 (knd: int, s2e0: s2exp): s2exp
+//
+(* ****** ****** *)
 //
 fun
 s2exp_arg
@@ -881,6 +902,8 @@ s2exp_arg
 fun
 s2exp_atx
 (bef: s2exp, aft: s2exp): s2exp
+//
+(* ****** ****** *)
 //
 fun
 s2exp_fun_nil
@@ -899,20 +922,20 @@ s2exp_fun_full
 //
 fun
 s2exp_lam
-(s2as: s2varlst, s2e0: s2exp): s2exp
+(s2as: s2varlst, s2e1: s2exp): s2exp
 //
 fun
 s2exp_met
-(s2es: s2explst, s2e0: s2exp): s2exp
+(s2es: s2explst, s2e1: s2exp): s2exp
 //
 fun
 s2exp_exi
 ( s2vs: s2varlst
-, s2ps: s2explst, s2e0: s2exp): s2exp
+, s2ps: s2explst, s2e1: s2exp): s2exp
 fun
 s2exp_uni
 ( s2vs: s2varlst
-, s2ps: s2explst, s2e0: s2exp): s2exp
+, s2ps: s2explst, s2e1: s2exp): s2exp
 //
 fun
 s2exp_list1
@@ -938,6 +961,11 @@ fun
 s2exp_record2
 ( knd: int
 , labs2explst, labs2explst): s2exp
+//
+(* ****** ****** *)
+//
+fun
+s2exp_t2ype(t2p0: t2ype): s2exp
 //
 (* ****** ****** *)
 //
@@ -1222,25 +1250,6 @@ s2varlst_ismem
 //
 (* ****** ****** *)
 //
-fun
-s2exp_revar
-(s2exp, s2v1: s2var, s2v2: s2var): s2exp
-fun
-s2explst_revar
-(s2explst, s2v1: s2var, s2v2: s2var): s2explst
-fun
-s2explst_revar_vt
-(s2explst, s2v1: s2var, s2v2: s2var): s2explst_vt
-//
-(* ****** ****** *)
-//
-fun
-s2exp_whnfize(s2e0: s2exp): s2exp
-//
-overload whnfize with s2exp_whnfize
-//
-(* ****** ****** *)
-//
 abstype
 s2cstnul_tbox(l:addr) = ptr
 typedef
@@ -1424,6 +1433,69 @@ val the_excptn_ctype : s2cstref
 //
 val the_lazy_ctype : s2cstref//nonlin
 val the_llazy_ctype : s2cstref//linear
+//
+(* ****** ****** *)
+//
+fun
+s2exp_revar
+( s2e0: s2exp
+, s2v1: s2var, s2v2: s2var): s2exp
+//
+fun
+s2explst_revar
+( s2es: s2explst
+, s2v1: s2var, s2v2: s2var): s2explst
+//
+fun
+s2explst_revar_vt
+( s2es: s2explst
+, s2v1: s2var, s2v2: s2var): s2explst_vt
+//
+(* ****** ****** *)
+(*
+HX-2021-02-27:
+Various substitution-related functions
+*)
+(* ****** ****** *)
+//
+fun{}
+s2exp_whnfz
+  (s2e0: t2ype): s2exp
+fun{}
+s2exp_whnfz$cst
+  (s2exp, flag: &int >> _): s2exp
+//
+(* ****** ****** *)
+//
+fun
+s2exp_whnfize(s2e0: s2exp): s2exp
+//
+overload whnfize with s2exp_whnfize
+//
+(* ****** ****** *)
+//
+fun{}
+s2exp_subst
+  (t2p0: s2exp): s2exp
+fun{}
+s2exp_subst$var
+  (s2exp, flag: &int >> _): s2exp
+//
+(* ****** ****** *)
+//
+fun
+s2exp_subst_svar
+( s2e0: s2exp
+, s2v0: s2var, tsub: s2exp): s2exp
+fun
+s2exp_subst_svarlst
+( s2e0: s2exp
+, s2vs: s2varlst, tsub: s2explst): s2exp
+//
+fun
+s2explst_subst_svarlst
+( s2es: s2explst
+, s2vs: s2varlst, tsub: s2explst): s2explst
 //
 (* ****** ****** *)
 

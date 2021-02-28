@@ -116,6 +116,16 @@ tr34env = tr34env_vtype
 (* ****** ****** *)
 //
 fun
+tr34env_make_nil
+  ((*void*)): tr34env
+//
+fun
+tr34env_free_nil
+  (env0: tr34env): void
+//
+(* ****** ****** *)
+//
+fun
 tr34env_add_let1
   ( env0: !tr34env ) : void
 //
@@ -154,6 +164,12 @@ tr34env_pop_lams
 (* ****** ****** *)
 //
 fun
+trans34_envless
+  (d3cls: d3eclist): d4eclist
+//
+(* ****** ****** *)
+//
+fun
 trans34_dpat
 ( env0:
 ! tr34env, d3p0: d3pat): d4pat
@@ -174,6 +190,17 @@ fun
 trans34_dexpopt
 ( env0:
 ! tr34env, opt0: d3expopt): d4expopt
+(* ****** ****** *)
+fun
+trans34_dexp_dntp
+( env0:
+! tr34env
+, d3e0: d3exp, s2e0: s2exp): d4exp
+fun
+trans34_dexplst_dnts
+( env0:
+! tr34env
+, d3es: d3explst, s2es: s2explst): d4explst
 (* ****** ****** *)
 //
 fun
@@ -200,9 +227,23 @@ f3undeclist = $D3E.f3undeclist
 (* ****** ****** *)
 
 typedef
+v3aldecl = $D3E.v3aldecl
+typedef
+v3aldeclist = $D3E.v3aldeclist
+
+(* ****** ****** *)
+
+typedef
 f4undecl = $D4E.f4undecl
 typedef
 f4undeclist = $D4E.f4undeclist
+
+(* ****** ****** *)
+
+typedef
+v4aldecl = $D4E.v4aldecl
+typedef
+v4aldeclist = $D4E.v4aldeclist
 
 (* ****** ****** *)
 //
@@ -221,6 +262,27 @@ trans34_fundeclist
 ( env0:
 ! tr34env, f3ds: f3undeclist): f4undeclist
 
+(* ****** ****** *)
+
+fun
+trans34_valdecl
+( env0:
+! tr34env, v3d0: v3aldecl): v4aldecl
+fun
+trans34_valdeclist
+( env0:
+! tr34env, v3ds: v3aldeclist): v4aldeclist
+
+(* ****** ****** *)
+//
+// HX-2021-02-20:
+// Some helper functions for trans34
+//
+(* ****** ****** *)
+//
+fun
+trans34_d4exp_deuni(d4e0: d4exp): d4exp
+//
 (* ****** ****** *)
 
 (* end of [xats_trans34.sats] *)

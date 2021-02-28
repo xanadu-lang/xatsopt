@@ -260,12 +260,26 @@ d4exp_node =
 //
 | D4Evar of (d2var)
 //
+| D4Efcst of (d2cst)
+//
 (*
 | D4Eexist1 of
   (s2explst, d4exp)
 | D4Eopenas of
   (s2varlst, s2explst, d4exp)
 *)
+//
+| D4Esapx of
+  ( d4exp
+  , s2explst, s2explst(*gua*))
+(*
+| D4Esmet of (d4exp, s2explst)
+*)
+//
+| D4Edapp of
+  (d4exp, int(*npf*), d4explst)
+//
+| D4Etcast of (d4exp, s2exp(*given*))
 //
 | D4Enone0 of () | D4Enone1 of (d3exp)
 //
@@ -308,6 +322,10 @@ overload .sexp with d4exp_get_sexp
 fun
 d4exp_none1(d3e0: d3exp): d4exp
 //
+(* ****** ****** *)
+fun
+d4exp_tcast
+(d4e0: d4exp, s2e0: s2exp): d4exp
 (* ****** ****** *)
 //
 fun
@@ -353,6 +371,53 @@ f4undeclist = List0(f4undecl)
 //
 (* ****** ****** *)
 //
+fun
+print_f4undecl: print_type(f4undecl)
+fun
+prerr_f4undecl: prerr_type(f4undecl)
+fun
+fprint_f4undecl: fprint_type(f4undecl)
+//
+(* ****** ****** *)
+//
+datatype
+v4aldecl =
+V4ALDECL of @{
+  loc= loc_t
+, pat= d4pat
+, def= d4expopt
+, wtp= s2expopt
+(*
+, ctp= t2pcast
+*)
+}
+//
+typedef
+v4aldeclist = List0(v4aldecl)
+//
+(* ****** ****** *)
+//
+fun
+print_v4aldecl: print_type(v4aldecl)
+fun
+prerr_v4aldecl: prerr_type(v4aldecl)
+fun
+fprint_v4aldecl: fprint_type(v4aldecl)
+//
+(* ****** ****** *)
+//
+datatype
+d4transd =
+D4TRANSD of @{
+  stadyn= int
+, source= filpath
+, transd=
+  Option(d4eclist)
+} where
+  filpath= $FP0.filpath
+//
+(* ****** ****** *)
+//
 datatype
 d4ecl_node =
 //
@@ -363,6 +428,13 @@ d4ecl_node =
   ( token(*funknd*)
   , decmodopt
   , tq2arglst(*tmpargs*), f4undeclist)
+//
+| D4Cvaldecl of
+  (token(*knd*), decmodopt, v4aldeclist)
+(*
+| D4Cvardecl of
+  (token(*knd*), decmodopt, v4ardeclist)
+*)
 //
 (* ****** ****** *)
 //
