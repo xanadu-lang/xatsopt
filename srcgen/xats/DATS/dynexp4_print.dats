@@ -169,9 +169,15 @@ case+ x0.node() of
   fprint!
   (out, "D4Pvar(", d2v, ")")
 //
-| D4Pnone1(d3p) =>
+| D4Panno
+  (d3p1, s2e2) =>
   fprint!
-  (out, "D4Pnone1(", d3p, ")")
+  ( out
+  , "D4Panno(", d3p1, "; ", s2e2, ")")
+//
+| D4Pnone1(d3p1) =>
+  fprint!
+  (out, "D4Pnone1(", d3p1, ")")
 //
 | _(* rest-of-d4pat *) => fprint!(out, "D4P...(...)")
 //
@@ -194,8 +200,10 @@ fprint_f4arg
 case+
 x0.node() of
 //
-| F4ARGnone2(f2a) =>
-  fprint!(out, "F4ARGnone2(", f2a, ")")
+(*
+| F4ARGnone(tok) => ...
+*)
+//
 | F4ARGnone3(f3a) =>
   fprint!(out, "F4ARGnone3(", f3a, ")")
 //
@@ -330,6 +338,18 @@ case+ x0.node() of
   , "D4Edapp("
   , d4f0, "; ", npf1, "; ", d4es, ")")
 //
+| D4Eif0
+  (d4e1, d4e2, opt3) =>
+  fprint!
+  ( out, "D4Eif0("
+  , d4e1, "; ", d4e2, "; ", opt3, ")")
+//
+| D4Eanno
+  (d3e1, s2e2) =>
+  fprint!
+  ( out
+  , "D4Eanno(", d3e1, "; ", s2e2, ")")
+//
 | D4Etcast
   ( d4e0, s2e0 ) =>
   fprint!
@@ -445,14 +465,14 @@ None() =>
   , "a2g=", rcd.a2g, ", ", "}")
 )
 |
-Some(rcd_a3g) =>
+Some(rcd_a4g) =>
 (
   fprint!
   ( out
   , "F4UNDECL@{"
   , "nam=", rcd.nam, ", "
   , "d2c=", rcd.d2c, ", "
-  , "a3g=", rcd_a3g, ", "
+  , "a4g=", rcd_a4g, ", "
   , "res=", rcd.res, ", "
   , "def=", rcd.def, ", "
   , "rtp=", rcd.rtp, ", "
