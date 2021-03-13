@@ -121,6 +121,13 @@ fprint_val<tq2arg> = fprint_tq2arg
 (* ****** ****** *)
 //
 implement
+fprint_val<ti2arg> = fprint_ti2arg
+implement
+fprint_val<ti3arg> = fprint_ti3arg
+//
+(* ****** ****** *)
+//
+implement
 fprint_val<d4pat> = fprint_d4pat
 //
 (* ****** ****** *)
@@ -210,6 +217,26 @@ fprint!
 (* ****** ****** *)
 //
 implement
+print_ti4arg(x0) =
+fprint_ti4arg(stdout_ref, x0) 
+implement
+prerr_ti4arg(x0) =
+fprint_ti4arg(stderr_ref, x0) 
+//
+implement
+fprint_ti4arg
+  (out, x0) =
+(
+case+ x0 of
+| TI4ARGnone() =>
+  fprint!(out, "TI4ARGnone(", ")")
+| TI4ARGsome(s2es) =>
+  fprint!(out, "TI4ARGsome(", s2es, ")")
+)
+//
+(* ****** ****** *)
+//
+implement
 print_d4exp(x0) =
 fprint_d4exp(stdout_ref, x0)
 implement
@@ -220,7 +247,9 @@ implement
 fprint_d4exp
   (out, x0) =
 (
+(*
 fprint!(out, ":", x0.sexp())
+*)
 ) where
 {
 val () =
@@ -253,8 +282,38 @@ case+ x0.node() of
 | D4Evar(d2v) =>
   fprint!(out, "D4Evar(", d2v, ")")
 //
+| D4Efcon(d2c) =>
+  fprint!(out, "D4Efcon(", d2c, ")")
 | D4Efcst(d2c) =>
   fprint!(out, "D4Efcst(", d2c, ")")
+//
+| D4Etcon
+  ( d2c1
+  , ti4a, ti3a, ti2s) =>
+  fprint!
+  ( out
+  , "D4Etcon("
+  , d2c1, ";"
+  , ti4a, ";", ti3a, ";", ti2s, ")")
+| D4Etcst
+  ( d2c1
+  , ti4a, ti3a, ti2s) =>
+  fprint!
+  ( out
+  , "D4Etcst("
+  , d2c1, ";"
+  , ti4a, ";", ti3a, ";", ti2s, ")")
+//
+| D4Esap0
+  (d4f0, s2es) =>
+  fprint!
+  ( out
+  , "D4Esap0(", d4f0, "; ", s2es, ")")
+| D4Esap1
+  (d4f0, s2es) =>
+  fprint!
+  ( out
+  , "D4Esap1(", d4f0, "; ", s2es, ")")
 //
 | D4Esapx
   (d4f0, s2es, s2ps) =>

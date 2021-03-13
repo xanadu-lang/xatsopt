@@ -315,6 +315,37 @@ end // end of [auxchr]
 (* ****** ****** *)
 
 fun
+auxfcon
+( d3e0
+: d3exp): d4exp =
+let
+//
+val
+loc0 = d3e0.loc()
+val
+t2p0 = d3e0.type()
+//
+val-
+D3Efcon(d2c0) = d3e0.node()
+//
+val
+s2e0 = d2con_get_sexp(d2c0)
+//
+val () =
+println!
+( "auxfcon: d2c0 = ", d2c0 )
+val () =
+println!
+( "auxfcon: s2e0 = ", s2e0 )
+//
+in
+d4exp_make_node
+(loc0, s2e0, t2p0, D4Efcon(d2c0))
+end // end of [auxfcon]
+
+(* ****** ****** *)
+
+fun
 auxfcst
 ( d3e0
 : d3exp): d4exp =
@@ -341,7 +372,274 @@ println!
 in
 d4exp_make_node
 (loc0, s2e0, t2p0, D4Efcst(d2c0))
-end // end of [auxchr]
+end // end of [auxfcst]
+
+(* ****** ****** *)
+
+local
+
+fun
+auxti4a
+( ti4a
+: ti4arg
+, ti2s
+: ti2arglst): void =
+(
+case+ ti4a of
+|
+TI4ARGnone() => ()
+|
+TI4ARGsome(xs) => auxlst1(xs, ti2s)
+) (* end of [auxti4a] *)
+and
+auxlst1
+( xs
+: s2explst
+, ys
+: ti2arglst): void =
+(
+case+ ys of
+| list_nil() => ()
+| list_cons(y1, ys) =>
+  let
+    val es =
+    y1.s2es() in auxlst2(xs, es, ys)
+  end
+) (*case*) // end of [auxlst1]
+and
+auxlst2
+( xs
+: s2explst
+, es
+: s2explst
+, ys
+: ti2arglst): void =
+(
+case+ xs of
+|
+list_nil() => ()
+|
+list_cons(x1, xs) =>
+(
+case+ es of
+| list_nil() =>
+  auxlst1(xs, ys)
+| list_cons(e1, es) =>
+  (
+  auxlst2(xs, es, ys)
+  ) where
+  {
+    val-
+    S2Extv(v1) = x1.node()
+    val ((*void*)) =
+    s2xtv_set_sexp(v1, e1)
+  }
+)
+) (*case*) // end of [auxlst2]
+
+in(*in-of-local*)
+
+fun
+auxtcon
+( d3e0
+: d3exp): d4exp =
+let
+//
+val
+loc0 = d3e0.loc()
+val
+t2p0 = d3e0.type()
+//
+val-
+D3Etcon
+( d2c0
+, ti3a, ti2s) = d3e0.node()
+//
+val s2e0 = d2c0.sexp()
+val ti4a =
+(
+case+ ti3a of
+| TI3ARGnone() =>
+  TI4ARGnone()
+| TI3ARGsome(t2ps) =>
+  TI4ARGsome(auxlst(t2ps))
+) where
+{
+fun
+auxlst
+( xs
+: t2ypelst): s2explst =
+(
+case+ xs of
+|
+list_nil() => list_nil()
+|
+list_cons(x1, xs) =>
+let
+  val
+  s2t1 = x1.sort()
+  val
+  xtv1 =
+  s2xtv_new(loc0, s2t1)
+  val
+  s2e1 = s2exp_xtv(xtv1)
+in
+  list_cons(s2e1, auxlst(xs))
+end
+)
+} (*where*) // end of [val ti4a]
+//
+val
+ti4a = ti4a: ti4arg
+//
+val s2e0 =
+(
+case+ ti4a of
+|
+TI4ARGnone() => s2e0
+|
+TI4ARGsome(s2es) =>
+let
+val s2vs =
+d2con_get_s2vs(d2c0)
+in
+  s2exp_subst_svarlst
+  ( s2e0, s2vs, s2es )
+end
+) (* end of [val s2e0] *)
+//
+val () = auxti4a(ti4a, ti2s)
+//
+in
+d4exp_make_node
+( loc0, s2e0, t2p0
+, D4Etcon(d2c0, ti4a, ti3a, ti2s))
+end // end of [auxtcon]
+
+(* ****** ****** *)
+
+fun
+auxtcst
+( d3e0
+: d3exp): d4exp =
+let
+//
+val
+loc0 = d3e0.loc()
+val
+t2p0 = d3e0.type()
+//
+val-
+D3Etcst
+( d2c0
+, ti3a, ti2s) = d3e0.node()
+//
+val s2e0 = d2c0.sexp()
+val ti4a =
+(
+case+ ti3a of
+| TI3ARGnone() =>
+  TI4ARGnone()
+| TI3ARGsome(t2ps) =>
+  TI4ARGsome(auxlst(t2ps))
+) where
+{
+fun
+auxlst
+( xs
+: t2ypelst): s2explst =
+(
+case+ xs of
+|
+list_nil() => list_nil()
+|
+list_cons(x1, xs) =>
+let
+  val
+  s2t1 = x1.sort()
+  val
+  xtv1 =
+  s2xtv_new(loc0, s2t1)
+  val
+  s2e1 = s2exp_xtv(xtv1)
+in
+  list_cons(s2e1, auxlst(xs))
+end
+)
+} (*where*) // end of [val ti4a]
+//
+val
+ti4a = ti4a: ti4arg
+//
+val s2e0 =
+(
+case+ ti4a of
+|
+TI4ARGnone() => s2e0
+|
+TI4ARGsome(s2es) =>
+let
+val s2vs =
+d2cst_get_s2vs(d2c0)
+in
+  s2exp_subst_svarlst
+  ( s2e0, s2vs, s2es )
+end
+) (* end of [val s2e0] *)
+//
+val () = auxti4a(ti4a, ti2s)
+//
+in
+d4exp_make_node
+( loc0, s2e0, t2p0
+, D4Etcst(d2c0, ti4a, ti3a, ti2s))
+end // end of [auxtcst]
+
+end // end of [local]
+
+(* ****** ****** *)
+
+fun
+auxsap0
+( env0
+: !tr34env
+, d3e0: d3exp): d4exp =
+let
+//
+val
+loc0 = d3e0.loc()
+val
+t2p0 = d3e0.type()
+//
+val-
+D3Esap0
+( d3f0
+, s2es) = d3e0.node()
+//
+val d4f0 =
+trans34_dexp(env0, d3f0)
+val s2f0 =
+s2exp_whnfize(d4f0.sexp())
+//
+in
+case+
+s2f0.node() of
+|
+S2Euni _ =>
+let
+val d4f0 =
+trans34_d4exp_deuni1(d4f0)
+in
+d4exp_make_node
+( loc0
+, s2f0, t2p0, D4Esap0(d4f0, s2es))
+end // end of [S3Euni]
+|
+_(* non-S2Euni *) =>
+d4exp_make_node
+( loc0
+, s2f0, t2p0, D4Esap0(d4f0, s2es))
+end // end of [auxsap0]
 
 (* ****** ****** *)
 
@@ -366,7 +664,7 @@ D3Edapp
 val d4f0 =
 trans34_dexp(env0, d3f0)
 val d4f0 =
-trans34_d4exp_deuni(d4f0)
+trans34_d4exp_deunis(d4f0)
 //
 val s2f0 =
 s2exp_whnfize(d4f0.sexp())
@@ -422,7 +720,12 @@ d3e0.node() of
 | D3Ebtf _ => auxbtf(d3e0)
 | D3Echr _ => auxchr(d3e0)
 //
+| D3Efcon _ => auxfcon(d3e0)
 | D3Efcst _ => auxfcst(d3e0)
+//
+| D3Etcon _ => auxtcon(d3e0)
+//
+| D3Esap0 _ => auxsap0(env0, d3e0)
 //
 | D3Edapp _ => auxdapp(env0, d3e0)
 //

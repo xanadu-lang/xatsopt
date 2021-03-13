@@ -241,6 +241,26 @@ f4arg_make_node
 (loc: loc_t, node: f4arg_node): f4arg
 //
 (* ****** ****** *)
+//
+datatype
+ti4arg =
+| TI4ARGnone of ()
+| TI4ARGsome of s2explst
+//
+(* ****** ****** *)
+//
+fun
+print_ti4arg: print_type(ti4arg)
+fun
+prerr_ti4arg: prerr_type(ti4arg)
+fun
+fprint_ti4arg: fprint_type(ti4arg)
+//
+overload print with print_ti4arg
+overload prerr with prerr_ti4arg
+overload fprint with fprint_ti4arg
+//
+(* ****** ****** *)
 
 datatype
 d4exp_node =
@@ -260,7 +280,19 @@ d4exp_node =
 //
 | D4Evar of (d2var)
 //
+| D4Efcon of (d2con)
+| D4Etcon of
+  ( d2con
+  , ti4arg(*s2es*)
+  , ti3arg(*t2ps*)
+  , ti2arglst(*sess*))
+//
 | D4Efcst of (d2cst)
+| D4Etcst of
+  ( d2cst
+  , ti4arg(*s2es*)
+  , ti3arg(*t2ps*)
+  , ti2arglst(*sess*))
 //
 (*
 | D4Eexist1 of
@@ -268,6 +300,9 @@ d4exp_node =
 | D4Eopenas of
   (s2varlst, s2explst, d4exp)
 *)
+//
+| D4Esap0 of (d4exp, s2explst)
+| D4Esap1 of (d4exp, s2explst)
 //
 | D4Esapx of
   ( d4exp
