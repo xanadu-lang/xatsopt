@@ -166,14 +166,23 @@ case+ x0.node() of
   fprint!(out, "D4Pany()")
 //
 | D4Pvar(d2v) =>
+  let
+  val s2e = d2v.sexp()
+  in
   fprint!
-  (out, "D4Pvar(", d2v, ")")
+  ( out
+  , "D4Pvar(", d2v, ":", s2e, ")")
+  end
 //
 | D4Panno
   (d3p1, s2e2) =>
   fprint!
   ( out
   , "D4Panno(", d3p1, "; ", s2e2, ")")
+//
+| D4Ptcast(d4p1, s2e2) =>
+  fprint!
+  (out, "D4Ptcast(", d4p1, "; ", s2e2, ")")
 //
 | D4Pnone1(d3p1) =>
   fprint!
@@ -289,6 +298,10 @@ case+ x0.node() of
 //
 | D4Evar(d2v) =>
   fprint!(out, "D4Evar(", d2v, ")")
+| D4Evknd(knd0, d2v1) =>
+  fprint!
+  ( out
+  , "D4Evknd(", knd0, ", ", d2v1, ")")
 //
 | D4Efcon(d2c) =>
   fprint!(out, "D4Efcon(", d2c, ")")
@@ -311,6 +324,15 @@ case+ x0.node() of
   , "D4Etcst("
   , d2c1, ";"
   , ti4a, ";", ti3a, ";", ti2s, ")")
+//
+| D4Etimp
+  ( stmp
+  , d4e1, targ
+  , d4cl, tsub) =>
+  fprint!
+  ( out
+  , "D4Etimp(", stmp, "; "
+  , d4e1, "; ", targ, "; ", d4cl, "; ", tsub, ")")
 //
 | D4Esap0
   (d4f0, s2es) =>

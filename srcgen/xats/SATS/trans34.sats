@@ -183,6 +183,12 @@ trans34_dpatlst
 ! tr34env, d3ps: d3patlst): d4patlst
 //
 (* ****** ****** *)
+fun
+trans34_dpat_dntp
+( env0:
+! tr34env
+, d3p0: d3pat, s2e0: s2exp): d4pat
+(* ****** ****** *)
 //
 fun
 trans34_dexp
@@ -304,6 +310,25 @@ trans34_d4exp_deuni1(d4e0: d4exp): d4exp
 fun
 trans34_d4exp_deunis(d4e0: d4exp): d4exp
 //
+(* ****** ****** *)
+//
+fun
+trans34_d2var_get_sexp
+( env0:
+! tr34env, d2v0: d2var): s2exp
+fun
+trans34_d2var_set_sexp
+( env0:
+! tr34env, d2v0: d2var, s2e0: s2exp): void
+//
+(* ****** ****** *)
+fun
+trans34_d3pat_get_sexp(d3pat): s2exp
+fun
+trans34_d3patlst_get_s2es(d3patlst): s2explst
+(* ****** ****** *)
+fun
+trans34_f3undecl_set_sexp(f3undecl): void
 (* ****** ****** *)
 
 (* end of [xats_trans34.sats] *)

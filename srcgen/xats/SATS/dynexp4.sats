@@ -130,7 +130,7 @@ d4pat_node =
   (d4pat, s2exp) // no s2xtv in anno
 //
 | D4Ptcast of
-  (d4pat, t2ype) // HX: error indication?
+  (d4pat, s2exp) // HX: error indication?
 //
 | D4Pnone0 of ()
 | D4Pnone1 of (d3pat) | D4Pnone2 of (d4pat)
@@ -280,20 +280,34 @@ d4exp_node =
 | D4Etop of (token)
 //
 | D4Evar of (d2var)
+(*
+HX-2021-03:
+For trans3x:
+Please see trans3x_envmap
+for the meaning of knd
+*)
+| D4Evknd of
+  (int(*kind*), d2var)
 //
 | D4Efcon of (d2con)
+| D4Efcst of (d2cst)
+//
 | D4Etcon of
   ( d2con
   , ti4arg(*s2es*)
   , ti3arg(*t2ps*)
   , ti2arglst(*sess*))
-//
-| D4Efcst of (d2cst)
 | D4Etcst of
   ( d2cst
   , ti4arg(*s2es*)
   , ti3arg(*t2ps*)
   , ti2arglst(*sess*))
+//
+| D4Etimp of
+  ( stamp
+  , d4exp(*tcst*), t2ypelst(*targ*)
+  , d4ecl(*impl*), t2ypelst(*tsub*)
+  ) (* end of [D4timp] *)
 //
 (*
 | D4Eexist1 of
