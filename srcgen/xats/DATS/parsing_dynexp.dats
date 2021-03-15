@@ -1223,14 +1223,23 @@ case+ tnd of
 end // end of [p_f0arg]
 
 (* ****** ****** *)
-
+(*
+HX-2021-03-14:
+p_f0argseq
+treats {n} as S1QUAprop(n)
+p_f0argseq1
+treats {n} as S1QUAvars(n)
+*)
 extern
 fun
 p_f0argseq: parser(f0arglst)
 extern
 fun
+p_f0argseq1: parser(f0arglst)
+(* ****** ****** *)
+extern
+fun
 p_f0unarrow: parser(f0unarrow)
-
 (* ****** ****** *)
 
 implement
@@ -1240,6 +1249,145 @@ p_f0argseq
   list_vt2t
   (pstar_fun{f0arg}(buf, err, p_f0arg))
 ) (* end of [p_f0argseq] *)
+
+(* ****** ****** *)
+
+local
+//
+fun
+auxs0q0
+( s0q0
+: s0qua): s0qua =
+(
+case+
+s0q0.node() of
+|
+S0QUAprop(s0p) =>
+(
+case+
+s0p.node() of
+| S0Eid0(sid) =>
+  let
+  val loc = s0p.loc()
+  val opt = None(*sort0*)
+  val ids = list_sing(sid)
+  in
+    s0qua_make_node
+    (loc, S0QUAvars(ids, opt))
+  end
+| _ (* non-S0Eid0 *) => s0q0
+)
+| _(* non-S0QUAprop *) => s0q0
+)
+fun
+auxs0qs
+( xs
+: s0qualst): s0qualst =
+list_vt2t
+(
+list_map<s0qua><s0qua>(xs)
+) where
+{
+implement
+list_map$fopr<s0qua><s0qua>(x) = auxs0q0(x)
+}
+//
+fun
+auxf0a0
+( f0a0
+: f0arg): f0arg =
+(
+case+
+f0a0.node() of
+| F0ARGsome_sta
+  (tbeg, s0qs, tend) =>
+  (
+    f0arg_make_node(loc, node)
+  ) where
+  {
+    val loc = f0a0.loc()
+    val s0qs = auxs0qs(s0qs)
+    val node =
+    F0ARGsome_sta(tbeg, s0qs, tend)
+  }
+| _ (* non-F0ARGsom_sta *) => f0a0
+)
+fun
+auxf0as
+( xs
+: f0arglst): f0arglst =
+list_vt2t
+(
+list_map<f0arg><f0arg>(xs)
+) where
+{
+implement
+list_map$fopr<f0arg><f0arg>(x) = auxf0a0(x)
+}
+//
+fun
+tsts0qs
+( xs
+: s0qualst): bool =
+(
+case+ xs of
+|
+list_nil() => false
+|
+list_cons(x1, xs) =>
+(
+case+ x1.node() of
+|
+S0QUAprop(s0p) =>
+(
+case+
+s0p.node() of
+| S0Eid0(sid) => true
+| _(*non-S0Eid0*) => tsts0qs(xs)
+)
+| _(*non-S0QUAprop*) => tsts0qs(xs)
+)
+)
+fun
+tstf0as
+( xs
+: f0arglst): bool =
+(
+case+ xs of
+|
+list_nil() => false
+|
+list_cons(x1, xs) =>
+(
+case+ x1.node() of
+|
+F0ARGsome_sta
+(tbeg, s0qs, tend) =>
+if
+tsts0qs(s0qs)
+then true else tstf0as(xs)
+|
+_(*non-F0ARGsom_sta*) => tstf0as(xs)
+)
+)
+//
+in
+
+(* ****** ****** *)
+
+implement
+p_f0argseq1
+( buf, err ) =
+let
+val
+f0as = p_f0argseq(buf, err)
+in
+if tstf0as(f0as) then auxf0as(f0as) else f0as
+end (*let*) // end of [p_f0argseq1]
+
+(* ****** ****** *)
+
+end (* end of [local] *)
 
 (* ****** ****** *)
 //
@@ -3353,7 +3501,7 @@ val nam =
 p_d0pid(buf, err)
 //
 val arg =
-p_f0argseq(buf, err)
+p_f0argseq1(buf, err)
 val res =
 p_effs0expopt(buf, err)
 //
@@ -3482,75 +3630,7 @@ ptok_impdecl
 //
 local
 //
-fun
-auxs0q0
-( s0q0
-: s0qua): s0qua =
-(
-case+
-s0q0.node() of
-| S0QUAprop(s0p) =>
-  (
-  case+
-  s0p.node() of
-  | S0Eid0(sid) =>
-    let
-      val loc = s0p.loc()
-      val opt = None(*sort0*)
-      val ids = list_sing(sid)
-    in
-      s0qua_make_node
-      (loc, S0QUAvars(ids, opt))
-    end
-  | _ (* non-S0Eid0 *) => s0q0
-  )
-| _(* non-S0QUAprop *) => s0q0
-)
-and
-auxs0qs
-( xs
-: s0qualst): s0qualst =
-list_vt2t
-(
-list_map<s0qua><s0qua>(xs)
-) where
-{
-implement
-list_map$fopr<s0qua><s0qua>(x0) = auxs0q0(x0)
-}
-//
-fun
-auxf0a0
-( f0a0
-: f0arg): f0arg =
-(
-case+
-f0a0.node() of
-| F0ARGsome_sta
-  (tbeg, s0qs, tend) =>
-  (
-    f0arg_make_node(loc, node)
-  ) where
-  {
-    val loc = f0a0.loc()
-    val s0qs = auxs0qs(s0qs)
-    val node =
-    F0ARGsome_sta(tbeg, s0qs, tend)
-  }
-| _ (* non-F0ARGsom_sta *) => f0a0
-)
-and
-auxf0as
-( xs
-: f0arglst): f0arglst =
-list_vt2t
-(
-list_map<f0arg><f0arg>(xs)
-) where
-{
-implement
-list_map$fopr<f0arg><f0arg>(x0) = auxf0a0(x0)
-}
+// HX: nothing
 //
 in (*in-of-local*)
 
@@ -3580,8 +3660,7 @@ tok, buf, err
     p_ti0argseq(buf, err)
 //
   val f0as =
-    p_f0argseq(buf, err)
-  val f0as = auxf0as(f0as)
+    p_f0argseq1(buf, err)
 //
   val tres =
     p_effs0expopt(buf, err)
