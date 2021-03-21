@@ -128,6 +128,145 @@ val () = tr34env_free_nil(env0)
 
 local
 
+(* ****** ****** *)
+
+fun
+auxi00
+(d3p0: d3pat): d4pat =
+let
+//
+val
+loc0 = d3p0.loc()
+val
+t2p0 = d3p0.type()
+//
+val-
+D3Pi00(int) = d3p0.node()
+//
+val
+s2i0 = s2exp_int(int)
+val
+s2e0 = s2exp_type_sint(s2i0)
+//
+in
+d4pat_make_node
+(loc0, s2e0, t2p0, D4Pi00(int))
+end (*let*) // end of [auxi00]
+
+(* ****** ****** *)
+
+fun
+auxb00
+(d3p0: d3pat): d4pat =
+let
+//
+val
+loc0 = d3p0.loc()
+val
+t2p0 = d3p0.type()
+//
+val-
+D3Pb00(btf) = d3p0.node()
+//
+val
+s2b0 = s2exp_btf(btf)
+val
+s2e0 = s2exp_type_bool(s2b0)
+//
+in
+d4pat_make_node
+(loc0, s2e0, t2p0, D4Pb00(btf))
+end (*let*) // end of [auxb00]
+
+(* ****** ****** *)
+
+fun
+auxint
+(d3p0: d3pat): d4pat =
+let
+//
+val
+loc0 = d3p0.loc()
+val
+t2p0 = d3p0.type()
+//
+val-
+D3Pint(tok) = d3p0.node()
+val
+s2i0 =
+s2exp_int(dint) where
+{
+val dint = token2dint(tok)
+}
+//
+val
+s2e0 = s2exp_type_sint(s2i0)
+//
+in
+d4pat_make_node
+(loc0, s2e0, t2p0, D4Pint(tok))
+end (*let*) // end of [auxint]
+
+(* ****** ****** *)
+
+fun
+auxbtf
+(d3p0: d3pat): d4pat =
+let
+//
+val
+loc0 = d3p0.loc()
+val
+t2p0 = d3p0.type()
+//
+val-
+D3Pbtf(tok) = d3p0.node()
+val
+s2b0 =
+s2exp_btf(dbtf) where
+{
+val dbtf = token2dbtf(tok)
+}
+//
+val
+s2e0 = s2exp_type_bool(s2b0)
+//
+in
+d4pat_make_node
+(loc0, s2e0, t2p0, D4Pbtf(tok))
+end (*let*) // end of [auxbtf]
+
+(* ****** ****** *)
+
+fun
+auxchr
+(d3p0: d3pat): d4pat =
+let
+//
+val
+loc0 = d3p0.loc()
+val
+t2p0 = d3p0.type()
+//
+val-
+D3Pchr(tok) = d3p0.node()
+val
+s2b0 =
+s2exp_chr(dchr) where
+{
+val dchr = token2dchr(tok)
+}
+//
+val
+s2e0 = s2exp_type_bool(s2b0)
+//
+in
+d4pat_make_node
+(loc0, s2e0, t2p0, D4Pchr(tok))
+end (*let*) // end of [auxchr]
+
+(* ****** ****** *)
+
 in(*in-of-local*)
 
 implement
@@ -139,6 +278,18 @@ case+
 d3p0.node() of
 //
 |
+D3Pi00 _ => auxint(d3p0)
+|
+D3Pb00 _ => auxbtf(d3p0)
+//
+|
+D3Pint _ => auxint(d3p0)
+|
+D3Pbtf _ => auxbtf(d3p0)
+|
+D3Pchr _ => auxchr(d3p0)
+//
+|
 D3Panno(d3p1, s2e2) =>
 trans34_dpat_dntp(env0, d3p1, s2e2)
 //
@@ -148,6 +299,40 @@ _ (*rest-of-d3pat*) => d4pat_none1(d3p0)
 )
 
 end // end of [local]
+
+(* ****** ****** *)
+
+implement
+trans34_dpatlst
+( env0, d3ps ) =
+(
+list_vt2t
+(
+list_map<d3pat><d4pat>(d3ps)
+)
+) where
+{
+//
+val
+env0 =
+$UN.castvwtp1{ptr}(env0)
+//
+implement
+list_map$fopr<d3pat><d4pat>
+  (d3p0) = let
+//
+val
+env0 =
+$UN.castvwtp0{tr34env}(env0)
+val
+d4p0 = trans34_dpat(env0, d3p0)
+//
+in
+let
+prval () = $UN.cast2void(env0) in d4p0
+end
+end // list_map$fopr
+} (* end of [trans34_dpatlst] *)
 
 (* ****** ****** *)
 
@@ -194,44 +379,55 @@ d4p0 =
 trans34_dpat
 (env0, d3p0) in
 d4pat_make_node
-(loc0, s2e0, t2p0, D4Ptcast(d4p0, s2e0))
+( loc0
+, s2e0, t2p0, D4Ptcast(d4p0, s2e0))
 end // end of [rest-of-d3pat]
 //
-end (*let*) // end of [trans34_dpat_dntp]
+end (* end of [trans34_dpat_dntp] *)
 
 (* ****** ****** *)
 
 implement
-trans34_dpatlst
-(  env0, d3ps  ) =
+trans34_dpatlst_dnts
+( env0, d3ps, s2es ) =
 (
-list_vt2t
+case+ d3ps of
+|
+list_nil() =>
+list_nil()
+|
+list_cons(d3p1, d3ps) =>
 (
-list_map<d3pat><d4pat>(d3ps)
-)
-) where
+case+ s2es of
+|
+list_nil() =>
+(
+list_cons(d4p1, d4ps)) where
 {
 //
 val
-env0 =
-$UN.castvwtp1{ptr}(env0)
+s2e1 = the_s2exp_none0(*void*)
 //
-implement
-list_map$fopr<d3pat><d4pat>
-  (d3p0) = let
+val d4p1 =
+trans34_dpat_dntp(env0, d3p1, s2e1)
+val d4ps =
+trans34_dpatlst_dnts(env0, d3ps, s2es)
 //
-val
-env0 =
-$UN.castvwtp0{tr34env}(env0)
-val
-d4p0 = trans34_dpat(env0, d3p0)
+} (* end of [list_nil] *)
+|
+list_cons(s2e1, s2es) =>
+(
+list_cons(d4p1, d4ps)) where
+{
 //
-in
-let
-prval () = $UN.cast2void(env0) in d4p0
-end
-end // list_map$fopr
-} (* end of [trans34_dpatlst] *)
+val d4p1 =
+trans34_dpat_dntp(env0, d3p1, s2e1)
+val d4ps =
+trans34_dpatlst_dnts(env0, d3ps, s2es)
+//
+} (* end of [list_cons] *)
+)
+) (* end of [trans34_dpatlst_dnts] *)
 
 (* ****** ****** *)
 
@@ -977,6 +1173,48 @@ end (*let*) // end of [aux_if0]
 (* ****** ****** *)
 
 fun
+aux_cas0
+( env0
+: !tr34env
+, d3e0: d3exp): d4exp =
+let
+//
+val
+loc0 = d3e0.loc()
+val
+t2p0 = d3e0.type()
+//
+val-
+D3Ecas0
+( knd0
+, dmat
+, dcls) = d3e0.node()
+//
+val
+dmat =
+trans34_dexp(env0, dmat)
+val
+tmat = dmat.sexp((*void*))
+//
+val s2t0 = t2p0.sort()
+val xtv0 =
+s2xtv_new(loc0, s2t0)
+val s2e0 = s2exp_xtv(xtv0)
+//
+val dcls =
+trans34_dclaulst_dntp
+( env0, dcls, tmat, s2e0 )
+//
+in
+d4exp_make_node
+( loc0
+, s2e0, t2p0
+, D4Ecas0(knd0, dmat, dcls) )
+end (*let*) // end of [aux_cas0]
+
+(* ****** ****** *)
+
+fun
 aux_anno
 ( env0
 : !tr34env
@@ -1050,6 +1288,8 @@ d3e0.node() of
   ( _cond_
   , _then_
   , _else_) => aux_if0(env0, d3e0)
+//
+| D3Ecas0 _ => aux_cas0(env0, d3e0)
 //
 | D3Eanno _ => aux_anno(env0, d3e0)
 //
@@ -1162,7 +1402,7 @@ case+ s2es of
 list_nil() =>
 let
 val s2e0 =
-s2exp_none0()
+the_s2exp_none0
 val d4e0 =
 trans34_dexp_dntp
 (env0, d3e0, s2e0)
@@ -1183,6 +1423,120 @@ end
 )
 ) (* end of [auxlst] *)
 } (* end of [trans34_dexplst_dnts] *)
+
+(* ****** ****** *)
+
+implement
+trans34_dgpat_dntp
+( env0
+, dgpt, tmat ) =
+let
+//
+val
+loc0 = dgpt.loc()
+//
+in
+//
+case-
+dgpt.node() of
+|
+D3GPATpat(d3p1) =>
+let
+val d4p1 =
+trans34_dpat_dntp
+( env0, d3p1, tmat )
+in
+  d4gpat_make_node
+  ( loc0, D4GPATpat(d4p1) )
+end
+(*
+|
+D3GPATgua(d3p1, d3gs) =>
+*)
+//
+end (*let*) // trans34_dgpat_dntp
+
+(* ****** ****** *)
+
+implement
+trans34_dclau_dntp
+( env0
+, d3cl, tmat, tres) =
+let
+//
+val
+loc0 = d3cl.loc()
+//
+in
+//
+case+
+d3cl.node() of
+|
+D3CLAUpat(dgpt) =>
+let
+val
+dgpt =
+trans34_dgpat_dntp
+( env0, dgpt, tmat )
+in
+d4clau_make_node
+(loc0, D4CLAUpat(dgpt))
+end
+|
+D3CLAUexp(dgpt, d3e2) =>
+let
+//
+val
+dgpt =
+trans34_dgpat_dntp
+( env0, dgpt, tmat )
+//
+val d4e2 =
+  trans34_dexp_dntp
+  ( env0, d3e2, tres )
+//
+in
+d4clau_make_node
+(loc0, D4CLAUexp(dgpt, d4e2))
+end
+//
+end (*let*) // [trans34_dclaulst]
+
+(* ****** ****** *)
+
+implement
+trans34_dclaulst_dntp
+( env0
+, dcls, tmat, tres) =
+list_vt2t
+(
+list_map<d3clau><d4clau>(dcls)
+) where
+{
+//
+val
+env0 =
+$UN.castvwtp1{ptr}(env0)
+//
+implement
+list_map$fopr<d3clau><d4clau>
+  (d3cl) = let
+//
+val
+env0 =
+$UN.castvwtp0{tr34env}(env0)
+//
+val
+d4cl =
+trans34_dclau_dntp
+( env0,  d3cl,  tmat,  tres )
+//
+in
+let
+prval () = $UN.cast2void(env0) in d4cl
+end
+end
+} (* end of [trans34_dclaulst_dntp] *)
 
 (* ****** ****** *)
 
@@ -1255,6 +1609,247 @@ prval () = $UN.cast2void(env0) in f4a0
 end
 end
 } (* end of [trans34_farglst] *)
+//
+(* ****** ****** *)
+//
+implement
+trans34_farglst_s2exp
+( env0
+, f3as, s2f0, sres) =
+(
+case+ f3as of
+|
+list_nil() =>
+let
+val () =
+(sres :=
+ EFFS2EXPsome(s2f0)) in list_nil()
+end // end of [list_nil]
+|
+list_cons
+(f3a1, f3as) =>
+(
+case+
+f3a1.node() of
+//
+(*
+HX-2021-03-15:
+Should this be handled?
+*)
+|
+F3ARGsome_sta
+(svs1, sps1) =>
+(
+case+
+s2f0.node() of
+|
+S2Euni
+(svs2, sps2, s2f1) =>
+let
+val
+s2vs =
+auxs2vs(svs1, svs2)
+val
+tsub =
+auxtsub(svs1, svs2)
+(*
+HX-2021-03-15:
+[sps1] is discarded!
+*)
+val
+s2ps =
+s2explst_subst_svarlst
+( sps2, svs2, tsub )
+val f4a1 = 
+f4arg_make_node
+(loc1, F4ARGsome_sta(s2vs, s2ps))
+val f4as = 
+trans34_farglst_s2exp(env0, f3as, s2f1, sres)
+in
+  list_cons(f4a1, f4as)
+end where
+{
+//
+val
+loc1 = f3a1.loc()
+//
+fun
+auxs2vs
+( svs1
+: s2varlst
+, svs2
+: s2varlst): s2varlst =
+(
+case+ svs2 of
+|
+list_nil() =>
+list_nil()
+|
+_(*list_cons*) =>
+(
+case+ svs1 of
+|
+list_nil() => svs2
+|
+list_cons(s2v1, svs1) =>
+let
+  val-
+  list_cons(_, svs2) = svs2
+in
+  list_cons
+  (s2v1, auxs2vs(svs1, svs2))
+end
+)
+) (* end of [auxs2vs] *)
+fun
+auxtsub
+( svs1
+: s2varlst
+, svs2
+: s2varlst): s2explst =
+(
+case+ svs2 of
+|
+list_nil() => list_nil()
+|
+list_cons
+(s2v2, svs2) =>
+(
+case+ svs1 of
+|
+list_nil() =>
+let
+val
+s2e1 = s2exp_var(s2v2)
+in
+list_cons
+(s2e1, auxtsub(svs1, svs2))
+end
+|
+list_cons
+(s2v1, svs1) =>
+let
+val
+s2t1 = s2v1.sort()
+val
+s2t2 = s2v2.sort()
+val
+s2e1 = s2exp_var(s2v1)
+val
+s2e1 =
+(
+if
+s2t1 <= s2t2
+then s2e1 else
+s2exp_cast
+(loc1, s2e1, s2t2)): s2exp
+in
+list_cons(s2e1, auxtsub(svs1, svs2))
+end
+)
+) (* auxtsub *)
+} (* end-of-S2Euni *)
+|
+_ (* rest-of-s2exp *) =>
+let
+val
+//
+loc1 = f3a1.loc()
+//
+val f4a1 = 
+f4arg_make_node(loc1, F4ARGnone3(f3a1))
+val f4as = 
+trans34_farglst_s2exp(env0, f3as, s2f0, sres)
+//
+in
+  list_cons(f4a1, f4as)
+end
+) (*where*) // end of [F3ARGsome_sta]
+//
+|
+F3ARGsome_dyn
+(npf1, d3ps) =>
+(
+auxdyn(env0, s2f0, sres)
+) where
+{
+fun
+auxdyn
+( env0:
+! tr34env
+, s2f0: s2exp
+, sres
+: &effs2expopt >> _): f4arglst =
+(
+case
+s2f0.node() of
+//
+|
+S2Euni
+(s2vs, s2ps, s2f1) =>
+let
+val f4a1 = 
+f4arg_make_node
+( f3a1.loc()
+, F4ARGsome_sta(s2vs, s2ps))
+in
+  list_cons
+  (f4a1, auxdyn(env0, s2f1, sres))
+end
+//
+|
+S2Efun
+( fclo
+, npf2, s2es, s2f1) =>
+//
+(
+list_cons(f4a1, f4as)) where
+{
+//
+(*
+HX-2021-03-15: check?
+val () = assert(npf1 = npf2)
+*)
+//
+val
+d4ps =
+trans34_dpatlst_dnts
+( env0, d3ps, s2es )
+val f4a1 = 
+f4arg_make_node
+( f3a1.loc()
+, F4ARGsome_dyn(npf1, d4ps) )
+val f4as = 
+trans34_farglst_s2exp(env0, f3as, s2f1, sres)
+} (* end-of-S2Efun *)
+//
+|
+_ (* rest-of-s2exp *) =>
+(
+  list_cons(f4a1, f4as)) where
+{
+val f4a1 = 
+f4arg_make_node
+(f3a1.loc(), F4ARGnone3(f3a1))
+val f4as = 
+trans34_farglst_s2exp(env0, f3as, s2f0, sres)
+}
+)
+} (*where*) // end of [F3ARGsome_dyn]
+//
+| _(* rest-of-f3arg *) =>
+(
+list_cons(f4a1, f4as)
+) where
+{
+val f4a1 = 
+f4arg_make_node
+(f3a1.loc(), F4ARGnone3(f3a1))
+val f4as = 
+trans34_farglst_s2exp(env0, f3as, s2f0, sres)
+}
+)
+) (* end of [trans34_farglst_s2exp] *)
 //
 (* ****** ****** *)
 
@@ -1458,6 +2053,10 @@ println!
 ("trans34_fundecl: d2c.type = ", d2c.type())
 *)
 //
+var
+sres:
+effs2expopt = rcd.res
+//
 val
 a4g =
 (
@@ -1468,12 +2067,40 @@ None() =>
 None(*void*)
 |
 Some(f3as) =>
+(
+case+
+rcd.wtp of
+|
+None() =>
 Some
-(trans34_farglst(env0, f3as))): f4arglstopt
+(trans34_farglst(env0, f3as))
+|
+Some(s2f0) =>
+Some
+(trans34_farglst_s2exp(env0, f3as, s2f0, sres))
+)
+) : f4arglstopt // end-of-val
 //
 val
 def = 
-trans34_dexpopt(env0, rcd.def)
+(
+case
+rcd.def of
+|
+None() => None()
+|
+Some(d3e0) =>
+(
+case+ sres of
+|
+EFFS2EXPnone() =>
+Some(trans34_dexp(env0, d3e0))
+|
+EFFS2EXPsome(s2e0) =>
+Some
+(trans34_dexp_dntp(env0, d3e0, s2e0))
+)
+) : d4expopt // end of [val def]
 //
 in(*in-of-let*)
 //
@@ -1484,7 +2111,7 @@ F4UNDECL@{
 , d2c= d2c
 //
 , a2g= a2g
-, a4g= a4g, res= rcd.res
+, a4g= a4g, res= sres
 //
 , def= def
 //
