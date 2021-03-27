@@ -199,8 +199,37 @@ case+ x0.node() of
   fprint!(out, "D4Pbtf(", tok, ")")
 | D4Pchr(tok) =>
   fprint!(out, "D4Pchr(", tok, ")")
-| D4Pstr(tok) =>
-  fprint!(out, "D4Pstr(", tok, ")")
+//
+| D4Pcon1(d2c0) =>
+  fprint!
+  (out, "D4Pcon1(", d2c0, ")")
+//
+| D4Psap0
+  (d4f0, s2es) =>
+  fprint!
+  ( out
+  , "D4Psap0(", d4f0, "; ", s2es, ")")
+| D4Psap1
+  (d4f0, s2es) =>
+  fprint!
+  ( out
+  , "D4Psap1(", d4f0, "; ", s2es, ")")
+//
+| D4Psapx
+  (d4f0, s2es, s2ps) =>
+  fprint!
+  ( out
+  , "D4Psapx("
+  , d4f0, "; ", s2es, "; ", s2ps, ")")
+//
+| D4Pdap1(d4f0) =>
+  fprint!
+  ( out, "D4Pdap1(", d4f0, ")")
+| D4Pdapp
+  (d4f0, npf1, d4ps) =>
+  fprint!
+  ( out, "D4Pdapp("
+  , d4f0, "; ", npf1, "; ", d4ps, ")")
 //
 | D4Panno
   (d4p1, s2e2) =>

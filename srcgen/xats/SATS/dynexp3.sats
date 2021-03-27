@@ -121,12 +121,21 @@ d3pat_node =
 | D3Psym0 of
   (d1pat(*sym*), d2pitmlst)
 //
+(*
+HX: [D3Psap0]: pred: skipped
+HX: [D3Psap1]: impred: checked
+*)
 | D3Psap0 of (d3pat, s2explst)
 | D3Psap1 of (d3pat, s2explst)
 //
-| D3Pdap1 of (d3pat)
+(*
+// HX-2021-03-21:
+// There is no [D3Pdap0] as
+// it is merged into [D3Pdapp]!
+*)
+| D3Pdap1 of (d3pat) // argless
 | D3Pdapp of
-  (d3pat, int(*npf*), d3patlst)
+  ( d3pat, int(*npf*), d3patlst )
 //
 | D3Ptuple of
   (int(*knd*), int(*npf*), d3patlst)
@@ -444,8 +453,14 @@ for the meaning of knd
 | D3Eif0 of
   ( d3exp(*cond*)
   , d3exp(*then*), d3expopt(*else*))
+| D3Eif1 of
+  ( d3exp(*cond*)
+  , d3exp(*then*), d3expopt(*else*), st2inv)
+//
 | D3Ecas0 of
   (int(*knd*), d3exp(*val*), d3claulst)
+| D3Ecas1 of
+  (int(*knd*), d3exp(*val*), d3claulst, st2inv)
 //
 | D3Elam of
   ( token(*knd*)

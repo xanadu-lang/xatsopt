@@ -124,7 +124,16 @@ d4pat_node =
 | D4Psap0 of (d4pat, s2explst)
 | D4Psap1 of (d4pat, s2explst)
 //
-| D4Pdap1 of (d4pat)
+| D4Psapx of
+  ( d4pat
+  , s2explst, s2explst(*gua*))
+//
+(*
+// HX-2021-03-21:
+// There is no [D4Pdap0] as
+// it is merged into [D4Pdapp]!
+*)
+| D4Pdap1 of (d4pat) // argness
 | D4Pdapp of
   (d4pat, int(*npf*), d4patlst)
 //
