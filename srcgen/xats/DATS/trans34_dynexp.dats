@@ -69,8 +69,10 @@ UN = "prelude/SATS/unsafe.sats"
 
 #staload "./../SATS/dynexp2.sats"
 #staload "./../SATS/dynexp3.sats"
-#staload "./../SATS/dynexp4.sats"
 
+(* ****** ****** *)
+#staload "./../SATS/cstrnt0.sats"
+#staload "./../SATS/dynexp4.sats"
 (* ****** ****** *)
 
 #staload "./../SATS/trans01.sats"
@@ -131,6 +133,54 @@ local
 (* ****** ****** *)
 
 fun
+auxany
+(d3p0: d3pat): d4pat =
+let
+//
+val
+loc0 = d3p0.loc()
+val
+t2p0 = d3p0.type()
+//
+val-
+D3Pany() = d3p0.node()
+//
+val
+s2e0 = s2exp_t2ype(t2p0)
+in
+d4pat_make_node
+(loc0, s2e0, t2p0, D4Pany())
+end (*let*) // end of [auxany]
+
+(* ****** ****** *)
+
+fun
+auxvar
+(d3p0: d3pat): d4pat =
+let
+//
+val
+loc0 = d3p0.loc()
+val
+t2p0 = d3p0.type()
+//
+val-
+D3Pvar(d2v1) = d3p0.node()
+//
+val
+t2p1 = d2v1.type()
+val
+s2e1 = s2exp_t2ype(t2p1)
+val () =
+d2var_set_sexp(d2v1, s2e1)
+in
+d4pat_make_node
+(loc0, s2e1, t2p0, D4Pvar(d2v1))
+end (*let*) // end of [auxvar]
+
+(* ****** ****** *)
+
+fun
 auxi00
 (d3p0: d3pat): d4pat =
 let
@@ -177,6 +227,36 @@ in
 d4pat_make_node
 (loc0, s2e0, t2p0, D4Pb00(btf))
 end (*let*) // end of [auxb00]
+
+(* ****** ****** *)
+
+fun
+auxs00
+(d3p0: d3pat): d4pat =
+let
+//
+val
+loc0 = d3p0.loc()
+val
+t2p0 = d3p0.type()
+//
+val-
+D3Ps00(str) = d3p0.node()
+//
+val
+s2i0 =
+let
+val len =
+string_length(str)
+in s2exp_int(sz2i(len)) end
+//
+val
+s2e0 = s2exp_type_strlen(s2i0)
+//
+in
+d4pat_make_node
+(loc0, s2e0, t2p0, D4Ps00(str))
+end (*let*) // end of [auxs00]
 
 (* ****** ****** *)
 
@@ -433,10 +513,22 @@ in (*in-of-let*)
 case+
 d3p0.node() of
 //
+(*
 |
-D3Pi00 _ => auxint(d3p0)
+D3Pnil _ => auxnil(d3p0)
+*)
+//
 |
-D3Pb00 _ => auxbtf(d3p0)
+D3Pany _ => auxany(d3p0)
+|
+D3Pvar _ => auxvar(d3p0)
+//
+|
+D3Pi00 _ => auxi00(d3p0)
+|
+D3Pb00 _ => auxb00(d3p0)
+|
+D3Ps00 _ => auxs00(d3p0)
 //
 |
 D3Pint _ => auxint(d3p0)
@@ -458,7 +550,21 @@ D3Pdapp _ => auxdapp(env0, d3p0)
 //
 |
 D3Panno(d3p1, s2e2) =>
+(
+d4pat_make_node
+( loc0
+, s2e2
+, t2p1, D4Panno(d4p1, s2e2))
+) where
+{
+//
+val loc0 = d3p0.loc()
+val t2p1 = d3p1.type()
+//
+val d4p1 =
 trans34_dpat_dntp(env0, d3p1, s2e2)
+//
+} (* end of [D3Panno] *)
 //
 |
 _ (*rest-of-d3pat*) => d4pat_none1(d3p0)
@@ -521,18 +627,30 @@ case+
 d3p0.node() of
 //
 |
-D3Pvar(d2v0) =>
+D3Pvar(d2v1) =>
 let
 val
 loc0 = d3p0.loc()
 val
-t2p0 = d3p0.type()
+t2p1 = d2v1.type()
 val () =
-d2var_set_sexp(d2v0, s2e0)
+d2var_set_sexp(d2v1, s2e0)
 in
 d4pat_make_node
-(loc0, s2e0, t2p0, D4Pvar(d2v0))
+(loc0, s2e0, t2p1, D4Pvar(d2v1))
 end (*let*) // end of [D3Pvar]
+//
+(*
+|
+D3Panno(d3p1, s2e2) =>
+(
+  d4pat_dntp(d4p1, s2e2)
+) where
+{
+val
+d4p1 = trans34_dntp(d3p1, s2e0)
+}
+*)
 //
 |
 _ (*rest-of-d3pat*) =>
@@ -540,17 +658,12 @@ let
 val
 loc0 = d3p0.loc()
 val
-t2p0 = d3p0.type()
-val
 d4p0 = 
 trans34_dpat
-(env0, d3p0) in
-d4pat_make_node
-( loc0
-, s2e0, t2p0, D4Ptcast(d4p0, s2e0))
+(env0, d3p0) in d4pat_tcast(d4p0, s2e0)
 end // end of [rest-of-d3pat]
 //
-end (* end of [trans34_dpat_dntp] *)
+end (*let*) // end of [trans34_dpat_dntp]
 
 (* ****** ****** *)
 
@@ -1390,15 +1503,17 @@ let
 //
 val
 loc0 = d3e0.loc()
-val
-t2p0 = d3e0.type()
 //
 val-
 D3Eanno
 ( d3e1
 , s2e2) = d3e0.node()
 //
-val d4e1 =
+val
+t2p1 = d3e1.type()
+//
+val
+d4e1 =
 (
   trans34_dexp_dntp
   ( env0, d3e1, s2e2 )
@@ -1407,7 +1522,7 @@ val d4e1 =
 in
 d4exp_make_node
 ( loc0
-, s2e2, t2p0, D4Eanno(d4e1, s2e2) )
+, s2e2, t2p1, D4Eanno(d4e1, s2e2) )
 end (*let*) // end of [aux_anno]
 
 (* ****** ****** *)

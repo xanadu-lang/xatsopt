@@ -434,6 +434,8 @@ s2xtv_struct =
 @{
   s2xtv_loc= loc_t
 ,
+  s2xtv_kind= kxtv2
+,
   s2xtv_sort= sort2
 ,
   s2xtv_sexp= s2exp
@@ -454,6 +456,8 @@ ref<s2xtv_struct>
 @{
   s2xtv_loc= loc0
 ,
+  s2xtv_kind= knd0
+,
   s2xtv_sort= s2t0
 ,
   s2xtv_sexp= s2e0
@@ -462,6 +466,7 @@ ref<s2xtv_struct>
 }
 ) where
 {
+val knd0 = KXTV2non()
 val s2e0 = the_s2exp_none0
 val stamp = s2xtv_stamp_new()
 } (* end of [s2xtv_new] *)
@@ -471,6 +476,10 @@ val stamp = s2xtv_stamp_new()
 implement
 s2xtv_get_loc
   (xtv0) = xtv0->s2xtv_loc
+//
+implement
+s2xtv_get_kind
+  (xtv0) = xtv0->s2xtv_kind
 //
 implement
 s2xtv_get_sort
@@ -915,6 +924,16 @@ end // end of [else]
 end // end of [s2exp_uni]
 
 (* ****** ****** *)
+//
+implement
+s2exp_type_void() =
+let
+val
+s2cr =
+the_void_ctype in
+s2cstref_get_sexp(s2cr) end
+//
+(* ****** ****** *)
 
 implement
 s2exp_type_sint
@@ -975,6 +994,8 @@ in
   s2exp_make_node(s2t0, node)
 end // end of [s2exp_type_bool]
 
+(* ****** ****** *)
+
 implement
 s2exp_type_char
   (s2i1) = let
@@ -993,6 +1014,27 @@ S2Eapp(s2f0, list_sing(s2i1))
 in
   s2exp_make_node(s2t0, node)
 end // end of [s2exp_type_char]
+
+(* ****** ****** *)
+
+implement
+s2exp_type_strlen
+  (s2i1) = let
+//
+val
+s2t0 =
+the_sort2_type
+//
+val
+s2f0 =
+s2cstref_get_sexp
+( the_string_ctype )
+val node =
+S2Eapp(s2f0, list_sing(s2i1))
+//
+in
+  s2exp_make_node(s2t0, node)
+end // end of [s2exp_type_strlen]
 
 (* ****** ****** *)
 

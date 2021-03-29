@@ -525,6 +525,11 @@ overload fprint with fprint_s2arg
 *)
 (* ****** ****** *)
 //
+abstbox s2xtv_tbox = ptr
+typedef s2xtv = s2xtv_tbox
+//
+(* ****** ****** *)
+//
 abstbox s2exp_tbox = ptr
 abstbox s2hnf_tbox = ptr
 abstbox t2ype_tbox = ptr
@@ -534,10 +539,26 @@ typedef s2hnf = s2hnf_tbox
 typedef t2ype = t2ype_tbox
 //
 (* ****** ****** *)
-
-abstbox s2xtv_tbox = ptr
-typedef s2xtv = s2xtv_tbox
-
+//
+datatype kxtv2 =
+| KXTV2non of ()
+| KXTV2tmp of () // for temp args
+| KXTV2uni of () // for poly args
+| KXTV2join of () // for if/case-exps
+//
+(* ****** ****** *)
+//
+fun
+print_kxtv2: print_type(kxtv2)
+fun
+prerr_kxtv2: print_type(kxtv2)
+fun
+fprint_kxtv2: fprint_type(kxtv2)
+//
+overload print with print_kxtv2
+overload prerr with prerr_kxtv2
+overload fprint with fprint_kxtv2
+//
 (* ****** ****** *)
 //
 (*
@@ -546,6 +567,8 @@ s2xtv_get_loc(s2xtv): loc_t
 *)
 fun
 s2xtv_get_loc(s2xtv): loc_t
+fun
+s2xtv_get_kind(s2xtv): kxtv2
 fun
 s2xtv_get_sort(s2xtv): sort2
 //
@@ -678,11 +701,11 @@ tyrec =
 | TYRECbox0 (* box *) // nonlin
 | TYRECbox1 (* box *) // linear
 //
-| TYRECflt0 (* flat *)
+| TYRECflt0 (* flat: non/lin *)
 (*
 | TYRECflt1 of stamp (* flat *)
 *)
-| TYRECflt2 of string  (* flat *)
+| TYRECflt2 of string (* flat *)
 // end of [tyrec]
 
 typedef
@@ -1043,14 +1066,21 @@ fun s2exp_list0(s2exp): s2exp
 *)
 //
 fun
+s2exp_type_void(): s2exp
+//
+fun
 s2exp_type_sint(idx: s2exp): s2exp
 fun
 s2exp_type_uint(idx: s2exp): s2exp
 //
 fun
 s2exp_type_bool(idx: s2exp): s2exp
+//
 fun
 s2exp_type_char(idx: s2exp): s2exp
+//
+fun
+s2exp_type_strlen(len: s2exp): s2exp
 //
 (* ****** ****** *)
 //

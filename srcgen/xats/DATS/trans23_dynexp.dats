@@ -386,6 +386,7 @@ D2Panno
 //
 val t2p2 = s2exp_erase(s2e2)
 val d3p1 = trans23_dpat_dntp(d2p1, t2p2)
+//
 } (* end of [aux_anno] *)
 
 (* ****** ****** *)
@@ -2373,7 +2374,7 @@ end // end of [trans23_dgpat_dntp]
 //
 implement
 trans23_dclaulst_dntp
-(d2cls, targ, tres) =
+( d2cls, targ, tres ) =
 list_vt2t
 (
   list_map<d2clau><d3clau>(d2cls)

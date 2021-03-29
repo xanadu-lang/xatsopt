@@ -650,11 +650,17 @@ H0Etimp of
   (h0exp(*l-val*), h0exp(*r-val*))
 //
 |
-H0Eif0 of
-( h0exp
+H0Eift1 of
+( h0exp // single if-then-else
 , h0exp(*then*), h0expopt(*else*))
+(*
+//
+// HX-2021-03-27:
+H0Eifts of // multiple if-then-else
+(h0gexplst(*then*), h0expopt(*else*))
+*)
 |
-H0Ecas0 of
+H0Ecase of
 ( int(*knd*)
 , h0exp(*val*), h0claulst(*claues*))
 //
