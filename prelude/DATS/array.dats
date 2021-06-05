@@ -41,7 +41,9 @@ val A0 =
 a0ptr_alloc<a>()
 //
 (*
-This cast may not be supported
+HX-2021:
+Casting an array to a
+pointer may not be supported!
 *)
 //
 val p0 =
@@ -54,12 +56,30 @@ end
 *)
 //
 (* ****** ****** *)
+impltmp
+<a:t0>
+a0ref_get(A0) =
+a0ref_get0<a>(A0)
+(* ****** ****** *)
+//
+impltmp
+<a:vt>
+a0ref_setf(A0, x0) =
+g_free<a>
+(a0ref_exch<a>(A0, x0))
+impltmp
+<a:vt>
+a0ptr_setf(A0, x0) =
+g_free<a>
+(a0ptr_exch<a>(A0, x0))
+//
+(* ****** ****** *)
 //
 impltmp
 <a:vt>
 a0ref_print(A0) =
 let
-val x0 = a0ref_get<a>(A0)
+val x0 = a0ref_get0<a>(A0)
 val x0 = $UN.castlin10{a}(x0)
 //
 val () = a0ref_print$beg<>()
@@ -368,8 +388,11 @@ val
 test =
 forall$test<a>(get_at(A0, i0))
 in
-if test then loop(succ(i0)) else false
-end else false // end of [if]
+if
+test
+then loop(succ(i0)) else false
+end // then
+else false // else // end of [if]
 //
 } (* end of [a1ref_forall] *)
 //
@@ -428,8 +451,9 @@ val
 test =
 rforall$test<a>(get_at(A0, i1))
 in
-  if test then loop(i1) else false
-end else false // end of [if]
+if test then loop(i1) else false
+end // then
+else false // else // end of [if]
 //
 } (* end of [a1ref_rforall] *)
 //
