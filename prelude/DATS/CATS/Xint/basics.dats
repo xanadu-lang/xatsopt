@@ -637,14 +637,14 @@ a0ptr_alloc<a> = XINTERP_a0ptr_alloc
 //
 #extern
 fun
-XINTERP_a0ref_get
+XINTERP_a0ref_get0
 {a:vt}
 ( A0
 : a0ref(a))
 : (~a) = $exname()
 #extern
 fun
-XINTERP_a0ref_set
+XINTERP_a0ref_setf
 {a:vt}
 ( A0
 : a0ref(a), x0: a): void
@@ -652,10 +652,10 @@ XINTERP_a0ref_set
 //
 impltmp
 {a:t0}
-a0ref_get<a> = XINTERP_a0ref_get{a}
+a0ref_get<a> = XINTERP_a0ref_get0{a}
 impltmp
 {a:t0}
-a0ref_set<a> = XINTERP_a0ref_set{a}
+a0ref_set<a> = XINTERP_a0ref_setf{a}
 //
 (* ****** ****** *)
 //
