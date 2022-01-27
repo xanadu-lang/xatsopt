@@ -63,18 +63,30 @@ absvtbx
 a1ptr_vt_i0_vx(a:vt, n:i0)
 //
 typedef
-a1ref(
-a:vt,n:i0) = a1ref_vt_i0_x0(a,n)
+a1ref//
+(a:vt,n:i0) = a1ref_vt_i0_x0(a,n)
 vwtpdef
-a1ptr(
-a:vt,n:i0) = a1ptr_vt_i0_vx(a,n)
+a1ptr//
+(a:vt,n:i0) = a1ptr_vt_i0_vx(a,n)
 //
 (* ****** ****** *)
 //
+abstbox
+a1refsz_vt_i0_x0(a:vt, n:i0)
+absvtbx
+a1ptrsz_vt_i0_vx(a:vt, n:i0)
+//
 typedef
-a1refsz(a:vt) = [n:i0] a1ref(a, n)
+a1refsz
+(a:vt,n:i0) = a1refsz_vt_i0_x0(a,n)
 vwtpdef
-a1ptrsz(a:vt) = [n:i0] a1ptr(a, n)
+a1ptrsz
+(a:vt,n:i0) = a1ptrsz_vt_i0_vx(a,n)
+//
+typedef
+a1refsz(a:vt) = [n:i0] a1refsz(a, n)
+vwtpdef
+a1ptrsz(a:vt) = [n:i0] a1ptrsz(a, n)
 //
 (* ****** ****** *)
 // HX: 2-dimensional
@@ -97,15 +109,6 @@ a2ptr(
 a:vt,
 m:i0,n:i0) =
 a2ptr_vt_i0_i0_vx(a, m, n)
-//
-(* ****** ****** *)
-//
-typedef
-a2refsz(a:vt) =
-  [m,n:i0] a2ref( a, m, n )
-vwtpdef
-a2ptrsz(a:vt) =
-  [m,n:i0] a2ptr( a, m, n )
 //
 (* ****** ****** *)
 //
@@ -618,16 +621,16 @@ a0ptr with a0ptr_make of 1000
 (* ****** ****** *)
 
 #symload
-head with a1ref_head of 1000
+print with a0ref_print of 1000
 #symload
-tail with a1ref_tail of 1000
+print with a0ptr_print of 1000
 
 (* ****** ****** *)
 
 #symload
-print with a0ref_print of 1000
+head with a1ref_head of 1000
 #symload
-print with a0ptr_print of 1000
+tail with a1ref_tail of 1000
 
 (* ****** ****** *)
 (*
