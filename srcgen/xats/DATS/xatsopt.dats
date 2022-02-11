@@ -69,8 +69,8 @@ then
 {
   val () =
   xatsopt_main0(argc, argv)
-}
-else
+} (* end of [if] *)
+) where
 {
 //
 val () =
@@ -82,18 +82,16 @@ XATSHOME = the_XATSHOME_get()
 val
 ((*void*)) =
 prerrln!
-("xatsopt: XATSHOME=",XATSHOME)
+("xatsopt: XATSHOME=", XATSHOME)
 //
-}
-// end of [if]
-) where
+} where
 {
 // (*
-  val out = stderr_ref
-  val ( ) =
-  echo_argc_argv(out, argc, argv)
+val out = stderr_ref
+val ( ) =
+echo_argc_argv(out, argc, argv)
 // *)
-} (* end of [main] *)
+} (* where *) // end of [main0]
 (* ****** ****** *)
 #endif // #ifdef(__LIBXATSOPT__)
 (* ****** ****** *)
