@@ -135,7 +135,7 @@ d0csopt of
   None(*void*)
 | Some(d0cs) =>
   Some(trans01_declist(d0cs))
-) : Option(d1eclist) // end-of-val
+) : Option(d1eclist) // end-val
 //
 val () =
 assertloc
@@ -176,7 +176,7 @@ rcd.transd of
   None(*void*)
 | Some(d1cs) =>
   Some(trans12_declist(d1cs))
-) : Option(d2eclist) // end-of-val
+) : Option(d2eclist) // end-val
 //
 val p2kg =
 D2TRANSD@{
@@ -218,14 +218,16 @@ d2csopt of
 | Some(d2cs) =>
   Some
   (trans23_declist(d2cs))
-) : Option(d3eclist) // end-of-val
+) : Option(d3eclist) // end-val
+//
 val () =
 tread23_package(p3kg) where
 {
 val p3kg =
 D3TRANSD@{
-  stadyn= stadyn
-, source= source, transd= d3csopt
+stadyn= stadyn
+,
+source= source, transd= d3csopt
 }
 }
 //
@@ -239,16 +241,7 @@ d3csopt of
 | Some(d3cs) =>
   Some
   (trans33_envless(d3cs))
-) : Option(d3eclist) // end-of-val
-val () =
-tread33_package(p3kg) where
-{
-val p3kg =
-D3TRANSD@{
-  stadyn= stadyn
-, source= source, transd= d3csopt
-}
-}
+) : Option(d3eclist) // end-val
 //
 val
 d3csopt =
@@ -259,7 +252,8 @@ d3csopt of
   None(*void*)
 | Some(d3cs) =>
   Some(trans3t_envless(d3cs))
-) : Option(d3eclist) // end-of-val
+) : Option(d3eclist) // end-val
+//
 val
 d3csopt =
 (
@@ -269,18 +263,15 @@ d3csopt of
   None(*void*)
 | Some(d3cs) =>
   Some(trans3x_envless(d3cs))
-) : Option(d3eclist) // end-of-val
+) : Option(d3eclist) // end-val
 //
-val p3kg =
+in
+//
 D3TRANSD@{
   stadyn= stadyn
 , source= source, transd= d3csopt
-}
+} (* D3TRANSD *)
 //
-in
-let
-val () = tread3x_package(p3kg) in p3kg
-end
 end // end of [trans03_package]
 
 (* ****** ****** *)
@@ -323,8 +314,9 @@ d4csopt of
 //
 in
 D4TRANSD@{
-  stadyn= stadyn
-, source= source, transd= d4csopt
+stadyn= stadyn
+,
+source= source, transd= d4csopt
 }
 end // end of [trans34_package]
 
@@ -334,11 +326,11 @@ implement
 trs03cmp30_package
   (p0kg) =
 (
-trcmp30_package(p3kg)
+  trcmp30_package(p3kg)
 ) where
 {
 val p3kg = trans03_package(p0kg)
-}
+} // end of [trs03cmp30_package]
 //
 (* ****** ****** *)
 //
@@ -350,11 +342,19 @@ val
 p3kg =
 trans03_package(p0kg)
 //
+val () =
+tread33_package(p3kg)
+val () =
+tread3x_package(p3kg)
+//
 val
 p4kg =
 trans34_package(p3kg)
+//
+(*
 val () =
 tread34_package(p4kg)
+*)
 //
 in(*in-of-let*)
 //
@@ -366,7 +366,7 @@ let
 val cstr =
 trans4x_package(p4kg)
 in
-  xatsopt_cstrnt1_solving(cstr)
+xatsopt_cstrnt1_solving(cstr)
 end
 *)
 } (*where*) // trcmp30_package
