@@ -46,13 +46,53 @@
 #staload "./intrep0.sats"
 
 (* ****** ****** *)
+//
+absvtype
+compenv_vtype = ptr
+vtypedef
+compenv = compenv_vtype
+//
+(* ****** ****** *)
 typedef
 P2tr0(a:vt0p) =
-[l:addr | l >= null] p2tr(a,l)
+[l:addr|l >= null] p2tr(a,l)
+(* ****** ****** *)
+
+fun
+compenv_make_nil
+( (*void*) ) : compenv
+fun
+compenv_free_nil
+( env0: compenv ) : void
+
+(* ****** ****** *)
+//
+fun
+compenv_pop0_timp
+(env0: !compenv): void
+fun
+compenv_push_timp
+( env0
+: !compenv
+, d3e0: d3exp
+, s2vs: s2varlst
+, tsub: t2ypelst): void
+//
+(* ****** ****** *)
+//
+fun
+t2ype_subst_compenv
+( t2p0: t2ype
+, env0: !compenv ) : t2ype
+//
 (* ****** ****** *)
 //
 fun
 htcst_make_scst(s2cst): htcst
+fun
+htvar_make_svar(s2var): htvar
+//
+(* ****** ****** *)
 //
 fun
 the_scstmap_search_ref
@@ -69,9 +109,6 @@ the_scstmap_insert_exn
 (s2v0: s2cst, htc1: htcst): void
 //
 (* ****** ****** *)
-//
-fun
-htvar_make_svar(s2var): htvar
 //
 fun
 the_svarmap_search_ref
@@ -230,51 +267,81 @@ trcmp30_dcstlst(d2cstlst): hdcstlst
 (* ****** ****** *)
 //
 fun
-trcmp30_dpat(d3p0: d3pat): h0pat
+trcmp30_dpat
+( env0:
+! compenv, d3p0: d3pat): h0pat
 fun
-trcmp30_dpatlst(d3patlst): h0patlst
+trcmp30_dpatlst
+( env0:
+! compenv, d3ps: d3patlst): h0patlst
 //
 (* ****** ****** *)
 //
 fun
-trcmp30_farg(f3a0: f3arg): hfarg
+trcmp30_farg
+( env0:
+! compenv, f3a0: f3arg): hfarg
 fun
-trcmp30_farglst(f3arglst): hfarglst
+trcmp30_farglst
+( env0:
+! compenv, f3as: f3arglst): hfarglst
 //
 (* ****** ****** *)
 //
 fun
-trcmp30_ti3arg(tia: ti3arg): htiarg
+trcmp30_ti3arg(tia0: ti3arg): htiarg
 //
 (* ****** ****** *)
 //
 fun
-trcmp30_dexp(d3e0: d3exp): h0exp
+trcmp30_dexp
+( env0:
+! compenv, d3e0: d3exp): h0exp
 fun
-trcmp30_dexpopt(d3expopt): h0expopt
+trcmp30_dexpopt
+( env0:
+! compenv, d3e0: d3expopt): h0expopt
 fun
-trcmp30_dexplst(d3explst): h0explst
+trcmp30_dexplst
+( env0:
+! compenv, d3e0: d3explst): h0explst
 //
 (* ****** ****** *)
 //
 fun
-trcmp30_dgua(d3g0: d3gua): h0gua
-fun
-trcmp30_dgualst(d3gualst): h0gualst
+trcmp30_dgua
+( env0:
+! compenv, d3g0: d3gua): h0gua
 //
 fun
-trcmp30_dclau(d3cl: d3clau): h0clau
+trcmp30_dgualst
+( env0:
+! compenv, d3gs: d3gualst): h0gualst
+//
 fun
-trcmp30_dgpat(d3gp: d3gpat): h0gpat
+trcmp30_dclau
+( env0:
+! compenv, d3cl: d3clau): h0clau
 fun
-trcmp30_dclaulst(d3claulst): h0claulst
+trcmp30_dgpat
+( env0:
+! compenv, d3gp: d3gpat): h0gpat
+//
+fun
+trcmp30_dclaulst
+( env0:
+! compenv, dcls: d3claulst): h0claulst
 //
 (* ****** ****** *)
 //
 fun
-trcmp30_decl(d3c0: d3ecl): h0dcl
+trcmp30_decl
+( env0:
+! compenv, d3c0: d3ecl): h0dcl
 fun
-trcmp30_declist(d3eclist): h0dclist
+trcmp30_declist
+( env0:
+! compenv, d3cs: d3eclist): h0dclist
 //
 (* ****** ****** *)
 
