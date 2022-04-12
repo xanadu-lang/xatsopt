@@ -28,21 +28,96 @@
 (* ****** ****** *)
 //
 // Author: Hongwei Xi
-// Start Time: April, 2020
+// Start Time: June, 2020
 // Authoremail: gmhwxiATgmailDOTcom
 //
 (* ****** ****** *)
 //
-abstype
-FILEref_tbox <= ptr0
-absvwtp
-FILEptr_vtbx(l:addr) <= ptr0
+#include
+"share/atspre_staload.hats"
+#staload
+UN = "prelude/SATS/unsafe.sats"
 //
-typedef FILEref = FILEref_tbox
-sexpdef FILEptr = FILEptr_vtbx
-vwtpdef FILEptr0 = [l:addr] FILEptr(l)
-vwtpdef FILEptr1 = [l:agtz] FILEptr(l)
+(* ****** ****** *)
+//
+#staload "./../SATS/xstamp0.sats"
+#staload "./../SATS/xsymbol.sats"
+#staload "./../SATS/locinfo.sats"
 //
 (* ****** ****** *)
 
-(* end of [xatslib_libc.sats] *)
+#staload "./../SATS/intrep0.sats"
+
+(* ****** ****** *)
+
+local
+
+absimpl
+h0typ_tbox = $rec
+{ 
+  h0typ_sort= h0srt
+, h0typ_node= h0typ_node
+} (* absimpl *)
+
+in (* in-of-local *)
+
+(* ****** ****** *)
+
+implement
+h0typ_get_sort
+  (htp) = htp.h0typ_sort
+implement
+h0typ_get_node
+  (htp) = htp.h0typ_node
+
+(* ****** ****** *)
+
+implement
+h0typ_make_node
+  (s2t0, node) = $rec
+{
+  h0typ_sort= s2t0, h0typ_node= node
+}
+
+(* ****** ****** *)
+
+end // end of [local]
+
+(* ****** ****** *)
+
+local
+
+absimpl
+htqarg_tbox = $rec
+{ 
+  htqarg_loc= loc_t
+, htqarg_htvs= htvarlst
+} (* absimpl *)
+
+in (* in-of-local *)
+
+(* ****** ****** *)
+
+implement
+htqarg_get_loc
+  (htqa) = htqa.htqarg_loc
+implement
+htqarg_get_htvs
+  (htqa) = htqa.htqarg_htvs
+
+(* ****** ****** *)
+
+implement
+htqarg_make
+  (loc0, htvs) = $rec
+{
+  htqarg_loc= loc0, htqarg_htvs= htvs
+}
+
+(* ****** ****** *)
+
+end // end of [local]
+
+(* ****** ****** *)
+
+(* end of [xats_intrep0_statyp.dats] *)

@@ -34,30 +34,30 @@ update:: XATSLIB
 
 MISC:: ; \
 $(CPF) \
-$(XATSHOME)/srcgen/xats/Makefile_xatsopt ./srcgen/xats/.
+$(XATSHOME)/srcgen/xcomp/Makefile_xatsopt ./srcgen/xcomp/.
 MISC:: ; \
 $(CPF) \
-$(XATSHOME)/srcgen/xats/TEST/Makefile_prelude ./srcgen/xats/TEST/.
+$(XATSHOME)/srcgen/xcomp/TEST/Makefile_prelude ./srcgen/xcomp/TEST/.
 MISC:: ; \
 $(CPF) \
-$(XATSHOME)/srcgen/xats/TEST/Makefile_xatslib ./srcgen/xats/TEST/.
+$(XATSHOME)/srcgen/xcomp/TEST/Makefile_xatslib ./srcgen/xcomp/TEST/.
 
 ######
 
 SATS:: ; \
-$(CPF) $(XATSHOME)/srcgen/xats/SATS/*.sats ./srcgen/xats/SATS/.
+$(CPF) $(XATSHOME)/srcgen/xcomp/SATS/*.sats ./srcgen/xcomp/SATS/.
 
 DATS:: ; \
-$(CPF) $(XATSHOME)/srcgen/xats/DATS/*.dats ./srcgen/xats/DATS/.
+$(CPF) $(XATSHOME)/srcgen/xcomp/DATS/*.dats ./srcgen/xcomp/DATS/.
 
 CATS:: ; \
-$(CPF) $(XATSHOME)/srcgen/xats/CATS/*.cats ./srcgen/xats/CATS/.
+$(CPF) $(XATSHOME)/srcgen/xcomp/CATS/*.cats ./srcgen/xcomp/CATS/.
 
 HATS:: ; \
-$(CPF) $(XATSHOME)/srcgen/xats/HATS/*.hats ./srcgen/xats/HATS/.
+$(CPF) $(XATSHOME)/srcgen/xcomp/HATS/*.hats ./srcgen/xcomp/HATS/.
 
 CONTRIB:: ; \
-$(CPFR) $(XATSHOME)/srcgen/xats/DATS/CONTRIB ./srcgen/xats/DATS/.
+$(CPFR) $(XATSHOME)/srcgen/xcomp/DATS/CONTRIB ./srcgen/xcomp/DATS/.
 
 ######
 #
