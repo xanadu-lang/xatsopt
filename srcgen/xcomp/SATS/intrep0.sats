@@ -272,10 +272,11 @@ h0typ_node =
 //
 | H0Tlft of h0typ // left-value
 //
-| H0Tfun of
-  ( int(*npf*)
-  , h0typlst(*arg*),h0typ(*res*)
-  ) (* end of H0Tfun *)
+|
+H0Tfun of
+( int(*npf*)
+, h0typlst(*arg*),h0typ(*res*)
+) (* end of H0Tfun *)
 //
 | H0Tapp of
   (h0typ, h0typlst) // instance
@@ -443,6 +444,11 @@ overload
 .abstdf2 with htcst_set_abstdf2
 //
 (* ****** ****** *)
+//
+fun
+htcst_isdat(htc0: htcst): bool
+//
+overload .isdat with htcst_isdat
 //
 fun
 htcst_get_hdconlst
@@ -1130,6 +1136,10 @@ H0Cinclude of
 , int(*knd*) // sta/dyn: 0/1
 , filpathopt
 , h0dclistopt) // file inclusion
+//
+|
+H0Cabstype of
+(htcst, h0typopt(*def*))
 //
 |
 H0Cfundecl of
