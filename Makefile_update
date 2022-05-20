@@ -31,7 +31,10 @@ update:: PREDATSCATS
 update:: XATSLIB
 
 ######
-
+MISC:: ; \
+$(CPF) \
+$(XATSHOME)/srcgen/Makefile_srcgen ./srcgen/.
+######
 MISC:: ; \
 $(CPF) \
 $(XATSHOME)/srcgen/xcomp/Makefile_xatsopt ./srcgen/xcomp/.
