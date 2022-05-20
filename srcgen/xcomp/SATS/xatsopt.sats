@@ -32,6 +32,10 @@
 // Authoremail: gmhwxiATgmailDOTcom
 //
 (* ****** ****** *)
+#define
+ATS_PACKNAME
+"ATS3.XANADU.libxatsopt"
+(* ****** ****** *)
 //
 fun
 xatsopt_version
@@ -159,8 +163,15 @@ the_preludes_load_if
 //
 (* ****** ****** *)
 //
+(*
+HX-2022-05-20:
+*)
+// This one is already
+// declared in [xglobal.sats]:
+(*
 fun
 the_XATSHOME_get((*void*)): string
+*)
 //
 (* ****** ****** *)
 //
