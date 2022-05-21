@@ -62,7 +62,7 @@ htcst_struct = @{
 //
 , htcst_abstdf2= h0typopt
 //
-, htcst_hdconlst= Option(hdconlst)
+, htcst_h0conlst= Option(h0conlst)
 //
 } (* end of [htcst_tbox] *)
 //
@@ -96,12 +96,12 @@ htcst_set_abstdf2
 (* ****** ****** *)
 //
 implement
-htcst_get_hdconlst
-(htc) = htc->htcst_hdconlst
+htcst_get_h0conlst
+(htc) = htc->htcst_h0conlst
 implement
-htcst_set_hdconlst
-(htc, hdcs) =
-(htc->htcst_hdconlst := Some(hdcs))
+htcst_set_h0conlst
+(htc, h0cs) =
+(htc->htcst_h0conlst := Some(h0cs))
 //
 (* ****** ****** *)
 
@@ -118,7 +118,7 @@ ref<htcst_struct>
 //
 , htcst_abstdf2= None()
 //
-, htcst_hdconlst= None()
+, htcst_h0conlst= None()
 //
 }
 ) where
@@ -138,13 +138,13 @@ implement
 htcst_isdat(x0) =
 (
 case+
-x0.hdconlst() of
+x0.h0conlst() of
 Some _ => true | None _ => false
 )
 (* ****** ****** *)
 
 local
-//
+
 typedef
 htvar_struct = @{
 //
@@ -156,8 +156,10 @@ htvar_struct = @{
 //
 absimpl
 htvar_tbox = ref(htvar_struct)
-//
+
+(* ****** ****** *)
 in(* in-of-local *)
+(* ****** ****** *)
 
 (* ****** ****** *)
 
@@ -190,7 +192,7 @@ val stmp = htvar_stamp_new()
 
 (* ****** ****** *)
 
-end // end of [local]
+end (*local*) // end of [local]
 
 (* ****** ****** *)
 implement
@@ -218,8 +220,8 @@ h0typ_tbox = $rec
 , h0typ_node= h0typ_node
 } (* absimpl *)
 
+(* ****** ****** *)
 in (* in-of-local *)
-
 (* ****** ****** *)
 
 implement
@@ -240,7 +242,7 @@ h0typ_make_node
 
 (* ****** ****** *)
 
-end // end of [local]
+end (*local*) // end of [local]
 
 (* ****** ****** *)
 
@@ -253,7 +255,9 @@ htqarg_tbox = $rec
 , htqarg_htvs= htvarlst
 } (* absimpl *)
 
+(* ****** ****** *)
 in (* in-of-local *)
+(* ****** ****** *)
 
 (* ****** ****** *)
 //
@@ -267,15 +271,15 @@ htqarg_get_htvs
 (* ****** ****** *)
 
 implement
-htqarg_make
+htqarg_make_htvarlst
   (loc0, htvs) = $rec
 {
   htqarg_loc= loc0, htqarg_htvs= htvs
-}
+} (* end of [htqarg_make_htvarlst] *)
 
 (* ****** ****** *)
 
-end // end of [local]
+end (*local*) // end of [local]
 
 (* ****** ****** *)
 
