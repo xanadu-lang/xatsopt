@@ -1293,7 +1293,7 @@ D2FUNDECL of @{
   loc= loc_t
 , nam= d2var
 , d2c= d2cst
-, arg= f2arglst
+, f2g= f2arglst
 , res= effs2expopt
 , xnm= g1namopt
 , def= d2expopt, wtp= s2expopt
@@ -1410,18 +1410,20 @@ d2ecl_node =
 | D2Cvardclst of
   (token(*varknd*), decmodopt, d2vardeclist)
 //
-| D2Cimplmnt1 of
-  ( token(*impkind*)
-  , stamp(*unicity*)
-  , decmodopt
-  , sq2arglst, tq2arglst
-  , impld2cst, ti2arglst, f2arglst, effs2expopt, d2exp)
-| D2Cimplmnt2 of
-  ( token(*impkind*)
-  , stamp(*unicity*)
-  , decmodopt
-  , sq2arglst, tq2arglst
-  , impld2cst, ti2arglst, f2arglst, effs2expopt, d2exp)
+|
+D2Cimplmnt1 of
+( token(*impkind*)
+, stamp(*unicity*)
+, decmodopt
+, sq2arglst, tq2arglst
+, impld2cst, ti2arglst, f2arglst, effs2expopt, d2exp)
+|
+D2Cimplmnt2 of
+( token(*impkind*)
+, stamp(*unicity*)
+, decmodopt
+, sq2arglst, tq2arglst
+, impld2cst, ti2arglst, f2arglst, effs2expopt, d2exp)
 //
 // end of [d2ecl_node]
 //

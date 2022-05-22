@@ -882,10 +882,11 @@ p_napps(buf, err) = let
 in
 //
 case+ tnd of
-| _ (* error *) =>
-  ( err := e0 + 1;
-    d0pat_make_node(tok.loc(), D0Pnone(tok))
-  ) (* end-of-error *)
+|
+_ (* error *) =>
+( err := e0 + 1;
+  d0pat_make_node(tok.loc(), D0Pnone(tok))
+) (* end-of-error *)
 //
 end // end of [p_napps]
 
@@ -1078,7 +1079,8 @@ case+ tnd of
     }
   end // end of [T_IDENT_qual]
 //
-| _ (* error *) => let
+| _ (* error *) =>
+  let
     val () = (err := e0 + 1)
   in
     d0pat_make_node(tok.loc(), D0Pnone(tok))
@@ -1950,7 +1952,7 @@ case+ tnd of
   let
     val () = err := e0 + 1
   in
-    d0exp_make_node(tok.loc(), D0Enone1(tok))
+    d0exp_make_node(tok.loc(), D0Enone(tok))
   end // HX: indicating a parsing error
 //
 end // end of [p_napps]
@@ -2449,7 +2451,7 @@ end // end of [T_DLR_EXISTS]
     val
     ((*void*)) = (err := e0 + 1)
   in
-    d0exp_make_node(loc, D0Enone1(tok))
+    d0exp_make_node(loc, D0Enone(tok))
   end
   end // HX: indication of a parsing error
 //
@@ -2597,7 +2599,7 @@ _(*non-T_LBRACE*) =>
 let
   val () = (err := e0 + 1)
 in
-d0exp_make_node(tok.loc(), D0Enone1(tok))
+d0exp_make_node(tok.loc(), D0Enone(tok))
 end // HX: indicating a parsing error
 //
 end // end of [p_D0Esqarg]
@@ -2897,7 +2899,7 @@ in
       val () = (err := e0 + 1)
     in
       d0exp_make_node
-        (tok.loc(), D0Enone1(tok))
+        (tok.loc(), D0Enone(tok))
       // end of [d0exp_make_node]
     end // end of [T_EQGT]
   | _(*non-EQGT...*) => p_atmd0exp(buf, err)
@@ -3272,7 +3274,7 @@ let
 in
   case+
   d0e.node() of
-  | D0Enone1(_) =>
+  | D0Enone(_) =>
     D0MDEFnone(*void*)
   | _(*non-G0Enone*) =>
     D0MDEFsome(None(*void*), d0e(*def*))
