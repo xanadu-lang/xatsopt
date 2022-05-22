@@ -1044,12 +1044,13 @@ fprint_val<d0ecl> = fprint_d0ecl
 //
 implement
 fprint_val<g0marg> = fprint_g0marg
+//
 implement
-fprint_val<f0undecl> = fprint_f0undecl
+fprint_val<d0valdecl> = fprint_d0valdecl
 implement
-fprint_val<v0aldecl> = fprint_v0aldecl
+fprint_val<d0vardecl> = fprint_d0vardecl
 implement
-fprint_val<v0ardecl> = fprint_v0ardecl
+fprint_val<d0fundecl> = fprint_d0fundecl
 implement
 fprint_val<d0cstdecl> = fprint_d0cstdecl
 //
@@ -1158,33 +1159,6 @@ case+ x0.node() of
   , tok, "; ", sqid, "; "
   , smas, "; ", res0, "; ", teq1, "; ", def2, ")")
 //
-| D0Cfundecl
-  (tok, mopt, tqas, d0cs) =>
-  fprint!
-  ( out
-  , "D0Cfundecl("
-  , tok, "; ", mopt, "; ", tqas, "; ", d0cs, ")")
-//
-| D0Cvaldecl
-  (tok, mopt, d0cs) =>
-  fprint!
-  ( out
-  , "D0Cvaldecl(", tok, "; ", mopt, "; ", d0cs, ")")
-| D0Cvardecl
-  (tok, mopt, d0cs) =>
-  fprint!
-  ( out
-  , "D0Cvardecl(", tok, "; ", mopt, "; ", d0cs, ")")
-//
-| D0Cimpdecl
-  ( tok, mopt, sqas, tqas
-  , dqid, tias, f0as, res0, teq1, d0e2) =>
-  fprint!
-  ( out
-  , "D0Cimpdecl("
-  , tok, "; ", mopt, "; ", sqas, "; ", tqas, "; "
-  , dqid, "; ", tias, "; ", f0as, "; ", res0, "; ", teq1, "; ", d0e2, ")")
-//
 | D0Csymload
   (tok, sym, twth, dqid, tint) =>
   fprint!
@@ -1209,6 +1183,33 @@ case+ x0.node() of
   fprint!
   ( out
   , "D0Cdynconst(", tok, "; ", tqas, "; ", d0cs, ")")
+//
+| D0Cfundclst
+  (tok, mopt, tqas, d0cs) =>
+  fprint!
+  ( out
+  , "D0Cfundclst("
+  , tok, "; ", mopt, "; ", tqas, "; ", d0cs, ")")
+//
+| D0Cvaldclst
+  (tok, mopt, d0cs) =>
+  fprint!
+  ( out
+  , "D0Cvaldclst(", tok, "; ", mopt, "; ", d0cs, ")")
+| D0Cvardclst
+  (tok, mopt, d0cs) =>
+  fprint!
+  ( out
+  , "D0Cvardclst(", tok, "; ", mopt, "; ", d0cs, ")")
+//
+| D0Cimpldcl0
+  ( tok, mopt, sqas, tqas
+  , dqid, tias, f0as, res0, teq1, d0e2) =>
+  fprint!
+  ( out
+  , "D0Cimpldcl0("
+  , tok, "; ", mopt, "; ", sqas, "; ", tqas, "; "
+  , dqid, "; ", tias, "; ", f0as, "; ", res0, "; ", teq1, "; ", d0e2, ")")
 //
 | D0Celse(tok) =>
   fprint!(out, "D0Celse(", tok, ")")
@@ -1366,76 +1367,78 @@ case+ x0 of
 ) (* end of [fprint_wd0eclseq] *)
 
 (* ****** ****** *)
+//
+implement
+print_d0valdecl(x0) =
+fprint_d0valdecl(stdout_ref, x0)
+implement
+prerr_d0valdecl(x0) =
+fprint_d0valdecl(stderr_ref, x0)
+//
+implement
+print_d0vardecl(x0) =
+fprint_d0vardecl(stdout_ref, x0)
+implement
+prerr_d0vardecl(x0) =
+fprint_d0vardecl(stderr_ref, x0)
+//
+implement
+print_d0fundecl(x0) =
+fprint_d0fundecl(stdout_ref, x0)
+implement
+prerr_d0fundecl(x0) =
+fprint_d0fundecl(stderr_ref, x0)
+//
+(* ****** ****** *)
 
 implement
-print_v0aldecl(x0) =
-fprint_v0aldecl(stdout_ref, x0)
-implement
-prerr_v0aldecl(x0) =
-fprint_v0aldecl(stderr_ref, x0)
-
-implement
-fprint_v0aldecl
+fprint_d0valdecl
   (out, x0) = let
 //
-val+V0ALDECL(rcd) = x0
+val+D0VALDECL(rcd) = x0
 //
 in
   fprint!
   ( out
-  , "V0ALDECL@{"
+  , "D0VALDECL@{"
   , "pat=", rcd.pat, ", teq=", rcd.teq
   , ", def=", rcd.def, ", wtp=", rcd.wtp, "}")
-end // end of [fprint_v0aldecl]
+end // end of [fprint_d0valdecl]
 
 (* ****** ****** *)
 
 implement
-print_v0ardecl(x0) =
-fprint_v0ardecl(stdout_ref, x0)
-implement
-prerr_v0ardecl(x0) =
-fprint_v0ardecl(stderr_ref, x0)
-
-implement
-fprint_v0ardecl
+fprint_d0vardecl
   (out, x0) = let
 //
-val+V0ARDECL(rcd) = x0
+val+D0VARDECL(rcd) = x0
 //
 in
   fprint!
   ( out
-  , "V0ARDECL@{"
+  , "D0VARDECL@{"
   , "nam=", rcd.nam
   , ", wth=", rcd.wth
   , ", res=", rcd.res, ", ini=", rcd.ini, "}")
-end // end of [fprint_v0ardecl]
+end // end of [fprint_d0vardecl]
 
 (* ****** ****** *)
 
 implement
-print_f0undecl(x0) =
-fprint_f0undecl(stdout_ref, x0)
-implement
-prerr_f0undecl(x0) =
-fprint_f0undecl(stderr_ref, x0)
-
-implement
-fprint_f0undecl
+fprint_d0fundecl
   (out, x0) = let
 //
-val+F0UNDECL(rcd) = x0
+val+D0FUNDECL(rcd) = x0
 //
 in
   fprint!
   ( out
-  , "F0UNDECL@{"
+  , "D0FUNDECL@{"
   , "nam=", rcd.nam
   , ", arg=", rcd.arg
   , ", res=", rcd.res, ", teq=", rcd.teq
   , ", def=", rcd.def, ", wtp=", rcd.wtp, "}")
-end // end of [fprint_f0undecl]
+end // end of [fprint_d0fundecl]
 
 (* ****** ****** *)
 

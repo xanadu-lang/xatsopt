@@ -462,8 +462,7 @@ let
   val () = tfun := t2p0
 in
   f3arg_make_node
-    ( f3a0.loc(), F3ARGnone3(f3a0) )
-  // f3arg_make_node
+  ( f3a0.loc(), F3ARGnone3(f3a0) )
 end
 ) (* end of [then] *)
 else
@@ -569,13 +568,12 @@ trans33_dpatlst_dnts(env0, d3ps, t2ps)
 in
   tfun := t2p0;
   f3arg_make_node
-    ( loc0, F3ARGsome_dyn(npf1, d3ps) )
-  // f3arg_make_node
+  (  loc0, F3ARGsome_dyn(npf1, d3ps)  )
 end // end of [T2Pfun]
 //
 | _(*non-T2Puni/fun*) =>
 (
-  f3arg_make_node(loc0, F3ARGnone3(f3a0))
+f3arg_make_node(loc0, F3ARGnone3(f3a0))
 )
 //
 end // end of [auxf3as_1d]
@@ -1441,7 +1439,7 @@ auxdcl0
 , d3cl: d3ecl): void =
 let
 val-
-D3Cimpdecl3
+D3Cimpldcl3
 ( tok0
 , stmp, mopt
 , sqas, tqas
@@ -1490,7 +1488,7 @@ val
 loc0 = d3cl.loc()
 //
 val-
-D3Cimpdecl3
+D3Cimpldcl3
 ( tok0
 , stmp, mopt
 , sqas, tqas
@@ -1641,12 +1639,12 @@ d3cl.node() of
   val () =
   auxlst1(htbl, body) in auxlst1(htbl, d3cs)
   end
-| D3Cimpdecl3 _ =>
+| D3Cimpldcl3 _ =>
   let
   val () =
   auxdcl0(htbl, d3cl) in auxlst1(htbl, d3cs)
   end
-| _(*non-D3Cimpdecl3*) => auxlst1(htbl, d3cs)
+| _(*non-D3Cimpldcl3*) => auxlst1(htbl, d3cs)
 )
 //
 val

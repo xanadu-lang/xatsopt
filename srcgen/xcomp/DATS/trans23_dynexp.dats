@@ -77,14 +77,13 @@ implement
 fprint_val<t2ype> = fprint_t2ype
 
 (* ****** ****** *)
-
 implement
 fprint_val<d2pat> = fprint_d2pat
 implement
 fprint_val<f2arg> = fprint_f2arg
+(* ****** ****** *)
 implement
 fprint_val<f3arg> = fprint_f3arg
-
 (* ****** ****** *)
 //
 fn//HX:non-rec
@@ -2613,16 +2612,54 @@ end // end of [aux_absimpl]
 end // end of [local]
 
 (* ****** ****** *)
-
+//
 fun
-aux_fundecl
+aux_excptcon
 ( d2cl
 : d2ecl): d3ecl = let
 //
 val
 loc0 = d2cl.loc()
 val-
-D2Cfundecl
+D2Cexcptcon
+( d1cl
+, d2cs ) = d2cl.node()
+//
+in
+d3ecl_make_node
+(loc0, D3Cexcptcon(d1cl, d2cs))
+end // end of [aux_excptcon]
+//
+(* ****** ****** *)
+//
+fun
+aux_datatype
+( d2cl
+: d2ecl): d3ecl = let
+//
+val
+loc0 = d2cl.loc()
+val-
+D2Cdatatype
+( d1cl
+, s2cs ) = d2cl.node()
+//
+in
+d3ecl_make_node
+(loc0, D3Cdatatype(d1cl, s2cs))
+end // end of [aux_datatype]
+//
+(* ****** ****** *)
+
+fun
+aux_fundclst
+( d2cl
+: d2ecl): d3ecl = let
+//
+val
+loc0 = d2cl.loc()
+val-
+D2Cfundclst
 ( knd
 , mopt
 , tqas
@@ -2636,7 +2673,7 @@ f3ds = aux2_f2ds(d2cl, f2ds, agtp)
 in
 d3ecl_make_node
 ( loc0
-, D3Cfundecl(knd, mopt, tqas, f3ds))
+, D3Cfundclst(knd, mopt, tqas, f3ds))
 end where
 {
 //
@@ -2648,10 +2685,10 @@ a3gt2p =
 fun
 ishdr
 ( f2d0
-: f2undecl): bool =
+: d2fundecl): bool =
 let
 val+
-F2UNDECL(rcd) = f2d0
+D2FUNDECL(rcd) = f2d0
 in
 case+ rcd.def of
 | None() => true | Some(d2e) => false
@@ -2742,14 +2779,14 @@ aux1_f2d0
 ( d2cl
 : d2ecl
 , f2d0
-: f2undecl
+: d2fundecl
 ) : a3gt2p = let
 //
 val
 loc0 = d2cl.loc()
 //
 val+
-F2UNDECL(rcd) = f2d0
+D2FUNDECL(rcd) = f2d0
 //
 val loc = rcd.loc
 val nam = rcd.nam
@@ -2798,7 +2835,7 @@ and
 aux1_f2ds
 ( d2cl: d2ecl
 , f2ds
-: f2undeclist): List0(a3gt2p) =
+: d2fundeclist): List0(a3gt2p) =
 (
 case+ f2ds of
 | list_nil() =>
@@ -2813,15 +2850,15 @@ aux2_f2d0
 ( d2cl
 : d2ecl
 , f2d0
-: f2undecl
+: d2fundecl
 , agtp: a3gt2p
-) : f3undecl = let
+) : d3fundecl = let
 //
 val
 loc0 = d2cl.loc()
 //
 val+
-F2UNDECL(rcd) = f2d0
+D2FUNDECL(rcd) = f2d0
 //
 val loc = rcd.loc
 val nam = rcd.nam
@@ -2885,23 +2922,23 @@ case+ def of
 ) : d3expopt // end-of-val
 //
 in
-F3UNDECL(
+D3FUNDECL(
 @{
  loc=loc
 ,nam=nam,d2c=d2c
 ,a2g=a2g,a3g=a3g
 ,res=res,def=def,rtp=rtp,wtp=wtp,ctp=ctp}
-) (* F3UNDECL *)
+) (* D3FUNDECL *)
 end // end of [let]
 and
 aux2_f2ds
 ( d2cl: d2ecl
 , f2ds
-: f2undeclist
+: d2fundeclist
 , agtp
 : List0(a3gt2p)
 )
-: f3undeclist =
+: d3fundeclist =
 (
 case+ f2ds of
 | list_nil() =>
@@ -2916,19 +2953,19 @@ case+ f2ds of
   end
 )
 //
-} (* end of [aux_fundecl] *)
+} (* end of [aux_fundclst] *)
 
 (* ****** ****** *)
 
 fun
-aux_valdecl
+aux_valdclst
 ( d2cl
 : d2ecl): d3ecl = let
 //
 val
 loc0 = d2cl.loc()
 val-
-D2Cvaldecl
+D2Cvaldclst
 ( knd
 , mopt
 , v2ds) = d2cl.node()
@@ -2937,8 +2974,8 @@ val
 v3ds = auxv2ds(d2cl, v2ds)
 //
 in
-  d3ecl_make_node
-  (loc0, D3Cvaldecl(knd, mopt, v3ds))
+d3ecl_make_node
+(loc0, D3Cvaldclst(knd, mopt, v3ds))
 end where
 {
 //
@@ -2947,13 +2984,13 @@ auxv2d0
 ( d2cl
 : d2ecl
 , v2d0
-: v2aldecl
-) : v3aldecl = let
+: d2valdecl
+) : d3valdecl = let
 //
 val
 loc0 = d2cl.loc()
 val+
-V2ALDECL(rcd) = v2d0
+D2VALDECL(rcd) = v2d0
 //
 val loc = rcd.loc
 val pat = rcd.pat
@@ -2988,7 +3025,7 @@ case+ def of
 ) : d3expopt // end-of-val
 //
 in
-V3ALDECL
+D3VALDECL
 (@{
 loc=loc,pat=pat,def=def,wtp=wtp})
 end // end of [auxv2d0]
@@ -2997,9 +3034,9 @@ fun
 auxv2ds
 ( d2cl: d2ecl
 , v2ds
-: v2aldeclist
+: d2valdeclist
 )
-: v3aldeclist =
+: d3valdeclist =
 (
 case+ v2ds of
 |
@@ -3016,19 +3053,19 @@ list_cons
 end (* end of [list_cons] *)
 )
 //
-} (* end of [aux_valdecl] *)
+} (* end of [aux_valdclst] *)
 
 (* ****** ****** *)
 
 fun
-aux_vardecl
+aux_vardclst
 ( d2cl
 : d2ecl): d3ecl = let
 //
 val
 loc0 = d2cl.loc()
 val-
-D2Cvardecl
+D2Cvardclst
 ( knd
 , mopt
 , v2ds) = d2cl.node()
@@ -3039,7 +3076,7 @@ v3ds = auxv2ds(d2cl, v2ds)
 in
 //
 d3ecl_make_node
-(loc0, D3Cvardecl(knd, mopt, v3ds))
+(loc0, D3Cvardclst(knd, mopt, v3ds))
 //
 end where
 {
@@ -3049,13 +3086,13 @@ auxv2d0
 ( d2cl
 : d2ecl
 , v2d0
-: v2ardecl
-) : v3ardecl = let
+: d2vardecl
+) : d3vardecl = let
 //
 val
 loc0 = d2cl.loc()
 val+
-V2ARDECL(rcd) = v2d0
+D2VARDECL(rcd) = v2d0
 //
 val loc = rcd.loc
 val d2v = rcd.d2v
@@ -3092,19 +3129,19 @@ d2var_set_type(d2v, t2ype_lft(tres))
 }
 //
 in
-V3ARDECL(
+D3VARDECL(
 @{
 loc=loc,d2v=d2v,wth=wth,res=res,ini=ini}
-) (* V3ARDECL *)
+) (* D3VARDECL *)
 end // end of [auxv2d0]
 //
 fun
 auxv2ds
 ( d2cl: d2ecl
 , v2ds
-: v2ardeclist
+: d2vardeclist
 )
-: v3ardeclist =
+: d3vardeclist =
 (
 case+ v2ds of
 |
@@ -3121,55 +3158,17 @@ list_cons
 end (* end of [list_cons] *)
 )
 //
-} (* end of [aux_vardecl] *)
+} (* end of [aux_vardclst] *)
 
-(* ****** ****** *)
-//
-fun
-aux_excptcon
-( d2cl
-: d2ecl): d3ecl = let
-//
-val
-loc0 = d2cl.loc()
-val-
-D2Cexcptcon
-( d1cl
-, d2cs ) = d2cl.node()
-//
-in
-d3ecl_make_node
-(loc0, D3Cexcptcon(d1cl, d2cs))
-end // end of [aux_excptcon]
-//
-(* ****** ****** *)
-//
-fun
-aux_datatype
-( d2cl
-: d2ecl): d3ecl = let
-//
-val
-loc0 = d2cl.loc()
-val-
-D2Cdatatype
-( d1cl
-, s2cs ) = d2cl.node()
-//
-in
-d3ecl_make_node
-(loc0, D3Cdatatype(d1cl, s2cs))
-end // end of [aux_datatype]
-//
 (* ****** ****** *)
 
 fun
-aux_impdecl1
+aux_impldcl1
 ( d2cl
 : d2ecl): d3ecl = let
 //
 val-
-D2Cimpdecl1
+D2Cimpldcl1
 ( knd
 , stmp, mopt
 , sqas, tqas
@@ -3246,7 +3245,7 @@ end
 (*
 val () =
 println!
-("aux_impdecl1: tfun = ", tfun)
+("aux_impldcl1: tfun = ", tfun)
 *)
 //
 val
@@ -3256,9 +3255,9 @@ f3as,tres
 //
 (*
 val () =
-println!("aux_impdecl1: f3as = ", f3as)
+println!("aux_impldcl1: f3as = ", f3as)
 val () =
-println!("aux_impdecl1: tres = ", tres)
+println!("aux_impldcl1: tres = ", tres)
 *)
 //
 val
@@ -3290,25 +3289,25 @@ in
 d3ecl_make_node
 ( d2cl.loc()
 ,
-  D3Cimpdecl1
+  D3Cimpldcl1
   ( knd
   , stmp, mopt
   , sqas, tqas
   , id2c, ti3a, tias, f3as, res0, d3e0)
 ) (* d3ecl_make_node *)
-end // end of [aux_impdecl1]
+end // end of [aux_impldcl1]
 
 (* ****** ****** *)
 
 fun
-aux_impdecl2
+aux_impldcl2
 ( d2cl
 : d2ecl): d3ecl = let
 //
 val
 loc0 = d2cl.loc()
 val-
-D2Cimpdecl2
+D2Cimpldcl2
 ( knd
 , stmp, mopt
 , sqas, tqas
@@ -3344,10 +3343,10 @@ trans23_dexp_dntp(d2e0, tres)
 (*
 val () =
 println!
-("aux_impdecl2: tres = ", tres)
+("aux_impldcl2: tres = ", tres)
 val () =
 println!
-("aux_impdecl2: d3e0 = ", d3e0)
+("aux_impldcl2: d3e0 = ", d3e0)
 *)
 //
 in
@@ -3357,14 +3356,14 @@ in
 ) where
 {
   val node =
-  D3Cimpdecl2
+  D3Cimpldcl2
   ( knd
   , stmp, mopt
   , sqas, tqas
   , id2c, ti3a, tias, f3as, res0, d3e0)
 }
 //
-end // end of [aux_impdecl2]
+end // end of [aux_impldcl2]
 
 in (* in-of-local *)
 
@@ -3428,23 +3427,23 @@ d2cl.node() of
 | D2Cabsopen _ => aux_absopen(d2cl)
 | D2Cabsimpl _ => aux_absimpl(d2cl)
 //
-| D2Cfundecl _ => aux_fundecl(d2cl)
-//
-| D2Cvaldecl _ => aux_valdecl(d2cl)
-| D2Cvardecl _ => aux_vardecl(d2cl)
-//
 | D2Cexcptcon _ => aux_excptcon(d2cl)
 | D2Cdatatype _ => aux_datatype(d2cl)
 //
-| D2Cimpdecl1 _ => aux_impdecl1(d2cl)
-| D2Cimpdecl2 _ => aux_impdecl2(d2cl)
+| D2Cfundclst _ => aux_fundclst(d2cl)
+//
+| D2Cvaldclst _ => aux_valdclst(d2cl)
+| D2Cvardclst _ => aux_vardclst(d2cl)
+//
+| D2Cimpldcl1 _ => aux_impldcl1(d2cl)
+| D2Cimpldcl2 _ => aux_impldcl2(d2cl)
+//
+| D2Csymload _ =>
+  d3ecl_make_node(loc0, D3Cd2ecl(d2cl))
 //
 | D2Csexpdef _ =>
   d3ecl_make_node(loc0, D3Cd2ecl(d2cl))
 | D2Cdatasort _ =>
-  d3ecl_make_node(loc0, D3Cd2ecl(d2cl))
-//
-| D2Csymload _ =>
   d3ecl_make_node(loc0, D3Cd2ecl(d2cl))
 //
 | _ (* rest-of-d2ecl *) => d3ecl_none1(d2cl)

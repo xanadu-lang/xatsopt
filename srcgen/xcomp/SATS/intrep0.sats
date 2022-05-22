@@ -140,6 +140,13 @@ typedef h0patopt = Option(h0pat)
 //
 (* ****** ****** *)
 //
+abstbox h0farg_tbox = ptr
+typedef h0farg = h0farg_tbox
+typedef h0farglst = List0(h0farg)
+typedef h0fargopt = Option(h0farg)
+//
+(* ****** ****** *)
+//
 abstbox h0exp_tbox = ptr
 typedef h0exp = h0exp_tbox
 typedef h0explst = List0(h0exp)
@@ -161,23 +168,15 @@ typedef htqargopt = Option(htqarg)
 //
 (* ****** ****** *)
 //
-abstbox h0farg_tbox = ptr
-//
-typedef h0farg = h0farg_tbox
-typedef h0farglst = List0(h0farg)
-typedef h0fargopt = Option(h0farg)
-//
-(* ****** ****** *)
-//
 abstbox h0gua_tbox = ptr
-typedef h0gua = h0gua_tbox
-typedef h0gualst = List0(h0gua)
-//
 abstbox h0gpat_tbox = ptr
-typedef h0gpat = h0gpat_tbox
-//
 abstbox h0clau_tbox = ptr
+//
+typedef h0gua = h0gua_tbox
+typedef h0gpat = h0gpat_tbox
 typedef h0clau = h0clau_tbox
+//
+typedef h0gualst = List0(h0gua)
 typedef h0claulst = List0(h0clau)
 //
 (* ****** ****** *)
@@ -192,17 +191,21 @@ h0srt =
 | HSTtup of
   (h0srtlst) // HX: not in use
 *)
-| HSTfun of
-  (h0srtlst, h0srt(*res*)) // fun
+|
+HSTfun of
+(h0srtlst, h0srt(*res*)) // fun
 //
 (*
-| HSTapp of
-  ( h0srt(*fun*)
-  , h0srtlst(*arg*)) // HX: not in use
+|
+HSTapp of
+( h0srt(*fun*)
+, h0srtlst(*arg*)) // HX: not in use
 *)
 //
-| HSTnone0 of ((*nil*)) // HX: placeholder
-| HSTnone1 of (dataptr) // HX: for ignores
+|
+HSTnone0 of ((*nil*)) // HX: placeholder
+|
+HSTnone1 of (dataptr) // HX: for ignores
 //
 where h0srtlst = List0(h0srt)
 
@@ -1173,7 +1176,7 @@ H0Cexcptcon of ( h0conlst )
 H0Cdatatype of ( htcstlst )
 //
 |
-H0Cimpdecl3 of
+H0Cimpldcl3 of
 ( token(*impkind*)
 , stamp(*unicity*)
 , decmodopt

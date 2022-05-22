@@ -239,9 +239,9 @@ in
 case-
 timp.node() of
 |
-D3Cfundecl _ => auxtimp2f(d3e0)
+D3Cfundclst _ => auxtimp2f(d3e0)
 |
-D3Cimpdecl3 _ => auxtimp2i(d3e0)
+D3Cimpldcl3 _ => auxtimp2i(d3e0)
 //
 end // end of [auxtimp]
 //
@@ -264,7 +264,7 @@ D3Etcst
 ( d2c0, _, _) = tcst.node()
 //
 val-
-D3Cfundecl
+D3Cfundclst
 ( knd0, mopt
 , tqas, f3ds) = timp.node()
 //
@@ -276,12 +276,12 @@ auxf3ds(f3ds) where
 fun
 auxf3d0
 ( f3d0
-: f3undecl): void =
+: d3fundecl): void =
 let
 val
 loc1 = f3d0.loc()
 val+
-F3UNDECL(rcd) = f3d0
+D3FUNDECL(rcd) = f3d0
 in
 //
 case+
@@ -310,7 +310,7 @@ end // end of [auxf3d0]
 fun
 auxf3ds
 ( f3ds
-: f3undeclist): void =
+: d3fundeclist): void =
 let
 val-
 list_cons
@@ -341,7 +341,7 @@ D3Etimp
 , timp, tsub) = d3e0.node()
 //
 val-
-D3Cimpdecl3
+D3Cimpldcl3
 ( tok0
 , stmp, mopt
 , sqas, tqas
@@ -825,7 +825,28 @@ val () = tread3x_d3eclist(body)
 //
 | D3Cstaload _ => ()
 //
-| D3Cfundecl
+| D3Cvardclst
+  ( knd, mopt, v3ds ) =>
+  {
+    val () = tread3x_d3vardeclist(v3ds)
+(*
+    val () =
+    println!
+    ("tread3x_d3ecl: D3Cvaldecl: v3ds = ", v3ds)
+*)
+  }
+| D3Cvaldclst
+  ( knd, mopt, v3ds ) =>
+  {
+    val () = tread3x_d3valdeclist(v3ds)
+(*
+    val () =
+    println!
+    ("tread3x_d3ecl: D3Cvaldecl: v3ds = ", v3ds)
+*)
+  }
+//
+| D3Cfundclst
   ( knd
   , mopt, tqas, f3ds) =>
   if
@@ -833,7 +854,7 @@ val () = tread3x_d3eclist(body)
   then
   {
     val () =
-    tread3x_f3undeclist(f3ds) //ntmp
+    tread3x_d3fundeclist(f3ds) //ntmp
 (*
     val () =
     println!
@@ -844,32 +865,11 @@ val () = tread3x_d3eclist(body)
   {
 (*
     val () =
-    tread3x_f3undeclist(f3ds) // temp
+    tread3x_d3fundeclist(f3ds) // temp
 *)
   }
 //
-| D3Cvaldecl
-  ( knd, mopt, v3ds ) =>
-  {
-    val () = tread3x_v3aldeclist(v3ds)
-(*
-    val () =
-    println!
-    ("tread3x_d3ecl: D3Cvaldecl: v3ds = ", v3ds)
-*)
-  }
-| D3Cvardecl
-  ( knd, mopt, v3ds ) =>
-  {
-    val () = tread3x_v3ardeclist(v3ds)
-(*
-    val () =
-    println!
-    ("tread3x_d3ecl: D3Cvaldecl: v3ds = ", v3ds)
-*)
-  }
-//
-| D3Cimpdecl3
+| D3Cimpldcl3
   ( tok0
   , stmp, mopt
   , sqas, tqas
@@ -889,7 +889,7 @@ val () = tread3x_d3eclist(body)
       val () = tread3x_d3exp(d3e0) // template
 *)
     }
-  ) (* D3Cimpdecl3 *)
+  ) (* D3Cimpldcl3 *)
 //
 | _(* rest-of-d3ecl *) =>
   {
@@ -915,7 +915,7 @@ list_foreach$fwork<d3ecl><env>(d3c, env) = tread3x_d3ecl(d3c)
 //
 implement
 //{}(*tmp*)
-tread3x_v3aldecl
+tread3x_d3valdecl
   (v3d0) =
 {
   val () =
@@ -929,26 +929,26 @@ tread3x_v3aldecl
 } where
 {
 //
-  val+V3ALDECL(rcd) = v3d0
+  val+D3VALDECL(rcd) = v3d0
 //
-} (* end of [tread3x_v3aldecl] *)
+} (* end of [tread3x_d3valdecl] *)
 //
 implement
 //{}(*tmp*)
-tread3x_v3aldeclist(v3ds) =
+tread3x_d3valdeclist(v3ds) =
 (
-list_foreach<v3aldecl>(v3ds)
+list_foreach<d3valdecl>(v3ds)
 ) where
 {
 implement(env)
-list_foreach$fwork<v3aldecl><env>(v3d, env) = tread3x_v3aldecl(v3d)
-} (* end of [tread3x_v3aldeclist] *)
+list_foreach$fwork<d3valdecl><env>(v3d, env) = tread3x_d3valdecl(v3d)
+} (* end of [tread3x_d3valdeclist] *)
 //
 (* ****** ****** *)
 //
 implement
 //{}(*tmp*)
-tread3x_v3ardecl
+tread3x_d3vardecl
   (v3d0) =
 {
   val () =
@@ -960,26 +960,26 @@ tread3x_v3ardecl
 } where
 {
 //
-  val+V3ARDECL(rcd) = v3d0
+  val+D3VARDECL(rcd) = v3d0
 //
-} (* end of [tread3x_v3ardecl] *)
+} (* end of [tread3x_d3vardecl] *)
 //
 implement
 //{}(*tmp*)
-tread3x_v3ardeclist(v3ds) =
+tread3x_d3vardeclist(v3ds) =
 (
-list_foreach<v3ardecl>(v3ds)
+list_foreach<d3vardecl>(v3ds)
 ) where
 {
 implement(env)
-list_foreach$fwork<v3ardecl><env>(v3d, env) = tread3x_v3ardecl(v3d)
-} (* end of [tread3x_v3ardeclist] *)
+list_foreach$fwork<d3vardecl><env>(v3d, env) = tread3x_d3vardecl(v3d)
+} (* end of [tread3x_d3vardeclist] *)
 //
 (* ****** ****** *)
 //
 implement
 //{}(*tmp*)
-tread3x_f3undecl
+tread3x_d3fundecl
   (f3d0) =
 {
   val () =
@@ -991,20 +991,20 @@ tread3x_f3undecl
 } where
 {
 //
-  val+F3UNDECL(rcd) = f3d0
+  val+D3FUNDECL(rcd) = f3d0
 //
-} (* end of [tread3x_f3undecl] *)
+} (* end of [tread3x_d3fundecl] *)
 //
 implement
 //{}(*tmp*)
-tread3x_f3undeclist(f3ds) =
+tread3x_d3fundeclist(f3ds) =
 (
-list_foreach<f3undecl>(f3ds)
+list_foreach<d3fundecl>(f3ds)
 ) where
 {
 implement(env)
-list_foreach$fwork<f3undecl><env>(f3d, env) = tread3x_f3undecl(f3d)
-} (* end of [tread3x_f3undeclist] *)
+list_foreach$fwork<d3fundecl><env>(f3d, env) = tread3x_d3fundecl(f3d)
+} (* end of [tread3x_d3fundeclist] *)
 //
 (* ****** ****** *)
 

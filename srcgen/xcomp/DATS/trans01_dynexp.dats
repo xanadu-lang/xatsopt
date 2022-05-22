@@ -2041,24 +2041,24 @@ list_vt2t(d1cs) where
 } (* end of [trans01_dclaulst] *)
 
 (* ****** ****** *)
-
+//
 extern
 fun
-trans01_valdecl: v0aldecl -> v1aldecl
+trans01_valdecl: d0valdecl -> d1valdecl
 and
-trans01_valdeclist: v0aldeclist -> v1aldeclist
-
+trans01_vardecl: d0vardecl -> d1vardecl
+and
+trans01_fundecl: d0fundecl -> d1fundecl
+//
 extern
 fun
-trans01_vardecl: v0ardecl -> v1ardecl
+trans01_valdeclist: d0valdeclist -> d1valdeclist
 and
-trans01_vardeclist: v0ardeclist -> v1ardeclist
-
-extern
-fun
-trans01_fundecl: f0undecl -> f1undecl
+trans01_vardeclist: d0vardeclist -> d1vardeclist
 and
-trans01_fundeclist: f0undeclist -> f1undeclist
+trans01_fundeclist: d0fundeclist -> d1fundeclist
+//
+(* ****** ****** *)
 
 extern
 fun
@@ -2145,7 +2145,7 @@ trans01_valdecl
   (d0cl) = let
 //
 val+
-V0ALDECL(rcd) = d0cl
+D0VALDECL(rcd) = d0cl
 //
 val
 loc = rcd.loc
@@ -2170,7 +2170,7 @@ println!("trans01_valdecl: wtp = ", wtp)
 *)
 //
 in
-  V1ALDECL
+  D1VALDECL
   (@{loc=loc,pat=pat,teq=teq,def=def,wtp=wtp})
 end // end of [trans01_valdecl]
 
@@ -2181,11 +2181,11 @@ list_vt2t(d1cs) where
 {
   val
   d1cs =
-  list_map<v0aldecl><v1aldecl>
+  list_map<d0valdecl><d1valdecl>
     (d0cs) where
   {
     implement
-    list_map$fopr<v0aldecl><v1aldecl> = trans01_valdecl
+    list_map$fopr<d0valdecl><d1valdecl> = trans01_valdecl
   }
 } (* end of [trans01_valdeclist] *)
 
@@ -2196,7 +2196,7 @@ trans01_vardecl
   (d0cl) = let
 //
 val+
-V0ARDECL(rcd) = d0cl
+D0VARDECL(rcd) = d0cl
 //
 val
 loc = rcd.loc
@@ -2236,8 +2236,8 @@ println!("trans01_vardecl: ini = ", ini)
 *)
 //
 in
-  V1ARDECL
-  (@{loc=loc,nam=tok,wth=wth,res=res,ini=ini})
+D1VARDECL
+(@{loc=loc,nam=tok,wth=wth,res=res,ini=ini})
 end // end of [trans01_vardecl]
 
 implement
@@ -2247,11 +2247,11 @@ list_vt2t(d1cs) where
 {
 val
 d1cs =
-list_map<v0ardecl><v1ardecl>
+list_map<d0vardecl><d1vardecl>
   (d0cs) where
 {
 implement
-list_map$fopr<v0ardecl><v1ardecl> = trans01_vardecl
+list_map$fopr<d0vardecl><d1vardecl> = trans01_vardecl
 }
 } (* end of [trans01_vardeclist] *)
 
@@ -2262,7 +2262,7 @@ trans01_fundecl
   (d0cl) = let
 //
 val+
-F0UNDECL(rcd) = d0cl
+D0FUNDECL(rcd) = d0cl
 //
 val
 loc = rcd.loc
@@ -2300,7 +2300,7 @@ println!("trans01_fundecl: wtp = ", wtp)
 *)
 //
 in
-  F1UNDECL
+  D1FUNDECL
   (@{loc=loc,nam=tok
     ,arg=arg,res=res,teq=teq,def=def,wtp=wtp})
 end // end of [trans01_fundecl]
@@ -2312,11 +2312,11 @@ list_vt2t(d1cs) where
 {
   val
   d1cs =
-  list_map<f0undecl><f1undecl>
+  list_map<d0fundecl><d1fundecl>
     (d0cs) where
   {
     implement
-    list_map$fopr<f0undecl><f1undecl> = trans01_fundecl
+    list_map$fopr<d0fundecl><d1fundecl> = trans01_fundecl
   }
 } (* end of [trans01_fundeclist] *)
 
@@ -3332,109 +3332,6 @@ end // end of [aux_absimpl]
 (* ****** ****** *)
 
 fun
-aux_fundecl
-( d0cl
-: d0ecl): d1ecl = let
-//
-val loc0 = d0cl.loc()
-//
-val-
-D0Cfundecl
-( knd
-, mopt, tqas, d0cs) = d0cl.node()
-//
-val tqas = trans01_tqarglst(tqas)
-val d1cs = trans01_fundeclist(d0cs)
-//
-in
-  d1ecl_make_node
-    (loc0, D1Cfundecl(knd, mopt, tqas, d1cs))
-  // d1ecl_make_node
-end // end of [aux_fundecl]
-
-(* ****** ****** *)
-
-fun
-aux_valdecl
-( d0cl
-: d0ecl): d1ecl = let
-//
-val loc0 = d0cl.loc()
-//
-val-
-D0Cvaldecl
-(knd, mopt, d0cs) = d0cl.node()
-//
-val d1cs = trans01_valdeclist(d0cs)
-//
-in
-  d1ecl_make_node
-    (loc0, D1Cvaldecl(knd, mopt, d1cs))
-  // d1ecl_make_node
-end // end of [aux_valdecl]
-
-(* ****** ****** *)
-
-fun
-aux_vardecl
-( d0cl
-: d0ecl): d1ecl = let
-//
-val loc0 = d0cl.loc()
-//
-val-
-D0Cvardecl
-(knd, mopt, d0cs) = d0cl.node()
-//
-val d1cs = trans01_vardeclist(d0cs)
-//
-in
-  d1ecl_make_node
-  (loc0, D1Cvardecl(knd, mopt, d1cs))
-end // end of [aux_vardecl]
-
-(* ****** ****** *)
-
-fun
-aux_impdecl
-( d0cl
-: d0ecl): d1ecl = let
-//
-val loc0 = d0cl.loc()
-//
-val-
-D0Cimpdecl
-( knd
-, mopt, sqas, tqas
-, dqid, tias, f0as, res0, teq1, d0e2) = d0cl.node()
-//
-val sqas =
-  trans01_sqarglst(sqas)
-val tqas =
-  trans01_tqarglst(tqas)
-//
-val tias =
-  trans01_tiarglst(tias)
-//
-val f1as =
-  trans01_farglst(f0as)
-val res0 =
-  trans01_effsexpopt(res0)
-//
-val d1e2 = trans01_dexp(d0e2)
-//
-in
-  d1ecl_make_node
-  ( loc0
-  , D1Cimpdecl
-    (knd, mopt, sqas, tqas, dqid, tias, f1as, res0, teq1, d1e2)
-  )
-  // d1ecl_make_node
-end // end of [aux_impdecl]
-
-(* ****** ****** *)
-
-fun
 aux_symload
 ( d0cl
 : d0ecl): d1ecl = let
@@ -3620,6 +3517,108 @@ end // end of [aux_dynconst]
 
 (* ****** ****** *)
 
+
+fun
+aux_valdclst
+( d0cl
+: d0ecl): d1ecl = let
+//
+val loc0 = d0cl.loc()
+//
+val-
+D0Cvaldclst
+(knd, mopt, d0cs) = d0cl.node()
+//
+val d1cs = trans01_valdeclist(d0cs)
+//
+in
+  d1ecl_make_node
+  (loc0, D1Cvaldclst(knd, mopt, d1cs))
+end // end of [aux_valdclst]
+
+(* ****** ****** *)
+
+fun
+aux_vardclst
+( d0cl
+: d0ecl): d1ecl = let
+//
+val loc0 = d0cl.loc()
+//
+val-
+D0Cvardclst
+(knd, mopt, d0cs) = d0cl.node()
+//
+val d1cs = trans01_vardeclist(d0cs)
+//
+in
+  d1ecl_make_node
+  (loc0, D1Cvardclst(knd, mopt, d1cs))
+end // end of [aux_vardclst]
+
+(* ****** ****** *)
+
+fun
+aux_fundclst
+( d0cl
+: d0ecl): d1ecl = let
+//
+val loc0 = d0cl.loc()
+//
+val-
+D0Cfundclst
+( knd
+, mopt, tqas, d0cs) = d0cl.node()
+//
+val tqas = trans01_tqarglst(tqas)
+val d1cs = trans01_fundeclist(d0cs)
+//
+in
+  d1ecl_make_node
+  (loc0, D1Cfundclst(knd, mopt, tqas, d1cs))
+end // end of [aux_fundclst]
+
+(* ****** ****** *)
+
+fun
+aux_impldcl0
+( d0cl
+: d0ecl): d1ecl = let
+//
+val loc0 = d0cl.loc()
+//
+val-
+D0Cimpldcl0
+( knd
+, mopt, sqas, tqas
+, dqid, tias, f0as, res0, teq1, d0e2) = d0cl.node()
+//
+val sqas =
+  trans01_sqarglst(sqas)
+val tqas =
+  trans01_tqarglst(tqas)
+//
+val tias =
+  trans01_tiarglst(tias)
+//
+val f1as =
+  trans01_farglst(f0as)
+val res0 =
+  trans01_effsexpopt(res0)
+//
+val d1e2 = trans01_dexp(d0e2)
+//
+in
+  d1ecl_make_node
+  ( loc0
+  , D1Cimpldcl0
+    (knd, mopt, sqas, tqas, dqid, tias, f1as, res0, teq1, d1e2)
+  )
+  // d1ecl_make_node
+end // end of [aux_impldcl0]
+
+(* ****** ****** *)
+
 in (* in-of-local *)
 
 (* ****** ****** *)
@@ -3693,13 +3692,6 @@ d0cl.node() of
 | D0Cabsopen _ => aux_absopen(d0cl)
 | D0Cabsimpl _ => aux_absimpl(d0cl)
 //
-| D0Cfundecl _ => aux_fundecl(d0cl)
-//
-| D0Cvaldecl _ => aux_valdecl(d0cl)
-| D0Cvardecl _ => aux_vardecl(d0cl)
-//
-| D0Cimpdecl _ => aux_impdecl(d0cl)
-//
 | D0Csymload _ => aux_symload(d0cl)
 //
 | D0Cdatasort _ => aux_datasort(d0cl)
@@ -3708,6 +3700,13 @@ d0cl.node() of
 | D0Cdatatype _ => aux_datatype(d0cl)
 //
 | D0Cdynconst _ => aux_dynconst(d0cl)
+//
+| D0Cfundclst _ => aux_fundclst(d0cl)
+//
+| D0Cvaldclst _ => aux_valdclst(d0cl)
+| D0Cvardclst _ => aux_vardclst(d0cl)
+//
+| D0Cimpldcl0 _ => aux_impldcl0(d0cl)
 //
 | D0Celse(tok1) =>
   (
