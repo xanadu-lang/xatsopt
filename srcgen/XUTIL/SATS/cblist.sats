@@ -32,84 +32,58 @@
 // Authoremail: gmhwxiATgmailDOTcom
 //
 (* ****** ****** *)
+#define
+ATS_PACKNAME "ATS3.XANADU.xatsopt"
+(* ****** ****** *)
 //
-fun
-xatsopt_memcpy
-( dst: ptr
-, src: ptr
-, nbyte: Size_t): ptr = "ext#xatsopt_memcpy"
+datatype
+cblist =
+| cblist_nil of ()
+| {n:pos}
+  cblist_cons of
+  (size_t(n), arrayref(uchar, n), cblist)
+//
+datavtype
+cblist_vt =
+| cblist_vt_nil of ()
+| {n:pos}
+  cblist_vt_cons of
+  (size_t(n), arrayptr(uchar, n), cblist_vt)
 //
 (* ****** ****** *)
 //
-(*
-char *strchr(const char *s, int c);
-char *strrchr(const char *s, int c);
-*)
-//
-fun
-xatsopt_strchr
-(cs: ptr, c0: int): ptr = "ext#xatsopt_strchr"
-fun
-xatsopt_strrchr
-(cs: ptr, c0: int): ptr = "ext#xatsopt_strrchr"
-//      
-(* ****** ****** *)
-//
-fun
-xatsopt_chrunq // '<char>' -> <char>
-(source: string): char = "ext#xatsopt_chrunq"
-fun
-xatsopt_strunq // "<string>" -> <string>
-(source: string): string = "ext#xatsopt_strunq"
+castfn
+clist_vt2t(cbs: cblist_vt): cblist
 //
 (* ****** ****** *)
 //
 fun
-xatsopt_strbtwe
-(p0: ptr, p1: ptr): string = "ext#xatsopt_strbtwe"
-//
-(* ****** ****** *)
-//
-(*
-int
-strcmp(const char *s1, const char *s2);
-int
-strncmp(const char *s1, const char *s2, size_t n);
-*)
-//
-fun
-xatsopt_strcmp
-(cs1: ptr, cs2: ptr): int = "ext#xatsopt_strcmp"
-fun
-xatsopt_strncmp
-( cs1: ptr
-, cs2: ptr, nlen: size_t): int = "ext#xatsopt_strncmp"
-//       
-(* ****** ****** *)
-//
-fun
-xatsopt_getcwd
-( buf: ptr
-, bsz: size_t): ptr = "ext#xatsopt_getcwd"
-fun
-xatsopt_getcwd_gc
-  ((*void*)): Strptr0 = "ext#xatsopt_getcwd_gc"
+string2cblist
+  {n:pos}(text: string(n)): cblist
 //
 (* ****** ****** *)
 //
 fun
-xatsopt_getenv
-  (key: string): ptr = "ext#xatsopt_getenv"
+cblist_length(cbs: cblist): intGte(0)
 fun
-xatsopt_getenv_gc
-  (key: string): Strptr0 = "ext#xatsopt_getenv_gc"
+cblist_vt_length(cbs: !cblist_vt): intGte(0)
 //
-(* ****** ****** *)
-//
-fun
-xatsopt_is_exist
-  (fpath: string): bool = "ext#xatsopt_is_exist"
+overload length with cblist_length
+overload length with cblist_vt_length
 //
 (* ****** ****** *)
 
-(* end of [mylibc.sats] *)
+fun cblist_vt_free(cbs: cblist_vt): void
+
+(* ****** ****** *)
+
+fun{}
+cblist_foreach(cbs: cblist): void
+fun{}
+cblist_foreach$fwork{n:int}(size_t(n), arrayref(uchar, n)): void
+//
+overload foreach with cblist_foreach
+//
+(* ****** ****** *)
+
+(* end of [cblist.sats] *)
