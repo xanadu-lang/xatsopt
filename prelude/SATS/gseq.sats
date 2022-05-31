@@ -9,10 +9,10 @@
 // HX-2020-02-26:
 // this idea is abandoned!!!
 //
-absprop
+#absprop
 gseq_prop
 (xs: t0, x0: t0)
-propdef
+#propdef
 gseq
 ( xs: t0
 , x0: t0) = gseq_prop(x0, xs)
@@ -1042,4 +1042,4 @@ x2iforeach_col with gseq_x2iforeach_col of 0100
 
 (* ****** ****** *)
 
-(* end of [gseq.sats] *)
+(* end of [prelude_gseq.sats] *)

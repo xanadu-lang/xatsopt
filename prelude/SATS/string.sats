@@ -42,12 +42,22 @@
 // Note that string_vt is included
 //
 (* ****** ****** *)
+#typedef
+str0 = string0
+#typedef
+str1 = string1
+(* ****** ****** *)
+#vwtpdef
+str0_vt = string0_vt
+#vwtpdef
+str1_vt = string1_vt
+(* ****** ****** *)
 //
-typedef cgtz =
+#typedef cgtz =
 [c:char|c > 0]char(c)
 //
 (* ****** ****** *)
-
+//
 prfun
 string_lemma
 {n:int}
@@ -60,7 +70,7 @@ prfun
 string_vt_lemma
 {n:int}
 (!string_vt(n)): [n>=0] void
-
+//
 (* ****** ****** *)
 //
 (*
@@ -116,20 +126,20 @@ a call to the cast-function UN_string_vt_cast,
 which itself is just a no-op.
 *)
 //
-absvwtp
+#absvwtp
 strtmp_i0_vx(n:int) <= p0tr
-vwtpdef
+#vwtpdef
 strtmp0_vt =
 [n:int] strtmp_i0_vx(n)
-vwtpdef
+#vwtpdef
 strtmp1_vt
 (n: int) = strtmp_i0_vx( n )
 //
 (* ****** ****** *)
 //
-vwtpdef
+#vwtpdef
 strtmp_vt = strtmp0_vt
-vwtpdef
+#vwtpdef
 strtmp_vt(n:int) = strtmp1_vt(n)
 //
 fcast
@@ -661,4 +671,4 @@ reverse with string_vt_reverse of 1000
 
 (* ****** ****** *)
 
-(* end of [string.sats] *)
+(* end of [prelude_string.sats] *)

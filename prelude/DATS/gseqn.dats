@@ -15,7 +15,7 @@ UN =
 
 (* ****** ****** *)
 
-impltmp
+#impltmp
 <xs><x0><ln>
 gseqn_nilq(xs) =
 let
@@ -26,7 +26,7 @@ end // end of [gseqn_nilq]
 
 (* ****** ****** *)
 
-impltmp
+#impltmp
 <xs><x0><ln>
 gseqn_consq(xs) =
 bool_neg<>
@@ -34,4 +34,4 @@ bool_neg<>
 
 (* ****** ****** *)
 
-(* end of [gseqn.dats] *)
+(* end of [prelude_gseqn.dats] *)

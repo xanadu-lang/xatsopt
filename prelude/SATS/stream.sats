@@ -30,6 +30,11 @@
 // For functional streams
 //
 (* ****** ****** *)
+#typedef
+strm(a:type) = stream(a)
+#typedef
+strx(a:type) = streax(a)
+(* ****** ****** *)
 //
 fun<>
 strmcon_nil_
@@ -338,4 +343,4 @@ streamize with stream_streamize of 1000
 //
 (* ****** ****** *)
 
-(* end of [stream.sats] *)
+(* end of [prelude_stream.sats] *)

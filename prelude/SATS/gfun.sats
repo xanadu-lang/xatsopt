@@ -4,9 +4,9 @@
 *)
 (* ****** ****** *)
 
-typedef
+#typedef
 fnp1(a1:vt,r0:vt) = (a1)-<fnp>r0
-typedef
+#typedef
 cfr1(a1:vt,r0:vt) = (a1)-<cfr>r0
 
 (* ****** ****** *)
@@ -40,4 +40,4 @@ gfun_memq_gseq(xs): cfr1(x0,bool)
 
 (* ****** ****** *)
 
-(* end of [gfun.sats] *)
+(* end of [prelude_gfun.sats] *)
