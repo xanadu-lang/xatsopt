@@ -579,7 +579,7 @@ else strmcon_vt_cons(i0, auxmain(pred(i0)))
 (*
 HX: the code has moved into prelude/gseq.dats
 *)
-#implement
+#impltmp
 <cz:type>
 gseq_concat_string
   (cz) =
