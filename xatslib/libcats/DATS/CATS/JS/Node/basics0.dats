@@ -7,7 +7,7 @@ for Xats2js/Node
 
 #staload
 "xatslib\
-/libc/DATS/fpath.dats"
+/libcats/DATS/fpath00.dats"
 
 (* ****** ****** *)
 
