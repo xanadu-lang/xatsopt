@@ -70,12 +70,20 @@ $(CPFR) $(XATSHOME)/srcgen/DATS/CONTRIB ./srcgen/DATS/.
 
 ######
 #
-PRETOP:: ; $(CPF) $(XATSHOME)/prelude/*.?ats ./prelude/.
+PRETOP:: ; \
+$(CPF) $(XATSHOME)/prelude/*.?ats ./prelude/.
 #
-PRESATS:: ; $(CPF) $(XATSHOME)/prelude/SATS/*.sats ./prelude/SATS/.
-PRESATS:: ; $(CPF) $(XATSHOME)/prelude/SATS/CC/*.sats ./prelude/SATS/CC/.
+PRESATS:: ; \
+$(CPF) $(XATSHOME)/prelude/SATS/*.sats ./prelude/SATS/.
+PRESATS:: ; \
+$(CPF) $(XATSHOME)/prelude/SATS/CC/*.sats ./prelude/SATS/CC/.
+PRESATS:: ; \
+$(CPF) $(XATSHOME)/prelude/SATS/VT/*.sats ./prelude/SATS/VT/.
 #
-PREDATS:: ; $(CPF) $(XATSHOME)/prelude/DATS/*.dats ./prelude/DATS/.
+PREDATS:: ; \
+$(CPF) $(XATSHOME)/prelude/DATS/*.dats ./prelude/DATS/.
+PREDATS:: ; \
+$(CPF) $(XATSHOME)/prelude/DATS/VT/*.dats ./prelude/DATS/VT/.
 #
 ######
 #
@@ -100,17 +108,17 @@ $(CPF) $(XATSHOME)/prelude/DATS/CATS/Xint/*.dats ./prelude/DATS/CATS/Xint/.
 ######
 #
 XATSLIB:: \
-XATSLIB_libc
-XATSLIB_libc:: ; \
-$(CPF) $(XATSHOME)/xatslib/libc/SATS/*.sats ./xatslib/libc/SATS/.
-XATSLIB_libc:: ; \
-$(CPF) $(XATSHOME)/xatslib/libc/DATS/*.dats ./xatslib/libc/DATS/.
+XATSLIB_libcats
+XATSLIB_libcats:: ; \
+$(CPF) $(XATSHOME)/xatslib/libcats/SATS/*.sats ./xatslib/libcats/SATS/.
+XATSLIB_libcats:: ; \
+$(CPF) $(XATSHOME)/xatslib/libcats/DATS/*.dats ./xatslib/libcats/DATS/.
 #
-XATSLIB_libc:: ; \
-$(CPF) $(XATSHOME)/xatslib/libc/DATS/CATS/Xint/*.?ats ./xatslib/libc/DATS/CATS/Xint/.
+XATSLIB_libcats:: ; \
+$(CPF) $(XATSHOME)/xatslib/libcats/DATS/CATS/Xint/*.?ats ./xatslib/libcats/DATS/CATS/Xint/.
 #
-XATSLIB_libc:: ; \
-$(CPF) $(XATSHOME)/xatslib/libc/DATS/CATS/JS/Node/*.?ats ./xatslib/libc/DATS/CATS/JS/Node/.
+XATSLIB_libcats:: ; \
+$(CPF) $(XATSHOME)/xatslib/libcats/DATS/CATS/JS/Node/*.?ats ./xatslib/libcats/DATS/CATS/JS/Node/.
 #
 ######
 

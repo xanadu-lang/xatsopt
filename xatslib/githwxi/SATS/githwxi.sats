@@ -37,7 +37,4 @@
 //
 (* ****** ****** *)
 
-
-(* ****** ****** *)
-
-(* end of [xatslib_githwxi.sats] *)
+(* end of [xatslib_githwxi_githwxi.sats] *)
