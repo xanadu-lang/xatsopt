@@ -47,4 +47,4 @@ fpath_streamize_cgtz
 //
 (* ****** ****** *)
 
-(* end of [xatslib_libc_XATS2JS_NODE_basics.dats] *)
+(* end of [xatslib_libc_XATS2JS_NODE_basics0.dats] *)
