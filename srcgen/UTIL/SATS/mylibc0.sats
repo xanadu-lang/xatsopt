@@ -28,107 +28,91 @@
 (* ****** ****** *)
 //
 // Author: Hongwei Xi
-// Start Time: May, 2018
+// Start Time: April, 2018
 // Authoremail: gmhwxiATgmailDOTcom
 //
 (* ****** ****** *)
 #define
-ATS_PACKNAME
-"ATS3.XANADU.xatsopt"
+ATS_PACKNAME "ATS3.XANADU.xatsopt"
 (* ****** ****** *)
 //
-%{#
-#include "CATS/lexbuf0.cats"
-%} // end of [%{#]
-//
-(* ****** ****** *)
-//
-#staload CBS =
-"./../UTIL/SATS/cblist0.sats"
-//
-typedef cblist = $CBS.cblist
+fun
+xatsopt_memcpy
+( dst: ptr
+, src: ptr
+, nbyte: Size_t): ptr = "ext#xatsopt_memcpy"
 //
 (* ****** ****** *)
 //
-#staload LOC = "./locinfo.sats"
+(*
+char *strchr(const char *s, int c);
+char *strrchr(const char *s, int c);
+*)
 //
-typedef pos_t = $LOC.pos_t
-typedef loc_t = $LOC.loc_t
-typedef position = $LOC.position
-typedef location = $LOC.location
+fun
+xatsopt_strchr
+(cs: ptr, c0: int): ptr = "ext#xatsopt_strchr"
+fun
+xatsopt_strrchr
+(cs: ptr, c0: int): ptr = "ext#xatsopt_strrchr"
+//      
+(* ****** ****** *)
+//
+fun
+xatsopt_chrunq // '<char>' -> <char>
+(source: string): char = "ext#xatsopt_chrunq"
+fun
+xatsopt_strunq // "<string>" -> <string>
+(source: string): string = "ext#xatsopt_strunq"
 //
 (* ****** ****** *)
 //
-abstflt
-lexbuf_tflt =
-$extype"xats_lexbuf_struct"
+fun
+xatsopt_strbtwe
+(p0: ptr, p1: ptr): string = "ext#xatsopt_strbtwe"
 //
-typedef lexbuf = lexbuf_tflt
+(* ****** ****** *)
+//
+(*
+int
+strcmp(const char *s1, const char *s2);
+int
+strncmp(const char *s1, const char *s2, size_t n);
+*)
+//
+fun
+xatsopt_strcmp
+(cs1: ptr, cs2: ptr): int = "ext#xatsopt_strcmp"
+fun
+xatsopt_strncmp
+( cs1: ptr
+, cs2: ptr, nlen: size_t): int = "ext#xatsopt_strncmp"
+//       
+(* ****** ****** *)
+//
+fun
+xatsopt_getcwd
+( buf: ptr
+, bsz: size_t): ptr = "ext#xatsopt_getcwd"
+fun
+xatsopt_getcwd_gc
+  ((*void*)): Strptr0 = "ext#xatsopt_getcwd_gc"
+//
+(* ****** ****** *)
+//
+fun
+xatsopt_getenv
+  (key: string): ptr = "ext#xatsopt_getenv"
+fun
+xatsopt_getenv_gc
+  (key: string): Strptr0 = "ext#xatsopt_getenv_gc"
+//
+(* ****** ****** *)
+//
+fun
+xatsopt_is_exist
+  (fpath: string): bool = "ext#xatsopt_is_exist"
 //
 (* ****** ****** *)
 
-fun
-lexbuf_initize_cblist
-(
-  buf: &lexbuf? >> _, cbs: cblist
-) : void // end of [lexbuf_initize_cblist]
-
-(* ****** ****** *)
-//
-(*
-fun
-lexbuf_get_ntot(buf: &lexbuf): int
-fun
-lexbuf_get_nspc(buf: &lexbuf): int
-*)
-//
-(* ****** ****** *)
-//
-fun
-lexbuf_get_none
-  (buf: &lexbuf >> _): void
-fun
-lexbuf_get_fullseg
-  (buf: &lexbuf >> _): string
-//
-(* ****** ****** *)
-//
-// HX-2018-05-27:
-// [lexbuf_getc] is like getc
-// [lexbuf_unget] can be safely
-// applied only once at a given
-// position!
-//
-fun
-lexbuf_getc(buf: &lexbuf >> _): int
-fun
-lexbuf_unget
-  (buf: &lexbuf >> _, i0: int): void
-//
-(* ****** ****** *)
-//
-(*
-fun
-lexbuf_get_pos
-(
-  buf: &lexbuf, pos: &pos_t? >> _
-) : void // end-of-fun
-*)
-//
-(*
-fun
-lexbuf_set_pos
-(buf: &lexbuf >> _, pos: &pos_t): void
-*)
-//
-(* ****** ****** *)
-(*
-//
-fun
-lexbufpos_get_loc
-  (buf: &lexbuf, pos: &pos_t): loc_t
-//
-*)
-(* ****** ****** *)
-
-(* end of [xats_lexbuf0.sats] *)
+(* end of [XATSOPT_UTIL_mylibc.sats] *)

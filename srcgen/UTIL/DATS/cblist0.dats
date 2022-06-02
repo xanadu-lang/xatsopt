@@ -28,107 +28,85 @@
 (* ****** ****** *)
 //
 // Author: Hongwei Xi
-// Start Time: May, 2018
+// Start Time: April, 2018
 // Authoremail: gmhwxiATgmailDOTcom
 //
 (* ****** ****** *)
-#define
-ATS_PACKNAME
-"ATS3.XANADU.xatsopt"
-(* ****** ****** *)
 //
-%{#
-#include "CATS/lexbuf0.cats"
-%} // end of [%{#]
-//
-(* ****** ****** *)
-//
-#staload CBS =
-"./../UTIL/SATS/cblist0.sats"
-//
-typedef cblist = $CBS.cblist
-//
-(* ****** ****** *)
-//
-#staload LOC = "./locinfo.sats"
-//
-typedef pos_t = $LOC.pos_t
-typedef loc_t = $LOC.loc_t
-typedef position = $LOC.position
-typedef location = $LOC.location
-//
-(* ****** ****** *)
-//
-abstflt
-lexbuf_tflt =
-$extype"xats_lexbuf_struct"
-//
-typedef lexbuf = lexbuf_tflt
+#staload
+UN = "prelude/SATS/unsafe.sats"
 //
 (* ****** ****** *)
 
-fun
-lexbuf_initize_cblist
+#staload "./../SATS/cblist0.sats"
+
+(* ****** ****** *)
+//
+implement
+string2cblist(cs) =
 (
-  buf: &lexbuf? >> _, cbs: cblist
-) : void // end of [lexbuf_initize_cblist]
+cblist_cons(n0, cs, nil)
+) where
+{
+  val n0 = length(cs)
+  val cs = $UN.cast(cs)
+  val nil = cblist_nil()
+} (* end of [string2cblist] *)
+//
+(* ****** ****** *)
 
-(* ****** ****** *)
-//
-(*
-fun
-lexbuf_get_ntot(buf: &lexbuf): int
-fun
-lexbuf_get_nspc(buf: &lexbuf): int
-*)
-//
-(* ****** ****** *)
+implement
+cblist_length
+  (cbs) = loop(cbs, 0) where
+{
 //
 fun
-lexbuf_get_none
-  (buf: &lexbuf >> _): void
-fun
-lexbuf_get_fullseg
-  (buf: &lexbuf >> _): string
-//
-(* ****** ****** *)
-//
-// HX-2018-05-27:
-// [lexbuf_getc] is like getc
-// [lexbuf_unget] can be safely
-// applied only once at a given
-// position!
-//
-fun
-lexbuf_getc(buf: &lexbuf >> _): int
-fun
-lexbuf_unget
-  (buf: &lexbuf >> _, i0: int): void
-//
-(* ****** ****** *)
-//
-(*
-fun
-lexbuf_get_pos
+loop
+(cbs: cblist, res: Nat): Nat =
 (
-  buf: &lexbuf, pos: &pos_t? >> _
-) : void // end-of-fun
-*)
+case+ cbs of
+|
+cblist_nil() => res
+|
+cblist_cons
+(_, _, cbs) => loop(cbs, res+1)
+)
 //
-(*
-fun
-lexbuf_set_pos
-(buf: &lexbuf >> _, pos: &pos_t): void
-*)
-//
+} (* end of [cblist_length] *)
+
 (* ****** ****** *)
-(*
 //
-fun
-lexbufpos_get_loc
-  (buf: &lexbuf, pos: &pos_t): loc_t
+implement
+cblist_vt_length
+  (cbs) =
+(
+cblist_length($UN.castvwtp1{cblist}(cbs))
+) (* end of [cblist_vt_length] *)
 //
-*)
 (* ****** ****** *)
 
-(* end of [xats_lexbuf0.sats] *)
+implement
+{}(*tmp*)
+cblist_foreach
+  (cbs) = loop(cbs) where
+{
+//
+fun
+loop
+(cbs: cblist): void =
+(
+case+ cbs of
+|
+cblist_nil() => ()
+|
+cblist_cons(n, cs, cbs) =>
+(
+cblist_foreach$fwork<>(n, cs); loop(cbs)
+)
+)
+//
+} (* end of [cblist_foreach] *)
+
+(* ****** ****** *)
+
+(* end of [XATSOPT_UTIL_cblist0.dats] *)

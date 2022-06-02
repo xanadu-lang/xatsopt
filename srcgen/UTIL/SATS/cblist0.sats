@@ -28,107 +28,62 @@
 (* ****** ****** *)
 //
 // Author: Hongwei Xi
-// Start Time: May, 2018
+// Start Time: April, 2018
 // Authoremail: gmhwxiATgmailDOTcom
 //
 (* ****** ****** *)
 #define
-ATS_PACKNAME
-"ATS3.XANADU.xatsopt"
+ATS_PACKNAME "ATS3.XANADU.xatsopt"
 (* ****** ****** *)
 //
-%{#
-#include "CATS/lexbuf0.cats"
-%} // end of [%{#]
+datatype
+cblist =
+| cblist_nil of ()
+| {n:pos}
+  cblist_cons of
+  (size_t(n), arrayref(uchar, n), cblist)
 //
-(* ****** ****** *)
-//
-#staload CBS =
-"./../UTIL/SATS/cblist0.sats"
-//
-typedef cblist = $CBS.cblist
-//
-(* ****** ****** *)
-//
-#staload LOC = "./locinfo.sats"
-//
-typedef pos_t = $LOC.pos_t
-typedef loc_t = $LOC.loc_t
-typedef position = $LOC.position
-typedef location = $LOC.location
+datavtype
+cblist_vt =
+| cblist_vt_nil of ()
+| {n:pos}
+  cblist_vt_cons of
+  (size_t(n), arrayptr(uchar, n), cblist_vt)
 //
 (* ****** ****** *)
 //
-abstflt
-lexbuf_tflt =
-$extype"xats_lexbuf_struct"
+castfn
+clist_vt2t(cbs: cblist_vt): cblist
 //
-typedef lexbuf = lexbuf_tflt
+(* ****** ****** *)
+//
+fun
+string2cblist
+  {n:pos}(text: string(n)): cblist
+//
+(* ****** ****** *)
+//
+fun
+cblist_length(cbs: cblist): intGte(0)
+fun
+cblist_vt_length(cbs: !cblist_vt): intGte(0)
+//
+overload length with cblist_length
+overload length with cblist_vt_length
 //
 (* ****** ****** *)
 
-fun
-lexbuf_initize_cblist
-(
-  buf: &lexbuf? >> _, cbs: cblist
-) : void // end of [lexbuf_initize_cblist]
+fun cblist_vt_free(cbs: cblist_vt): void
 
 (* ****** ****** *)
+
+fun{}
+cblist_foreach(cbs: cblist): void
+fun{}
+cblist_foreach$fwork{n:int}(size_t(n), arrayref(uchar, n)): void
 //
-(*
-fun
-lexbuf_get_ntot(buf: &lexbuf): int
-fun
-lexbuf_get_nspc(buf: &lexbuf): int
-*)
+overload foreach with cblist_foreach
 //
-(* ****** ****** *)
-//
-fun
-lexbuf_get_none
-  (buf: &lexbuf >> _): void
-fun
-lexbuf_get_fullseg
-  (buf: &lexbuf >> _): string
-//
-(* ****** ****** *)
-//
-// HX-2018-05-27:
-// [lexbuf_getc] is like getc
-// [lexbuf_unget] can be safely
-// applied only once at a given
-// position!
-//
-fun
-lexbuf_getc(buf: &lexbuf >> _): int
-fun
-lexbuf_unget
-  (buf: &lexbuf >> _, i0: int): void
-//
-(* ****** ****** *)
-//
-(*
-fun
-lexbuf_get_pos
-(
-  buf: &lexbuf, pos: &pos_t? >> _
-) : void // end-of-fun
-*)
-//
-(*
-fun
-lexbuf_set_pos
-(buf: &lexbuf >> _, pos: &pos_t): void
-*)
-//
-(* ****** ****** *)
-(*
-//
-fun
-lexbufpos_get_loc
-  (buf: &lexbuf, pos: &pos_t): loc_t
-//
-*)
 (* ****** ****** *)
 
-(* end of [xats_lexbuf0.sats] *)
+(* end of [XATSOPT_UTIL_cblist0.sats] *)

@@ -28,7 +28,7 @@
 (* ****** ****** *)
 //
 // Author: Hongwei Xi
-// Start Time: May, 2018
+// Start Time: April, 2018
 // Authoremail: gmhwxiATgmailDOTcom
 //
 (* ****** ****** *)
@@ -36,99 +36,18 @@
 ATS_PACKNAME
 "ATS3.XANADU.xatsopt"
 (* ****** ****** *)
-//
-%{#
-#include "CATS/lexbuf0.cats"
-%} // end of [%{#]
-//
-(* ****** ****** *)
-//
-#staload CBS =
-"./../UTIL/SATS/cblist0.sats"
-//
-typedef cblist = $CBS.cblist
-//
-(* ****** ****** *)
-//
-#staload LOC = "./locinfo.sats"
-//
-typedef pos_t = $LOC.pos_t
-typedef loc_t = $LOC.loc_t
-typedef position = $LOC.position
-typedef location = $LOC.location
-//
-(* ****** ****** *)
-//
-abstflt
-lexbuf_tflt =
-$extype"xats_lexbuf_struct"
-//
-typedef lexbuf = lexbuf_tflt
-//
-(* ****** ****** *)
 
-fun
-lexbuf_initize_cblist
-(
-  buf: &lexbuf? >> _, cbs: cblist
-) : void // end of [lexbuf_initize_cblist]
+#staload "./../cblist0.sats"
 
 (* ****** ****** *)
 //
+fun
+fpath_get_cblist(inp: string): Option_vt(cblist)
 (*
 fun
-lexbuf_get_ntot(buf: &lexbuf): int
-fun
-lexbuf_get_nspc(buf: &lexbuf): int
+fileref_get_cblist(inp: FILEref): Option_vt(cblist)
 *)
 //
-(* ****** ****** *)
-//
-fun
-lexbuf_get_none
-  (buf: &lexbuf >> _): void
-fun
-lexbuf_get_fullseg
-  (buf: &lexbuf >> _): string
-//
-(* ****** ****** *)
-//
-// HX-2018-05-27:
-// [lexbuf_getc] is like getc
-// [lexbuf_unget] can be safely
-// applied only once at a given
-// position!
-//
-fun
-lexbuf_getc(buf: &lexbuf >> _): int
-fun
-lexbuf_unget
-  (buf: &lexbuf >> _, i0: int): void
-//
-(* ****** ****** *)
-//
-(*
-fun
-lexbuf_get_pos
-(
-  buf: &lexbuf, pos: &pos_t? >> _
-) : void // end-of-fun
-*)
-//
-(*
-fun
-lexbuf_set_pos
-(buf: &lexbuf >> _, pos: &pos_t): void
-*)
-//
-(* ****** ****** *)
-(*
-//
-fun
-lexbufpos_get_loc
-  (buf: &lexbuf, pos: &pos_t): loc_t
-//
-*)
 (* ****** ****** *)
 
-(* end of [xats_lexbuf0.sats] *)
+(* end of [XATSOPT_UTIL_Windows_cblist.sats] *)
