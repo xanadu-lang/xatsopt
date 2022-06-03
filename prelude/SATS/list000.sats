@@ -196,9 +196,13 @@ fun
 list_rlistize
 {n:int}
 (xs: list(x0, n)): list_vt(x0, n)
+//
 fun
 <x0:t0>
-list_streamize(list(x0)): stream_vt(x0)
+list_strmize(list(x0)): strm_vt(x0)
+fun
+<x0:t0>
+list_rstrmize(list(x0)): strm_vt(x0)
 //
 (* ****** ****** *)
 //
@@ -221,8 +225,12 @@ list_map_vt
 (* ****** ****** *)
 //
 (*
-list_maprev: map$for
-list_maprev_vt: map$for
+//
+HX-2022-06-02:
+[maprev] stack-collects:
+//
+list_maprev: map$fopr
+list_maprev_vt: map$fopr
 *)
 //
 fun
@@ -277,7 +285,7 @@ fun
 <a:t0>
 list_subsetize_vt
 {n:int}
-(xs: list(a, n)): stream_vt(listlte_vt(a, n))
+(xs: list(a, n)): strm_vt(listlte_vt(a, n))
 //
 (* ****** ****** *)
 //
@@ -336,18 +344,18 @@ cons with list_cons of 000
 #symload foreach with list_foreach of 1000
 
 (* ****** ****** *)
-
 #symload listize with list_listize of 1000
-#symload rlistize with list_rlistize of 1000
-#symload streamize with list_streamize of 1000
-
+#symload strmize with list_strmize of 1000
 (* ****** ****** *)
-
+#symload rlistize with list_rlistize of 1000
+#symload rstrmize with list_rstrmize of 1000
+(* ****** ****** *)
+//
 #symload map with list_map of 1000
 #symload map_vt with list_map_vt of 1000
 #symload maprev with list_maprev of 1000
 #symload maprev_vt with list_maprev_vt of 1000
-
+//
 (* ****** ****** *)
 
 #symload mergesort with list_mergesort of 1000

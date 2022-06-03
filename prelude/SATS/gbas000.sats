@@ -134,7 +134,7 @@ fun
 gl_print1(x: !a): void
 //
 (* ****** ****** *)
-
+//
 fun
 <x0:t0>
 <y0:vt>
@@ -147,7 +147,7 @@ fun
 <x0:vt>
 <y0:vt>
 map1$fopr(x0: !x0): (y0)
-
+//
 (* ****** ****** *)
 
 fun
@@ -225,15 +225,15 @@ maplist1$fopr(x0: !x0): list_vt(y0)
 fun
 <x0:t0>
 <y0:vt>
-mapstrm$fopr(x0: x0): stream_vt(y0)
+mapstrm$fopr(x0: x0): strm_vt(y0)
 fun
 <x0:vt>
 <y0:vt>
-mapstrm0$fopr(x0: ~x0): stream_vt(y0)
+mapstrm0$fopr(x0: ~x0): strm_vt(y0)
 fun
 <x0:vt>
 <y0:vt>
-mapstrm1$fopr(x0: !x0): stream_vt(y0)
+mapstrm1$fopr(x0: !x0): strm_vt(y0)
 //
 (* ****** ****** *)
 //
@@ -327,6 +327,21 @@ fun
 <n0:i0>
 tabulate$fopr
 (index: nintlt(n0)): x0
+//
+(* ****** ****** *)
+//
+fun
+<x0:t0>
+<y0:vt>
+rmap$fopr(x0: x0): (y0)
+fun
+<x0:vt>
+<y0:vt>
+rmap0$fopr(x0: ~x0): (y0)
+fun
+<x0:vt>
+<y0:vt>
+rmap1$fopr(x0: !x0): (y0)
 //
 (* ****** ****** *)
 //
