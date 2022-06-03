@@ -32,41 +32,38 @@ update:: PREDATSCATS
 update:: XATSLIB
 
 ######
+
 MISC:: ; \
 $(CPF) \
-$(XATSHOME)/srcgen0/Makefile_xatsopt ./srcgen0/.
-MISC:: ; \
-$(CPF) \
-$(XATSHOME)/srcgen0/TEST/Makefile_prelude ./srcgen0/TEST/.
-MISC:: ; \
-$(CPF) \
-$(XATSHOME)/srcgen0/TEST/Makefile_xatslib ./srcgen0/TEST/.
+$(XATSHOME)/srcgenx/Makefile_xatsopt ./srcgenx/.
 
 ######
 
 SATS:: ; \
-$(CPF) $(XATSHOME)/srcgen0/SATS/*.sats ./srcgen0/SATS/.
+$(CPF) $(XATSHOME)/srcgenx/SATS/*.sats ./srcgenx/SATS/.
 
 DATS:: ; \
-$(CPF) $(XATSHOME)/srcgen0/DATS/*.dats ./srcgen0/DATS/.
+$(CPF) $(XATSHOME)/srcgenx/DATS/*.dats ./srcgenx/DATS/.
 
 CATS:: ; \
-$(CPF) $(XATSHOME)/srcgen0/CATS/*.cats ./srcgen0/CATS/.
+$(CPF) $(XATSHOME)/srcgenx/CATS/*.cats ./srcgenx/CATS/.
 
 HATS:: ; \
-$(CPF) $(XATSHOME)/srcgen0/HATS/*.hats ./srcgen0/HATS/.
+$(CPF) $(XATSHOME)/srcgenx/HATS/*.hats ./srcgenx/HATS/.
 
 ######
 
 UTIL:: ; \
-$(CPFR) $(XATSHOME)/srcgen0/UTIL/SATS ./srcgen0/UTIL/.
+$(CPFR) $(XATSHOME)/srcgenx/UTIL/SATS ./srcgenx/UTIL/.
 UTIL:: ; \
-$(CPFR) $(XATSHOME)/srcgen0/UTIL/DATS ./srcgen0/UTIL/.
+$(CPFR) $(XATSHOME)/srcgenx/UTIL/DATS ./srcgenx/UTIL/.
 UTIL:: ; \
-$(CPFR) $(XATSHOME)/srcgen0/UTIL/TEST ./srcgen0/UTIL/.
+$(CPFR) $(XATSHOME)/srcgenx/UTIL/TEST ./srcgenx/UTIL/.
+
+######
 
 CONTRIB:: ; \
-$(CPFR) $(XATSHOME)/srcgen0/DATS/CONTRIB ./srcgen0/DATS/.
+$(CPFR) $(XATSHOME)/srcgenx/DATS/CONTRIB ./srcgenx/DATS/.
 
 ######
 #
