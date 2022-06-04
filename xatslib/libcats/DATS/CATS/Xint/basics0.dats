@@ -38,10 +38,31 @@ g_stderr<> = XINTERP_g_stderr
 //
 #extern
 fun
-XINTERP_fgetc_ref
-(fr: FILEref): int
+XINTERP_bool_fprint
+(FILEref, bool): void
 #impltmp
-fgetc_ref<> = XINTERP_fgetc_ref
+bool_fprint<> = XINTERP_bool_fprint
+#extern
+fun
+XINTERP_char_fprint
+(FILEref, char): void
+#impltmp
+char_fprint<> = XINTERP_char_fprint
+//
+#extern
+fun
+XINTERP_gint_fprint_sint
+(FILEref, sint): void
+#impltmp
+gint_fprint_sint<> = XINTERP_gint_fprint_sint
+//
+(* ****** ****** *)
+//
+#extern
+fun
+XINTERP_fgetc_ref
+(fi: FILEref): int
+#impltmp fgetc_ref<> = XINTERP_fgetc_ref
 //
 (* ****** ****** *)
 //
@@ -49,9 +70,8 @@ fgetc_ref<> = XINTERP_fgetc_ref
 fun
 XINTERP_fputc_ref
 ( c0: int
-, fr: FILEref): int
-#impltmp
-fputc_ref<> = XINTERP_fputc_ref
+, fo: FILEref): int
+#impltmp fputc_ref<> = XINTERP_fputc_ref
 //
 (* ****** ****** *)
 //
@@ -65,4 +85,4 @@ nint_rand_limit<> = XINTERP_nint_rand_limit
 //
 (* ****** ****** *)
 
-(* end of [xatslib_libcats_DATS_CATS_Xint_basics0.dats] *)
+(* end of [ATS3/XANADU_xatslib_libcats_DATS_CATS_Xint_basics0.dats] *)

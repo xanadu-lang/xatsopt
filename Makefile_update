@@ -28,6 +28,7 @@ update:: CONTRIB
 update:: PRETOP
 update:: PRESATS
 update:: PREDATS
+update:: PREHATS
 update:: PREDATSCATS
 update:: XATSLIB
 
@@ -77,10 +78,21 @@ $(CPF) $(XATSHOME)/prelude/SATS/CC/*.sats ./prelude/SATS/CC/.
 PRESATS:: ; \
 $(CPF) $(XATSHOME)/prelude/SATS/VT/*.sats ./prelude/SATS/VT/.
 #
+######
+#
 PREDATS:: ; \
 $(CPF) $(XATSHOME)/prelude/DATS/*.dats ./prelude/DATS/.
 PREDATS:: ; \
 $(CPF) $(XATSHOME)/prelude/DATS/VT/*.dats ./prelude/DATS/VT/.
+#
+######
+#
+PREHATS:: ; \
+$(CPF) $(XATSHOME)/prelude/HATS/*.hats ./prelude/HATS/.
+PREDATS:: ; \
+$(CPF) $(XATSHOME)/prelude/HATS/JS/*.hats ./prelude/HATS/JS/.
+PREDATS:: ; \
+$(CPF) $(XATSHOME)/prelude/HATS/Xint/*.hats ./prelude/HATS/Xint/.
 #
 ######
 #

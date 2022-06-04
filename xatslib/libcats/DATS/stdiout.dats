@@ -39,4 +39,4 @@
 #staload "./../SATS/libcats.sats"
 (* ****** ****** *)
 
-(* end of [xatslib_libcats_stdiout.dats] *)
+(* end of [ATS3/XANADU_xatslib_libcats_stdiout.dats] *)
