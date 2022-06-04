@@ -26,75 +26,59 @@
 *)
 
 (* ****** ****** *)
-//
-// For processing files abstractly
-//
-(* ****** ****** *)
-//
-// Author: Hongwei Xi
-// Start Time: November, 2020
-// Authoremail: gmhwxiATgmailDOTcom
-//
-(* ****** ****** *)
 #staload
-"xatslib\
-/libc/SATS/libc.sats"
+"./../SATS/githwxi.sats"
 (* ****** ****** *)
 //
-#extern
-fun<>
-fpath_streamize_char
-(path: string): stream_vt(char)
+(*
+HX:
+For processing files abstractly
+*)
 //
-#extern
-fun<>
-fpath_streamize_cgtz
-(path: string): stream_vt(cgtz)
-#extern
-fun<>
-fpath_streamize_line
-(path: string): stream_vt(string)
-#extern
-fun<>
-fpath_streamize_line_vt
-(path: string): stream_vt(string_vt)
+(* ****** ****** *)
+//
+(*
+Author: Hongwei Xi
+Start Time: November, 2020
+Authoremail: gmhwxiATgmailDOTcom
+*)
 //
 (* ****** ****** *)
 
 #impltmp
 <>(*tmp*)
-fpath_streamize_line
+fpath_strmize_line
   (path) =
-stream_vt_map0
+strm_vt_map0
 (
-fpath_streamize_line_vt<>(path)
+fpath_strmize_line_vt<>(path)
 ) where
 {
 //
-#typedef y0 = string
-#vwtpdef x0 = string_vt
+#typedef y0 = strn
+#vwtpdef x0 = strn_vt
 //
 #impltmp
-map0$fopr<x0><y0>(x0) = string_vt2t(x0)
-} (*where*) // [fpath_streamize_line]
+map0$fopr<x0><y0>(x0) = strn_vt2t(x0)
+} (*where*) // [fpath_strmize_line]
 
 (* ****** ****** *)
 
 #impltmp
 <>(*tmp*)
-fpath_streamize_line_vt
+fpath_strmize_line_vt
   (path) =
 (
 auxmain0
 (
-fpath_streamize_cgtz<>(path)
+fpath_strmize_cgtz<>(path)
 )
 ) where
 {
 //
 #vwtpdef
-cstream =
-stream_vt(cgtz)
+cstrm =
+strm_vt(cgtz)
 //
 fun
 iseol
@@ -104,8 +88,8 @@ iseol
 fnx
 auxmain0
 ( cs
-: cstream)
-: stream_vt(string_vt) =
+: cstrm)
+: strm_vt(strn_vt) =
 $llazy
 (
 free(cs);
@@ -121,7 +105,7 @@ then
 strmcon_vt_cons
 (l1, auxmain0(cs)) where
 {
-  val l1 = string_vt_nil()
+  val l1 = strn_vt_nil()
 }
 else
 let
@@ -132,10 +116,10 @@ end
 and
 auxmain1
 ( cs
-: cstream
+: cstrm
 , rs
 : list_vt(cgtz))
-: strmcon_vt(string_vt) =
+: strmcon_vt(strn_vt) =
 (
 case+ !cs of
 | ~
@@ -145,9 +129,9 @@ strmcon_vt_sing(l1)
 ) where
 {
 val rs =
-list_vt_reverse(rs)
+list_vt_reverse0(rs)
 val l1 =
-string_vt_make_list_vt(rs)
+strn_vt_make_list_vt(rs)
 }
 | ~
 strmcon_vt_cons(c0, cs) =>
@@ -156,9 +140,9 @@ iseol(c0)
 then
 let
 val rs =
-list_vt_reverse(rs)
+list_vt_reverse0(rs)
 val l1 =
-string_vt_make_list_vt(rs)
+strn_vt_make_list_vt(rs)
 in
   strmcon_vt_cons(l1, auxmain0(cs))
 end
@@ -168,8 +152,8 @@ else
 )
 ) (* end of [auxmain1] *)
 //
-} (*where*) // [fpath_streamize_line]
+} (*where*) // [fpath_strmize_line]
 
 (* ****** ****** *)
 
-(* end of [xatslib_libc_fpath.dats] *)
+(* end of [ATS3/XANADU_xatslib_githwxi_f00path.dats] *)

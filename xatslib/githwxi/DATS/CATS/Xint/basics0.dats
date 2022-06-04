@@ -7,52 +7,50 @@ Basics for Xinterp
 "xatslib\
 /libcats/SATS/libcats.sats"
 (* ****** ****** *)
-//
-#staload "./../../g00iout.dats"
-#staload "./../../rand000.dats"
-#staload "./../../stdiout.dats"
-//
+#staload
+"xatslib\
+/githwxi/SATS/githwxi.sats"
 (* ****** ****** *)
 //
 #extern
 fun
 XINTERP_g_stdin
-((*void*)): FILEref
+((*void*)): FILR = $extnam()
 #extern
 fun
 XINTERP_g_stdout
-((*void*)): FILEref
+((*void*)): FILR = $extnam()
 #extern
 fun
 XINTERP_g_stderr
-((*void*)): FILEref
+((*void*)): FILR = $extnam()
 //
 #impltmp
-g_stdin<> = XINTERP_g_stdin
+g_stdin< > = XINTERP_g_stdin
 #impltmp
-g_stdout<> = XINTERP_g_stdout
+g_stdout< > = XINTERP_g_stdout
 #impltmp
-g_stderr<> = XINTERP_g_stderr
+g_stderr< > = XINTERP_g_stderr
 //
 (* ****** ****** *)
 //
 #extern
 fun
 XINTERP_bool_fprint
-(FILEref, bool): void
+(FILEref, bool): void = $extnam()
 #impltmp
 bool_fprint<> = XINTERP_bool_fprint
 #extern
 fun
 XINTERP_char_fprint
-(FILEref, char): void
+(FILEref, char): void = $extnam()
 #impltmp
 char_fprint<> = XINTERP_char_fprint
 //
 #extern
 fun
 XINTERP_gint_fprint_sint
-(FILEref, sint): void
+(FILEref, sint): void = $extnam()
 #impltmp
 gint_fprint_sint<> = XINTERP_gint_fprint_sint
 //
@@ -61,7 +59,7 @@ gint_fprint_sint<> = XINTERP_gint_fprint_sint
 #extern
 fun
 XINTERP_fgetc_ref
-(fi: FILEref): int
+(finp: FILEref): ierr = $extnam()
 #impltmp fgetc_ref<> = XINTERP_fgetc_ref
 //
 (* ****** ****** *)
@@ -70,7 +68,7 @@ XINTERP_fgetc_ref
 fun
 XINTERP_fputc_ref
 ( c0: int
-, fo: FILEref): int
+, fout: FILEref): ierr = $extnam()
 #impltmp fputc_ref<> = XINTERP_fputc_ref
 //
 (* ****** ****** *)
@@ -78,11 +76,12 @@ XINTERP_fputc_ref
 #extern
 fun
 XINTERP_nint_rand_limit
-{n:pos}(limit: int(n)): nintlt(n)
+{n:pos}
+(limit: int(n)): nintlt(n) = $extnam()
 //
 #impltmp
 nint_rand_limit<> = XINTERP_nint_rand_limit
 //
 (* ****** ****** *)
 
-(* end of [ATS3/XANADU_xatslib_libcats_DATS_CATS_Xint_basics0.dats] *)
+(* end of [ATS3/XANADU_xatslib_githwxi_DATSCATS_Xint_basics0.dats] *)

@@ -122,14 +122,6 @@ XATSLIB:: \
 XATSLIB_libcats
 XATSLIB_libcats:: ; \
 $(CPF) $(XATSHOME)/xatslib/libcats/SATS/*.sats ./xatslib/libcats/SATS/.
-XATSLIB_libcats:: ; \
-$(CPF) $(XATSHOME)/xatslib/libcats/DATS/*.dats ./xatslib/libcats/DATS/.
-#
-XATSLIB_libcats:: ; \
-$(CPF) $(XATSHOME)/xatslib/libcats/DATS/CATS/Xint/*.?ats ./xatslib/libcats/DATS/CATS/Xint/.
-#
-XATSLIB_libcats:: ; \
-$(CPF) $(XATSHOME)/xatslib/libcats/DATS/CATS/JS/Node/*.?ats ./xatslib/libcats/DATS/CATS/JS/Node/.
 #
 ######
 
@@ -140,6 +132,13 @@ $(CPF) $(XATSHOME)/xatslib/githwxi/SATS/*.sats ./xatslib/githwxi/SATS/.
 XATSLIB_githwxi:: ; \
 $(CPF) $(XATSHOME)/xatslib/githwxi/DATS/*.dats ./xatslib/githwxi/DATS/.
 XATSLIB_githwxi:: ; \
+$(CPF) $(XATSHOME)/xatslib/githwxi/HATS/*.hats ./xatslib/githwxi/HATS/.
+XATSLIB_githwxi:: ; \
 $(CPF) $(XATSHOME)/xatslib/githwxi/TEST/*.dats ./xatslib/githwxi/TEST/.
-
+#
+XATSLIB_githwxi:: ; \
+$(CPF) $(XATSHOME)/xatslib/githwxi/DATS/CATS/Xint/*.?ats ./xatslib/githwxi/DATS/CATS/Xint/.
+XATSLIB_githwxi:: ; \
+$(CPF) $(XATSHOME)/xatslib/githwxi/DATS/CATS/JS/Node/*.?ats ./xatslib/githwxi/DATS/CATS/JS/Node/.
+#
 ###### end of [Makefile] ######
