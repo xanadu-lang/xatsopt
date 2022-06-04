@@ -90,9 +90,11 @@ $(CPF) $(XATSHOME)/prelude/DATS/VT/*.dats ./prelude/DATS/VT/.
 PREHATS:: ; \
 $(CPF) $(XATSHOME)/prelude/HATS/*.hats ./prelude/HATS/.
 PREDATS:: ; \
-$(CPF) $(XATSHOME)/prelude/HATS/JS/*.hats ./prelude/HATS/JS/.
+$(CPF) \
+$(XATSHOME)/prelude/HATS/CATS/JS/*.hats ./prelude/HATS/CATS/JS/.
 PREDATS:: ; \
-$(CPF) $(XATSHOME)/prelude/HATS/Xint/*.hats ./prelude/HATS/Xint/.
+$(CPF) \
+$(XATSHOME)/prelude/HATS/CATS/Xint/*.hats ./prelude/HATS/CATS/Xint/.
 #
 ######
 #
