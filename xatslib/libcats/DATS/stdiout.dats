@@ -36,31 +36,7 @@
 // Authoremail: gmhwxiATgmailDOTcom
 //
 (* ****** ****** *)
-#staload
-"xatslib\
-/libcats/SATS/libcats.sats"
-(* ****** ****** *)
-
-#extern
-fun<>
-fgetc_ref
-(filr: FILEref): int
-#extern
-fun<>
-fgetc_ptr
-(filp: !FILEptr1): int
-
-(* ****** ****** *)
-
-#extern
-fun<>
-fputc_ref
-(char: int, filr: FILEref): int
-#extern
-fun<>
-fputc_ptr
-(char: int, filp: !FILEptr1): int
-
+#staload "./../SATS/libcats.sats"
 (* ****** ****** *)
 
 (* end of [xatslib_libcats_stdiout.dats] *)
