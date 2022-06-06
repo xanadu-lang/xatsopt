@@ -122,6 +122,10 @@ XATSLIB:: \
 XATSLIB_libcats
 XATSLIB_libcats:: ; \
 $(CPF) $(XATSHOME)/xatslib/libcats/SATS/*.sats ./xatslib/libcats/SATS/.
+XATSLIB:: \
+XATSLIB_libcats
+XATSLIB_libcats:: ; \
+$(CPF) $(XATSHOME)/xatslib/libcats/DATS/*.dats ./xatslib/libcats/DATS/.
 #
 ######
 
