@@ -69,7 +69,13 @@ char_code<>
 (   c0   ) = $UN.cast01( c0 )
 //
 #impltmp
+char_make_code<>
+(   i0   ) = $UN.cast01( i0 )
+#impltmp
 char_make_sint<>
+(   i0   ) = $UN.cast01( i0 )
+#impltmp
+char_make_uint<>
 (   i0   ) = $UN.cast01( i0 )
 //
 // HX-2022-06-12:
@@ -82,24 +88,24 @@ sint_make_char<>
 (* ****** ****** *)
 #extern
 fun
-XATS2JS_char_eqzq
-(c0: char): bool = $extnam()
-#impltmp
-char_eqzq<> = XATS2JS_char_eqzq
-#extern
-fun
-XATS2JS_char_neqzq
-(c0: char): bool = $extnam()
-#impltmp
-char_neqzq<> = XATS2JS_char_neqzq
-(* ****** ****** *)
-#extern
-fun
 XATS2JS_char_cmp
 ( c1: char
 , c2: char): sint = $extnam()
 #impltmp
 char_cmp<> = XATS2JS_char_cmp
+(* ****** ****** *)
+#extern
+fun
+XATS2JS_char_eqz
+(c0: char): bool = $extnam()
+#impltmp
+char_eqz<> = XATS2JS_char_eqz
+#extern
+fun
+XATS2JS_char_neqz
+(c0: char): bool = $extnam()
+#impltmp
+char_neqz<> = XATS2JS_char_neqz
 (* ****** ****** *)
 #extern
 fun
@@ -115,6 +121,70 @@ XATS2JS_char_noteq
 , c2: char): bool = $extnam()
 #impltmp
 char_noteq<> = XATS2JS_char_noteq
+(* ****** ****** *)
+//
+#extern
+fun
+XATS2JS_char_isalpha
+( c0: char ): bool = $extnam()
+#extern
+fun
+XATS2JS_sint_isalpha
+( c0: sint ): bool = $extnam()
+//
+#impltmp
+char_isalpha<> = XATS2JS_char_isalpha
+#impltmp
+sint_isalpha<> = XATS2JS_sint_isalpha
+//
+(* ****** ****** *)
+//
+#extern
+fun
+XATS2JS_char_isalnum
+( c0: char ): bool = $extnam()
+#extern
+fun
+XATS2JS_sint_isalnum
+( c0: sint ): bool = $extnam()
+//
+#impltmp
+char_isalnum<> = XATS2JS_char_isalnum
+#impltmp
+sint_isalnum<> = XATS2JS_sint_isalnum
+//
+(* ****** ****** *)
+//
+#extern
+fun
+XATS2JS_char_isdigit
+( c0: char ): bool = $extnam()
+#extern
+fun
+XATS2JS_sint_isdigit
+( c0: sint ): bool = $extnam()
+//
+#impltmp
+char_isdigit<> = XATS2JS_char_isdigit
+#impltmp
+sint_isdigit<> = XATS2JS_sint_isdigit
+//
+(* ****** ****** *)
+//
+#extern
+fun
+XATS2JS_char_isxdigit
+( c0: char ): bool = $extnam()
+#extern
+fun
+XATS2JS_sint_isxdigit
+( c0: sint ): bool = $extnam()
+//
+#impltmp
+char_isxdigit<> = XATS2JS_char_isxdigit
+#impltmp
+sint_isxdigit<> = XATS2JS_sint_isxdigit
+//
 (* ****** ****** *)
 //
 //prelude/SATS/gint000.sats

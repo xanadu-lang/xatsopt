@@ -26,19 +26,6 @@ XATS2JS_bool_mul
 //
 /* ****** ****** */
 function
-XATS2JS_char_eqzq
-  (c0)
-{
-return (0===c0); // eqzq
-}
-function
-XATS2JS_char_neqzq
-  (c0)
-{
-return (0!==c0); // neqzq
-}
-/* ****** ****** */
-function
 XATS2JS_char_cmp
   (c1, c2)
 {
@@ -47,6 +34,19 @@ if
 return (-1);
 else
 return (c1 <= c2 ? 0 : 1);
+}
+/* ****** ****** */
+function
+XATS2JS_char_eqz
+  (c0)
+{
+return (0===c0); // eqz
+}
+function
+XATS2JS_char_neqz
+  (c0)
+{
+return (0!==c0); // neqz
 }
 /* ****** ****** */
 function
@@ -61,6 +61,127 @@ XATS2JS_char_noteq
 {
 return (c1!==c2); // noteq
 }
+/* ****** ****** */
+//
+function
+XATS2JS_char_lowerq
+  (  ch  )
+{
+  let a = 97;
+  let z = 122;
+  return ((a <= ch) && (ch <= z));
+}
+function
+XATS2JS_sint_lowerq
+  (  ch  )
+{
+  let a = 97;
+  let z = 122;
+  return ((a <= ch) && (ch <= z));
+}
+function
+XATS2JS_char_upperq
+  (  ch  )
+{
+  let A = 65;
+  let Z = 90;
+  return ((A <= ch) && (ch <= Z));
+}
+function
+XATS2JS_sint_upperq
+  (  ch  )
+{
+  return ((A <= ch) && (ch <= Z));
+}
+//
+function
+XATS2JS_char_isdigit
+  (  ch  )
+{
+  return ((48 <= ch) && (ch <= 57));
+}
+function
+XATS2JS_sint_isdigit
+  (  ch  )
+{
+  return ((48 <= ch) && (ch <= 57));
+}
+//
+function
+XATS2JS_char_isalpha
+  (  ch  )
+{
+  return (XATS2JS_char_lowerq(ch) || XATS2JS_char_upperq(ch));
+}
+function
+XATS2JS_sint_isalpha
+  (  ch  )
+{
+  return (XATS2JS_sint_lowerq(ch) || XATS2JS_sint_upperq(ch));
+}
+//
+function
+XATS2JS_char_isalnum
+  (  ch  )
+{
+  return (XATS2JS_char_isalpha(ch) || XATS2JS_char_isdigit(ch));
+}
+function
+XATS2JS_sint_isalnum
+  (  ch  )
+{
+  return (XATS2JS_sint_isalpha(ch) || XATS2JS_sint_isdigit(ch));
+}
+//
+/* ****** ****** */
+//
+function
+XATS2JS_char_lohexq
+  (  ch  )
+{
+  let a = 97;
+  let f = 102;
+  return ((a <= ch) && (ch <= f));
+}
+function
+XATS2JS_sint_lohexq
+  (  ch  )
+{
+  let a = 97;
+  let f = 102;
+  return ((a <= ch) && (ch <= f));
+}
+//
+function
+XATS2JS_char_uphexq
+  (  ch  )
+{
+  let A = 65;
+  let F = 70;
+  return ((A <= ch) && (ch <= F));
+}
+function
+XATS2JS_sint_lohexq
+  (  ch  )
+{
+  let A = 65;
+  let F = 70;
+  return ((A <= ch) && (ch <= F));
+}
+//
+function
+XATS2JS_char_isxdigit
+  (  ch  )
+{
+  return (XATS2JS_char_isdigit(ch) || XATS2JS_char_lohexq(ch) || XATS2JS_char_uphexq(ch));
+}
+function
+XATS2JS_sint_isxdigit
+  (  ch  )
+{
+  return (XATS2JS_sint_isdigit(ch) || XATS2JS_sint_lohexq(ch) || XATS2JS_sint_uphexq(ch));
+}
+//
 /* ****** ****** */
 //
 //prelude/gint000.sats

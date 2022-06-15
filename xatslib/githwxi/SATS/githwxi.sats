@@ -27,10 +27,6 @@
 
 (* ****** ****** *)
 //
-// For generic ordering
-//
-(* ****** ****** *)
-//
 (*
 Author: Hongwei Xi
 Start Time: April, 2020
