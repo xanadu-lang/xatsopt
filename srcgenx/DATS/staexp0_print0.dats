@@ -531,9 +531,9 @@ case+ x0.node() of
 | S0Tapps(s0ts) =>
   fprint!(out, "S0Tapps(", s0ts, ")")
 //
-| S0Tlist(t0, s0ts, t1) =>
+| S0Tlpar(t0, s0ts, t1) =>
   fprint!
-  (out, "S0Tlist(", t0, "; ", s0ts, "; ", t1, ")")
+  (out, "S0Tlpar(", t0, "; ", s0ts, "; ", t1, ")")
 //
 | S0Tqual(q0, s0t) =>
   fprint!
@@ -799,11 +799,11 @@ case+ x0.node() of
   ( out
   , "S0Eimp(", tbeg, "; ", s0es, "; ", tend, ")")
 //
-| S0Eparen
+| S0Elpar
   (tbeg, s0es, tend) =>
   fprint!
   ( out
-  , "S0Eparen(", tbeg, "; ", s0es, "; ", tend, ")")
+  , "S0Elpar(", tbeg, "; ", s0es, "; ", tend, ")")
 //
 | S0Eforall(tbeg, s0qs, tend) =>
   fprint!

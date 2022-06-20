@@ -941,7 +941,7 @@ in
   g0exp_make_node(tok.loc(), G0Enone1(tok))
 end (* this-is-a-case-of-error *)
 //
-end // end-of-let // end of [p_atmsort0]
+end // end-of-let // end of [p_atmg0exp]
 //
 (* ****** ****** *)
 //
@@ -1305,7 +1305,7 @@ case+ tnd of
     err := e0;
     sort0_make_node
     ( loc_res
-    , S0Tlist(tbeg, s0ts, tend)) where
+    , S0Tlpar(tbeg, s0ts, tend)) where
     {
       val loc_res = tbeg.loc()+tend.loc()
     }
@@ -2106,17 +2106,17 @@ case+ tnd of
   end // end of [t_t0chr]
 | _ when t_t0flt(tnd) =>
   let
-    val c0 = p_t0flt(buf, err)
+    val f0 = p_t0flt(buf, err)
   in
     err := e0;
-    s0exp_make_node(c0.loc(), S0Eflt(c0))
+    s0exp_make_node(f0.loc(), S0Eflt(f0))
   end // end of [t_t0flt]
 | _ when t_t0str(tnd) =>
   let
-    val c0 = p_t0str(buf, err)
+    val s0 = p_t0str(buf, err)
   in
     err := e0;
-    s0exp_make_node(c0.loc(), S0Estr(c0))
+    s0exp_make_node(s0.loc(), S0Estr(s0))
   end // end of [t_t0str]
 //
 | T_MSLT() => let
@@ -2163,7 +2163,7 @@ case+ tnd of
     err := e0;
     s0exp_make_node
     ( loc_res
-    , S0Eparen(tbeg, s0es, tend)) where
+    , S0Elpar(tbeg, s0es, tend)) where
     {
       val loc_res =
         tbeg.loc()+s0exp_RPAREN_loc(tend)
@@ -2612,7 +2612,7 @@ p_s0uniseq
 list_vt2t
 (pstar_fun{s0uni}(buf, err, p_s0uni))
 //
-) (* end of [p_d0eclseq] *)
+) (* end of [p_s0uniseq] *)
 
 (* ****** ****** *)
 
@@ -2739,6 +2739,8 @@ in
     (loc_res, S0Tapps(list_cons(s0t0, s0ts)))
   // end of [sort0_make_node]
 end // end of [p_appsort0_NGT]
+
+(* ****** ****** *)
 
 implement
 p_apps0exp_NGT

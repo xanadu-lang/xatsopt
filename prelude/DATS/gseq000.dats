@@ -81,6 +81,58 @@ gseq_tail_raw<xs><x0>(xs)
 //
 #impltmp
 <xs><x0>
+gseq_last_raw(xs) =
+let
+var xs = xs
+val x0 =
+gseq_uncons_raw<xs><x0>(xs)
+in
+gseq_last_ini<xs><x0>(xs, x0)
+end(*let*)//end(gseq_last_raw)
+
+(* ****** ****** *)
+
+#impltmp
+<xs><x0>
+gseq_last_opt(xs) =
+let
+//
+var xs = xs
+//
+val opt =
+gseq_uncons_opt<xs><x0>(xs)
+in
+case+ opt of
+| ~
+optn_vt_nil() =>
+optn_vt_nil()
+| ~
+optn_vt_cons(x0) =>
+optn_vt_cons
+(gseq_last_ini<xs><x0>(xs, x0))
+end(*let*)//end-of(gseq_last_opt)
+
+(* ****** ****** *)
+
+#impltmp
+<xs><x0>
+gseq_last_ini
+(xs, x0) = let
+//
+#typedef r0 = x0
+//
+#impltmp
+foldl$fopr
+<x0><r0>(r0, x0) = x0
+//
+in//let
+gseq_foldl<xs><x0><r0>(xs, x0)
+end(*let*)//(gseq_last_ini/foldl)
+
+(* ****** ****** *)
+//
+#impltmp
+<xs><x0>
 gseq_uncons_raw(xs) =
 (
 let
@@ -574,24 +626,13 @@ gseq_map_list<xs><x0><x0>(xs)
 {
   #impltmp map$fopr<x0><x0>(x0) = x0
 }
-#impltmp
-<xs><x0>
-gseq_rlistize
-  (xs) =
-(
-gseq_map_rlist<xs><x0><x0>(xs)
-) where
-{
-  #impltmp map$fopr<x0><x0>(x0) = x0
-}
-//
 (* ****** ****** *)
-
-(*
 //
 (*
 HX-2020-11-23:
 This is not very useful!
+HX-2022-06-15:
+This seems to be working!
 *)
 //
 #impltmp
@@ -619,8 +660,26 @@ strmcon_vt_cons(x0, auxseq(xs))
 end // end of [else]
 ) (* end of [auxseq] *)
 }(*where*)//end-of(gseq_strmize)
-*)
-
+//
+(* ****** ****** *)
+//
+#impltmp
+<xs><x0>
+gseq_rlistize(xs) =
+(
+gseq_map_rlist<xs><x0><x0>(xs)
+) where
+{
+  #impltmp map$fopr<x0><x0>(x0) = x0
+}
+//
+(* ****** ****** *)
+//
+#impltmp
+<xs><x0>
+gseq_rstrmize(xs) =
+list_vt_strmize<x0>(gseq_rlistize<xs><x0>(xs))
+//
 (* ****** ****** *)
 //
 #impltmp
@@ -677,7 +736,7 @@ loop
 )
 in
   loop(xx, gseq_nil<xs><x0>())
-end // end of [gseq_unrlist_vt]
+endlet//end-of-[gseq_unrlist_vt]
 //
 (* ****** ****** *)
 
@@ -975,7 +1034,7 @@ gseq_nilq<xs><x0>(xs)
 then
 $raise SubscriptExn()
 else
-gseq_max2
+gseq_max_ini
 ( gseq_tail_raw<xs><x0>(xs)
 , gseq_head_raw<xs><x0>(xs))
 ) (* end of [gseq_max_exn] *)
@@ -990,7 +1049,7 @@ gseq_nilq<xs><x0>(xs)
 then
 $raise SubscriptExn()
 else
-gseq_min2
+gseq_min_ini
 ( gseq_tail_raw<xs><x0>(xs)
 , gseq_head_raw<xs><x0>(xs))
 ) (* end of [gseq_min_exn] *)
@@ -1009,7 +1068,7 @@ optn_vt_nil((*void*))
 else
 optn_vt_cons
 (
-gseq_max2
+gseq_max_ini
 ( gseq_tail_raw<xs><x0>(xs)
 , gseq_head_raw<xs><x0>(xs))
 )
@@ -1027,7 +1086,7 @@ optn_vt_nil((*void*))
 else
 optn_vt_cons
 (
-gseq_min2
+gseq_min_ini
 ( gseq_tail_raw<xs><x0>(xs)
 , gseq_head_raw<xs><x0>(xs))
 )
@@ -1037,7 +1096,7 @@ gseq_min2
 //
 #impltmp
 <xs><x0>
-gseq_max2
+gseq_max_ini
 (xs, x0) = let
 //
 #typedef r0 = x0
@@ -1049,11 +1108,11 @@ foldl$fopr
 //
 in
   gseq_foldl<xs><x0><r0>(xs, x0)
-end // end of [gseq_max2/foldl]
+end // end of [gseq_max_ini/foldl]
 //
 #impltmp
 <xs><x0>
-gseq_min2
+gseq_min_ini
 (xs, x0) = let
 //
 #typedef r0 = x0
@@ -1065,7 +1124,7 @@ foldl$fopr
 //
 in
   gseq_foldl<xs><x0><r0>(xs, x0)
-end // end of [gseq_min2/foldl]
+end // end of [gseq_min_ini/foldl]
 //
 (* ****** ****** *)
 
@@ -1161,16 +1220,22 @@ gseq_rforall<xs><x0>(xs) where
 #impltmp
 rforall$test<x0>(x0) =
 let
-val () = rforeach$work<x0>(x0) in true
-end
+val () =
+rforeach$work<x0>(x0) in true end
 }
 in
   // nothing
-end // end of [gseq_rforeach/rforall]
+endlet//end(gseq_rforeach/rforall)
 
 (* ****** ****** *)
 //
 (*
+(*
+HX-2022-06-15:
+Using [gseq_cons] should
+be avoided as it enforces
+the list-like sequentiality!
+*)
 #impltmp
 <xs><x0>
 gseq_append
@@ -1187,24 +1252,19 @@ gseq_foldr
 foldr$fopr
 <x0><r0>(x0, r0) =
 gseq_cons<xs><x0>(x0, r0)
-} (* end of [gseq_append] *)
+}(*whr*)//end(gseq_append/foldr)
 *)
+//
 #impltmp
 <xs><x0>
 gseq_append
-(xs, ys) = let
+(xs1, xs2) = 
+gseq_unstrm_vt<xs><x0>
+(
+gseq_append_strm<xs><x0>(xs1,xs2)
+)
 //
-val
-xs =
-gseq_listize<xs><x0>(xs)
-val
-ys =
-gseq_listize<xs><x0>(ys)
-//
-in
-gseq_unlist_vt<xs><x0>
-(list_vt_append0<x0>(xs, ys))
-end (* end of [gseq_append] *)
+(* ****** ****** *)
 //
 #impltmp
 <xz><xs><x0>
@@ -1216,12 +1276,31 @@ gseq_concat_strm<xz><xs><x0>(xss)
 //
 (* ****** ****** *)
 //
+(*
 #impltmp
 <xs><x0>
 gseq_reverse(xs) =
 gseq_rappend<xs><x0>
 (xs, gseq_nil<xs><x0>())
+*)
 //
+#impltmp
+<xs><x0>
+gseq_reverse(xs) =
+gseq_unstrm_vt<xs><x0>
+(
+gseq_rstrmize<xs><x0>(xs)
+)
+//
+(* ****** ****** *)
+//
+(*
+(*
+HX-2022-06-15:
+Using [gseq_cons] should
+be avoided as it enforces
+the list-like sequentiality!
+*)
 #impltmp
 <xs><x0>
 gseq_rappend(xs1, xs2) =
@@ -1236,10 +1315,19 @@ gseq_foldl<xs><x0><r0>(xs1, xs2)
 foldl$fopr
 <x0><xs>(r0, x0) =
 let
-  val r0 =
-  gseq_cons<xs><x0>(x0, r0) in r0
-end
-}
+val r0 =
+gseq_cons<xs><x0>(x0, r0) in r0
+end(*let*)//end-of-(foldl$fopr)
+}(*where*)//end-of-(gseq_rappend)
+*)
+//
+#impltmp
+<xs><x0>
+gseq_rappend(xs1, xs2) =
+gseq_unstrm_vt<xs><x0>
+(
+gseq_rappend_strm<xs><x0>(xs1,xs2)
+)
 //
 (* ****** ****** *)
 //
@@ -1300,6 +1388,24 @@ end
 in
   strm_vt_concat<x0>(  xss  )
 end // end of [gseq_concat_strm]
+//
+(* ****** ****** *)
+//
+#impltmp
+<xs><x0>
+gseq_rappend_strm
+  (xs1, xs2) = let
+//
+val
+xs2 =
+gseq_strmize<xs><x0>(xs2)
+val
+xs1 =
+gseq_rstrmize<xs><x0>(xs1)
+//
+in
+  strm_vt_append<x0>(xs1, xs2)
+end // end-of-[gseq_rappend_strm]
 //
 (* ****** ****** *)
 //

@@ -3235,10 +3235,12 @@ auxsym
 ( sym
 : sym_t): d2pitmlst =
 let
+//
 val
 opt =
 the_dexpenv_find(sym)
-in
+//
+in//let
 //
 case+ opt of
 | ~
@@ -3250,8 +3252,10 @@ None_vt() =>
 Some_vt(d2i) =>
 (
 case+ d2i of
-| D2ITMsym(_, dpis) => dpis
-| _ (*non-D2ITMsym*) => list_nil()
+|
+D2ITMsym(_, dpis) => dpis
+|
+_(*non-D2ITMsym*) => list_nil()
 ) (* Some_vt *)
 //
 end // end of [auxsym]
@@ -4046,7 +4050,7 @@ loc0 = d1cl.loc()
 //
 val-
 D1Cstaload
-( tok
+( tok0
 , src1, knd2
 , fopt
 , flag, body) = d1cl.node()
@@ -4176,27 +4180,24 @@ None() => ((*void*))
 |
 Some(menv) =>
 let
-  val
-  nmopt =
-  g1exp_nmspace(src1)
-in
+val nmopt = g1exp_nmspace(src1)
+in//let
 case+ nmopt of
 | ~
 None_vt() =>
 the_nmspace_open(menv)
 | ~
 Some_vt(nm0) =>
-the_sexpenv_add
-(nm0, S2ITMfmodenv(menv))
+the_sexpenv_add(nm0, S2ITMfmodenv(menv))
 end // end of [Some]
 ) : void // end of val
 //
-in
+in//let
+//
 d2ecl_make_node
 ( loc0
-, D2Cstaload
-  ( tok // #staload
-  , src1, knd2, fopt, flag, body))
+, D2Cstaload(tok0, src1, knd2, fopt, flag, body))
+//
 end // end of [aux_staload]
 
 (* ****** ****** *)

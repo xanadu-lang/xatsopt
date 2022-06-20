@@ -428,9 +428,33 @@ else
 // HX-2022-06-06:
 //
 function
-XATS2JS_gint_sint2uint(x0){return x0;}
+XATS2JS_gint_sint2uint(x0)
+{       return x0;       }
 function
-XATS2JS_gint_uint2sint(x0){return x0;}
+XATS2JS_gint_uint2sint(x0)
+{       return x0;       }
+//
+/* ****** ****** */
+//
+// HX-2022-06-16:
+//
+function
+XATS2JS_gint_parse_sint(rep)
+{
+  const exn = 0;
+  const bas = 10;
+  const res = parseInt(rep, bas);
+  return ( isNaN(res) ? exn : res );
+}
+function
+XATS2JS_gint_parse_uint(rep)
+{
+  const exn = 0;
+  const res =
+  XATS2JS_gint_parse_sint(rep);
+  return ( (res >= 0) ? res : exn );
+}
+//
 /* ****** ****** */
 //
 //prelude/gflt000.sats
