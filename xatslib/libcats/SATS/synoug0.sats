@@ -150,9 +150,60 @@ prout1_a09
 #symload prout with prout1_a09
 //
 (* ****** ****** *)
+//
+#symload prout1 with prout1_a01
+#symload prout1 with prout1_a02
+#symload prout1 with prout1_a03
+#symload prout1 with prout1_a04
+#symload prout1 with prout1_a05
+#symload prout1 with prout1_a06
+#symload prout1 with prout1_a07
+#symload prout1 with prout1_a08
+#symload prout1 with prout1_a09
+//
+(* ****** ****** *)
+//
 (*
 fun<>
-prout1_a00
+prerr0_a00
+((*void*)) : void
+*)
+fun
+<a1:vt>
+prerr0_a01
+( x1: ~a1 ) : void
+fun
+<a1:vt>
+<a2:vt>
+prerr0_a02
+( x1: ~a1, x2: ~a2 ) : void
+fun
+<a1:vt>
+<a2:vt>
+<a3:vt>
+prerr0_a03
+( x1: ~a1
+, x2: ~a2, x3: ~a3 ) : void
+fun
+<a1:vt>
+<a2:vt>
+<a3:vt>
+<a4:vt>
+prerr0_a04
+( x1: ~a1, x2: ~a2
+, x3: ~a3, x4: ~a4 ) : void
+//
+(* ****** ****** *)
+//
+#symload prerr0 with prerr0_a01
+#symload prerr0 with prerr0_a02
+#symload prerr0 with prerr0_a03
+#symload prerr0 with prerr0_a04
+//
+(* ****** ****** *)
+(*
+fun<>
+prerr1_a00
 ((*void*)) : void
 *)
 fun
@@ -364,6 +415,57 @@ proutln1_a09
 //
 (* ****** ****** *)
 //
+#symload proutln1 with proutln1_a00
+#symload proutln1 with proutln1_a01
+#symload proutln1 with proutln1_a02
+#symload proutln1 with proutln1_a03
+#symload proutln1 with proutln1_a04
+#symload proutln1 with proutln1_a05
+#symload proutln1 with proutln1_a06
+#symload proutln1 with proutln1_a07
+#symload proutln1 with proutln1_a08
+#symload proutln1 with proutln1_a09
+//
+(* ****** ****** *)
+//
+fun<>
+prerrln0_a00
+((*void*)) : void
+fun
+<a1:vt>
+prerrln0_a01
+( x1: ~a1 ) : void
+fun
+<a1:vt>
+<a2:vt>
+prerrln0_a02
+( x1: ~a1, x2: ~a2 ) : void
+fun
+<a1:vt>
+<a2:vt>
+<a3:vt>
+prerrln0_a03
+( x1: ~a1
+, x2: ~a2, x3: ~a3 ) : void
+fun
+<a1:vt>
+<a2:vt>
+<a3:vt>
+<a4:vt>
+prerrln0_a04
+( x1: ~a1, x2: ~a2
+, x3: ~a3, x4: ~a4) : void
+//
+(* ****** ****** *)
+//
+#symload prerrln0 with prerrln0_a00
+#symload prerrln0 with prerrln0_a01
+#symload prerrln0 with prerrln0_a02
+#symload prerrln0 with prerrln0_a03
+#symload prerrln0 with prerrln0_a04
+//
+(* ****** ****** *)
+//
 fun<>
 prerrln1_a00
 ((*void*)) : void
@@ -468,6 +570,19 @@ prerrln1_a09
 #symload prerrln with prerrln1_a07
 #symload prerrln with prerrln1_a08
 #symload prerrln with prerrln1_a09
+//
+(* ****** ****** *)
+//
+#symload prerrln1 with prerrln1_a00
+#symload prerrln1 with prerrln1_a01
+#symload prerrln1 with prerrln1_a02
+#symload prerrln1 with prerrln1_a03
+#symload prerrln1 with prerrln1_a04
+#symload prerrln1 with prerrln1_a05
+#symload prerrln1 with prerrln1_a06
+#symload prerrln1 with prerrln1_a07
+#symload prerrln1 with prerrln1_a08
+#symload prerrln1 with prerrln1_a09
 //
 (* ****** ****** *)
 
