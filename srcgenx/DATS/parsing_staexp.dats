@@ -856,7 +856,7 @@ println!
 ("p_atmg0exp: tok = ", tok)
 *)
 //
-in
+in//let
 //
 case+ tnd of
 //
@@ -866,7 +866,7 @@ let
   val id =
   p_g0eid(buf, err)
   val loc = id.loc()
-in
+in//let
   err := e0;
   g0exp_make_node(loc, G0Eid0(id))
 end // end of [t_g0eid]
@@ -877,7 +877,7 @@ let
   val i0 =
   p_t0int(buf, err)
   val loc = i0.loc()
-in
+in//let
   err := e0;
   g0exp_make_node(loc, G0Eint(i0))
 end // end of [t_t0int]
@@ -885,44 +885,45 @@ end // end of [t_t0int]
 |
 _ when t_t0chr(tnd) =>
 let
-  val i0 =
+  val c0 =
   p_t0chr(buf, err)
-  val loc = i0.loc()
-in
+  val loc = c0.loc()
+in//let
   err := e0;
-  g0exp_make_node(loc, G0Echr(i0))
+  g0exp_make_node(loc, G0Echr(c0))
 end // end of [t_t0chr]
 //
 |
 _ when t_t0flt(tnd) =>
 let
-  val i0 =
+  val f0 =
   p_t0flt(buf, err)
-  val loc = i0.loc()
-in
+  val loc = f0.loc()
+in//let
   err := e0;
-  g0exp_make_node(loc, G0Eflt(i0))
+  g0exp_make_node(loc, G0Eflt(f0))
 end // end of [t_t0flt]
 //
 | _ when t_t0str(tnd) =>
-  let
-    val x0 =
-    p_t0str(buf, err)
-    val loc = x0.loc()
-  in
-    err := e0;
-    g0exp_make_node(loc, G0Estr(x0))
-  end // end of [t_t0str]
+let
+  val s0 =
+  p_t0str(buf, err)
+  val loc = s0.loc()
+in//let
+  err := e0;
+  g0exp_make_node(loc, G0Estr(s0))
+end // end of [t_t0str]
 //
 |
-T_LPAREN() => let
+T_LPAREN() =>
+let
   val () = buf.incby1()
   val g0es =
     p_g0expseq_COMMA(buf, err)
   // end of [val]
   val tbeg = tok
   val tend = p_RPAREN(buf, err)
-in
+in//let
   err := e0;
   g0exp_make_node
   ( loc_res
@@ -2792,9 +2793,10 @@ implement
 p_effs0expopt
   (buf, err) = let
 //
+val e00 = err
 val tok = buf.get0()
 //
-in
+in//let
 //
 case+
 tok.node() of
@@ -2804,6 +2806,7 @@ tok.node() of
       p_apps0exp_NEQ(buf, err)
     // end of [val]
   in
+    err := e00;
     EFFS0EXPsome(s0e_res)
 (*
     EFFS0EXPsome
@@ -2827,6 +2830,7 @@ tok.node() of
     // end of [val]
     val loc_res = tbeg.loc() + tend.loc()
   in
+    err := e00;
     EFFS0EXPsome
       (S0EFFsome(tbeg, s0es, tend), s0e_res)
     // EFFS0EXPsome

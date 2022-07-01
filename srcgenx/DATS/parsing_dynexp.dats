@@ -767,7 +767,7 @@ case+ tnd of
     val tend = p_RPAREN(buf, err)
     val loc_res = tbeg.loc() + tend.loc()
   in
-    err := 0;
+    err := e0;
     d0arg_make_node
     ( loc_res
     , D0ARGsome_dyn2(tbeg, arg0, opt1, tend))
@@ -3396,17 +3396,17 @@ local
 
 (* ****** ****** *)
 //
-static
-fun
-p_d0cstdecl
- : parser(d0cstdecl)
-and
-p_d0cstdeclseq_AND
- : parser(d0cstdeclist)
-//
+(*
 static
 fun
 p_dynconst : parser(d0ecl)
+*)
+//
+static
+fun
+p_d0cstdecl: parser(d0cstdecl)
+and
+p_d0cstdeclseq_AND: parser(d0cstdeclist)
 //
 implement
 p_d0cstdecl
@@ -4500,7 +4500,7 @@ in
 err := e0;
 d0ecl_make_node
 (loc_res, D0Csymload(tok, sym, twth, dqid, tint))
-end // end of [#STALOAD(...)]
+end // end of [#SYMLOAD(...)]
 //
 | T_SRP_NONFIX() => let
 //

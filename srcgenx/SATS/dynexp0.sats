@@ -1279,6 +1279,7 @@ for skipping synerr:
   , sq0eid
   , s0marglst, sort0opt, token(*EQ*), s0exp)
   // D0Cabsimpl
+//
 | D0Csymload of
   ( token(*symload*)
   , s0ymb(*overloaded*)
@@ -1314,8 +1315,8 @@ for skipping synerr:
   , dq0eid, ti0arglst, f0arglst
   , effs0expopt, token(*EQ*), d0exp(*body*))
 //
-| D0Celse of (token) // opt
-| D0Cendif of (token) // req
+| D0Celse of (token) // optional
+| D0Cendif of (token) // required
 | D0Cifdec of (token, g0exp, tokenopt) // # if(gexp) ...
 | D0Celsif of (token, g0exp, tokenopt) // # elsif(gexp) ...
 //
