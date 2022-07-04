@@ -73,7 +73,8 @@ strn_tail(cs) =
 strn_head_opt(cs) = ...
 *)
 //
-#impltmp<>
+#impltmp
+<>(*tmp*)
 strn_tail_opt(cs) =
 if
 strn_nilq(cs)
@@ -81,6 +82,13 @@ then
 optn_vt_nil((*void*))
 else
 optn_vt_cons(strn_tail_raw(cs))
+//
+(* ****** ****** *)
+//
+#impltmp
+<>(*tmp*)
+strn_cmp =
+gseq_cmp<strn><cgtz>
 //
 (* ****** ****** *)
 //
@@ -105,7 +113,8 @@ strn_neq(x1, x2) =
 //
 (* ****** ****** *)
 
-#impltmp<>
+#impltmp
+<>(*tmp*)
 strn_print(cs) =
 let
 #impltmp
@@ -114,22 +123,22 @@ gseq_print$beg<>() = ()
 gseq_print$sep<>() = ()
 #impltmp
 gseq_print$end<>() = ()
-in
+in//let
 gseq_print<strn><cgtz>(cs)
 end(*let*)//end of [strn_print]
 
 (* ****** ****** *)
 
-#impltmp<>
+#impltmp
+<>(*tmp*)
 strn_length
   (xs) =
 (
-  loop(xs, 0)
-) where
+auxloop(xs, 0)) where
 {
 //
 fnx
-loop
+auxloop
 {i,j:nat}.<i>.
 ( xs: strn(i)
 , j0: sint(j)): sint(i+j) =
@@ -140,10 +149,10 @@ in
 if
 test
 then j0 else
-loop(strn_tail(xs), succ(j0))
-end
+auxloop(strn_tail(xs), succ(j0))
+endlet // end of [auxloop(xs,j0)]
 // end of [if]
-}(*where*)//end-of(strn_length)
+}(*where*)//end-of[strn_length(xs)]
 
 (* ****** ****** *)
 //
@@ -165,7 +174,7 @@ list_vt_append0<cgtz>
 ( strn_listize<>(xs)
 , strn_listize<>(ys))
 //
-in
+in//let
 strn_vt_make_list_vt<>(zs)
 end // end of [strn_append_vt]
 //
@@ -175,9 +184,11 @@ end // end of [strn_append_vt]
 strn_reverse
 {n0}(cs) =
 let
+//
 val n0 =
 strn_length<>(cs)
-in
+//
+in//let
 //
 let
 //
@@ -188,13 +199,13 @@ tabulate$fopr
 <c0><n0>(i0) =
 let
 val j0 = (n0-1)-i0
-in
-  strn_get_at<>(cs, j0)
-end
+in//let
+strn_get_at<>(cs, j0)
+endlet//tabulate$fopr
 //
 in
   strn_tabulate<n0>(n0)
-end
+end (*let*)//tabulate$fopr
 //
 end // end of [strn_reverse]
 
@@ -204,9 +215,11 @@ end // end of [strn_reverse]
 strn_reverse_vt
 {n0}(cs) =
 let
+//
 val n0 =
 strn_length<>(cs)
-in
+//
+in//let
 //
 let
 //
@@ -217,15 +230,15 @@ tabulate$fopr
 <c0><n0>(i0) =
 let
 val j0 = (n0-1)-i0
-in
+in//let
   strn_get_at<>(cs, j0)
-end
+end(*let*)//tabulate$fopr
 //
 in
   strn_vt_tabulate<n0>(n0)
-end
+end (*let*)//strn_reverse_vt
 //
-end // end of [strn_reverse_vt]
+end // end-of-[strn_reverse_vt]
 
 (* ****** ****** *)
 
@@ -258,19 +271,20 @@ end // end of [else]
 } (* end of [strn_forall/uncons] *)
 
 (* ****** ****** *)
+//
 #impltmp
 <>(*tmp*)
 strn_listize
   {n}( cs ) =
 (
-auxmain(n0, r0)) where
+loop(n0, r0)) where
 {
 //
 val n0 = length(cs)
 val r0 = list_vt_nil()
 //
-fun
-auxmain
+fnx
+loop
 {i,j:nat}
 ( i0: sint(i)
 , r0
@@ -283,12 +297,14 @@ then r0 else
 let
   val i1 = i0 - 1
   val ci = cs[i1]
-in
-auxmain(i1, list_vt_cons(ci, r0))
-end // end of [else]
-)
+in//let
+  loop(i1, list_vt_cons(ci, r0))
+endlet // else // end-of-[if]
+) (*if*) // end of [loop(i0,r0)]
 } (*where*) // end of [strn_listize]
+//
 (* ****** ****** *)
+//
 #impltmp
 <>(*tmp*)
 strn_strmize(cs) =
@@ -318,7 +334,9 @@ in
 end // end of [else]
 )
 } (*where*) // end of [strn_strmize]
+//
 (* ****** ****** *)
+//
 #impltmp
 <>(*tmp*)
 strn_strxize(cs) =
@@ -353,21 +371,23 @@ in
 end // end of [else]
 )
 } (*where*) // end of [strn_strxize]
+//
 (* ****** ****** *)
+//
 #impltmp
 <>(*tmp*)
 strn_rlistize
   {n}( cs ) =
 (
-auxmain(i0, r0)) where
+loop(i0, r0)) where
 {
 //
 val i0 = 0
 val n0 = length(cs)
 val r0 = list_vt_nil()
 //
-fun
-auxmain
+fnx
+loop
 {i,j:nat
 |i <= n}
 ( i0: sint(i)
@@ -382,10 +402,11 @@ let
   val ci = cs[i0]
   val i1 = i0 + 1
 in
-auxmain(i1, list_vt_cons(ci, r0))
-end // end of [else]
+loop(i1, list_vt_cons(ci, r0))
+endlet //end-of-(else)//end-of-(if)
 )
 } (*where*) // end of [strn_rlistize]
+//
 (* ****** ****** *)
 //
 #impltmp<>
@@ -458,6 +479,85 @@ tabulate$fopr<cgtz><n>(i0) = f0(i0)
 //
 (* ****** ****** *)
 //
+(*
+// HX-2022-07-01
+// Fri Jul  1 12:09:16 EDT 2022
+*)
+//
+#implfun
+<>(*tmp*)
+strn_prefixq
+( s1, s2 ) =
+(
+loop(s1, s2)) where
+{
+fnx
+loop
+( s1: strn
+, s2: strn): bool =
+let
+val c1 =
+strn_head_opt(s1)
+in//let
+if
+char_eqz(c1)
+then true else
+let
+val c2 =
+strn_head_opt(s2)
+in//let
+if
+char_eqz(c2)
+then false else
+(
+if
+(c1 = c2)
+then
+loop(tail(s1), tail(s2)) else false)
+endlet // end of [loop(s1, s2)]
+endlet // end of [loop(s1, s2)]
+} (*where*)//end-of-[strn_prefix(s1,s2)]
+//
+(* ****** ****** *)
+//
+(*
+// HX-2022-07-01
+// Fri Jul  1 12:28:23 EDT 2022
+*)
+//
+#implfun
+<>(*tmp*)
+strn_suffixq
+( s1, s2 ) =
+(
+if
+(n1 <= n2)
+then loop(n1, 0) else false
+) where
+{
+//
+val n1 =
+length(s1) and n2 = length(s2)
+//
+fnx
+loop
+{n:int}
+{i:nat|i<=n} .<n-i>.
+(n1: sint(n), i0: int(i)): bool =
+if
+(i0 >= n1)
+then true else
+let
+val c1 = s1[i0]
+val c2 = s2[n2-n1+i0]
+in//let
+if
+(c1 = c2) then loop(n1,i0+1) else false
+endlet // end of [loop{...}(n1,i0)]
+} (*where*)//end-of-[strn_suffix(s1,s2)]
+//
+(* ****** ****** *)
+//
 // HX:
 // For #implementing
 // some gseq_operations
@@ -490,9 +590,6 @@ g_neq<xs> = strn_neq<>
 #impltmp
 g_cmp<xs> = strn_cmp<>
 //
-#impltmp
-strn_cmp<> = gseq_cmp<xs><x0>
-//
 (* ****** ****** *)
 //
 #impltmp
@@ -504,8 +601,6 @@ gseq_print$beg<xs><x0>() = ()
 gseq_print$end<xs><x0>() = ()
 #impltmp
 gseq_print$sep<xs><x0>() = ()
-#impltmp
-strn_print<> = gseq_print<xs><x0>
 //
 (* ****** ****** *)
 
@@ -554,7 +649,14 @@ gseq_unstrm_vt<xs><x0> = strn_make_strm_vt<>
 
 (* ****** ****** *)
 
-end (*local*) // end of [local]
+#impltmp
+gseq_prefixq<xs><x0> = strn_prefixq<>(*void*)
+#impltmp
+gseq_suffixq<xs><x0> = strn_suffixq<>(*void*)
+
+(* ****** ****** *)
+
+end (*local*) // end of [local] // g/gseq-ops
 
 (* ****** ****** *)
 

@@ -339,6 +339,14 @@ group0$test(x0: !x0): bool
 //
 (* ****** ****** *)
 //
+(*
+HX-2022-07-03:
+//
+Sun Jul  3 10:35:38 EDT 2022
+//
+An element is KEPT only if
+the [sieve$test] on it passes
+*)
 fun
 <x0:t0>
 sieve$test(x1: x0, x2: x0): bool
@@ -523,13 +531,23 @@ ifoldr$fopr
 // For z2-gseq-operations
 //
 (* ****** ****** *)
-
+//
 fun
 <x0:t0
 ,y0:t0>
 <z0:vt>
 z2map$fopr(x0, y0): (z0)
-
+fun
+<x0:vt
+,y0:vt>
+<z0:vt>
+z2map0$fopr(~x0, ~y0): (z0)
+fun
+<x0:vt
+,y0:vt>
+<z0:vt>
+z2map1$fopr(!x0, !y0): (z0)
+//
 (* ****** ****** *)
 //
 fun
@@ -586,6 +604,69 @@ z2foreach1$work(!x0, !y0): void
 //
 (* ****** ****** *)
 //
+fun
+<x0:t0
+,y0:t0>
+<z0:vt>
+z2imap$fopr(nint,x0,y0): (z0)
+fun
+<x0:vt
+,y0:vt>
+<z0:vt>
+z2imap0$fopr(nint,~x0,~y0): (z0)
+fun
+<x0:vt
+,y0:vt>
+<z0:vt>
+z2imap1$fopr(nint,!x0,!y0): (z0)
+//
+(* ****** ****** *)
+//
+fun
+<x0:t0
+,y0:t0>
+z2iforall$test(nint,x0,y0): bool
+fun
+<x0:vt
+,y0:vt>
+z2iforall0$test(nint,~x0,~y0): bool
+fun
+<x0:vt
+,y0:vt>
+z2iforall1$test(nint,!x0,!y0): bool
+//
+(* ****** ****** *)
+//
+fun
+<x0:t0
+,y0:t0>
+z2iforcmp$fcmp(nint,x0,y0): sint
+fun
+<x0:vt
+,y0:vt>
+z2iforcmp0$fcmp(nint,~x0,~y0): sint
+fun
+<x0:vt
+,y0:vt>
+z2iforcmp1$fcmp(nint,!x0,!y0): sint
+//
+(* ****** ****** *)
+//
+fun
+<x0:t0
+,y0:t0>
+z2iforeach$work(nint,x0,y0): void
+fun
+<x0:vt
+,y0:vt>
+z2iforeach0$work(nint,~x0,~y0): void
+fun
+<x0:vt
+,y0:vt>
+z2iforeach1$work(nint,!x0,!y0): void
+//
+(* ****** ****** *)
+//
 // For x2-gseq-operations
 //
 (* ****** ****** *)
@@ -603,6 +684,11 @@ fun
 x2filter$test
   (x0: x0, y0: y0): bool
 //
+(* ****** ****** *)
+fun
+<x0:t0
+,y0:t0>
+x2foreach$work(x0, y0): void
 (* ****** ****** *)
 //
 fun<>
@@ -639,6 +725,13 @@ fun
 <z0:vt>
 x2ifilter$test
   (nint, x0, nint, y0): bool
+//
+(* ****** ****** *)
+//
+fun
+<x0:t0
+,y0:t0>
+x2iforeach$work(nint, x0, nint, y0): void
 //
 (* ****** ****** *)
 //

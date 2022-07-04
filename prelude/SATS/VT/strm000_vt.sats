@@ -130,6 +130,34 @@ fun
 strx_vt_free(strx_vt(a)): void
 
 (* ****** ****** *)
+(*
+Sun Jul  3 13:07:07 EDT 2022
+*)
+fun
+<a:vt>
+strm_vt_from(x0:a): strm_vt(a)
+fun
+<a:vt>
+strm_vt_from$next(x0: !a): (a)
+(*
+HX-2022-07-03:
+The default for [$next]:
+strm_vt_from$next(x0) = g_succ(x0)
+*)
+//
+fun
+<a:vt>
+strx_vt_from(x0:a): strx_vt(a)
+fun
+<a:vt>
+strx_vt_from$next(x0: !a): (a)
+(*
+HX-2022-07-03:
+The default for [$next]:
+strx_vt_from$next(x0) = g_succ(x0)
+*)
+//
+(* ****** ****** *)
 //
 fun
 <a:vt>
@@ -323,17 +351,28 @@ strx_vt_mapstrm0
   (xs: strx_vt(x0)): strx_vt(y0)
 //
 (* ****** ****** *)
+//
 fun
 <x0:vt>
 strm_vt_group0_list
 ( xs
-: strm_vt(x0))
-: strm_vt(list_vt(x0))
+: strm_vt(x0)): strm_vt(list_vt(x0))
+//
 (* ****** ****** *)
+//
+fun
+<x0:vt>
+strm_vt_merge0
+( xs: strm_vt(x0)
+, ys: strm_vt(x0) ): strm_vt(x0)
+//
+(* ****** ****** *)
+//
 fun
 <x0:vt>
 strm_vt_sieve0
   (xs: strm_vt(x0)): strm_vt(x0)
+//
 (* ****** ****** *)
 //
 // For glseq-i-operations
@@ -410,9 +449,62 @@ strm_vt_z2forcmp0
 fun
 <x0:vt
 ,y0:vt>
+strm_vt_z2foreach0
+  ( xs: strm_vt(x0)
+  , ys: strm_vt(y0)): void
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt
+,y0:vt>
+<z0:vt>
+strm_vt_z2map0//seq
+( xs: strm_vt(x0)
+, ys: strm_vt(y0)): strm_vt( z0 )
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt
+,y0:vt>
 strm_vt_z2strmize
 ( xs: strm_vt(x0)
-, ys: strm_vt(y0)): strm_vt(@(x0, y0))
+, ys: strm_vt(y0)): strm_vt(@(x0,y0))
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt
+,y0:vt>
+<z0:vt>
+strm_vt_z2imap0//seq
+( xs: strm_vt(x0)
+, ys: strm_vt(y0)): strm_vt(   z0   )
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt
+,y0:vt>
+<z0:vt>
+strm_vt_z2iforall0
+(xs: strm_vt(x0), ys: strm_vt(y0)): bool
+fun
+<x0:vt
+,y0:vt>
+<z0:vt>
+strm_vt_z2iforcmp0
+(xs: strm_vt(x0), ys: strm_vt(y0)): sint
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt
+,y0:vt>
+<z0:vt>
+strm_vt_z2iforeach0
+(xs: strm_vt(x0), ys: strm_vt(y0)): void
 //
 (* ****** ****** *)
 //

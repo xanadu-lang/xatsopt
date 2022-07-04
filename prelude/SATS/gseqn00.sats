@@ -73,12 +73,12 @@ fun
 <xs:t0>
 <x0:t0>
 <ln:i0>
-gseqn_listize(xs): list_vt(x0, ln)
+gseqn_listize(xs): list_vt(x0,ln)
 fun
 <xs:t0>
 <x0:t0>
 <ln:i0>
-gseqn_rlistize(xs): list_vt(x0, ln)
+gseqn_rlistize(xs): list_vt(x0,ln)
 
 (* ****** ****** *)
 
@@ -86,12 +86,12 @@ fun
 <xs:t0>
 <x0:t0>
 <ln:i0>
-gseqn_unlist(list(x0, ln)): (xs)
+gseqn_unlist(xs:list(x0,ln)): (xs)
 fun
 <xs:t0>
 <x0:t0>
 <ln:i0>
-gseqn_unrlist(list(x0, ln)): (xs)
+gseqn_unrlist(xs:list(x0,ln)): (xs)
 
 (* ****** ****** *)
 //
@@ -100,13 +100,13 @@ fun
 <x0:t0>
 <y0:t0>
 <ln:i0>
-gseqn_map_list(xs): list_vt(y0, ln)
+gseqn_map_arrn(xs:xs): a1ptr(y0,ln)
 fun
 <xs:t0>
 <x0:t0>
 <y0:t0>
 <ln:i0>
-gseqn_map_rlist(xs): list_vt(y0, ln)
+gseqn_map_rarrn(xs:xs): a1ptr(y0,ln)
 //
 (* ****** ****** *)
 //
@@ -115,13 +115,13 @@ fun
 <x0:t0>
 <y0:t0>
 <ln:i0>
-gseqn_map_array(xs): a1ptr( y0, ln )
+gseqn_map_list(xs:xs): list_vt(y0,ln)
 fun
 <xs:t0>
 <x0:t0>
 <y0:t0>
 <ln:i0>
-gseqn_map_rarray(xs): a1ptr( y0, ln )
+gseqn_map_rlist(xs:xs): list_vt(y0,ln)
 //
 (* ****** ****** *)
 
@@ -191,7 +191,7 @@ fun
 <z0:vt>
 <ln:i0>
 gseqn_z2map_list
-  (xs: xs, ys: ys): list_vt(z0, ln)
+  (xs: xs, ys: ys): list_vt(z0,ln)
 fun
 <xs:t0
 ,ys:t0>
@@ -200,7 +200,74 @@ fun
 <z0:vt>
 <ln:i0>
 gseqn_z2map_rlist
-  (xs: xs, ys: ys): list_vt(z0, ln)
+  (xs: xs, ys: ys): list_vt(z0,ln)
+//
+(* ****** ****** *)
+// HX-2022-07-01:
+// Fri Jul  1 13:44:28 EDT 2022
+// For gseq-types indexed by length
+(* ****** ****** *)
+//
+fun
+<xs:
+i0->t0>
+<x0:t0>
+gseqn1_nilq
+{ln:int}(xs(ln)): bool(ln=0)
+//
+fun
+<xs:
+i0->t0>
+<x0:t0>
+gseqn1_consq
+{ln:int}(xs(ln)): bool(ln>0)
+//
+(* ****** ****** *)
+//
+fun
+<xs:
+i0->t0>
+<x0:t0>
+gseqn1_head
+{ln:pos}(xs:xs(ln)): (x0)
+//
+fun
+<xs:
+i0->t0>
+<x0:t0>
+gseqn1_tail
+{ln:pos}(xs:xs(ln)): xs(ln-1)
+//
+(* ****** ****** *)
+//
+fun
+<xs:
+i0->t0>
+<x0:t0>
+gseqn1_length
+{ln:int}(xs:xs(ln)): sint(ln)
+//
+(* ****** ****** *)
+//
+fun
+<xs:
+i0->t0>
+<x0:t0>
+gseqn1_drop
+{ln:int}
+{n0:nat|n0<ln}
+(xs:xs(ln), n0:sint(n0)): xs(ln-n0)
+//
+(* ****** ****** *)
+//
+fun
+<xs:
+i0->t0>
+<x0:t0>
+<ys:
+i0->t0>
+<y0:t0>
+gseqn1_map{ln:int}(xs:xs(ln)): ys(ln)
 //
 (* ****** ****** *)
 

@@ -72,11 +72,11 @@ list_make_nval_vt
 fun<>
 list_nilq
 {a:type}{n:int}
-(xs: list(a, n)): bool(n = 0)
+(xs: list(a, n)): bool( n=0 )
 fun<>
 list_consq
 {a:type}{n:int}
-(xs: list(a, n)): bool(n > 0)
+(xs: list(a, n)): bool( n>0 )
 //
 (* ****** ****** *)
 //
@@ -121,6 +121,13 @@ fun
 list_last_ini
 {n:int}
 (x0: a, xs: list(a, n)):(a)
+//
+(* ****** ****** *)
+//
+fun
+<a:t0>
+list_cmp
+(xs: list(a), ys: list(a)): sint
 //
 (* ****** ****** *)
 //
@@ -288,11 +295,11 @@ list_maprev_vt
 fun
 <a:t0>
 list_copy_vt
-{n:int}(xs: list(a, n)): list_vt(a, n)
+{n:int}(xs:list(a, n)): list_vt(a,n)
 fun
 <a:t0>
 list_rcopy_vt
-{n:int}(xs: list(a, n)): list_vt(a, n)
+{n:int}(xs:list(a, n)): list_vt(a,n)
 //
 (* ****** ****** *)
 //
