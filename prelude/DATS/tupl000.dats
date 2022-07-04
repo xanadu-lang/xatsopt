@@ -31,15 +31,14 @@ Sun Jul  3 22:18:42 EDT 2022
 {a0:t0
 ,a1:t0}
 g_print
-<
-(a0,a1)>(t2) =
+<(a0,a1)>(tup) =
 let
-val () = t0up_print$beg( )
-val () = g_print<a0>(t2.0)
-val () = t0up_print$sep( )
-val () = g_print<a1>(t2.1)
-val () = t0up_print$end( )
-end // end of [g_print<t0up2>(t2)]
+val () = t0up_print$beg()
+val () = g_print<a0>(tup.0)
+val () = t0up_print$sep()
+val () = g_print<a1>(tup.1)
+val () = t0up_print$end((*nil*))
+end // end of [g_print<t0up2>(tup)]
 //
 (* ****** ****** *)
 //
@@ -50,16 +49,16 @@ end // end of [g_print<t0up2>(t2)]
 g_print
 <
 (a0
-,a1,a2)>(t3) =
+,a1,a2)>(tup) =
 let
-val () = t0up_print$beg( )
-val () = g_print<a0>(t3.0)
-val () = t0up_print$sep( )
-val () = g_print<a1>(t3.1)
-val () = t0up_print$sep( )
-val () = g_print<a1>(t3.2)
-val () = t0up_print$end( )
-end // end of [g_print<t0up3>(t3)]
+val () = t0up_print$beg()
+val () = g_print<a0>(tup.0)
+val () = t0up_print$sep()
+val () = g_print<a1>(tup.1)
+val () = t0up_print$sep()
+val () = g_print<a2>(tup.2)
+val () = t0up_print$end((*nil*))
+end // end of [g_print<t0up3>(tup)]
 //
 (* ****** ****** *)
 //
@@ -71,18 +70,187 @@ end // end of [g_print<t0up3>(t3)]
 g_print
 <
 (a0,a1
-,a2,a3)>(t4) =
+,a2,a3)>(tup) =
 let
-val () = t0up_print$beg( )
-val () = g_print<a0>(t4.0)
-val () = t0up_print$sep( )
-val () = g_print<a1>(t4.1)
-val () = t0up_print$sep( )
-val () = g_print<a1>(t4.2)
-val () = t0up_print$sep( )
-val () = g_print<a1>(t4.3)
-val () = t0up_print$end( )
-end // end of [g_print<t0up>(t4)]
+val () = t0up_print$beg()
+val () = g_print<a0>(tup.0)
+val () = t0up_print$sep()
+val () = g_print<a1>(tup.1)
+val () = t0up_print$sep()
+val () = g_print<a2>(tup.2)
+val () = t0up_print$sep()
+val () = g_print<a3>(tup.3)
+val () = t0up_print$end((*nil*))
+end // end of [g_print<t0up4>(tup)]
+//
+(* ****** ****** *)
+//
+#impltmp
+{a0:t0
+,a1:t0
+,a2:t0
+,a3:t0
+,a4:t0}
+g_print
+<
+(a0
+,a1,a2
+,a3,a4)>(tup) =
+let
+val () = t0up_print$beg()
+val () = g_print<a0>(tup.0)
+val () = t0up_print$sep()
+val () = g_print<a1>(tup.1)
+val () = t0up_print$sep()
+val () = g_print<a2>(tup.2)
+val () = t0up_print$sep()
+val () = g_print<a3>(tup.3)
+val () = t0up_print$sep()
+val () = g_print<a4>(tup.4)
+val () = t0up_print$end((*nil*))
+end // end of [g_print<t0up5>(tup)]
+//
+(* ****** ****** *)
+//
+#impltmp
+{a0:t0
+,a1:t0
+,a2:t0
+,a3:t0
+,a4:t0
+,a5:t0}
+g_print
+<
+(a0,a1
+,a2,a3
+,a4,a5)>(tup) =
+let
+val () = t0up_print$beg()
+val () = g_print<a0>(tup.0)
+val () = t0up_print$sep()
+val () = g_print<a1>(tup.1)
+val () = t0up_print$sep()
+val () = g_print<a2>(tup.2)
+val () = t0up_print$sep()
+val () = g_print<a3>(tup.3)
+val () = t0up_print$sep()
+val () = g_print<a4>(tup.4)
+val () = t0up_print$sep()
+val () = g_print<a5>(tup.5)
+val () = t0up_print$end((*nil*))
+end // end of [g_print<t0up6>(tup)]
+//
+(* ****** ****** *)
+//
+#impltmp
+{a0:t0
+,a1:t0
+,a2:t0
+,a3:t0
+,a4:t0
+,a5:t0
+,a6:t0}
+g_print
+<
+(a0
+,a1,a2
+,a3,a4
+,a5,a6)>(tup) =
+let
+val () = t0up_print$beg()
+val () = g_print<a0>(tup.0)
+val () = t0up_print$sep()
+val () = g_print<a1>(tup.1)
+val () = t0up_print$sep()
+val () = g_print<a2>(tup.2)
+val () = t0up_print$sep()
+val () = g_print<a3>(tup.3)
+val () = t0up_print$sep()
+val () = g_print<a4>(tup.4)
+val () = t0up_print$sep()
+val () = g_print<a5>(tup.5)
+val () = t0up_print$sep()
+val () = g_print<a6>(tup.6)
+val () = t0up_print$end((*nil*))
+end // end of [g_print<t0up7>(tup)]
+//
+(* ****** ****** *)
+//
+#impltmp
+{a0:t0
+,a1:t0
+,a2:t0
+,a3:t0
+,a4:t0
+,a5:t0
+,a6:t0
+,a7:t0}
+g_print
+<
+(a0,a1
+,a2,a3
+,a4,a5
+,a6,a7)>(tup) =
+let
+val () = t0up_print$beg()
+val () = g_print<a0>(tup.0)
+val () = t0up_print$sep()
+val () = g_print<a1>(tup.1)
+val () = t0up_print$sep()
+val () = g_print<a2>(tup.2)
+val () = t0up_print$sep()
+val () = g_print<a3>(tup.3)
+val () = t0up_print$sep()
+val () = g_print<a4>(tup.4)
+val () = t0up_print$sep()
+val () = g_print<a5>(tup.5)
+val () = t0up_print$sep()
+val () = g_print<a6>(tup.6)
+val () = t0up_print$sep()
+val () = g_print<a7>(tup.7)
+val () = t0up_print$end((*nil*))
+end // end of [g_print<t0up8>(tup)]
+//
+(* ****** ****** *)
+//
+#impltmp
+{a0:t0
+,a1:t0
+,a2:t0
+,a3:t0
+,a4:t0
+,a5:t0
+,a6:t0
+,a8:t0
+,a7:t0}
+g_print
+<
+(a0
+,a1,a2
+,a3,a4
+,a5,a6
+,a7,a8)>(tup) =
+let
+val () = t0up_print$beg()
+val () = g_print<a0>(tup.0)
+val () = t0up_print$sep()
+val () = g_print<a1>(tup.1)
+val () = t0up_print$sep()
+val () = g_print<a2>(tup.2)
+val () = t0up_print$sep()
+val () = g_print<a3>(tup.3)
+val () = t0up_print$sep()
+val () = g_print<a4>(tup.4)
+val () = t0up_print$sep()
+val () = g_print<a5>(tup.5)
+val () = t0up_print$sep()
+val () = g_print<a6>(tup.6)
+val () = t0up_print$sep()
+val () = g_print<a7>(tup.7)
+val () = t0up_print$sep()
+val () = g_print<a8>(tup.8)
+val () = t0up_print$end((*nil*))
+end // end of [g_print<t0up9>(tup)]
 //
 (* ****** ****** *)
 //
@@ -99,12 +267,12 @@ gl_print for flat/boxed tuples
 gl_print1
 <
 t1up1
-( a0 )>(t1) =
+( a0 )>(tup) =
 let
-val () = t1up_print$beg(   )
-val () = gl_print1<a0>(t1.0)
-val () = t1up_print$end(   )
-end // end of [gl_print1<t1up1>(t1)]
+val () = t1up_print$beg()
+val () = gl_print1<a0>(tup.0)
+val () = t1up_print$end((*nil*))
+end // end of [gl_print1<t1up1>(tup)]
 //
 (* ****** ****** *)
 //
@@ -114,14 +282,14 @@ end // end of [gl_print1<t1up1>(t1)]
 gl_print1
 <
 t0up2
-(a0,a1)>(t2) =
+(a0,a1)>(tup) =
 let
-val () = t0up_print$beg(   )
-val () = gl_print1<a0>(t2.0)
-val () = t0up_print$sep(   )
-val () = gl_print1<a1>(t2.1)
-val () = t0up_print$end(   )
-end // end of [gl_print1<t0up2>(t2)]
+val () = t0up_print$beg()
+val () = gl_print1<a0>(tup.0)
+val () = t0up_print$sep()
+val () = gl_print1<a1>(tup.1)
+val () = t0up_print$end((*nil*))
+end // end of [gl_print1<t0up2>(tup)]
 //
 #impltmp
 {a0:vt
@@ -129,14 +297,14 @@ end // end of [gl_print1<t0up2>(t2)]
 gl_print1
 <
 t1up2
-(a0,a1)>(t2) =
+(a0,a1)>(tup) =
 let
-val () = t1up_print$beg(   )
-val () = gl_print1<a0>(t2.0)
-val () = t1up_print$sep(   )
-val () = gl_print1<a1>(t2.1)
-val () = t1up_print$end(   )
-end // end of [gl_print1<t1up2>(t2)]
+val () = t1up_print$beg()
+val () = gl_print1<a0>(tup.0)
+val () = t1up_print$sep()
+val () = gl_print1<a1>(tup.1)
+val () = t1up_print$end((*nil*))
+end // end of [gl_print1<t1up2>(tup)]
 //
 (* ****** ****** *)
 //
@@ -147,16 +315,17 @@ end // end of [gl_print1<t1up2>(t2)]
 gl_print1
 <
 t0up3
-(a0,a1,a2)>(t3) =
+(a0
+,a1,a2)>(tup) =
 let
 val () = t0up_print$beg(   )
-val () = gl_print1<a0>(t3.0)
+val () = gl_print1<a0>(tup.0)
 val () = t0up_print$sep(   )
-val () = gl_print1<a1>(t3.1)
+val () = gl_print1<a1>(tup.1)
 val () = t0up_print$sep(   )
-val () = gl_print1<a2>(t3.2)
-val () = t0up_print$end(   )
-end // end of [gl_print1<t0up3>(t3)]
+val () = gl_print1<a2>(tup.2)
+val () = t0up_print$end((*nil*))
+end // end of [gl_print1<t0up3>(tup)]
 //
 #impltmp
 {a0:vt
@@ -165,16 +334,401 @@ end // end of [gl_print1<t0up3>(t3)]
 gl_print1
 <
 t1up3
-(a0,a1,a2)>(t3) =
+(a0
+,a1,a2)>(tup) =
 let
-val () = t1up_print$beg(   )
-val () = gl_print1<a0>(t3.0)
-val () = t1up_print$sep(   )
-val () = gl_print1<a1>(t3.1)
-val () = t1up_print$sep(   )
-val () = gl_print1<a2>(t3.2)
-val () = t1up_print$end(   )
-end // end of [gl_print1<t1up3>(t3)]
+val () = t1up_print$beg()
+val () = gl_print1<a0>(tup.0)
+val () = t1up_print$sep()
+val () = gl_print1<a1>(tup.1)
+val () = t1up_print$sep()
+val () = gl_print1<a2>(tup.2)
+val () = t1up_print$end((*nil*))
+end // end of [gl_print1<t1up3>(tup)]
+//
+(* ****** ****** *)
+//
+#impltmp
+{a0:vt
+,a1:vt
+,a2:vt
+,a3:vt}
+gl_print1
+<
+t0up4
+(a0,a1
+,a2,a3)>(tup) =
+let
+val () = t0up_print$beg()
+val () = gl_print1<a0>(tup.0)
+val () = t0up_print$sep()
+val () = gl_print1<a1>(tup.1)
+val () = t0up_print$sep()
+val () = gl_print1<a2>(tup.2)
+val () = t0up_print$sep()
+val () = gl_print1<a3>(tup.3)
+val () = t0up_print$end((*nil*))
+end // end of [gl_print1<t0up3>(tup)]
+//
+#impltmp
+{a0:vt
+,a1:vt
+,a2:vt
+,a3:vt}
+gl_print1
+<
+t1up4
+(a0,a1
+,a2,a3)>(tup) =
+let
+val () = t1up_print$beg()
+val () = gl_print1<a0>(tup.0)
+val () = t1up_print$sep()
+val () = gl_print1<a1>(tup.1)
+val () = t1up_print$sep()
+val () = gl_print1<a2>(tup.2)
+val () = t1up_print$sep()
+val () = gl_print1<a3>(tup.3)
+val () = t1up_print$end((*nil*))
+end // end of [gl_print1<t1up3>(tup)]
+//
+(* ****** ****** *)
+//
+#impltmp
+{a0:vt
+,a1:vt
+,a2:vt
+,a3:vt
+,a4:vt}
+gl_print1
+<
+t0up5
+(a0
+,a1,a2
+,a3,a4)>(tup) =
+let
+val () = t0up_print$beg()
+val () = gl_print1<a0>(tup.0)
+val () = t0up_print$sep()
+val () = gl_print1<a1>(tup.1)
+val () = t0up_print$sep()
+val () = gl_print1<a2>(tup.2)
+val () = t0up_print$sep()
+val () = gl_print1<a3>(tup.3)
+val () = t0up_print$sep()
+val () = gl_print1<a4>(tup.4)
+val () = t0up_print$end((*nil*))
+end // end of [gl_print1<t0up5>(tup)]
+//
+#impltmp
+{a0:vt
+,a1:vt
+,a2:vt
+,a3:vt
+,a4:vt}
+gl_print1
+<
+t1up5
+(a0
+,a1,a2
+,a3,a4)>(tup) =
+let
+val () = t1up_print$beg()
+val () = gl_print1<a0>(tup.0)
+val () = t1up_print$sep()
+val () = gl_print1<a1>(tup.1)
+val () = t1up_print$sep()
+val () = gl_print1<a2>(tup.2)
+val () = t1up_print$sep()
+val () = gl_print1<a3>(tup.3)
+val () = t1up_print$sep()
+val () = gl_print1<a4>(tup.4)
+val () = t1up_print$end((*nil*))
+end // end of [gl_print1<t1up5>(tup)]
+//
+(* ****** ****** *)
+//
+#impltmp
+{a0:vt
+,a1:vt
+,a2:vt
+,a3:vt
+,a4:vt
+,a5:vt}
+gl_print1
+<
+t0up6
+(a0,a1
+,a2,a3
+,a4,a5)>(tup) =
+let
+val () = t0up_print$beg()
+val () = gl_print1<a0>(tup.0)
+val () = t0up_print$sep()
+val () = gl_print1<a1>(tup.1)
+val () = t0up_print$sep()
+val () = gl_print1<a2>(tup.2)
+val () = t0up_print$sep()
+val () = gl_print1<a3>(tup.3)
+val () = t0up_print$sep()
+val () = gl_print1<a4>(tup.4)
+val () = t0up_print$sep()
+val () = gl_print1<a5>(tup.5)
+val () = t0up_print$end((*nil*))
+end // end of [gl_print1<t0up6>(tup)]
+//
+#impltmp
+{a0:vt
+,a1:vt
+,a2:vt
+,a3:vt
+,a4:vt
+,a5:vt}
+gl_print1
+<
+t1up6
+(a0,a1
+,a2,a3
+,a4,a5)>(tup) =
+let
+val () = t1up_print$beg()
+val () = gl_print1<a0>(tup.0)
+val () = t1up_print$sep()
+val () = gl_print1<a1>(tup.1)
+val () = t1up_print$sep()
+val () = gl_print1<a2>(tup.2)
+val () = t1up_print$sep()
+val () = gl_print1<a3>(tup.3)
+val () = t1up_print$sep()
+val () = gl_print1<a4>(tup.4)
+val () = t1up_print$sep()
+val () = gl_print1<a5>(tup.5)
+val () = t1up_print$end((*nil*))
+end // end of [gl_print1<t1up6>(tup)]
+//
+(* ****** ****** *)
+//
+#impltmp
+{a0:vt
+,a1:vt
+,a2:vt
+,a3:vt
+,a4:vt
+,a5:vt
+,a6:vt}
+gl_print1
+<
+t0up7
+(a0
+,a1,a2
+,a3,a4
+,a5,a6)>(tup) =
+let
+val () = t0up_print$beg()
+val () = gl_print1<a0>(tup.0)
+val () = t0up_print$sep()
+val () = gl_print1<a1>(tup.1)
+val () = t0up_print$sep()
+val () = gl_print1<a2>(tup.2)
+val () = t0up_print$sep()
+val () = gl_print1<a3>(tup.3)
+val () = t0up_print$sep()
+val () = gl_print1<a4>(tup.4)
+val () = t0up_print$sep()
+val () = gl_print1<a5>(tup.5)
+val () = t0up_print$sep()
+val () = gl_print1<a6>(tup.6)
+val () = t0up_print$end((*nil*))
+end // end of [gl_print1<t0up7>(tup)]
+//
+#impltmp
+{a0:vt
+,a1:vt
+,a2:vt
+,a3:vt
+,a4:vt
+,a5:vt
+,a6:vt}
+gl_print1
+<
+t1up7
+(a0
+,a1,a2
+,a3,a4
+,a5,a6)>(tup) =
+let
+val () = t1up_print$beg()
+val () = gl_print1<a0>(tup.0)
+val () = t1up_print$sep()
+val () = gl_print1<a1>(tup.1)
+val () = t1up_print$sep()
+val () = gl_print1<a2>(tup.2)
+val () = t1up_print$sep()
+val () = gl_print1<a3>(tup.3)
+val () = t1up_print$sep()
+val () = gl_print1<a4>(tup.4)
+val () = t1up_print$sep()
+val () = gl_print1<a5>(tup.5)
+val () = t1up_print$sep()
+val () = gl_print1<a6>(tup.6)
+val () = t1up_print$end((*nil*))
+end // end of [gl_print1<t1up7>(tup)]
+//
+(* ****** ****** *)
+//
+#impltmp
+{a0:vt
+,a1:vt
+,a2:vt
+,a3:vt
+,a4:vt
+,a5:vt
+,a6:vt
+,a7:vt}
+gl_print1
+<
+t1up8
+(a0,a1
+,a2,a3
+,a4,a5
+,a6,a7)>(tup) =
+let
+val () = t1up_print$beg()
+val () = gl_print1<a0>(tup.0)
+val () = t1up_print$sep()
+val () = gl_print1<a1>(tup.1)
+val () = t1up_print$sep()
+val () = gl_print1<a2>(tup.2)
+val () = t1up_print$sep()
+val () = gl_print1<a3>(tup.3)
+val () = t1up_print$sep()
+val () = gl_print1<a4>(tup.4)
+val () = t1up_print$sep()
+val () = gl_print1<a5>(tup.5)
+val () = t1up_print$sep()
+val () = gl_print1<a6>(tup.6)
+val () = t1up_print$sep()
+val () = gl_print1<a7>(tup.7)
+val () = t1up_print$end((*nil*))
+end // end of [gl_print1<t1up8>(tup)]
+//
+#impltmp
+{a0:vt
+,a1:vt
+,a2:vt
+,a3:vt
+,a4:vt
+,a5:vt
+,a6:vt
+,a7:vt}
+gl_print1
+<
+t1up8
+(a0,a1
+,a2,a3
+,a4,a5
+,a6,a7)>(tup) =
+let
+val () = t1up_print$beg()
+val () = gl_print1<a0>(tup.0)
+val () = t1up_print$sep()
+val () = gl_print1<a1>(tup.1)
+val () = t1up_print$sep()
+val () = gl_print1<a2>(tup.2)
+val () = t1up_print$sep()
+val () = gl_print1<a3>(tup.3)
+val () = t1up_print$sep()
+val () = gl_print1<a4>(tup.4)
+val () = t1up_print$sep()
+val () = gl_print1<a5>(tup.5)
+val () = t1up_print$sep()
+val () = gl_print1<a6>(tup.6)
+val () = t1up_print$sep()
+val () = gl_print1<a7>(tup.7)
+val () = t1up_print$end((*nil*))
+end // end of [gl_print1<t1up8>(tup)]
+//
+(* ****** ****** *)
+//
+#impltmp
+{a0:vt
+,a1:vt
+,a2:vt
+,a3:vt
+,a4:vt
+,a5:vt
+,a6:vt
+,a7:vt
+,a8:vt}
+gl_print1
+<
+t1up9
+(a0
+,a1,a2
+,a3,a4
+,a5,a6
+,a7,a8)>(tup) =
+let
+val () = t1up_print$beg()
+val () = gl_print1<a0>(tup.0)
+val () = t1up_print$sep()
+val () = gl_print1<a1>(tup.1)
+val () = t1up_print$sep()
+val () = gl_print1<a2>(tup.2)
+val () = t1up_print$sep()
+val () = gl_print1<a3>(tup.3)
+val () = t1up_print$sep()
+val () = gl_print1<a4>(tup.4)
+val () = t1up_print$sep()
+val () = gl_print1<a5>(tup.5)
+val () = t1up_print$sep()
+val () = gl_print1<a6>(tup.6)
+val () = t1up_print$sep()
+val () = gl_print1<a7>(tup.7)
+val () = t1up_print$sep()
+val () = gl_print1<a8>(tup.8)
+val () = t1up_print$end((*nil*))
+end // end of [gl_print1<t1up9>(tup)]
+//
+#impltmp
+{a0:vt
+,a1:vt
+,a2:vt
+,a3:vt
+,a4:vt
+,a5:vt
+,a6:vt
+,a7:vt
+,a8:vt}
+gl_print1
+<
+t1up9
+(a0
+,a1,a2
+,a3,a4
+,a5,a6
+,a7,a8)>(tup) =
+let
+val () = t1up_print$beg()
+val () = gl_print1<a0>(tup.0)
+val () = t1up_print$sep()
+val () = gl_print1<a1>(tup.1)
+val () = t1up_print$sep()
+val () = gl_print1<a2>(tup.2)
+val () = t1up_print$sep()
+val () = gl_print1<a3>(tup.3)
+val () = t1up_print$sep()
+val () = gl_print1<a4>(tup.4)
+val () = t1up_print$sep()
+val () = gl_print1<a5>(tup.5)
+val () = t1up_print$sep()
+val () = gl_print1<a6>(tup.6)
+val () = t1up_print$sep()
+val () = gl_print1<a7>(tup.7)
+val () = t1up_print$sep()
+val () = gl_print1<a8>(tup.8)
+val () = t1up_print$end((*nil*))
+end // end of [gl_print1<t1up9>(tup)]
 //
 (* ****** ****** *)
 
