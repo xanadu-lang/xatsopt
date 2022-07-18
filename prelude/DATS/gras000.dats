@@ -18,5 +18,11 @@ gras_get_at_opt<xs><x0>(xs, i0)
 } (*where*) // end of [gras_get_at]
 
 (* ****** ****** *)
+(*
+#impltmp
+<xs><x0>
+gras_rstrmize = gseq_rstrmize<xs><x0>
+*)
+(* ****** ****** *)
 
 (* end of [ATS3/XANADU_prelude_gras000.dats] *)

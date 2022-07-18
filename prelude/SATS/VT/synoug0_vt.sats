@@ -56,6 +56,117 @@ optn_vt with optn_vt_a00
 optn_vt with optn_vt_a01
 //
 (* ****** ****** *)
+//
+(*
+HX-2022-07-05:
+Tue Jul  5 20:35:51 EDT 2022
+*)
+//
+fun
+<a0:vt>
+list_vt_a00
+(      ): list_vt(a0, 0)
+fun
+<a0:vt>
+list_vt_a01
+(x1: a0): list_vt(a0, 1)
+fun
+<a0:vt>
+list_vt_a02
+(x1: a0
+,x2: a0): list_vt(a0, 2)
+fun
+<a0:vt>
+list_vt_a03
+(x1: a0
+,x2: a0
+,x3: a0): list_vt(a0, 3)
+fun
+<a0:vt>
+list_vt_a04
+(x1: a0
+,x2: a0
+,x3: a0
+,x4: a0): list_vt(a0, 4)
+fun
+<a0:vt>
+list_vt_a05
+(x1: a0
+,x2: a0
+,x3: a0
+,x4: a0
+,x5: a0): list_vt(a0, 5)
+fun
+<a0:vt>
+list_vt_a06
+(x1: a0
+,x2: a0
+,x3: a0
+,x4: a0
+,x5: a0
+,x6: a0): list_vt(a0, 6)
+fun
+<a0:vt>
+list_vt_a07
+(x1: a0
+,x2: a0
+,x3: a0
+,x4: a0
+,x5: a0
+,x6: a0
+,x7: a0): list_vt(a0, 7)
+fun
+<a0:vt>
+list_vt_a08
+(x1: a0
+,x2: a0
+,x3: a0
+,x4: a0
+,x5: a0
+,x6: a0
+,x7: a0
+,x8: a0): list_vt(a0, 8)
+fun
+<a0:vt>
+list_vt_a09
+(x1: a0
+,x2: a0
+,x3: a0
+,x4: a0
+,x5: a0
+,x6: a0
+,x7: a0
+,x8: a0
+,x9: a0): list_vt(a0, 9)
+fun
+<a0:vt>
+list_vt_a10
+(x01: a0
+,x02: a0
+,x03: a0
+,x04: a0
+,x05: a0
+,x06: a0
+,x07: a0
+,x08: a0
+,x09: a0
+,x10: a0): list_vt(a0, 10)
+//
+(* ****** ****** *)
+//
+#symload list_vt with list_vt_a00
+#symload list_vt with list_vt_a01
+#symload list_vt with list_vt_a02
+#symload list_vt with list_vt_a03
+#symload list_vt with list_vt_a04
+#symload list_vt with list_vt_a05
+#symload list_vt with list_vt_a06
+#symload list_vt with list_vt_a07
+#symload list_vt with list_vt_a08
+#symload list_vt with list_vt_a09
+#symload list_vt with list_vt_a10
+//
+(* ****** ****** *)
 //HX:
 //implementing fproc0/1
 (* ****** ****** *)
@@ -71,23 +182,23 @@ gl_fproc1(x0: !a0): void
 //
 (*
 fun<>
-fproc0_a00
+glfproc0_a00
 ((*void*)) : void
 *)
 fun
 <a1:vt>
-fproc0_a01
+glfproc0_a01
 ( x1: ~a1 ) : void
 fun
 <a1:vt>
 <a2:vt>
-fproc0_a02
+glfproc0_a02
 ( x1: ~a1, x2: ~a2 ) : void
 fun
 <a1:vt>
 <a2:vt>
 <a3:vt>
-fproc0_a03
+glfproc0_a03
 ( x1: ~a1
 , x2: ~a2, x3: ~a3 ) : void
 fun
@@ -95,7 +206,7 @@ fun
 <a2:vt>
 <a3:vt>
 <a4:vt>
-fproc0_a04
+glfproc0_a04
 ( x1: ~a1, x2: ~a2
 , x3: ~a3, x4: ~a4 ) : void
 fun
@@ -104,7 +215,7 @@ fun
 <a3:vt>
 <a4:vt>
 <a5:vt>
-fproc0_a05
+glfproc0_a05
 ( x1: ~a1
 , x2: ~a2, x3: ~a3
 , x4: ~a4, x5: ~a5 ) : void
@@ -115,7 +226,7 @@ fun
 <a4:vt>
 <a5:vt>
 <a6:vt>
-fproc0_a06
+glfproc0_a06
 ( x1: ~a1, x2: ~a2
 , x3: ~a3, x4: ~a4
 , x5: ~a5, x6: ~a6 ) : void
@@ -127,7 +238,7 @@ fun
 <a5:vt>
 <a6:vt>
 <a7:vt>
-fproc0_a07
+glfproc0_a07
 ( x1: ~a1
 , x2: ~a2, x3: ~a3
 , x4: ~a4, x5: ~a5
@@ -141,7 +252,7 @@ fun
 <a6:vt>
 <a7:vt>
 <a8:vt>
-fproc0_a08
+glfproc0_a08
 ( x1: ~a1, x2: ~a2
 , x3: ~a3, x4: ~a4
 , x5: ~a5, x6: ~a6
@@ -156,7 +267,7 @@ fun
 <a7:vt>
 <a8:vt>
 <a9:vt>
-fproc0_a09
+glfproc0_a09
 ( x1: ~a1
 , x2: ~a2, x3: ~a3
 , x4: ~a4, x5: ~a5
@@ -173,7 +284,7 @@ fun
 <a08:vt>
 <a09:vt>
 <a10:vt>
-fproc0_a10
+glfproc0_a10
 ( x01: ~a01, x02: ~a02
 , x03: ~a03, x04: ~a04
 , x05: ~a05, x06: ~a06
@@ -181,38 +292,38 @@ fproc0_a10
 , x09: ~a09, x10: ~a10 ) : void
 (* ****** ****** *)
 //
-#symload fproc0 with fproc0_a01
-#symload fproc0 with fproc0_a02
-#symload fproc0 with fproc0_a03
-#symload fproc0 with fproc0_a04
-#symload fproc0 with fproc0_a05
-#symload fproc0 with fproc0_a06
-#symload fproc0 with fproc0_a07
-#symload fproc0 with fproc0_a08
-#symload fproc0 with fproc0_a09
-#symload fproc0 with fproc0_a10
+#symload glfproc0 with glfproc0_a01
+#symload glfproc0 with glfproc0_a02
+#symload glfproc0 with glfproc0_a03
+#symload glfproc0 with glfproc0_a04
+#symload glfproc0 with glfproc0_a05
+#symload glfproc0 with glfproc0_a06
+#symload glfproc0 with glfproc0_a07
+#symload glfproc0 with glfproc0_a08
+#symload glfproc0 with glfproc0_a09
+#symload glfproc0 with glfproc0_a10
 //
 (* ****** ****** *)
 //
 (*
 fun<>
-fproc1_a00
+glfproc1_a00
 ((*void*)) : void
 *)
 fun
 <a1:vt>
-fproc1_a01
+glfproc1_a01
 ( x1: !a1 ) : void
 fun
 <a1:vt>
 <a2:vt>
-fproc1_a02
+glfproc1_a02
 ( x1: !a1, x2: !a2 ) : void
 fun
 <a1:vt>
 <a2:vt>
 <a3:vt>
-fproc1_a03
+glfproc1_a03
 ( x1: !a1
 , x2: !a2, x3: !a3 ) : void
 fun
@@ -220,7 +331,7 @@ fun
 <a2:vt>
 <a3:vt>
 <a4:vt>
-fproc1_a04
+glfproc1_a04
 ( x1: !a1, x2: !a2
 , x3: !a3, x4: !a4 ) : void
 fun
@@ -229,7 +340,7 @@ fun
 <a3:vt>
 <a4:vt>
 <a5:vt>
-fproc1_a05
+glfproc1_a05
 ( x1: !a1
 , x2: !a2, x3: !a3
 , x4: !a4, x5: !a5 ) : void
@@ -240,7 +351,7 @@ fun
 <a4:vt>
 <a5:vt>
 <a6:vt>
-fproc1_a06
+glfproc1_a06
 ( x1: !a1, x2: !a2
 , x3: !a3, x4: !a4
 , x5: !a5, x6: !a6 ) : void
@@ -252,7 +363,7 @@ fun
 <a5:vt>
 <a6:vt>
 <a7:vt>
-fproc1_a07
+glfproc1_a07
 ( x1: !a1
 , x2: !a2, x3: !a3
 , x4: !a4, x5: !a5
@@ -266,7 +377,7 @@ fun
 <a6:vt>
 <a7:vt>
 <a8:vt>
-fproc1_a08
+glfproc1_a08
 ( x1: !a1, x2: !a2
 , x3: !a3, x4: !a4
 , x5: !a5, x6: !a6
@@ -281,7 +392,7 @@ fun
 <a7:vt>
 <a8:vt>
 <a9:vt>
-fproc1_a09
+glfproc1_a09
 ( x1: !a1
 , x2: !a2, x3: !a3
 , x4: !a4, x5: !a5
@@ -298,7 +409,7 @@ fun
 <a08:vt>
 <a09:vt>
 <a10:vt>
-fproc1_a10
+glfproc1_a10
 ( x01: !a01, x02: !a02
 , x03: !a03, x04: !a04
 , x05: !a05, x06: !a06
@@ -306,16 +417,266 @@ fproc1_a10
 , x09: !a09, x10: !a10 ) : void
 (* ****** ****** *)
 //
-#symload fproc1 with fproc1_a01
-#symload fproc1 with fproc1_a02
-#symload fproc1 with fproc1_a03
-#symload fproc1 with fproc1_a04
-#symload fproc1 with fproc1_a05
-#symload fproc1 with fproc1_a06
-#symload fproc1 with fproc1_a07
-#symload fproc1 with fproc1_a08
-#symload fproc1 with fproc1_a09
-#symload fproc1 with fproc1_a10
+#symload glfproc1 with glfproc1_a01
+#symload glfproc1 with glfproc1_a02
+#symload glfproc1 with glfproc1_a03
+#symload glfproc1 with glfproc1_a04
+#symload glfproc1 with glfproc1_a05
+#symload glfproc1 with glfproc1_a06
+#symload glfproc1 with glfproc1_a07
+#symload glfproc1 with glfproc1_a08
+#symload glfproc1 with glfproc1_a09
+#symload glfproc1 with glfproc1_a10
+//
+(* ****** ****** *)
+//
+//HX:
+//implementing fred2
+//
+(* ****** ****** *)
+//
+fun
+<a0:vt>
+gl_fred20(~a0, ~a0): a0
+fun
+<a0:vt>
+gl_fred21(!a0, !a0): a0
+//
+(* ****** ****** *)
+fun
+<a0:vt>
+glfred2l0_a02
+(x1: ~a0, x2: ~a0): a0
+fun
+<a0:vt>
+glfred2l0_a03
+( x1: ~a0
+, x2: ~a0, x3: ~a0): a0
+fun
+<a0:vt>
+glfred2l0_a04
+( x1: ~a0, x2: ~a0
+, x3: ~a0, x4: ~a0): a0
+fun
+<a0:vt>
+glfred2l0_a05
+( x1: ~a0
+, x2: ~a0, x3: ~a0
+, x4: ~a0, x5: ~a0): a0
+fun
+<a0:vt>
+glfred2l0_a06
+( x1: ~a0, x2: ~a0
+, x3: ~a0, x4: ~a0
+, x5: ~a0, x6: ~a0): a0
+fun
+<a0:vt>
+glfred2l0_a07
+( x1: ~a0
+, x2: ~a0, x3: ~a0
+, x4: ~a0, x5: ~a0
+, x6: ~a0, x7: ~a0): a0
+fun
+<a0:vt>
+glfred2l0_a08
+( x1: ~a0, x2: ~a0
+, x3: ~a0, x4: ~a0
+, x5: ~a0, x6: ~a0
+, x7: ~a0, x8: ~a0): a0
+fun
+<a0:vt>
+glfred2l0_a09
+( x1: ~a0
+, x2: ~a0, x3: ~a0
+, x4: ~a0, x5: ~a0
+, x6: ~a0, x7: ~a0
+, x8: ~a0, x9: ~a0): a0
+//
+fun
+<a0:vt>
+glfred2l0_a10
+( x01: ~a0, x02: ~a0
+, x03: ~a0, x04: ~a0
+, x05: ~a0, x06: ~a0
+, x07: ~a0, x08: ~a0
+, x09: ~a0, x10: ~a0): a0
+//
+(* ****** ****** *)
+fun
+<a0:vt>
+glfred2l1_a02
+(x1: !a0, x2: !a0): a0
+fun
+<a0:vt>
+glfred2l1_a03
+( x1: !a0
+, x2: !a0, x3: !a0): a0
+fun
+<a0:vt>
+glfred2l1_a04
+( x1: !a0, x2: !a0
+, x3: !a0, x4: !a0): a0
+fun
+<a0:vt>
+glfred2l1_a05
+( x1: !a0
+, x2: !a0, x3: !a0
+, x4: !a0, x5: !a0): a0
+fun
+<a0:vt>
+glfred2l1_a06
+( x1: !a0, x2: !a0
+, x3: !a0, x4: !a0
+, x5: !a0, x6: !a0): a0
+fun
+<a0:vt>
+glfred2l1_a07
+( x1: !a0
+, x2: !a0, x3: !a0
+, x4: !a0, x5: !a0
+, x6: !a0, x7: !a0): a0
+fun
+<a0:vt>
+glfred2l1_a08
+( x1: !a0, x2: !a0
+, x3: !a0, x4: !a0
+, x5: !a0, x6: !a0
+, x7: !a0, x8: !a0): a0
+fun
+<a0:vt>
+glfred2l1_a09
+( x1: !a0
+, x2: !a0, x3: !a0
+, x4: !a0, x5: !a0
+, x6: !a0, x7: !a0
+, x8: !a0, x9: !a0): a0
+//
+fun
+<a0:vt>
+glfred2l1_a10
+( x01: !a0, x02: !a0
+, x03: !a0, x04: !a0
+, x05: !a0, x06: !a0
+, x07: !a0, x08: !a0
+, x09: !a0, x10: !a0): a0
+//
+(* ****** ****** *)
+fun
+<a0:vt>
+glfred2r0_a02
+(x1: ~a0, x2: ~a0): a0
+fun
+<a0:vt>
+glfred2r0_a03
+( x1: ~a0
+, x2: ~a0, x3: ~a0): a0
+fun
+<a0:vt>
+glfred2r0_a04
+( x1: ~a0, x2: ~a0
+, x3: ~a0, x4: ~a0): a0
+fun
+<a0:vt>
+glfred2r0_a05
+( x1: ~a0
+, x2: ~a0, x3: ~a0
+, x4: ~a0, x5: ~a0): a0
+fun
+<a0:vt>
+glfred2r0_a06
+( x1: ~a0, x2: ~a0
+, x3: ~a0, x4: ~a0
+, x5: ~a0, x6: ~a0): a0
+fun
+<a0:vt>
+glfred2r0_a07
+( x1: ~a0
+, x2: ~a0, x3: ~a0
+, x4: ~a0, x5: ~a0
+, x6: ~a0, x7: ~a0): a0
+fun
+<a0:vt>
+glfred2r0_a08
+( x1: ~a0, x2: ~a0
+, x3: ~a0, x4: ~a0
+, x5: ~a0, x6: ~a0
+, x7: ~a0, x8: ~a0): a0
+fun
+<a0:vt>
+glfred2r0_a09
+( x1: ~a0
+, x2: ~a0, x3: ~a0
+, x4: ~a0, x5: ~a0
+, x6: ~a0, x7: ~a0
+, x8: ~a0, x9: ~a0): a0
+//
+fun
+<a0:vt>
+glfred2r0_a10
+( x01: ~a0, x02: ~a0
+, x03: ~a0, x04: ~a0
+, x05: ~a0, x06: ~a0
+, x07: ~a0, x08: ~a0
+, x09: ~a0, x10: ~a0): a0
+//
+(* ****** ****** *)
+fun
+<a0:vt>
+glfred2r1_a02
+(x1: !a0, x2: !a0): a0
+fun
+<a0:vt>
+glfred2r1_a03
+( x1: !a0
+, x2: !a0, x3: !a0): a0
+fun
+<a0:vt>
+glfred2r1_a04
+( x1: !a0, x2: !a0
+, x3: !a0, x4: !a0): a0
+fun
+<a0:vt>
+glfred2r1_a05
+( x1: !a0
+, x2: !a0, x3: !a0
+, x4: !a0, x5: !a0): a0
+fun
+<a0:vt>
+glfred2r1_a06
+( x1: !a0, x2: !a0
+, x3: !a0, x4: !a0
+, x5: !a0, x6: !a0): a0
+fun
+<a0:vt>
+glfred2r1_a07
+( x1: !a0
+, x2: !a0, x3: !a0
+, x4: !a0, x5: !a0
+, x6: !a0, x7: !a0): a0
+fun
+<a0:vt>
+glfred2r1_a08
+( x1: !a0, x2: !a0
+, x3: !a0, x4: !a0
+, x5: !a0, x6: !a0
+, x7: !a0, x8: !a0): a0
+fun
+<a0:vt>
+glfred2r1_a09
+( x1: !a0
+, x2: !a0, x3: !a0
+, x4: !a0, x5: !a0
+, x6: !a0, x7: !a0
+, x8: !a0, x9: !a0): a0
+//
+fun
+<a0:vt>
+glfred2r1_a10
+( x01: !a0, x02: !a0
+, x03: !a0, x04: !a0
+, x05: !a0, x06: !a0
+, x07: !a0, x08: !a0
+, x09: !a0, x10: !a0): a0
 //
 (* ****** ****** *)
 //
@@ -421,6 +782,24 @@ print0_a09
 , x6: ~a6, x7: ~a7
 , x8: ~a8, x9: ~a9 ) : void
 (* ****** ****** *)
+fun
+<a01:vt>
+<a02:vt>
+<a03:vt>
+<a04:vt>
+<a05:vt>
+<a06:vt>
+<a07:vt>
+<a08:vt>
+<a09:vt>
+<a10:vt>
+print0_a10
+(x01: ~a01, x02: ~a02
+,x03: ~a03, x04: ~a04
+,x05: ~a05, x06: ~a06
+,x07: ~a07, x08: ~a08
+,x09: ~a09, x10: ~a10) : void
+(* ****** ****** *)
 //
 #symload print0 with print0_a01
 #symload print0 with print0_a02
@@ -431,6 +810,7 @@ print0_a09
 #symload print0 with print0_a07
 #symload print0 with print0_a08
 #symload print0 with print0_a09
+#symload print0 with print0_a10
 //
 (* ****** ****** *)
 //
@@ -526,6 +906,24 @@ println0_a09
 , x6: ~a6, x7: ~a7
 , x8: ~a8, x9: ~a9 ) : void
 (* ****** ****** *)
+fun
+<a01:vt>
+<a02:vt>
+<a03:vt>
+<a04:vt>
+<a05:vt>
+<a06:vt>
+<a07:vt>
+<a08:vt>
+<a09:vt>
+<a10:vt>
+println0_a10
+(x01: ~a01, x02: ~a02
+,x03: ~a03, x04: ~a04
+,x05: ~a05, x06: ~a06
+,x07: ~a07, x08: ~a08
+,x09: ~a09, x10: ~a10) : void
+(* ****** ****** *)
 //
 #symload println0 with println0_a00
 #symload println0 with println0_a01
@@ -537,6 +935,7 @@ println0_a09
 #symload println0 with println0_a07
 #symload println0 with println0_a08
 #symload println0 with println0_a09
+#symload println0 with println0_a10
 //
 (* ****** ****** *)
 //
@@ -642,6 +1041,24 @@ print1_a09
 , x6: !a6, x7: !a7
 , x8: !a8, x9: !a9 ) : void
 (* ****** ****** *)
+fun
+<a01:vt>
+<a02:vt>
+<a03:vt>
+<a04:vt>
+<a05:vt>
+<a06:vt>
+<a07:vt>
+<a08:vt>
+<a09:vt>
+<a10:vt>
+print1_a10
+(x01: !a01, x02: !a02
+,x03: !a03, x04: !a04
+,x05: !a05, x06: !a06
+,x07: !a07, x08: !a08
+,x09: !a09, x10: !a10) : void
+(* ****** ****** *)
 //
 #symload print1 with print1_a01
 #symload print1 with print1_a02
@@ -652,6 +1069,7 @@ print1_a09
 #symload print1 with print1_a07
 #symload print1 with print1_a08
 #symload print1 with print1_a09
+#symload print1 with print1_a10
 //
 (* ****** ****** *)
 //
@@ -747,6 +1165,24 @@ println1_a09
 , x6: !a6, x7: !a7
 , x8: !a8, x9: !a9 ) : void
 (* ****** ****** *)
+fun
+<a01:vt>
+<a02:vt>
+<a03:vt>
+<a04:vt>
+<a05:vt>
+<a06:vt>
+<a07:vt>
+<a08:vt>
+<a09:vt>
+<a10:vt>
+println1_a10
+(x01: !a01, x02: !a02
+,x03: !a03, x04: !a04
+,x05: !a05, x06: !a06
+,x07: !a07, x08: !a08
+,x09: !a09, x10: !a10) : void
+(* ****** ****** *)
 //
 #symload println1 with println1_a00
 #symload println1 with println1_a01
@@ -758,6 +1194,7 @@ println1_a09
 #symload println1 with println1_a07
 #symload println1 with println1_a08
 #symload println1 with println1_a09
+#symload println1 with println1_a10
 //
 (* ****** ****** *)
 (*
@@ -872,6 +1309,282 @@ fun
 strx_vt_print0_begendseprst
 ( xs: ~strx_vt(a0)
 , xbeg: strn, xend: strn, xsep: strn, xrst: strn): void
+//
+(* ****** ****** *)
+//
+(*
+HX-2022-07-05:
+Tue Jul  5 15:08:37 EDT 2022
+*)
+//
+fun<>
+strn_vt_glappend0_a02
+( ~strn_vt
+, ~strn_vt ): strn_vt
+fun<>
+strn_vt_glappend0_a03
+( ~strn_vt
+, ~strn_vt, ~strn_vt): strn_vt
+fun<>
+strn_vt_glappend0_a04
+( ~strn_vt, ~strn_vt
+, ~strn_vt, ~strn_vt): strn_vt
+fun<>
+strn_vt_glappend0_a05
+( ~strn_vt, ~strn_vt
+, ~strn_vt, ~strn_vt, ~strn_vt): strn_vt
+fun<>
+strn_vt_glappend0_a06
+( ~strn_vt, ~strn_vt, ~strn_vt
+, ~strn_vt, ~strn_vt, ~strn_vt): strn_vt
+fun<>
+strn_vt_glappend0_a07
+( ~strn_vt
+, ~strn_vt, ~strn_vt, ~strn_vt
+, ~strn_vt, ~strn_vt, ~strn_vt): strn_vt
+fun<>
+strn_vt_glappend0_a08
+( ~strn_vt, ~strn_vt
+, ~strn_vt, ~strn_vt, ~strn_vt
+, ~strn_vt, ~strn_vt, ~strn_vt): strn_vt
+fun<>
+strn_vt_glappend0_a09
+( ~strn_vt, ~strn_vt, ~strn_vt
+, ~strn_vt, ~strn_vt, ~strn_vt
+, ~strn_vt, ~strn_vt, ~strn_vt): strn_vt
+fun<>
+strn_vt_glappend0_a10
+( ~strn_vt
+, ~strn_vt, ~strn_vt, ~strn_vt
+, ~strn_vt, ~strn_vt, ~strn_vt
+, ~strn_vt, ~strn_vt, ~strn_vt): strn_vt
+//
+(* ****** ****** *)
+//
+#symload glappend0 with strn_vt_glappend0_a02
+#symload glappend0 with strn_vt_glappend0_a03
+#symload glappend0 with strn_vt_glappend0_a04
+#symload glappend0 with strn_vt_glappend0_a05
+#symload glappend0 with strn_vt_glappend0_a06
+#symload glappend0 with strn_vt_glappend0_a07
+#symload glappend0 with strn_vt_glappend0_a08
+#symload glappend0 with strn_vt_glappend0_a09
+#symload glappend0 with strn_vt_glappend0_a10
+//
+(* ****** ****** *)
+//
+(*
+HX-2022-07-05:
+Tue Jul  5 18:29:59 EDT 2022
+*)
+//
+fun<>
+strn_vt_glappend1_a02
+( !strn_vt
+, !strn_vt ): strn_vt
+fun<>
+strn_vt_glappend1_a03
+( !strn_vt
+, !strn_vt, !strn_vt): strn_vt
+fun<>
+strn_vt_glappend1_a04
+( !strn_vt, !strn_vt
+, !strn_vt, !strn_vt): strn_vt
+fun<>
+strn_vt_glappend1_a05
+( !strn_vt, !strn_vt
+, !strn_vt, !strn_vt, !strn_vt): strn_vt
+fun<>
+strn_vt_glappend1_a06
+( !strn_vt, !strn_vt, !strn_vt
+, !strn_vt, !strn_vt, !strn_vt): strn_vt
+fun<>
+strn_vt_glappend1_a07
+( !strn_vt
+, !strn_vt, !strn_vt, !strn_vt
+, !strn_vt, !strn_vt, !strn_vt): strn_vt
+fun<>
+strn_vt_glappend1_a08
+( !strn_vt, !strn_vt
+, !strn_vt, !strn_vt, !strn_vt
+, !strn_vt, !strn_vt, !strn_vt): strn_vt
+fun<>
+strn_vt_glappend1_a09
+( !strn_vt, !strn_vt, !strn_vt
+, !strn_vt, !strn_vt, !strn_vt
+, !strn_vt, !strn_vt, !strn_vt): strn_vt
+fun<>
+strn_vt_glappend1_a10
+( !strn_vt
+, !strn_vt, !strn_vt, !strn_vt
+, !strn_vt, !strn_vt, !strn_vt
+, !strn_vt, !strn_vt, !strn_vt): strn_vt
+//
+(* ****** ****** *)
+//
+#symload glappend1 with strn_vt_glappend1_a02
+#symload glappend1 with strn_vt_glappend1_a03
+#symload glappend1 with strn_vt_glappend1_a04
+#symload glappend1 with strn_vt_glappend1_a05
+#symload glappend1 with strn_vt_glappend1_a06
+#symload glappend1 with strn_vt_glappend1_a07
+#symload glappend1 with strn_vt_glappend1_a08
+#symload glappend1 with strn_vt_glappend1_a09
+#symload glappend1 with strn_vt_glappend1_a10
+//
+(* ****** ****** *)
+//
+(*
+HX-2022-07-05:
+Tue Jul  5 19:09:52 EDT 2022
+*)
+//
+fun
+<a0:vt>
+list_vt_glappend0_a02
+( ~list_vt(a0)
+, ~list_vt(a0) ): list_vt(a0)
+fun
+<a0:vt>
+list_vt_glappend0_a03
+( ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)): list_vt(a0)
+fun
+<a0:vt>
+list_vt_glappend0_a04
+( ~list_vt(a0), ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)): list_vt(a0)
+fun
+<a0:vt>
+list_vt_glappend0_a05
+( ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)): list_vt(a0)
+fun
+<a0:vt>
+list_vt_glappend0_a06
+( ~list_vt(a0), ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)): list_vt(a0)
+fun
+<a0:vt>
+list_vt_glappend0_a07
+( ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)): list_vt(a0)
+fun
+<a0:vt>
+list_vt_glappend0_a08
+( ~list_vt(a0), ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)): list_vt(a0)
+fun
+<a0:vt>
+list_vt_glappend0_a09
+( ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)): list_vt(a0)
+fun
+<a0:vt>
+list_vt_glappend0_a10
+( ~list_vt(a0), ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)
+, ~list_vt(a0), ~list_vt(a0)): list_vt(a0)
+//
+(* ****** ****** *)
+//
+#symload glappend0 with list_vt_glappend0_a02
+#symload glappend0 with list_vt_glappend0_a03
+#symload glappend0 with list_vt_glappend0_a04
+#symload glappend0 with list_vt_glappend0_a05
+#symload glappend0 with list_vt_glappend0_a06
+#symload glappend0 with list_vt_glappend0_a07
+#symload glappend0 with list_vt_glappend0_a08
+#symload glappend0 with list_vt_glappend0_a09
+#symload glappend0 with list_vt_glappend0_a10
+//
+(* ****** ****** *)
+//
+(*
+HX-2022-07-05:
+Tue Jul  5 20:25:07 EDT 2022
+*)
+//
+fun
+<a0:vt>
+list_vt_glappend1_a02
+( !list_vt(a0)
+, !list_vt(a0) ): list_vt(a0)
+fun
+<a0:vt>
+list_vt_glappend1_a03
+( !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)): list_vt(a0)
+fun
+<a0:vt>
+list_vt_glappend1_a04
+( !list_vt(a0), !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)): list_vt(a0)
+fun
+<a0:vt>
+list_vt_glappend1_a05
+( !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)): list_vt(a0)
+fun
+<a0:vt>
+list_vt_glappend1_a06
+( !list_vt(a0), !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)): list_vt(a0)
+fun
+<a0:vt>
+list_vt_glappend1_a07
+( !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)): list_vt(a0)
+fun
+<a0:vt>
+list_vt_glappend1_a08
+( !list_vt(a0), !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)): list_vt(a0)
+fun
+<a0:vt>
+list_vt_glappend1_a09
+( !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)): list_vt(a0)
+fun
+<a0:vt>
+list_vt_glappend1_a10
+( !list_vt(a0), !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)
+, !list_vt(a0), !list_vt(a0)): list_vt(a0)
+//
+(* ****** ****** *)
+//
+#symload glappend1 with list_vt_glappend1_a02
+#symload glappend1 with list_vt_glappend1_a03
+#symload glappend1 with list_vt_glappend1_a04
+#symload glappend1 with list_vt_glappend1_a05
+#symload glappend1 with list_vt_glappend1_a06
+#symload glappend1 with list_vt_glappend1_a07
+#symload glappend1 with list_vt_glappend1_a08
+#symload glappend1 with list_vt_glappend1_a09
+#symload glappend1 with list_vt_glappend1_a10
 //
 (* ****** ****** *)
 

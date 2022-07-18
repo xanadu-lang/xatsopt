@@ -255,17 +255,36 @@ strn_append
 ( xs: strn(m)
 , ys: strn(n)): strn(m+n)
 //
+fun<>
+strn_append_vt
+{m,n:int}
+( xs: strn(m)
+, ys: strn(n)): strn_vt(m+n)
+//
 (* ****** ****** *)
+//
 fun<>
 strn_reverse
 {n:int}
 ( cs: strn(n) ) : strn(n)
+fun<>
+strn_reverse_vt
+{n:int}
+( cs: strn(n) ) : strn_vt(n)
+//
 (* ****** ****** *)
 //
 fun<>
 strn_forall(strn): bool
 fun<>
+strn_foreach(strn): void
+//
+(* ****** ****** *)
+//
+fun<>
 strn_rforall(strn): bool
+fun<>
+strn_rforeach(strn): void
 //
 (* ****** ****** *)
 //
@@ -273,6 +292,8 @@ fun<>
 strn_listize
 {n:int}
 (strn(n)): list_vt(cgtz,n)
+//
+(* ****** ****** *)
 //
 fun<>
 strn_strmize
@@ -287,6 +308,13 @@ strn_strxize
 (cs:strn): strx_vt( char )
 //
 fun<>
+strn_strqize
+{n:int}
+(strn(n)): strq_vt(cgtz,n)
+//
+(* ****** ****** *)
+//
+fun<>
 strn_rlistize
 {n:int}
 (cs:strn(n)): list_vt(cgtz,n)
@@ -294,8 +322,23 @@ strn_rlistize
 (* ****** ****** *)
 //
 fun<>
+strn_rstrmize
+{n:int}
+(cs:strn(n)): strm_vt( cgtz )
+fun<>
+strn_rstrqize
+{n:int}
+(cs:strn(n)): strq_vt(cgtz,n)
+//
+(* ****** ****** *)
+//
+fun<>
 strn_copy
 {n:int}(strn(n)): strn(n)
+//
+fun<>
+strn_copy_vt
+{n:int}(strn(n)): strn_vt(n)
 //
 (* ****** ****** *)
 //
@@ -309,12 +352,32 @@ strn_make_list_vt
 (cs:list_vt(cgtz, n)): strn(n)
 //
 (* ****** ****** *)
+//
 fun<>
 strn_make_strm
   (cs:strm(cgtz)): strn(*0*)
 fun<>
 strn_make_strm_vt
   (cs:strm_vt(cgtz)): strn(*0*)
+//
+(* ****** ****** *)
+//
+fun<>
+strnlst_concat
+  (css: list(strn)): strn
+fun<>
+strnlst_concat_vt
+  (css: list(strn)): strn_vt
+//
+(* ****** ****** *)
+//
+fun<>
+strntrm_concat
+  (css: strm(strn)): strn
+fun<>
+strntrm_concat_vt
+  (css: strm(strn)): strn_vt
+//
 (* ****** ****** *)
 //
 fun

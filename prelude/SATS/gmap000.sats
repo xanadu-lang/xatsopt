@@ -10,8 +10,29 @@ fun
 <map:t0>
 <key:t0>
 <itm:t0>
+gmap_size(map): nint
+(* ****** ****** *)
+//
+fun
+<map:t0>
+<key:t0>
+<itm:t0>
 gmap_print
 ( kxs: map ) : void
+//
+fun<>
+gmap_print$beg(): void
+fun<>
+gmap_print$end(): void
+fun<>
+gmap_print$sep(): void
+//
+fun
+<key:t0>
+<itm:t0>
+gmap_print$keyval
+(k0: key, x0: itm) : void
+//
 (* ****** ****** *)
 //
 fun

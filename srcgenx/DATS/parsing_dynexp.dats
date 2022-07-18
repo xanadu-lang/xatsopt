@@ -118,6 +118,7 @@ case+ tnd of
   let val () = err := err + 1 in tok end
 //
 end // end of [p_idint]
+//
 implement
 p_idintseq
   (buf, err) =
@@ -820,6 +821,7 @@ p_d0argseq
 ) (* end of [p_d0argseq] *)
 //
 (* ****** ****** *)
+//
 (*
 atmd0pat::
 //
@@ -996,17 +998,17 @@ case+ tnd of
   end // end of [t_t0chr]
 | _ when t_t0flt(tnd) =>
   let
-    val c0 = p_t0flt(buf, err)
+    val f0 = p_t0flt(buf, err)
   in
     err := e0;
-    d0pat_make_node(c0.loc(), D0Pflt(c0))
+    d0pat_make_node(f0.loc(), D0Pflt(f0))
   end // end of [t_t0flt]
 | _ when t_t0str(tnd) =>
   let
-    val c0 = p_t0str(buf, err)
+    val s0 = p_t0str(buf, err)
   in
     err := e0;
-    d0pat_make_node(c0.loc(), D0Pstr(c0))
+    d0pat_make_node(s0.loc(), D0Pstr(s0))
   end // end of [t_t0str]
 //
 | T_LBRACE() => let
@@ -1153,6 +1155,8 @@ case+ tnd1 of
   )
 //
 end // end of [p_d0pat_RPAREN]
+
+(* ****** ****** *)
 
 implement
 p_labd0pat_RBRACE
@@ -1325,7 +1329,7 @@ f0a0.node() of
     val node =
     F0ARGsome_sta(tbeg, s0qs, tend)
   }
-| _ (* non-F0ARGsom_sta *) => f0a0
+| _ (* non-F0ARGsome_sta *) => f0a0
 )
 fun
 auxf0as
@@ -1382,7 +1386,7 @@ if
 tsts0qs(s0qs)
 then true else tstf0as(xs)
 |
-_(*non-F0ARGsom_sta*) => tstf0as(xs)
+_(*non-F0ARGsome_sta*) => tstf0as(xs)
 )
 )
 //
@@ -1610,6 +1614,7 @@ _(*non-LPAREN*) => ST0INVnone(stqs, tok0)
 //
 end (*let*) // end of [p_st0inv]
 (* ****** ****** *)
+//
 implement
 popt_endst0inv
   (buf, err) =
@@ -1633,30 +1638,31 @@ tok0.node() of
 | _(*non-ENDST*) => ENDST0INVnone()
 //
 end (*let*) // end of [popt_endst0inv]
+//
 (* ****** ****** *)
 (*
 //
-atmd0exp ::
+atmd0exp ::=
 //
-  | d0eid
+| d0eid
 //
-  | t0int // int
-  | t0chr // char
-  | t0flt // float
-  | t0str // string
+| t0int // int
+| t0chr // char
+| t0flt // float
+| t0str // string
 //
-  | qualid atm0exp
+| qualid atm0exp
 //
-  | { d0eclseq }
-  | LET d0eclseq END
-  | LET d0eclseq IN d0expseq END
+| { d0eclseq }
+| LET d0eclseq END
+| LET d0eclseq IN d0expseq END
 //
-  | ( d0expseq_COMMA )
-  | ( d0expseq_COMMA | d0expseq_COMMA )
-  | ( d0expseq_COMMA ; d0expseq_SMCLN )
+| ( d0expseq_COMMA )
+| ( d0expseq_COMMA | d0expseq_COMMA )
+| ( d0expseq_COMMA ; d0expseq_SMCLN )
 //
-  | { labd0expseq_COMMA }
-  | { labd0expseq_COMMA | labd0expseq_COMMA }
+| { labd0expseq_COMMA }
+| { labd0expseq_COMMA | labd0expseq_COMMA }
 //
 *)
 extern
@@ -1776,17 +1782,16 @@ case+ tnd of
     val d0e3 =
       p_d0exp_ELSE(buf, err)
 //
-(*
     val topt =
-      popt_ENDIF(buf, err)
-*)
-    val topt =
+      popt_ENDIF0(buf, err)
+//
+    val tend =
       popt_endst0inv(buf, err)
 //
     val
     loc_res =
     (
-    case+ topt of
+    case+ tend of
     | ENDST0INVnone() =>
       (
       case d0e3 of
@@ -1811,7 +1816,7 @@ case+ tnd of
   in
     err := e0;
     (
-    case+ topt of
+    case+ tend of
     | ENDST0INVnone _ =>
       d0exp_make_node
       ( loc_res
@@ -1837,18 +1842,17 @@ case+ tnd of
     val dcls =
       p_d0clauseq_BAR(buf, err)
 //
-(*
     val topt =
-      popt_ENDCASE(buf, err)
-*)
-    val topt =
+      popt_ENDCAS(buf, err)
+//
+    val tend =
       popt_endst0inv(buf, err)
 //
     val
     loc_res = let
       val loc = tok.loc()
     in
-      case+ topt of
+      case+ tend of
       | ENDST0INVnone
         ( (*void*) ) =>
         (
@@ -1872,7 +1876,7 @@ case+ tnd of
   in
     err := e0;
     (
-    case+ topt of
+    case+ tend of
     | ENDST0INVnone _ =>
       d0exp_make_node
       ( loc_res
@@ -2528,10 +2532,11 @@ end // end of [T_THEN]
 |
 _(*non-THEN*) =>
 ( // HX-2018-09-25: error
+  err := e0 + 1;
   d0exp_THEN(tok, p_d0exp(buf, err))
-) (* end of [non-THEN] *)
+) (* end of [non-T_THEN] *)
 //
-end // end of [p_d0exp_THEN]
+end (*let*) // end of [p_d0exp_THEN]
 
 (* ****** ****** *)
 
@@ -2561,7 +2566,7 @@ _(*non-ELSE*) =>
   d0exp_ELSEnone((*void*)) // HX: ELSE-less
 )
 //
-end // end of [p_d0exp_ELSE]
+end (*let*) // end of [p_d0exp_ELSE]
 
 (* ****** ****** *)
 
@@ -3878,7 +3883,6 @@ tok, buf, err
   val () =
     buf.incby1()
   // end of [val]
-  val loc = tok.loc()
 //
   val mopt =
     p_decmodopt(buf, err)

@@ -27,9 +27,11 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi
-// Start Time: June, 2019
-// Authoremail: gmhwxiATgmailDOTcom
+(*
+Author: Hongwei Xi
+Start Time: June, 2019
+Authoremail: gmhwxiATgmailDOTcom
+*)
 //
 (* ****** ****** *)
 
@@ -180,7 +182,7 @@ if
 then
 let
 val xs = pred(xs)
-in
+in//let
 if
 rforall$test<x0>(xs) then loop(xs) else false
 end
@@ -303,6 +305,25 @@ if
 then
 strm_vt_nil() else gint_strmize_nint(i0)
 )
+(* ****** ****** *)
+//
+// HX:
+// For #implementing
+// some g_operations
+//
+(* ****** ****** *)
+//
+(*
+#impltmp
+g_i<sint>(i) = i // see above
+#impltmp
+g_u<uint>(u) = u // see above
+*)
+#impltmp
+g_i<uint>(i) = gint_sint2uint(i)
+#impltmp
+g_u<sint>(u) = gint_uint2sint(u)
+//
 (* ****** ****** *)
 //
 // HX:

@@ -163,19 +163,6 @@ gseq_length(xs): nint
 
 (* ****** ****** *)
 //
-fun
-<xs:t0>
-<x0:t0>
-gseq_drop
-(xs: xs, n0: sint): xs
-//
-fun
-<xs:t0>
-<x0:t0>
-gseq_dropif(xs: xs): xs
-//
-(* ****** ****** *)
-//
 (*
 gseq_foldl: foldl$fopr
 gseq_foldr: foldr$fopr
@@ -249,6 +236,13 @@ gseq_get_at
 fun
 <xs:t0>
 <x0:t0>
+gseq_set_at
+( xs:
+& xs >> xs
+, i0: nint, x0: x0): void
+fun
+<xs:t0>
+<x0:t0>
 gseq_fset_at
 ( xs: xs
 , i0: nint, x0: x0): xs
@@ -259,14 +253,13 @@ fun
 gseq_get_at_opt
 ( xs: xs
 , i0: nint): optn_vt(x0)
-(*
 fun
 <xs:t0>
 <x0:t0>
-gseq_fset_at_opt
-( xs: xs
-, i0: nint, x0: x0): optn_vt(xs)
-*)
+gseq_set_at_opt
+( xs:
+& xs >> xs
+, i0: nint, x0: x0): optn_vt(x0)
 //
 (* ****** ****** *)
 //
@@ -288,6 +281,19 @@ fun
 <xs:t0>
 <x0:t0>
 gseq_rstrmize(xs): strm_vt(x0)
+//
+(* ****** ****** *)
+//
+fun
+<xs:t0>
+<x0:t0>
+gseq_range_lt
+(s1: x0, f2: x0): (xs)
+fun
+<xs:t0>
+<x0:t0>
+gseq_range_lte
+(s1: x0, f2: x0): (xs)
 //
 (* ****** ****** *)
 //
@@ -322,6 +328,14 @@ gseq_unstrm_vt(strm_vt(x0)): (xs)
 //
 (* ****** ****** *)
 //
+fun
+<xs:t0>
+<x0:t0>
+<n0:i0>
+gseq_tabulate(n0: sint(n0)): (xs)
+//
+(* ****** ****** *)
+//
 (*
 gseq_map: map$fopr
 *)
@@ -334,6 +348,15 @@ fun
 <ys:vt>
 <y0:vt>
 gseq_map(xs: xs): (ys)
+//
+fun
+<xs:t0>
+<x0:t0> // g_mul
+gseq_scale(xs, x0): (xs)
+fun
+<xs:t0>
+<x0:t0> // g_add
+gseq_shift(xs, x0): (xs)
 //
 (* ****** ****** *)
 //
@@ -404,6 +427,45 @@ gseq_filter_rlist(xs): list_vt(x0)
 fun
 <xs:t0>
 <x0:t0>
+gseq_drop
+(xs: xs, n0: sint): xs
+//
+fun
+<xs:t0>
+<x0:t0>
+gseq_dropif(xs: xs): xs
+//
+(* ****** ****** *)
+//
+fun
+<xs:t0>
+<x0:t0>
+gseq_take
+(xs: xs, n0: sint): xs
+//
+fun
+<xs:t0>
+<x0:t0>
+gseq_takeif(xs: xs): xs
+//
+fun
+<xs:t0>
+<x0:t0>
+gseq_takeif_list(xs): list_vt(x0)
+fun
+<xs:t0>
+<x0:t0>
+gseq_takeif_strm(xs): strm_vt(x0)
+fun
+<xs:t0>
+<x0:t0>
+gseq_takeif_rlist(xs): list_vt(x0)
+//
+(* ****** ****** *)
+//
+fun
+<xs:t0>
+<x0:t0>
 <y0:vt>
 gseq_mapopt_list(xs): list_vt(y0)
 fun
@@ -422,51 +484,103 @@ gseq_mapopt_rlist(xs): list_vt(y0)
 //
 fun
 <xs:t0>
-<x0:t0>gseq_add(xs): x0
-fun
-<xs:t0>
-<x0:t0>gseq_mul(xs): x0
+<x0:t0>
+gseq_add(xs:xs): x0
 fun
 <xs:t0>
 <x0:t0>
-<y0:t0>gseq_map_add(xs): y0
+gseq_mul(xs:xs): x0
+//
+fun
+<x0:t0>
+gseq_add$nil((*nil*)): x0
+fun
+<x0:t0>
+gseq_mul$nil((*nil*)): x0
+//
+(* ****** ****** *)
+//
 fun
 <xs:t0>
-<x0:t0>
-<y0:t0>gseq_map_mul(xs): y0
+gseq_conj(xs:xs): bool
+fun
+<xs:t0>
+gseq_disj(xs:xs): bool
 //
 (* ****** ****** *)
 //
 fun
 <xs:t0>
 <x0:t0>
-gseq_max_exn(xs): x0
+<y0:t0>
+gseq_map_add(xs): (y0)
 fun
 <xs:t0>
 <x0:t0>
-gseq_min_exn(xs): x0
+<y0:t0>
+gseq_map_mul(xs): (y0)
+//
+fun
+<xs:t0>
+<x0:t0>
+gseq_map_conj(xs): bool
+fun
+<xs:t0>
+<x0:t0>
+gseq_map_disj(xs): bool
+//
+(* ****** ****** *)
+//
+fun
+<xs:t0>
+<x0:t0>
+gseq_max(xs:xs): x0
+fun
+<xs:t0>
+<x0:t0>
+gseq_min(xs:xs): x0
+//
+fun
+<x0:t0>
+gseq_max$nil((*nil*)): x0
+fun
+<x0:t0>
+gseq_min$nil((*nil*)): x0
+//
+(* ****** ****** *)
+//
+fun
+<xs:t0>
+<x0:t0>
+gseq_max_exn(xs:xs): x0
+fun
+<xs:t0>
+<x0:t0>
+gseq_min_exn(xs:xs): x0
 //
 fun
 <xs:t0>
 <x0:t0>
 gseq_max_opt
-(xs: xs): optn_vt(x0)
+(  xs: xs  ): optn_vt(x0)
 fun
 <xs:t0>
 <x0:t0>
 gseq_min_opt
-(xs: xs): optn_vt(x0)
+(  xs: xs  ): optn_vt(x0)
 //
 (* ****** ****** *)
 //
 fun
 <xs:t0>
 <x0:t0>
-gseq_max_ini(xs, x0): x0
+gseq_max_ini
+( xs: xs, x0: x0 ): (x0)
 fun
 <xs:t0>
 <x0:t0>
-gseq_min_ini(xs, x0): x0
+gseq_min_ini
+( xs: xs, x0: x0 ): (x0)
 //
 (* ****** ****** *)
 //
@@ -515,12 +629,14 @@ fun
 <xz:t0>
 <xs:t0>
 <x0:t0>
-gseq_concat(xss: xz): xs
+gseq_concat
+( xss: xz ): xs//xz=[xs]
 //
 fun
 <xs:t0>
 <x0:t0>
-gseq_reverse(xs: xs): xs
+gseq_reverse
+( xs0: xs ): xs//xs=[x0]
 fun
 <xs:t0>
 <x0:t0>
@@ -537,10 +653,17 @@ gseq_append_strm
 //
 (* ****** ****** *)
 //
+(*
+// c0 = cgtz
+// cs = strn
+// cz = gseq(cs)
+*)
 fun
 <cz:t0>
 gseq_concat_strn
   (css: cz): strn_vt
+//
+(* ****** ****** *)
 //
 fun
 <xz:t0>
@@ -671,10 +794,21 @@ fun
 <x0:t0>
 gseq_idropif(xs: xs): xs
 //
+(* ****** ****** *)
+//
+fun
+<xs:t0>
+<x0:t0>
+gseq_itakeif(xs: xs): xs
+//
 fun
 <xs:t0>
 <x0:t0>
 gseq_itakeif_list(xs): list_vt(x0)
+fun
+<xs:t0>
+<x0:t0>
+gseq_itakeif_strm(xs): strm_vt(x0)
 fun
 <xs:t0>
 <x0:t0>

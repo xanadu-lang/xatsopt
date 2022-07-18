@@ -68,41 +68,45 @@ char_neq(x1, x2) =
 <>(*tmp*)
 sub_char_char
   (c1, c2) =
-  ( code(c1) - code(c2) )
+( code(c1) - code(c2) )
+//
+#impltmp
+<>(*tmp*)
+add_char_sint
+  (c1, i2) =
+char_make_code(code(c1)+i2)
 //
 (* ****** ****** *)
 
 #impltmp
 <>(*tmp*)
 char_lower
-  (c0) =
+(   c0   ) =
 (
-  if
-  (c0 < 'A')
-  then c0 else
-  (
-  if
-  (c0 > 'Z')
-  then c0 else
-  char(code('a')+(code(c0)-code('A')))
-  )
-) (* end of [char_lower] *)
+if
+(c0 < 'A')
+then c0 else
+if
+(c0 > 'Z')
+then c0 else char
+(code('a')+(code(c0)-code('A')))
+endif // end-of-(else)
+) (* if *) // end of [char_lower(c0)]
 
 #impltmp
 <>(*tmp*)
 char_upper
-  (c0) =
+(   c0   ) =
 (
-  if
-  (c0 < 'a')
-  then c0 else
-  (
-  if
-  (c0 > 'z')
-  then c0 else
-  char(code('A')+(code(c0)-code('a')))
-  )
-) (* end of [char_upper] *)
+if
+(c0 < 'a')
+then c0 else
+if
+(c0 > 'z')
+then c0 else char
+(code('A')+(code(c0)-code('a')))
+endif // end-of(else)
+) (* if *) // end of [char_upper(c0)]
 
 (* ****** ****** *)
 //
@@ -115,6 +119,12 @@ char_upper
 #impltmp
 g_cmp<char> = char_cmp<>
 
+(* ****** ****** *)
+//
+#impltmp
+g_succ<char>(ch) =
+char_make_code(code(ch)+1)
+//
 (* ****** ****** *)
 
 #impltmp

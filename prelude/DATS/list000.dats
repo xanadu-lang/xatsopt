@@ -36,6 +36,74 @@ list_cons(x0, list_nil())
 //
 #impltmp
 <a>(*tmp*)
+list_btw(s1, f2) =
+list_vt2t
+(list_btw_vt<a>(s1, f2))
+#impltmp
+<a>(*tmp*)
+list_btwe(s1, f2) =
+list_vt2t
+(list_btwe_vt<a>(s1, f2))
+//
+(* ****** ****** *)
+//
+#impltmp
+<a>(*tmp*)
+list_btw_vt(s1, f2) =
+let
+//
+#vwtpdef
+alst = list_vt(a)
+//
+fnx
+loop
+( i0: sint
+, r0: alst): alst =
+if
+(i0 = f2)
+then r0 else
+loop(i0+1, r0) where
+{
+val x0 = g_i<a>(i0)
+val r0 = list_vt_cons(x0, r0)
+} (*where*) // end-of(loop(i0,r0))
+//
+in//let
+if s1 > f2
+then list_vt_nil() else
+list_vt_reverse0<a>(loop(s1,list_vt_nil))
+end(*let*) // end-of-[list_btw_vt(s1,f2)]
+//
+#impltmp
+<a>(*tmp*)
+list_btwe_vt(s1, f2) =
+let
+//
+#vwtpdef
+alst = list_vt(a)
+//
+fnx
+loop
+( i0: sint
+, r0: alst): alst =
+let
+val x0 = g_i<a>(i0)
+val r0 = list_vt_cons(x0, r0)
+in//let
+if
+(i0 = f2) then r0 else loop(i0+1, r0)
+endlet(* end of [loop(i0,r0)] *)
+//
+in//let
+if s1 > f2
+then list_vt_nil() else
+list_vt_reverse0<a>(loop(s1,list_vt_nil))
+end(*let*) // end-of-[list_btwe_vt(s1,f2)]
+//
+(* ****** ****** *)
+//
+#impltmp
+<a>(*tmp*)
 list_make_nval
   (n0, x0) =
 (
@@ -220,7 +288,7 @@ fnx
 loop
 {n:int}
 ( xs
-: list(a, n)
+: list(a,n)
 , i0
 : nintlt(n)): (a) =
 (
@@ -230,7 +298,7 @@ list_cons(x0, xs) =>
 if
 (i0 > 0)
 then loop(xs, pred(i0)) else x0
-) (* end of [auxloop] *)
+) (*cas*)//end of [loop(xs,i0)]
 } (*where*) // end of [list_get_at]
 //
 (* ****** ****** *)
@@ -276,11 +344,13 @@ end // end of [auxmain]
 #impltmp
 <a>(*tmp*)
 list_extend
-(xs, x0) = let
-val ys =
-list_sing<a>(x0) in
-  list_append<a>(xs, ys)
-end // end of [list_extend]
+(xs, x0) =
+(
+list_append<a>(xs, ys)
+) where
+{
+  val ys = list_sing<a>(x0)
+} (*where*)//end-of-[list_extend]
 //
 #impltmp
 <a>(*tmp*)
@@ -458,42 +528,74 @@ list_rappendx0_vt<a>(xs, list_vt_nil())
 ) (* list_reverse_vt *)
 //
 (* ****** ****** *)
+#impltmp
+<x0>
+<r0>(*tmp*)
+list_foldl =
+gseq_foldl<list(x0)><x0>
+(* ****** ****** *)
+#impltmp
+<x0>
+<r0>(*tmp*)
+list_foldr =
+gseq_foldr<list(x0)><x0>
+(* ****** ****** *)
 //
 #impltmp
-<a>(*tmp*)
-list_forall(xs) =
+<x0>(*tmp*)
+list_exists(xs) =
   (loop(xs)) where
 {
 fnx
 loop
-(xs: list(a)): bool =
+(xs: list(x0)): bool =
 (
 case+ xs of
 | list_nil() => true
 | list_cons(x0, xs) =>
   if
-  forall$test<a>(x0)
-  then loop(xs) else false
+  exists$test<x0>(x0)
+  then true else loop(xs)
 )
-}
+}(*where*)//end-of-[list_exists(xs)]
 //
 (* ****** ****** *)
 //
 #impltmp
-<a>(*tmp*)
+<x0>(*tmp*)
+list_forall(xs) =
+  (loop(xs)) where
+{
+fnx
+loop
+(xs: list(x0)): bool =
+(
+case+ xs of
+| list_nil() => true
+| list_cons(x0, xs) =>
+  if
+  forall$test<x0>(x0)
+  then loop(xs) else false
+)
+}(*where*)//end-of-[list_forall(xs)]
+//
+(* ****** ****** *)
+//
+#impltmp
+<x0>(*tmp*)
 list_foreach(xs) =
   (loop(xs)) where
 {
 fnx
 loop
-(xs: list(a)): void =
+(xs: list(x0)): void =
 (
 case+ xs of
 | list_nil() => ()
 | list_cons(x0, xs) =>
   let
   val () =
-  foreach$work<a>(x0) in loop(xs)
+  foreach$work<x0>(x0) in loop(xs)
   end
 )
 }
@@ -501,14 +603,14 @@ case+ xs of
 (* ****** ****** *)
 //
 #impltmp
-<a>(*tmp*)
-list_listize = list_copy_vt<a>
+<x0>(*tmp*)
+list_listize = list_copy_vt<x0>
 #impltmp
-<a>(*tmp*)
-list_rlistize = list_rcopy_vt<a>
+<x0>(*tmp*)
+list_rlistize = list_rcopy_vt<x0>
 //
 #impltmp
-<a>(*tmp*)
+<x0>(*tmp*)
 list_strmize
   (xs) =
 ( auxmain(xs) ) where

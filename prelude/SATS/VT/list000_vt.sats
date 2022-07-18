@@ -145,12 +145,21 @@ fun
 list_vt_extend0
 {n:int}
 (~list_vt(a,n), a): list_vt(a,n+1)
+//
+(* ****** ****** *)
+//
 fun
 <a:vt>
 list_vt_append0
 {m,n:int}
 ( ~list_vt(a, m)
 , ~list_vt(a, n)): list_vt(a, m+n)
+fun
+<a:vt>
+list_vt_append1
+{m,n:int}
+( !list_vt(a, m)
+, !list_vt(a, n)): list_vt(a, m+n)
 //
 (* ****** ****** *)
 //
@@ -207,12 +216,12 @@ fun
 <a:vt>
 <n:i0>
 list_vt_tabulate
-(n0: int(n)): list_vt(a, n)
+(n0: sint(n)): list_vt(a, n)
 fun
 <a:vt>
 list_vt_tabulate_cfr
 {n:nat}
-( n0: int(n)
+( n0: sint(n)
 , f0
 : nintlt(n) -<cfr> a): list_vt(a, n)
 //

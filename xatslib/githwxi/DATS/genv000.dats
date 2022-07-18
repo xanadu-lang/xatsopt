@@ -29,17 +29,81 @@
 #staload
 "./../SATS/genv000.sats"
 (* ****** ****** *)
-
 #staload
 UN =
 "prelude/SATS/unsafex.sats"
+(* ****** ****** *)
+
+#impltmp
+<xs>
+<x0>
+<r0>
+<e1>
+gseq_foldl_env1
+( xs, r0, env ) =
+(
+gseq_foldl
+<xs>
+<x0>
+<r0>(xs, r0)) where
+{
+val env =
+$UN.datacopy( env )
+#impltmp
+foldl$fopr<x0>(r0, x0) =
+let
+//
+val env =
+$UN.castlin10{e1}(env)
+val res =
+foldl_env1$fopr
+< x0><r0 >< e1>(r0, x0, env)
+//
+in//let
+//
+let
+val
+env = $UN.delinear(env) in res end
+//
+endlet//end-of(foldl$fopr<x0><r0>(x0))
+} (*where*) // end-of-(gseq_foldl_env1)
 
 (* ****** ****** *)
+
+#impltmp
+<xs>
+<x0>
+<r0>
+<e1>
+gseq_foldr_env1
+( xs, r0, env ) =
+(
+gseq_foldr
+<xs>
+<x0>
+<r0>(xs, r0)) where
+{
+val env =
+$UN.datacopy( env )
+#impltmp
+foldr$fopr<x0>(x0, r0) =
+let
 //
-#extern
-fcast//HX: it is safe!
-datacopy{a0:vt}(x0: !a0): (~a0)
+val env =
+$UN.castlin10{e1}(env)
+val res =
+foldr_env1$fopr
+< x0><r0 >< e1>(x0, r0, env)
 //
+in//let
+//
+let
+val
+env = $UN.delinear(env) in res end
+//
+endlet//end-of(foldr$fopr<x0><r0>(x0))
+} (*where*) // end-of-(gseq_foldr_env1)
+
 (* ****** ****** *)
 
 #impltmp
@@ -54,7 +118,7 @@ gseq_forall
 < x0 >( xs )) where
 {
 val env =
-datacopy(env)
+$UN.datacopy( env )
 #impltmp
 forall$test<x0>(x0) =
 let
@@ -86,7 +150,7 @@ gseq_foreach
 < x0 >( xs )) where
 {
 val env =
-datacopy(env)
+$UN.datacopy( env )
 #impltmp
 foreach$work<x0>(x0) =
 let
@@ -111,6 +175,39 @@ endlet // end of [foreach$work<x0>(x0)]
 <x0>
 <y0>
 <e1>
+gseq_map_env1
+  (xs, env) =
+(
+gseq_map
+<xs>
+<x0><y0>( xs )) where
+{
+val env =
+$UN.datacopy( env )
+#impltmp
+map$fopr<x0><y0>(x0) =
+let
+//
+val env =
+$UN.castlin10{e1}(env)
+val res =
+map_env1$fopr<x0><y0>(x0, env)
+//
+in//let
+//
+let
+val env = $UN.delinear(env) in res end
+//
+endlet // end of [map$fopr<x0><y0>(x0)]
+}(*where*)//end-of(gseq_map_env1(xs,env))
+
+(* ****** ****** *)
+
+#impltmp
+<xs>
+<x0>
+<y0>
+<e1>
 gseq_map_env1_list
   (xs, env) =
 (
@@ -119,7 +216,7 @@ gseq_map_list
 <x0><y0>( xs )) where
 {
 val env =
-datacopy( env )
+$UN.datacopy( env )
 #impltmp
 map$fopr<x0><y0>(x0) =
 let
@@ -152,7 +249,7 @@ gseq_map_strm
 <x0><y0>( xs )) where
 {
 val env =
-datacopy(env)
+$UN.datacopy( env )
 #impltmp
 map$fopr<x0><y0>(x0) =
 let

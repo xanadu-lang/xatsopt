@@ -23,6 +23,134 @@ optn_vt_cons(  x1  )
 //
 (* ****** ****** *)
 //
+(*
+HX: 2022-07-05:
+Tue Jul  5 20:38:08 EDT 2022
+*)
+//
+#impltmp
+<a0>
+list_vt_a00
+(      ) =
+list_vt_nil((*void*))
+#impltmp
+<a0>
+list_vt_a01
+(  x1  ) =
+list_vt_cons(x1, list_vt_nil())
+#impltmp
+<a0>
+list_vt_a02
+(x1, x2) =
+list_vt_cons(x1,
+list_vt_cons(x2, list_vt_nil()))
+#impltmp
+<a0>
+list_vt_a03
+(x1
+,x2, x3) =
+list_vt_cons(x1,
+list_vt_cons(x2,
+list_vt_cons(x3, list_vt_nil())))
+#impltmp
+<a0>
+list_vt_a04
+(x1, x2
+,x3, x4) =
+list_vt_cons(x1,
+list_vt_cons(x2,
+list_vt_cons(x3,
+list_vt_cons(x4, list_vt_nil()))))
+#impltmp
+<a0>
+list_vt_a05
+(x1
+,x2, x3
+,x4, x5) =
+list_vt_cons(x1,
+list_vt_cons(x2,
+list_vt_cons(x3,
+list_vt_cons(x4,
+list_vt_cons(x5, list_vt_nil())))))
+#impltmp
+<a0>
+list_vt_a06
+(x1, x2
+,x3, x4
+,x5, x6) =
+list_vt_cons(x1,
+list_vt_cons(x2,
+list_vt_cons(x3,
+list_vt_cons(x4,
+list_vt_cons(x5,
+list_vt_cons(x6, list_vt_nil()))))))
+#impltmp
+<a0>
+list_vt_a07
+(x1
+,x2, x3
+,x4, x5
+,x6, x7) =
+list_vt_cons(x1,
+list_vt_cons(x2,
+list_vt_cons(x3,
+list_vt_cons(x4,
+list_vt_cons(x5,
+list_vt_cons(x6,
+list_vt_cons(x7, list_vt_nil())))))))
+#impltmp
+<a0>
+list_vt_a08
+(x1, x2
+,x3, x4
+,x5, x6
+,x7, x8) =
+list_vt_cons(x1,
+list_vt_cons(x2,
+list_vt_cons(x3,
+list_vt_cons(x4,
+list_vt_cons(x5,
+list_vt_cons(x6,
+list_vt_cons(x7,
+list_vt_cons(x8, list_vt_nil()))))))))
+#impltmp
+<a0>
+list_vt_a09
+(x1
+,x2, x3
+,x4, x5
+,x6, x7
+,x8, x9) =
+list_vt_cons(x1,
+list_vt_cons(x2,
+list_vt_cons(x3,
+list_vt_cons(x4,
+list_vt_cons(x5,
+list_vt_cons(x6,
+list_vt_cons(x7,
+list_vt_cons(x8,
+list_vt_cons(x9, list_vt_nil())))))))))
+#impltmp
+<a0>
+list_vt_a10
+(x01,x02
+,x03,x04
+,x05,x06
+,x07,x08
+,x09,x10) =
+list_vt_cons(x01,
+list_vt_cons(x02,
+list_vt_cons(x03,
+list_vt_cons(x04,
+list_vt_cons(x05,
+list_vt_cons(x06,
+list_vt_cons(x07,
+list_vt_cons(x08,
+list_vt_cons(x09,
+list_vt_cons(x10, list_vt_nil()))))))))))
+//
+(* ****** ****** *)
+//
 // HX:
 // Implementing fproc0/1
 //
@@ -30,7 +158,7 @@ optn_vt_cons(  x1  )
 //
 #impltmp
 <a1>
-fproc0_a01(x1) = () where
+glfproc0_a01(x1) = () where
 {
   val () = gl_fproc0<a1>(x1)
 }
@@ -39,7 +167,7 @@ fproc0_a01(x1) = () where
 //
 #impltmp
 <a1><a2>
-fproc0_a02
+glfproc0_a02
 ( x1
 , x2 ) = () where
 {
@@ -52,7 +180,7 @@ fproc0_a02
 #impltmp
 <a1>
 <a2><a3>
-fproc0_a03
+glfproc0_a03
 ( x1
 , x2
 , x3 ) = () where
@@ -67,7 +195,7 @@ fproc0_a03
 #impltmp
 <a1><a2>
 <a3><a4>
-fproc0_a04
+glfproc0_a04
 ( x1
 , x2
 , x3
@@ -85,7 +213,7 @@ fproc0_a04
 <a1>
 <a2><a3>
 <a4><a5>
-fproc0_a05
+glfproc0_a05
 ( x1
 , x2
 , x3
@@ -105,7 +233,7 @@ fproc0_a05
 <a1><a2>
 <a3><a4>
 <a5><a6>
-fproc0_a06
+glfproc0_a06
 ( x1
 , x2
 , x3
@@ -128,7 +256,7 @@ fproc0_a06
 <a2><a3>
 <a4><a5>
 <a6><a7>
-fproc0_a07
+glfproc0_a07
 ( x1
 , x2, x3
 , x4, x5
@@ -150,7 +278,7 @@ fproc0_a07
 <a3><a4>
 <a5><a6>
 <a7><a8>
-fproc0_a08
+glfproc0_a08
 ( x1, x2
 , x3, x4
 , x5, x6
@@ -174,7 +302,7 @@ fproc0_a08
 <a4><a5>
 <a6><a7>
 <a8><a9>
-fproc0_a09
+glfproc0_a09
 ( x1
 , x2, x3
 , x4, x5
@@ -200,7 +328,7 @@ fproc0_a09
 <a05><a06>
 <a07><a08>
 <a09><a10>
-fproc0_a10
+glfproc0_a10
 ( x01, x02
 , x03, x04
 , x05, x06
@@ -223,7 +351,7 @@ val () = gl_fproc0<a10>(x10)
 //
 #impltmp
 <a1>
-fproc1_a01(x1) = () where
+glfproc1_a01(x1) = () where
 {
   val () = gl_fproc1<a1>(x1)
 }
@@ -232,7 +360,7 @@ fproc1_a01(x1) = () where
 //
 #impltmp
 <a1><a2>
-fproc1_a02
+glfproc1_a02
 ( x1
 , x2 ) = () where
 {
@@ -245,7 +373,7 @@ fproc1_a02
 #impltmp
 <a1>
 <a2><a3>
-fproc1_a03
+glfproc1_a03
 ( x1
 , x2
 , x3 ) = () where
@@ -260,7 +388,7 @@ fproc1_a03
 #impltmp
 <a1><a2>
 <a3><a4>
-fproc1_a04
+glfproc1_a04
 ( x1
 , x2
 , x3
@@ -278,7 +406,7 @@ fproc1_a04
 <a1>
 <a2><a3>
 <a4><a5>
-fproc1_a05
+glfproc1_a05
 ( x1
 , x2
 , x3
@@ -298,7 +426,7 @@ fproc1_a05
 <a1><a2>
 <a3><a4>
 <a5><a6>
-fproc1_a06
+glfproc1_a06
 ( x1
 , x2
 , x3
@@ -321,7 +449,7 @@ fproc1_a06
 <a2><a3>
 <a4><a5>
 <a6><a7>
-fproc1_a07
+glfproc1_a07
 ( x1
 , x2, x3
 , x4, x5
@@ -343,7 +471,7 @@ fproc1_a07
 <a3><a4>
 <a5><a6>
 <a7><a8>
-fproc1_a08
+glfproc1_a08
 ( x1, x2
 , x3, x4
 , x5, x6
@@ -367,7 +495,7 @@ fproc1_a08
 <a4><a5>
 <a6><a7>
 <a8><a9>
-fproc1_a09
+glfproc1_a09
 ( x1
 , x2, x3
 , x4, x5
@@ -393,7 +521,7 @@ fproc1_a09
 <a05><a06>
 <a07><a08>
 <a09><a10>
-fproc1_a10
+glfproc1_a10
 ( x01, x02
 , x03, x04
 , x05, x06
@@ -413,6 +541,504 @@ val () = gl_fproc1<a10>(x10)
 }
 //
 (* ****** ****** *)
+(*
+HX: implementing glfred2l0
+Tue Jul  5 16:35:26 EDT 2022
+*)
+(* ****** ****** *)
+//
+#impltmp
+<a0>
+glfred2l0_a02
+(x1, x2) =
+(
+gl_fred20<a0>(x1, x2)
+) (* end of [glfred2l0_a02] *)
+#impltmp
+<a0>
+glfred2l0_a03
+( x1
+, x2, x3) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+  f0(f0(x1, x2), x3)
+end (*let*) // end of [glfred2l0_a03]
+#impltmp
+<a0>
+glfred2l0_a04
+( x1, x2
+, x3, x4) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+  f0(f0(f0(x1,x2),x3),x4)
+end (*let*) // end of [glfred2l0_a04]
+#impltmp
+<a0>
+glfred2l0_a05
+( x1
+, x2, x3
+, x4, x5) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+f0(f0(f0(f0(x1,x2),x3),x4),x5)
+end (*let*) // end of [glfred2l0_a05]
+#impltmp
+<a0>
+glfred2l0_a06
+( x1, x2
+, x3, x4
+, x5, x6) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+f0(f0(f0(f0(f0(x1,x2),x3),x4),x5),x6)
+end (*let*) // end of [glfred2l0_a06]
+#impltmp
+<a0>
+glfred2l0_a07
+( x1
+, x2, x3
+, x4, x5
+, x6, x7) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+f0(f0(f0(f0(f0(f0(x1,x2),x3),x4),x5),x6),x7)
+end (*let*) // end of [glfred2l0_a07]
+#impltmp
+<a0>
+glfred2l0_a08
+( x1, x2
+, x3, x4
+, x5, x6
+, x7, x8) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+f0(f0(f0(f0(f0(f0(f0(x1,x2),x3),x4),x5),x6),x7),x8)
+end (*let*) // end of [glfred2l0_a08]
+#impltmp
+<a0>
+glfred2l0_a09
+( x1
+, x2, x3
+, x4, x5
+, x6, x7
+, x8, x9) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+f0(f0(f0(f0(f0(f0(f0(f0(x1,x2),x3),x4),x5),x6),x7),x8),x9)
+end (*let*) // end of [glfred2l0_a09]
+//
+#impltmp
+<a0>
+glfred2l0_a10
+( x01, x02
+, x03, x04
+, x05, x06
+, x07, x08
+, x09, x10) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+f0(f0(f0(f0(
+f0(f0(f0(f0(f0(x01,x02),x03),x04),x05),x06),x07),x08),x09),x10)
+end (*let*) // end of [glfred2l0_a10]
+//
+(* ****** ****** *)
+(*
+HX: implementing glfred2l1
+Tue Jul  5 16:37:10 EDT 2022
+*)
+(* ****** ****** *)
+//
+#impltmp
+<a0>
+glfred2l1_a02
+(x1, x2) =
+(
+gl_fred20<a0>(x1, x2)
+) (* end of [glfred2l1_a02] *)
+#impltmp
+<a0>
+glfred2l1_a03
+( x1
+, x2, x3) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+  f0(f0(x1, x2), x3)
+end (*let*) // end of [glfred2l1_a03]
+#impltmp
+<a0>
+glfred2l1_a04
+( x1, x2
+, x3, x4) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+  f0(f0(f0(x1,x2),x3),x4)
+end (*let*) // end of [glfred2l1_a04]
+#impltmp
+<a0>
+glfred2l1_a05
+( x1
+, x2, x3
+, x4, x5) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+f0(f0(f0(f0(x1,x2),x3),x4),x5)
+end (*let*) // end of [glfred2l1_a05]
+#impltmp
+<a0>
+glfred2l1_a06
+( x1, x2
+, x3, x4
+, x5, x6) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+f0(f0(f0(f0(f0(x1,x2),x3),x4),x5),x6)
+end (*let*) // end of [glfred2l1_a06]
+#impltmp
+<a0>
+glfred2l1_a07
+( x1
+, x2, x3
+, x4, x5
+, x6, x7) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+f0(f0(f0(f0(f0(f0(x1,x2),x3),x4),x5),x6),x7)
+end (*let*) // end of [glfred2l1_a07]
+#impltmp
+<a0>
+glfred2l1_a08
+( x1, x2
+, x3, x4
+, x5, x6
+, x7, x8) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+f0(f0(f0(f0(f0(f0(f0(x1,x2),x3),x4),x5),x6),x7),x8)
+end (*let*) // end of [glfred2l1_a08]
+#impltmp
+<a0>
+glfred2l1_a09
+( x1
+, x2, x3
+, x4, x5
+, x6, x7
+, x8, x9) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+f0(f0(f0(f0(f0(f0(f0(f0(x1,x2),x3),x4),x5),x6),x7),x8),x9)
+end (*let*) // end of [glfred2l1_a09]
+//
+#impltmp
+<a0>
+glfred2l1_a10
+( x01, x02
+, x03, x04
+, x05, x06
+, x07, x08
+, x09, x10) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+f0(f0(f0(f0(
+f0(f0(f0(f0(f0(x01,x02),x03),x04),x05),x06),x07),x08),x09),x10)
+end (*let*) // end of [glfred2l1_a10]
+//
+(* ****** ****** *)
+(*
+HX: implementing glfred2r0
+Tue Jul  5 16:45:16 EDT 2022
+*)
+(* ****** ****** *)
+//
+#impltmp
+<a0>
+glfred2r0_a02
+(x1, x2) =
+(
+gl_fred20<a0>(x1, x2)
+) (* end of [glfred2r0_a02] *)
+#impltmp
+<a0>
+glfred2r0_a03
+( x1
+, x2, x3) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+  f0(x1, f0(x2, x3))
+end (*let*) // end of [glfred2r0_a03]
+#impltmp
+<a0>
+glfred2r0_a04
+( x1, x2
+, x3, x4) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+  f0(x1,f0(x2,f0(x3,x4)))
+end (*let*) // end of [glfred2r0_a04]
+#impltmp
+<a0>
+glfred2r0_a05
+( x1
+, x2, x3
+, x4, x5) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+  f0(x1,f0(x2,f0(x3,f0(x4,x5))))
+end (*let*) // end of [glfred2r0_a05]
+#impltmp
+<a0>
+glfred2r0_a06
+( x1, x2
+, x3, x4
+, x5, x6) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+  f0(x1,f0(x2,f0(x3,f0(x4,f0(x5,x6)))))
+end (*let*) // end of [glfred2r0_a06]
+#impltmp
+<a0>
+glfred2r0_a07
+( x1
+, x2, x3
+, x4, x5
+, x6, x7) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+  f0(x1,f0(x2,f0(x3,f0(x4,f0(x5,f0(x6,x7))))))
+end (*let*) // end of [glfred2r0_a07]
+#impltmp
+<a0>
+glfred2r0_a08
+( x1, x2
+, x3, x4
+, x5, x6
+, x7, x8) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+f0(x1,f0(x2,f0(x3,f0(x4,f0(x5,f0(x6,f0(x7,x8)))))))
+end (*let*) // end of [glfred2r0_a08]
+#impltmp
+<a0>
+glfred2r0_a09
+( x1
+, x2, x3
+, x4, x5
+, x6, x7
+, x8, x9) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+f0(x1,f0(x2,f0(x3,f0(x4,f0(x5,f0(x6,f0(x7,f0(x8,x9))))))))
+end (*let*) // end of [glfred2r0_a09]
+(* ****** ****** *)
+#impltmp
+<a0>
+glfred2r0_a10
+( x01, x02
+, x03, x04
+, x05, x06
+, x07, x08
+, x09, x10) =
+let
+fun
+f0(x, y) =
+gl_fred20<a0>(x, y)
+in//let
+f0(x01,f0(x02,
+f0(x03,f0(x04,f0(x05,f0(x06,f0(x07,f0(x08,f0(x09,x10)))))))))
+end (*let*) // end of [glfred2r0_a10]
+(* ****** ****** *)
+(*
+HX: implementing glfred2r1
+Tue Jul  5 16:46:17 EDT 2022
+*)
+(* ****** ****** *)
+//
+#impltmp
+<a0>
+glfred2r1_a02
+(x1, x2) =
+(
+gl_fred21<a0>(x1, x2)
+) (* end of [glfred2r1_a02] *)
+#impltmp
+<a0>
+glfred2r1_a03
+( x1
+, x2, x3) =
+let
+fun
+f0(x, y) =
+gl_fred21<a0>(x, y)
+in//let
+  f0(x1, f0(x2, x3))
+end (*let*) // end of [glfred2r1_a03]
+#impltmp
+<a0>
+glfred2r1_a04
+( x1, x2
+, x3, x4) =
+let
+fun
+f0(x, y) =
+gl_fred21<a0>(x, y)
+in//let
+  f0(x1,f0(x2,f0(x3,x4)))
+end (*let*) // end of [glfred2r1_a04]
+#impltmp
+<a0>
+glfred2r1_a05
+( x1
+, x2, x3
+, x4, x5) =
+let
+fun
+f0(x, y) =
+gl_fred21<a0>(x, y)
+in//let
+  f0(x1,f0(x2,f0(x3,f0(x4,x5))))
+end (*let*) // end of [glfred2r1_a05]
+#impltmp
+<a0>
+glfred2r1_a06
+( x1, x2
+, x3, x4
+, x5, x6) =
+let
+fun
+f0(x, y) =
+gl_fred21<a0>(x, y)
+in//let
+  f0(x1,f0(x2,f0(x3,f0(x4,f0(x5,x6)))))
+end (*let*) // end of [glfred2r1_a06]
+#impltmp
+<a0>
+glfred2r1_a07
+( x1
+, x2, x3
+, x4, x5
+, x6, x7) =
+let
+fun
+f0(x, y) =
+gl_fred21<a0>(x, y)
+in//let
+  f0(x1,f0(x2,f0(x3,f0(x4,f0(x5,f0(x6,x7))))))
+end (*let*) // end of [glfred2r1_a07]
+#impltmp
+<a0>
+glfred2r1_a08
+( x1, x2
+, x3, x4
+, x5, x6
+, x7, x8) =
+let
+fun
+f0(x, y) =
+gl_fred21<a0>(x, y)
+in//let
+f0(x1,f0(x2,f0(x3,f0(x4,f0(x5,f0(x6,f0(x7,x8)))))))
+end (*let*) // end of [glfred2r1_a08]
+#impltmp
+<a0>
+glfred2r1_a09
+( x1
+, x2, x3
+, x4, x5
+, x6, x7
+, x8, x9) =
+let
+fun
+f0(x, y) =
+gl_fred21<a0>(x, y)
+in//let
+f0(x1,f0(x2,f0(x3,f0(x4,f0(x5,f0(x6,f0(x7,f0(x8,x9))))))))
+end (*let*) // end of [glfred2r1_a09]
+(* ****** ****** *)
+#impltmp
+<a0>
+glfred2r1_a10
+( x01, x02
+, x03, x04
+, x05, x06
+, x07, x08
+, x09, x10) =
+let
+fun
+f0(x, y) =
+gl_fred21<a0>(x, y)
+in//let
+f0(x01,f0(x02,
+f0(x03,f0(x04,f0(x05,f0(x06,f0(x07,f0(x08,f0(x09,x10)))))))))
+end (*let*) // end of [glfred2r1_a10]
+(* ****** ****** *)
 //
 (*
 HX:
@@ -424,7 +1050,7 @@ Implementing print0/println0
 #impltmp
 <a1>
 print0_a01 =
-fproc0_a01
+glfproc0_a01
 <  a1  > where
 {
 #impltmp
@@ -435,7 +1061,7 @@ gl_fproc0<a0> = gl_print0<a0>
 #impltmp
 <a1><a2>
 print0_a02 =
-fproc0_a02
+glfproc0_a02
 <a1><a2> where
 {
 #impltmp
@@ -447,7 +1073,7 @@ gl_fproc0<a0> = gl_print0<a0>
 <a1>
 <a2><a3>
 print0_a03 =
-fproc0_a03
+glfproc0_a03
 <a1>
 <a2><a3> where
 {
@@ -460,7 +1086,7 @@ gl_fproc0<a0> = gl_print0<a0>
 <a1><a2>
 <a3><a4>
 print0_a04 =
-fproc0_a04
+glfproc0_a04
 <a1><a2>
 <a3><a4> where
 {
@@ -474,7 +1100,7 @@ gl_fproc0<a0> = gl_print0<a0>
 <a2><a3>
 <a4><a5>
 print0_a05 =
-fproc0_a05
+glfproc0_a05
 <a1>
 <a2><a3>
 <a4><a5> where
@@ -489,7 +1115,7 @@ gl_fproc0<a0> = gl_print0<a0>
 <a3><a4>
 <a5><a6>
 print0_a06 =
-fproc0_a06
+glfproc0_a06
 <a1><a2>
 <a3><a4>
 <a5><a6> where
@@ -505,7 +1131,7 @@ gl_fproc0<a0> = gl_print0<a0>
 <a4><a5>
 <a6><a7>
 print0_a07 =
-fproc0_a07
+glfproc0_a07
 <a1>
 <a2><a3>
 <a4><a5>
@@ -522,7 +1148,7 @@ gl_fproc0<a0> = gl_print0<a0>
 <a5><a6>
 <a7><a8>
 print0_a08 =
-fproc0_a08
+glfproc0_a08
 <a1><a2>
 <a3><a4>
 <a5><a6>
@@ -540,7 +1166,7 @@ gl_fproc0<a0> = gl_print0<a0>
 <a6><a7>
 <a8><a9>
 print0_a09 =
-fproc0_a09
+glfproc0_a09
 <a1>
 <a2><a3>
 <a4><a5>
@@ -550,6 +1176,25 @@ fproc0_a09
 #impltmp
 {a0:vt}
 gl_fproc0<a0> = gl_print0<a0>
+}
+//
+#impltmp
+<a01><a02>
+<a03><a04>
+<a05><a06>
+<a07><a08>
+<a09><a10>
+print0_a10 =
+glfproc0_a10
+<a01><a02>
+<a03><a04>
+<a05><a06>
+<a07><a08>
+<a09><a10> where
+{
+#impltmp
+{a00:vt}
+gl_fproc0<a00> = gl_print0<a00>
 }
 //
 (* ****** ****** *)
@@ -717,6 +1362,27 @@ print0_a09
 //
 (* ****** ****** *)
 //
+#impltmp
+<a01><a02>
+<a03><a04>
+<a05><a06>
+<a07><a08>
+<a09><a10>
+println0_a10
+( x01
+, x02, x03, x04
+, x05, x06, x07
+, x08, x09, x10 ) =
+(
+print0_a10
+( x01
+, x02, x03, x04
+, x05, x06, x07
+, x08, x09, x10 ) ; println0_a00<>()
+) (* end of [println0_a10] *)
+//
+(* ****** ****** *)
+//
 (*
 HX:
 Implementing print1/println1
@@ -727,7 +1393,7 @@ Implementing print1/println1
 #impltmp
 <a1>
 print1_a01 =
-fproc1_a01
+glfproc1_a01
 <  a1  > where
 {
 #impltmp
@@ -738,7 +1404,7 @@ gl_fproc1<a0> = gl_print1<a0>
 #impltmp
 <a1><a2>
 print1_a02 =
-fproc1_a02
+glfproc1_a02
 <a1><a2> where
 {
 #impltmp
@@ -750,7 +1416,7 @@ gl_fproc1<a0> = gl_print1<a0>
 <a1>
 <a2><a3>
 print1_a03 =
-fproc1_a03
+glfproc1_a03
 <a1>
 <a2><a3> where
 {
@@ -763,7 +1429,7 @@ gl_fproc1<a0> = gl_print1<a0>
 <a1><a2>
 <a3><a4>
 print1_a04 =
-fproc1_a04
+glfproc1_a04
 <a1><a2>
 <a3><a4> where
 {
@@ -777,7 +1443,7 @@ gl_fproc1<a0> = gl_print1<a0>
 <a2><a3>
 <a4><a5>
 print1_a05 =
-fproc1_a05
+glfproc1_a05
 <a1>
 <a2><a3>
 <a4><a5> where
@@ -792,7 +1458,7 @@ gl_fproc1<a0> = gl_print1<a0>
 <a3><a4>
 <a5><a6>
 print1_a06 =
-fproc1_a06
+glfproc1_a06
 <a1><a2>
 <a3><a4>
 <a5><a6> where
@@ -808,7 +1474,7 @@ gl_fproc1<a0> = gl_print1<a0>
 <a4><a5>
 <a6><a7>
 print1_a07 =
-fproc1_a07
+glfproc1_a07
 <a1>
 <a2><a3>
 <a4><a5>
@@ -825,7 +1491,7 @@ gl_fproc1<a0> = gl_print1<a0>
 <a5><a6>
 <a7><a8>
 print1_a08 =
-fproc1_a08
+glfproc1_a08
 <a1><a2>
 <a3><a4>
 <a5><a6>
@@ -843,7 +1509,7 @@ gl_fproc1<a0> = gl_print1<a0>
 <a6><a7>
 <a8><a9>
 print1_a09 =
-fproc1_a09
+glfproc1_a09
 <a1>
 <a2><a3>
 <a4><a5>
@@ -853,6 +1519,25 @@ fproc1_a09
 #impltmp
 {a0:vt}
 gl_fproc1<a0> = gl_print1<a0>
+}
+//
+#impltmp
+<a01><a02>
+<a03><a04>
+<a05><a06>
+<a07><a08>
+<a09><a10>
+print1_a10 =
+glfproc1_a10
+<a01><a02>
+<a03><a04>
+<a05><a06>
+<a07><a08>
+<a09><a10> where
+{
+#impltmp
+{a00:vt}
+gl_fproc1<a00> = gl_print1<a00>
 }
 //
 (* ****** ****** *)
@@ -1017,6 +1702,27 @@ print1_a09
 , x6, x7
 , x8, x9 ) ; println1_a00<>()
 ) (* end of [println1_a09] *)
+//
+(* ****** ****** *)
+//
+#impltmp
+<a01><a02>
+<a03><a04>
+<a05><a06>
+<a07><a08>
+<a09><a10>
+println1_a10
+( x01
+, x02, x03, x04
+, x05, x06, x07
+, x08, x09, x10 ) =
+(
+print1_a10
+( x01
+, x02, x03, x04
+, x05, x06, x07
+, x08, x09, x10 ) ; println1_a00<>()
+) (* end of [println1_a10] *)
 //
 (* ****** ****** *)
 (*
@@ -1460,6 +2166,320 @@ strx_vt_print$sep<(*0*)>() = print(xsep)
 #impltmp
 strx_vt_print$rst<(*0*)>() = print(xrst)
 }
+//
+(* ****** ****** *)
+//
+(*
+HX-2022-07-05:
+Tue Jul  5 15:12:21 EDT 2022
+*)
+//
+#impltmp
+<>(*tmp*)
+strn_vt_glappend0_a02 =
+glfred2r0_a02<strn_vt> where
+{
+#impltmp
+gl_fred20<strn_vt> = strn_vt_append0<> }
+#impltmp
+<>(*tmp*)
+strn_vt_glappend0_a03 =
+glfred2r0_a03<strn_vt> where
+{
+#impltmp
+gl_fred20<strn_vt> = strn_vt_append0<> }
+//
+#impltmp
+<>(*tmp*)
+strn_vt_glappend0_a04 =
+glfred2r0_a04<strn_vt> where
+{
+#impltmp
+gl_fred20<strn_vt> = strn_vt_append0<> }
+//
+#impltmp
+<>(*tmp*)
+strn_vt_glappend0_a05 =
+glfred2r0_a05<strn_vt> where
+{
+#impltmp
+gl_fred20<strn_vt> = strn_vt_append0<> }
+//
+#impltmp
+<>(*tmp*)
+strn_vt_glappend0_a06 =
+glfred2r0_a06<strn_vt> where
+{
+#impltmp
+gl_fred20<strn_vt> = strn_vt_append0<> }
+//
+#impltmp
+<>(*tmp*)
+strn_vt_glappend0_a07 =
+glfred2r0_a07<strn_vt> where
+{
+#impltmp
+gl_fred20<strn_vt> = strn_vt_append0<> }
+//
+#impltmp
+<>(*tmp*)
+strn_vt_glappend0_a08 =
+glfred2r0_a08<strn_vt> where
+{
+#impltmp
+gl_fred20<strn_vt> = strn_vt_append0<> }
+//
+#impltmp
+<>(*tmp*)
+strn_vt_glappend0_a09 =
+glfred2r0_a09<strn_vt> where
+{
+#impltmp
+gl_fred20<strn_vt> = strn_vt_append0<> }
+//
+#impltmp
+<>(*tmp*)
+strn_vt_glappend0_a10 =
+glfred2r0_a10<strn_vt> where
+{
+#impltmp
+gl_fred20<strn_vt> = strn_vt_append0<> }
+//
+(* ****** ****** *)
+//
+(*
+HX-2022-07-05:
+Tue Jul  5 18:30:51 EDT 2022
+*)
+//
+#impltmp
+<>(*tmp*)
+strn_vt_glappend1_a02 =
+glfred2r1_a02<strn_vt> where
+{
+#impltmp
+gl_fred21<strn_vt> = strn_vt_append1<> }
+#impltmp
+<>(*tmp*)
+strn_vt_glappend1_a03 =
+glfred2r1_a03<strn_vt> where
+{
+#impltmp
+gl_fred21<strn_vt> = strn_vt_append1<> }
+//
+#impltmp
+<>(*tmp*)
+strn_vt_glappend1_a04 =
+glfred2r1_a04<strn_vt> where
+{
+#impltmp
+gl_fred21<strn_vt> = strn_vt_append1<> }
+//
+#impltmp
+<>(*tmp*)
+strn_vt_glappend1_a05 =
+glfred2r1_a05<strn_vt> where
+{
+#impltmp
+gl_fred21<strn_vt> = strn_vt_append1<> }
+//
+#impltmp
+<>(*tmp*)
+strn_vt_glappend1_a06 =
+glfred2r1_a06<strn_vt> where
+{
+#impltmp
+gl_fred21<strn_vt> = strn_vt_append1<> }
+//
+#impltmp
+<>(*tmp*)
+strn_vt_glappend1_a07 =
+glfred2r1_a07<strn_vt> where
+{
+#impltmp
+gl_fred21<strn_vt> = strn_vt_append1<> }
+//
+#impltmp
+<>(*tmp*)
+strn_vt_glappend1_a08 =
+glfred2r1_a08<strn_vt> where
+{
+#impltmp
+gl_fred21<strn_vt> = strn_vt_append1<> }
+//
+#impltmp
+<>(*tmp*)
+strn_vt_glappend1_a09 =
+glfred2r1_a09<strn_vt> where
+{
+#impltmp
+gl_fred21<strn_vt> = strn_vt_append1<> }
+//
+#impltmp
+<>(*tmp*)
+strn_vt_glappend1_a10 =
+glfred2r1_a10<strn_vt> where
+{
+#impltmp
+gl_fred21<strn_vt> = strn_vt_append1<> }
+//
+(* ****** ****** *)
+//
+(*
+HX-2022-07-05:
+Tue Jul  5 19:07:51 EDT 2022
+*)
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend0_a02 =
+glfred2r0_a02<list_vt(a0)> where
+{
+#impltmp
+gl_fred20<list_vt(a0)> = list_vt_append0<a0> }
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend0_a03 =
+glfred2r0_a03<list_vt(a0)> where
+{
+#impltmp
+gl_fred20<list_vt(a0)> = list_vt_append0<a0> }
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend0_a04 =
+glfred2r0_a04<list_vt(a0)> where
+{
+#impltmp
+gl_fred20<list_vt(a0)> = list_vt_append0<a0> }
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend0_a05 =
+glfred2r0_a05<list_vt(a0)> where
+{
+#impltmp
+gl_fred20<list_vt(a0)> = list_vt_append0<a0> }
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend0_a06 =
+glfred2r0_a06<list_vt(a0)> where
+{
+#impltmp
+gl_fred20<list_vt(a0)> = list_vt_append0<a0> }
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend0_a07 =
+glfred2r0_a07<list_vt(a0)> where
+{
+#impltmp
+gl_fred20<list_vt(a0)> = list_vt_append0<a0> }
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend0_a08 =
+glfred2r0_a08<list_vt(a0)> where
+{
+#impltmp
+gl_fred20<list_vt(a0)> = list_vt_append0<a0> }
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend0_a09 =
+glfred2r0_a09<list_vt(a0)> where
+{
+#impltmp
+gl_fred20<list_vt(a0)> = list_vt_append0<a0> }
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend0_a10 =
+glfred2r0_a10<list_vt(a0)> where
+{
+#impltmp
+gl_fred20<list_vt(a0)> = list_vt_append0<a0> }
+//
+(* ****** ****** *)
+//
+(*
+HX-2022-07-05:
+Tue Jul  5 20:23:29 EDT 2022
+*)
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend1_a02 =
+glfred2r1_a02<list_vt(a0)> where
+{
+#impltmp
+gl_fred21<list_vt(a0)> = list_vt_append1<a0> }
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend1_a03 =
+glfred2r1_a03<list_vt(a0)> where
+{
+#impltmp
+gl_fred21<list_vt(a0)> = list_vt_append1<a0> }
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend1_a04 =
+glfred2r1_a04<list_vt(a0)> where
+{
+#impltmp
+gl_fred21<list_vt(a0)> = list_vt_append1<a0> }
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend1_a05 =
+glfred2r1_a05<list_vt(a0)> where
+{
+#impltmp
+gl_fred21<list_vt(a0)> = list_vt_append1<a0> }
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend1_a06 =
+glfred2r1_a06<list_vt(a0)> where
+{
+#impltmp
+gl_fred21<list_vt(a0)> = list_vt_append1<a0> }
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend1_a07 =
+glfred2r1_a07<list_vt(a0)> where
+{
+#impltmp
+gl_fred21<list_vt(a0)> = list_vt_append1<a0> }
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend1_a08 =
+glfred2r1_a08<list_vt(a0)> where
+{
+#impltmp
+gl_fred21<list_vt(a0)> = list_vt_append1<a0> }
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend1_a09 =
+glfred2r1_a09<list_vt(a0)> where
+{
+#impltmp
+gl_fred21<list_vt(a0)> = list_vt_append1<a0> }
+//
+#impltmp
+<a0>(*tmp*)
+list_vt_glappend1_a10 =
+glfred2r1_a10<list_vt(a0)> where
+{
+#impltmp
+gl_fred21<list_vt(a0)> = list_vt_append1<a0> }
 //
 (* ****** ****** *)
 

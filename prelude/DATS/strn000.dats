@@ -48,23 +48,27 @@ strn_make_list<>
 //
 (* ****** ****** *)
 
-#impltmp<>
+#impltmp
+<>(*tmp*)
 strn_nilq(cs) =
 char_eqz
-(strn_head_opt(cs))
-#impltmp<>
+(strn_head_opt<>(cs))
+#impltmp
+<>(*tmp*)
 strn_consq(cs) =
 char_neqz
-(strn_head_opt(cs))
+(strn_head_opt<>(cs))
 
 (* ****** ****** *)
 
-#impltmp<>
+#impltmp
+<>(*tmp*)
 strn_head(cs) =
-(strn_head_raw(cs))
-#impltmp<>
+(strn_head_raw<>(cs))
+#impltmp
+<>(*tmp*)
 strn_tail(cs) =
-(strn_tail_raw(cs))
+(strn_tail_raw<>(cs))
 
 (* ****** ****** *)
 //
@@ -241,10 +245,10 @@ end (*let*)//strn_reverse_vt
 end // end-of-[strn_reverse_vt]
 
 (* ****** ****** *)
-
+//
 #impltmp<>
 strn_forall
-  (xs) =
+  ( xs ) =
 ( loop(xs) ) where
 {
 //
@@ -269,7 +273,53 @@ loop
 // end of [if]
 end // end of [else]
 } (* end of [strn_forall/uncons] *)
-
+//
+(* ****** ****** *)
+//
+#impltmp
+<>(*tmp*)
+strn_rforall
+  {n}( cs ) =
+(
+loop(cs, n0)) where
+{
+//
+val n0 = length(cs)
+//
+fnx
+loop
+{n:int}
+{i:nat
+|i <= n}
+( cs: strn(n)
+, i0: sint(i)): bool =
+(
+if
+(i0 <= 0)
+then true else
+let
+  val i1 = i0 - 1
+  val ci = cs[i1]
+in
+if
+forall$test<cgtz>(ci)
+then loop(cs, i1) else false
+endlet//end-of-(else)//end-of-(if)
+)
+} (*where*) // end of [strn_rforall]
+//
+(* ****** ****** *)
+//
+#impltmp
+strn_foreach<> =
+gseq_foreach<strn><cgtz>
+//
+(* ****** ****** *)
+//
+#impltmp
+strn_rforeach<> =
+gseq_rforeach<strn><cgtz>
+//
 (* ****** ****** *)
 //
 #impltmp
@@ -403,9 +453,45 @@ let
   val i1 = i0 + 1
 in
 loop(i1, list_vt_cons(ci, r0))
-endlet //end-of-(else)//end-of-(if)
+endlet//end-of-(else)//end-of-(if)
 )
 } (*where*) // end of [strn_rlistize]
+//
+(* ****** ****** *)
+//
+#impltmp
+<>(*tmp*)
+strn_rstrmize(cs) =
+(
+  auxmain(n0)) where
+{
+//
+val n0 = length(cs)
+//
+fun
+auxmain
+(i0: nint): strm_vt(cgtz) =
+$llazy
+(
+if
+(i0 <= 0)
+then
+(
+strmcon_vt_nil())
+else
+let
+  val i0 = (i0-1)
+  val ci = cs[i0] in
+  strmcon_vt_cons(ci, auxmain(i0))
+end // end of [else]
+)
+} (*where*) // end of [strn_rstrmize]
+//
+(* ****** ****** *)
+//
+#impltmp<>
+strn_copy_vt(xs) =
+strn_vt_make_strn<>(xs)
 //
 (* ****** ****** *)
 //
@@ -414,15 +500,14 @@ strn_make_list
   (cs) =
 (
 strn_vt2t
-(strn_vt_make_list<>(cs))
-)
+(strn_vt_make_list<>(cs)))
+//
 #impltmp<>
 strn_make_list_vt
   (cs) =
 (
 strn_vt2t
-(strn_vt_make_list_vt<>(cs))
-)
+(strn_vt_make_list_vt<>(cs)))
 //
 (* ****** ****** *)
 //
@@ -440,6 +525,26 @@ strn_make_strm_vt
 strn_vt2t
 (strn_vt_make_strm_vt<>(cs))
 )
+//
+(* ****** ****** *)
+//
+#impltmp<>
+strnlst_concat(css) =
+strn_vt2t
+(strnlst_concat_vt<>(css))
+#impltmp<>
+strnlst_concat_vt(css) =
+gseq_concat_strn<list(strn)>(css)
+//
+(* ****** ****** *)
+//
+#impltmp<>
+strntrm_concat(css) =
+strn_vt2t
+(strntrm_concat_vt<>(css))
+#impltmp<>
+strntrm_concat_vt(css) =
+gseq_concat_strn<strm(strn)>(css)
 //
 (* ****** ****** *)
 //
@@ -603,17 +708,31 @@ gseq_print$end<xs><x0>() = ()
 gseq_print$sep<xs><x0>() = ()
 //
 (* ****** ****** *)
-
+#impltmp
+gseq_nil<xs><x0> = strn_nil<>
+(* ****** ****** *)
 #impltmp
 gseq_nilq<xs><x0> = strn_nilq<>
 #impltmp
 gseq_consq<xs><x0> = strn_consq<>
-
 (* ****** ****** *)
-
+//
+#impltmp
+gseq_append<xs><x0> = strn_append<>
+//
+(* ****** ****** *)
+//
+#impltmp
+gseq_reverse<xs><x0> = strn_reverse<>
+//
+(* ****** ****** *)
+//
 #impltmp
 gseq_forall<xs><x0> = strn_forall<>
-
+//
+#impltmp
+gseq_rforall<xs><x0> = strn_rforall<>
+//
 (* ****** ****** *)
 
 #impltmp
@@ -622,10 +741,15 @@ gseq_listize<xs><x0> = strn_listize<>
 gseq_strmize<xs><x0> = strn_strmize<>
 
 (* ****** ****** *)
-
+//
 #impltmp
 gseq_rlistize<xs><x0> = strn_rlistize<>
-
+//
+#impltmp
+gras_rstrmize<xs><x0> = strn_rstrmize<>
+#impltmp
+gseq_rstrmize<xs><x0> = strn_rstrmize<>
+//
 (* ****** ****** *)
 
 #impltmp

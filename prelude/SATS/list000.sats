@@ -52,21 +52,41 @@ list_cons_
 //
 fun
 <a:t0>
-list_sing(x0: a): list(a, 1)
+list_sing(x0: a): list(a,1)
 //
 (* ****** ****** *)
-
+//
+fun
+<a:t0>
+list_btw
+(s1:sint, f2:sint): list(a)
+fun
+<a:t0>
+list_btwe
+(s1:sint, f2:sint): list(a)
+//
+fun
+<a:t0>
+list_btw_vt
+(s1:sint, f2:sint): list_vt(a)
+fun
+<a:t0>
+list_btwe_vt
+(s1:sint, f2:sint): list_vt(a)
+//
+(* ****** ****** *)
+//
 fun
 <a:t0>
 list_make_nval
 {n:nat}
-(n: int(n), x: a): list(a, n)
+(n:sint(n),x:a): list(a,n)
 fun
 <a:t0>
 list_make_nval_vt
 {n:nat}
-(n: int(n), x: a): list_vt(a, n)
-
+(n:sint(n),x:a): list_vt(a,n)
+//
 (* ****** ****** *)
 //
 fun<>
@@ -83,13 +103,13 @@ list_consq
 fun
 <a:t0>
 list_head
-{n:pos}(list(a, n)): a
+{n:pos}(list(a, n)): (a)
 fun
 <a:t0>
-list_head_raw(xs: list(a)): a
+list_head_raw(xs: list(a)): (a)
 fun
 <a:t0>
-list_head_exn(xs: list(a)): a
+list_head_exn(xs: list(a)): (a)
 fun
 <a:t0>
 list_head_opt(xs: list(a)): optn_vt(a)
@@ -220,16 +240,28 @@ list_reverse_vt
 {n:int}(list(a, n)): list_vt(a, n)
 //
 (* ****** ****** *)
-
+//
 fun
 <x0:t0>
-list_forall
-{n:int}(xs: list(x0, n)): bool
+<r0:vt>
+list_foldl(list(x0), r0): (r0)
 fun
 <x0:t0>
-list_foreach
-{n:int}(xs: list(x0, n)): void
-
+<r0:vt>
+list_foldr(list(x0), r0): (r0)
+//
+(* ****** ****** *)
+//
+fun
+<x0:t0>
+list_exists(xs: list(x0)): bool
+fun
+<x0:t0>
+list_forall(xs: list(x0)): bool
+fun
+<x0:t0>
+list_foreach(xs: list(x0)): void
+//
 (* ****** ****** *)
 //
 fun

@@ -378,7 +378,7 @@ d0pat_node =
 //
 | D0Papps of d0patlst
 //
-| D0Psqarg of//sqparg
+| D0Psqarg of//sqarg
     (token, s0arglst, token)
   // end of [D0Psqarg]
 //
@@ -692,7 +692,7 @@ d0exp_node =
 // HX-2020-11-04:
 | D0Eextnam of (g0nam) // HX: for specifying names
 // HX-2021-01-14:
-| D0Eexists of // HX-2021-01-14: $exist{..}..{..}
+| D0Eexists of // HX-2021-01-14: $exists{..}..{..}
   (token, d0explst(*D0Esqarglst*), d0exp) // (d0exp)
 //
 // end of [d0exp_node]
@@ -714,7 +714,7 @@ labd0exp_RBRACE =
 | labd0exp_RBRACE_cons1 of (token, labd0explst, token)
 //
 (* ****** ****** *)
-
+//
 and
 d0exp_THEN =
 | d0exp_THEN of (token, d0exp)
@@ -722,7 +722,7 @@ and
 d0exp_ELSE =
 | d0exp_ELSEnone of ()
 | d0exp_ELSEsome of (token, d0exp)
-
+//
 (* ****** ****** *)
 //
 and
