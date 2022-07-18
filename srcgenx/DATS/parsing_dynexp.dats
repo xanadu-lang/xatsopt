@@ -1932,7 +1932,7 @@ case+ tnd of
     val farrw =
       p_f0unarrow(buf, err)
     val fbody = p_d0exp(buf, err)
-    val tfini = popt_ENDLAM(buf, err)
+    val tfini = popt_ENDFIX(buf, err)
 //
   in
     err := e0;
