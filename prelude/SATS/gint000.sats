@@ -279,6 +279,13 @@ gint_forall_uint(ub: uint): bool
 (* ****** ****** *)
 //
 fun<>
+gint_foreach_sint(ub: sint): void
+fun<>
+gint_foreach_uint(ub: uint): void
+//
+(* ****** ****** *)
+//
+fun<>
 gint_rforall_sint(ub: sint): bool
 fun<>
 gint_rforall_uint(ub: uint): bool
@@ -403,6 +410,7 @@ cmp with gint_cmp_uint_uint of 1000
 //
 #symload nilq with gint_nilq_sint of 1000
 #symload nilq with gint_nilq_uint of 1000
+//
 #symload consq with gint_consq_sint of 1000
 #symload consq with gint_consq_uint of 1000
 //
@@ -413,14 +421,23 @@ cmp with gint_cmp_uint_uint of 1000
 //
 (* ****** ****** *)
 //
+#symload foreach with gint_foreach_sint of 1000
+#symload foreach with gint_foreach_uint of 1000
+//
+(* ****** ****** *)
+//
 #symload rforall with gint_rforall_sint of 1000
 #symload rforall with gint_rforall_uint of 1000
 //
+(* ****** ****** *)
+#symload listize with gint_listize_nint of 1000
+#symload strmize with gint_strmize_sint of 1000
 (* ****** ****** *)
 #symload sint_strmize with gint_strmize_sint of 1000
 (* ****** ****** *)
 #symload nint_listize with gint_listize_nint of 1000
 #symload nint_strmize with gint_strmize_nint of 1000
+(* ****** ****** *)
 #symload nint_rlistize with gint_rlistize_nint of 1000
 (* ****** ****** *)
 #symload nint_map_list with gint_map_list_nint of 1000
