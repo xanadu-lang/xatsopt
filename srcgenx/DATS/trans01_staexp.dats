@@ -498,7 +498,9 @@ end
 end
 ) (* end of [G0Nlist] *)
 //
+(*
 | G0Nnone0() => G1Nnone0()
+*)
 //
 | _(*rest-of-g0nam*) => G1Nnone1(gnm0)
 ) (* end of [trans01_gnam] *)
@@ -508,10 +510,10 @@ end // end of [local]
 implement
 trans01_gnamlst
   (gnms) =
-list_vt2t(g1es) where
+list_vt2t(gnms) where
 {
 val
-g1es =
+gnms =
 list_map<g0nam><g1nam>
   (gnms) where
 {
@@ -1081,7 +1083,7 @@ in
 case-
 s0ma.node() of
 (*
-| S0ARGnone(tok) => ...
+| S0MARGnone(tok) => ...
 *)
 | S0MARGsing(sid) => let
     val-

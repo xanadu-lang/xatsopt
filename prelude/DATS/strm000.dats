@@ -111,6 +111,24 @@ strm_cons(x0, strm_sing(y0))
 //
 #impltmp
 <a>(*tmp*)
+strm_head_raw(xs) =
+strmcon_head_raw<a>(!xs)
+#impltmp
+<a>(*tmp*)
+strm_tail_raw(xs) =
+strmcon_tail_raw<a>(!xs)
+//
+#impltmp
+<a>(*tmp*)
+strmcon_head_raw(xs) = xs.0
+#impltmp
+<a>(*tmp*)
+strmcon_tail_raw(xs) = xs.1
+//
+(* ****** ****** *)
+//
+#impltmp
+<a>(*tmp*)
 strm_from(x0) =
 (
 auxmain(x0) ) where
@@ -332,6 +350,71 @@ strmcon_vt_cons
 (map$fopr<x0>(x0), auxmain(xs))
 )
 } (*where*)//end-of-[strm_map_vt(xs)]
+
+(* ****** ****** *)
+
+#impltmp
+<x0>(*tmp*)
+strm_scanl
+(   xs   ) =
+strm_vt2t
+(strm_scanl_vt<x0>(xs))
+
+(* ****** ****** *)
+
+#impltmp
+<x0>(*tmp*)
+strm_scanl_vt
+  (xs) =
+(
+  auxmain(xs)) where
+{
+fun
+auxmain
+( xs
+: strm(x0))
+: strm_vt(x0) =
+$llazy
+(
+case+
+$eval(xs) of
+|
+strmcon_nil() =>
+strmcon_vt_nil()
+|
+strmcon_cons(x0, xs) =>
+!(strm_xscanl_vt(xs, x0))
+)
+} (*where*)//end-of-[strm_scanl_vt(xs)]
+
+(* ****** ****** *)
+
+#impltmp
+<x0><r0>
+strm_xscanl_vt
+  (xs, r0) =
+(
+auxmain(r0, xs)) where
+{
+fun
+auxmain(r0, xs) =
+$llazy
+(
+case+
+$eval(xs) of
+|
+strmcon_nil() =>
+strmcon_vt_sing(r0)
+|
+strmcon_cons(x0, xs) =>
+let
+val r1 =
+xscanl$fopr<x0><r0>(r0, x0)
+in//let
+strmcon_vt_cons(r0, auxmain(r1, xs))
+endlet // end of [strmcon_cons]
+)
+}(*where*)//end-of(strm_xscanl_vt(xs,r0))
 
 (* ****** ****** *)
 //
@@ -1053,6 +1136,17 @@ gseq_nilq
 {a:t0}
 gseq_consq
 <strm(a)><a> = strm_consq<a>
+(* ****** ****** *)
+//
+#impltmp
+{a:type}
+gseq_head_raw
+<strm(a)><a> = strm_head_raw<a>
+#impltmp
+{a:type}
+gseq_tail_raw
+<strm(a)><a> = strm_tail_raw<a>
+//
 (* ****** ****** *)
 //
 #impltmp

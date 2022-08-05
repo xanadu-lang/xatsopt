@@ -80,6 +80,27 @@ g_print<key>( k0 );
 strn_print<>("->"); g_print<itm>( x0 )
 ) // end-of-[gmap_print$keyval(k0,x0)]
 (* ****** ****** *)
+
+#impltmp
+<map>
+<key><itm>
+gmap_search
+(kxs, k0) =
+let
+val opt =
+gmap_search_opt
+<map><key><itm>(kxs, k0)
+in
+case+ opt of
+| ~
+optn_vt_nil() =>
+gmap_search$exn
+<map><key><itm>((*void*))
+| ~
+optn_vt_cons(x0) => ( x0 ) // found!
+end (*let*)//end-of[gmap_search(kxs,k0)]
+
+(* ****** ****** *)
 //
 #impltmp
 <map>
@@ -138,6 +159,84 @@ It is already in [list000.dats]
 gmap_strmize
 <list0((k0,x0))><k0><x0> = list_strmize<(k0,x0)>
 *)
+//
+(* ****** ****** *)
+//
+#impltmp
+<map>
+<key><itm>
+gmap_unlist(kxs) =
+gmap_unstrm_vt
+<map><key><itm>
+(list_strmize<(key,itm)>(kxs))
+//
+(* ****** ****** *)
+//
+#impltmp
+<map>
+<key><itm>
+gmap_unstrm(kxs) =
+gmap_unstrm_vt
+<map><key><itm>
+(strm_strmize<(key,itm)>(kxs))
+//
+(* ****** ****** *)
+//
+#impltmp
+<map>
+<key><itm>
+gmap_unlist_vt(kxs) =
+gmap_unstrm_vt
+<map><key><itm>
+(list_vt_strmize<(key,itm)>(kxs))
+//
+(* ****** ****** *)
+//
+#impltmp
+<map>
+<key><itm>
+gmap_unstrm_vt(kxs) =
+let
+val map =
+gmap_make_nil
+<map><key><itm>((*nil*))
+var map = map
+val ( ) = loop(map, kxs) in map
+end where
+{
+//
+#vwtpdef
+kxs = strm_vt@(key,itm)
+//
+fun
+loop
+( map
+: &map >> map
+, kxs
+: strm_vt@(key,itm)): void =
+(
+case+ !kxs of
+| ~
+strmcon_vt_nil() => ()
+| ~
+strmcon_vt_cons(kx1, kxs) =>
+(
+  loop(map, kxs)) where
+{
+val opt =
+gmap_insert_opt
+<map><key><itm>(map, kx1.0, kx1.1)
+val ( ) =
+(
+case+ opt of
+| ~
+optn_vt_nil _ => ( (*void*) )
+| ~
+optn_vt_cons _ => ( (*void*) )): void
+} (*where*) // end of [strmcon_vt_cons]
+)
+//
+} (*where*) // end of [gmap_unstrm_vt(kxs)]
 //
 (* ****** ****** *)
 

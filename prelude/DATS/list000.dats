@@ -6,11 +6,11 @@
 
 (*
 #staload
-"./../SATS/list.sats"
+"./../SATS/list000.sats"
 *)
 (*
 #staload
-"./../SATS/gseq.sats"
+"./../SATS/gseq000.sats"
 *)
 
 (* ****** ****** *)
@@ -664,7 +664,8 @@ strmcon_vt_cons(x0, auxmain(xs))
 <x0><y0>
 list_map(xs) =
 (
-list_vt2t(list_map_vt(xs))
+list_vt2t
+(list_map_vt<x0><y0>(xs))
 )
 //
 #impltmp
@@ -712,7 +713,8 @@ end (*let*) // end of [list_map_vt(xs)]
 <x0><y0>
 list_maprev(xs) =
 (
-list_vt2t(list_maprev_vt(xs))
+list_vt2t
+(list_maprev_vt<x0><y0>(xs))
 )
 //
 #impltmp
@@ -1059,9 +1061,19 @@ For gmap-operations
 #impltmp
 {k0:t0}
 {x0:t0}
+gmap_make_nil
+<list@(k0,x0)><k0><x0>
+  ((*void*)) =
+(
+  list_nil( (*void*) )
+)
+(* ****** ****** *)
+#impltmp
+{k0:t0}
+{x0:t0}
 gmap_keyq
 <list@(k0,x0)><k0><x0>
-(kxs, key) =
+  (kxs, key) =
 (
   loop(kxs)) where
 {
@@ -1106,7 +1118,7 @@ g_equal<k0>
 (key, kx1.0)
 then optn_vt_cons(kx1.1) else loop(kxs)
 )
-} (*where*) // end of [gmap_search_opt]
+} (*where*)//end-of-[gmap_search_opt(...)]
 (* ****** ****** *)
 #impltmp
 {k0:t0}
@@ -1118,7 +1130,7 @@ optn_vt_nil(*void*) where
 {
 val () =
 ( kxs := list_cons((key, itm), kxs) )
-} (* end of [gmap_insert_opt] *)
+} (*where*)//end-of-[gmap_insert_opt(...)]
 (* ****** ****** *)
 //
 #impltmp

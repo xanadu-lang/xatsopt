@@ -48,6 +48,25 @@ fun
 <map:t0>
 <key:t0>
 <itm:t0>
+gmap_make_nil(): map
+//
+(* ****** ****** *)
+//
+fun
+<map:t0>
+<key:t0>
+<itm:t0>
+gmap_search
+(kxs: map, key: key): itm
+fun
+<map:t0>
+<key:t0>
+<itm:t0>
+gmap_search$exn(   ): itm
+fun
+<map:t0>
+<key:t0>
+<itm:t0>
 gmap_search_opt
 (kxs: map, key: key): optn_vt(itm)
 //
@@ -99,6 +118,32 @@ fun
 <key:t0>
 <itm:t0>
 gmap_strmize_itm(map): strm_vt(key)
+(* ****** ****** *)
+(*
+HX: For initializing a gmap
+Wed Aug  3 10:20:10 EDT 2022
+*)
+(* ****** ****** *)
+fun
+<map:t0>
+<key:t0>
+<itm:t0>
+gmap_unlist(list(@(key, itm))): map
+fun
+<map:t0>
+<key:t0>
+<itm:t0>
+gmap_unstrm(strm(@(key, itm))): map
+fun
+<map:t0>
+<key:t0>
+<itm:t0>
+gmap_unlist_vt(list_vt(@(key, itm))): map
+fun
+<map:t0>
+<key:t0>
+<itm:t0>
+gmap_unstrm_vt(strm_vt(@(key, itm))): map
 (* ****** ****** *)
 
 (* end of [ATS3/XANADU_prelude_gmap000.sats] *)

@@ -13,8 +13,12 @@ ATS3_XANADU_prelude/DATS
 #staload _ = "./../DATS/gseq000.dats"
 #staload _ = "./../DATS/gseqn00.dats"
 (* ****** ****** *)
+#staload _ = "./../DATS/gmap000.dats"
+(* ****** ****** *)
 #staload _ = "./../DATS/gfor000.dats"
 #staload _ = "./../DATS/gfun000.dats"
+(* ****** ****** *)
+#staload _ = "./../DATS/genv000.dats"
 (* ****** ****** *)
 #staload _ = "./../DATS/bool000.dats"
 #staload _ = "./../DATS/char000.dats"
