@@ -839,12 +839,17 @@ s2exp_make_node
 val
 s2t =
 (
-  if
-  knd = 0
-  then s2e.sort((*void*))
-  else the_sort2_tbox(*void*)
-) : sort2 // end-of-val
-}
+ifcase
+| // ~
+knd = 0 =>
+sort2_topize
+(s2e.sort((*void*)))
+| // !
+knd = 1 => s2e.sort()
+|
+_(*else*) => // &
+the_sort2_tbox(*void*)): sort2
+} (*where*) // end of [s2exp_arg]
 //
 implement
 s2exp_atx
@@ -855,7 +860,7 @@ s2exp_make_node
 ) where
 {
   val s2t = bef.sort((*void*))
-}
+} (*where*) // end of [s2exp_atx]
 //
 (* ****** ****** *)
 //
@@ -1142,6 +1147,8 @@ in
 s2exp_make_node
 (s2t, S2Etyrec(knd, ~1(*npf*), ls2es))
 end // end of [s2exp_list1]
+
+(* ****** ****** *)
 
 implement
 s2exp_list2
@@ -1514,8 +1521,10 @@ case+ xs of
     val lxs = list_vt_cons(lx, lxs)
   } // end of [list_cons]
 ) (* end of [auxlst1] *)
-fun
 
+(* ****** ****** *)
+
+fun
 auxlst2
 ( xs
 : s2explst
@@ -1576,28 +1585,43 @@ end // end of [local]
 (* ****** ****** *)
 
 local
-
-absimpl
-s2exp_tbox = $rec{
+//
+typedef
+s2exp_struct =
+@{
   s2exp_sort= sort2
 , s2exp_node= s2exp_node
-} (* end of [absimpl] *)
-
+}
+absimpl
+s2exp_tbox = ref(s2exp_struct)
+//
 in (* in-of-local *)
 //
 implement
-s2exp_get_sort(x0) = x0.s2exp_sort
-implement
-s2exp_get_node(x0) = x0.s2exp_node
-//
-implement
 s2exp_make_node
-  (s0t0, node) = $rec
-{
-  s2exp_sort= s0t0, s2exp_node= node
-} (* end of [s2exp_make_node] *)
+  (s0t0, node) =
+(
+ref<s2exp_struct>
+@{
+  s2exp_sort= s0t0
+, s2exp_node= node }
+) (* end of [s2exp_make_node] *)
 //
-end // end of [local]
+implement
+s2exp_get_sort
+  (s2e0) = s2e0->s2exp_sort
+implement
+s2exp_get_node
+  (s2e0) = s2e0->s2exp_node
+//
+(*
+implement
+s2exp_set_sort
+  ( s2e0, s2t0 ) =
+  ( s2e0->s2exp_sort := s2t0 )
+*)
+//
+end (*local*) // end of [local(s2exp_tbox)]
 
 (* ****** ****** *)
 //

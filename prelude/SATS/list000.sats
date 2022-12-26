@@ -53,6 +53,10 @@ list_cons_
 fun
 <a:t0>
 list_sing(x0: a): list(a,1)
+fun
+<a:t0>
+list_pair
+( x1: a, x2: a ): list(a,2)
 //
 (* ****** ****** *)
 //
@@ -114,6 +118,17 @@ list_consq
 {a:type}{n:int}
 (xs: list(a, n)): bool( n>0 )
 //
+(* ****** ****** *)
+fun
+<a:t0>
+list_singq
+{a:type}{n:int}
+(xs: list(a, n)): bool( n=1 )
+fun
+<a:t0>
+list_pairq
+{a:type}{n:int}
+(xs: list(a, n)): bool( n=2 )
 (* ****** ****** *)
 //
 fun
@@ -349,6 +364,15 @@ fun
 list_rcopy_vt
 {n:int}(xs:list(a, n)): list_vt(a,n)
 //
+(* ****** ****** *)
+fun
+<a:t0>
+list_filter
+{n:int}(list(a, n)): listlte(a,n)
+fun
+<a:t0>
+list_filter_vt
+{n:int}(list(a, n)): listlte_vt(a,n)
 (* ****** ****** *)
 //
 fun

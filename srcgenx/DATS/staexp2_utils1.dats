@@ -172,7 +172,7 @@ case+
 //
 | (_(*rest*), _(*rest*)) => false
 //
-) (* end of [eq_t2bas_t2bas] *)
+) (* end of [lte_t2bas_t2bas] *)
 //
 (* ****** ****** *)
 
@@ -215,7 +215,7 @@ S2Tfun(arg1, res1) =>
 (
 case+ x2 of
 | S2Tfun(arg2, res2) =>
-  if (arg1 <= arg2) then (res1 <= res2) else false
+  if (arg2 <= arg1) then (res1 <= res2) else false
 | _ (* non-S2Tfun *) => false
 )
 //

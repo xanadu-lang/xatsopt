@@ -124,36 +124,6 @@ fprint_val<s2exp> = fprint_s2exp
 
 local
 
-fun
-auxid0
-( s1t0
-: sort1): sort2 = let
-//
-val-
-S1Tid0(tid) = s1t0.node()
-val
-opt = the_sortenv_find(tid)
-//
-in
-//
-case+ opt of
-//
-| ~None_vt() => S2Tid0(tid)
-//
-| ~Some_vt(s2t) =>
-  (
-    case+ s2t of
-    | S2TXTsrt(s2t) => s2t
-    | S2TXTsub
-        (s2v, _) => s2v.sort()
-      // S2TXTsub
-(*
-    | S2TXTerr _(*loc*) => S2Tnone1(s1t0)
-*)
-  ) (* Some_vt *)
-//
-end // end of [auxid0]
-
 (* ****** ****** *)
 
 fun
@@ -189,6 +159,38 @@ s1t.node() of
   tid = $SYM.MSGT_symbol
 | _(*non-S1Tid0*) => false
 )
+
+(* ****** ****** *)
+
+fun
+auxid0
+( s1t0
+: sort1): sort2 = let
+//
+val-
+S1Tid0(tid) = s1t0.node()
+val
+opt = the_sortenv_find(tid)
+//
+in
+//
+case+ opt of
+//
+| ~None_vt() => S2Tid0(tid)
+//
+| ~Some_vt(s2t) =>
+  (
+    case+ s2t of
+    | S2TXTsrt(s2t) => s2t
+    | S2TXTsub
+        (s2v, _) => s2v.sort()
+      // S2TXTsub
+(*
+    | S2TXTerr _(*loc*) => S2Tnone1(s1t0)
+*)
+  ) (* Some_vt *)
+//
+end // end of [auxid0]
 
 (* ****** ****** *)
 
@@ -243,7 +245,7 @@ auxapp2
 val () =
 println!
 ("\
-trans01_sort: \
+trans12_sort: \
 auxapp2: s1t0 = ", s1t0)
 *)
 //
@@ -987,7 +989,7 @@ isTOP0
 case+
 s1e.node() of
 | S1Eid0(sid) =>
-  sid = $SYM.QMARK_symbol
+  sid = $SYM.QMNON_symbol
 | _(*non-S1Eid0*) => false
 )
 fun
@@ -998,9 +1000,11 @@ isTOP1
 case+
 s1e.node() of
 | S1Eid0(sid) =>
-  sid = $SYM.QMNEG_symbol
+  sid = $SYM.QMLIN_symbol
 | _(*non-S1Eid0*) => false
 )
+
+(* ****** ****** *)
 
 fun
 isextp
@@ -1160,7 +1164,7 @@ val s1es =
 (
 case+
 s1e2.node() of
-| S1Elist(s1es) => s1es
+| S1El1st(s1es) => s1es
 | _(*non-list*) => list_sing(s1e2)
 ) : s1explst // end of [val]
 //
@@ -1198,7 +1202,7 @@ val s1es =
 (
 case+
 s1e2.node() of
-| S1Elist(s1es) => s1es
+| S1El1st(s1es) => s1es
 | _(*non-list*) => list_sing(s1e2)
 ) : s1explst // end of [val]
 //
@@ -1323,7 +1327,7 @@ auxapp1_cbv0_
 ( s1e0
 : s1exp): s2exp = let
 //
-val CBV0 = 0 // !
+val CBV0 = 0 // ~
 //
 val-
 S1Eapp1
@@ -1345,7 +1349,7 @@ auxapp1_cbv1_
 ( s1e0
 : s1exp): s2exp = let
 //
-val CBV1 = 1 // ~
+val CBV1 = 1 // !
 //
 val-
 S1Eapp1
@@ -1429,7 +1433,7 @@ val s1es =
 (
 case+
 s1e2.node() of
-| S1Elist(s1es) => s1es
+| S1El1st(s1es) => s1es
 | _(*non-list*) => list_sing(s1e2)
 ) : s1explst // end of [val]
 //
@@ -1524,7 +1528,7 @@ S1Enone(loc) =>
 case+
 s1e1.node() of
 | S1Eid0(sid) =>
-  sid = $SYM.QMARK_symbol
+  sid = $SYM.QMNON_symbol
 | _(*non-S1Eid0*) => false)
 | _(*non-S1Enone1*) => false
 )
@@ -1550,7 +1554,7 @@ S1Enone(loc) =>
 case+
 s1e1.node() of
 | S1Eid0(sid) =>
-  sid = $SYM.QMNEG_symbol
+  sid = $SYM.QMLIN_symbol
 | _(*non-S1Eid0*) => false)
 | _(*non-S1Enone1*) => false
 )
@@ -1624,7 +1628,7 @@ s2c.sort() of
 val s2cs = list_vt2t{s2cst}(s2cs)
 *)
 //
-in
+in//let
 //
 case+ s2cs of
 | list_nil() =>
@@ -1672,9 +1676,9 @@ val s2es =
 (
   case+
   s1e2.node() of
-  | S1Elist(xs) =>
+  | S1El1st(xs) =>
     trans12_sexplst_ci(xs)
-  | S1Elist(xs1, xs2) =>
+  | S1El2st(xs1, xs2) =>
     (
       s2es1 + s2es2
     ) where
@@ -1718,9 +1722,9 @@ s1e1.node() of
   (
   case+
   s1e2.node() of
-  | S1Elist(xs) =>
+  | S1El1st(xs) =>
     trans12_sexplst_ci(xs)
-  | S1Elist(xs1, xs2) =>
+  | S1El2st(xs1, xs2) =>
     (
       s2es1 + s2es2
     ) where
@@ -1881,7 +1885,7 @@ end // end of [auxapp2_2_]
 (* ****** ****** *)
 
 fun
-auxlist1
+auxl1st
 ( s1e0
 : s1exp): s2exp = let
 //
@@ -1890,11 +1894,11 @@ val () =
 println!
 ("\
 trans12_sexp:\
- auxlist1: s1e0 = ", s1e0)
+ auxl1st: s1e0 = ", s1e0)
 *)
 //
 val-
-S1Elist(s1es) = s1e0.node()
+S1El1st(s1es) = s1e0.node()
 //
 in
   if
@@ -1910,10 +1914,12 @@ in
   (
     s2exp_list1(trans12_sexplst(s1es))
   )
-end // end of [auxlist1]
+end // end of [auxl1st]
+
+(* ****** ****** *)
 
 fun
-auxlist2
+auxl2st
 ( s1e0
 : s1exp): s2exp = let
 // 
@@ -1922,11 +1928,11 @@ val () =
 println!
 ("\
 trans12_sexp:\
- auxlist2: s1e0 = ", s1e0)
+ auxl2st: s1e0 = ", s1e0)
 *)
 //
 val-
-S1Elist
+S1El2st
 (s1es1, s1es2) = s1e0.node()
 //
 in
@@ -1938,7 +1944,7 @@ case+ s1es1 of
   s2exp_list2
   (trans12_sexplst(s1es1), trans12_sexplst(s1es2))
 //
-end // end of [auxlist2]
+end // end of [auxl2st]
 
 (* ****** ****** *)
 
@@ -2134,11 +2140,8 @@ s1e0.node() of
 | S1Eapp1 _ => auxapp1(s1e0)
 | S1Eapp2 _ => auxapp2(s1e0)
 //
-| S1Elist
-    (_) => auxlist1(s1e0)
-| S1Elist
-    (_, _) => auxlist2(s1e0)
-  // end of [S1Elist]
+| S1El1st _ => auxl1st(s1e0)
+| S1El2st _ => auxl2st(s1e0)
 //
 | S1Etrcd1
     (k0, _) => auxtrcd11(s1e0)

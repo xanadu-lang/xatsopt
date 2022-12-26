@@ -287,18 +287,18 @@ typedef d1arglst = List0(d1arg)
 //
 datatype
 d1arg_node =
+//
 (*
 | D1ARGnone of token
 *)
 //
 |
 D1ARGsome_sta of (s1qualst)
-//
 |
-D1ARGsome_dyn1 of token // s0eid
+D1ARGsome_dyn1 of token // d0pid
 |
 D1ARGsome_dyn2 of
-(a1typlst(*arg0*), a1typlstopt(*opt1*))
+(a1typlst, a1typlstopt(*argopt2*))
 //
 fun
 d1arg_get_loc(d1arg): loc_t
@@ -436,8 +436,8 @@ d1pat_node =
 | D1Psarg of
   (s1arglst(*static*))
 //
-| D1Plist of d1patlst // temp.
-| D1Plist of
+| D1Pl1st of d1patlst // temp.
+| D1Pl2st of
   (d1patlst, d1patlst) // temp.
 //
 | D1Ptrcd1 of
@@ -633,8 +633,8 @@ d1exp_node =
 | D1Esqarg of s1explst
 | D1Etqarg of s1explst
 //
-| D1Elist of d1explst // temp.
-| D1Elist of
+| D1El1st of d1explst // temp.
+| D1El2st of
   (d1explst, d1explst) // temp.
 //
 | D1Enone of ()//HX: emptiness?

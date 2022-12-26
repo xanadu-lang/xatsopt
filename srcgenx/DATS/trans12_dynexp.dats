@@ -165,6 +165,47 @@ end
 (* ****** ****** *)
 //
 fun
+my_d2pat_con1
+( loc0
+: loc_t
+, d2c0
+: d2con): d2pat =
+let  
+val
+narg = d2c0.narg()
+val
+d2p0 = d2pat_con1(loc0, d2c0)
+in
+if
+(narg>0)
+then d2p0 else d2pat_dap0(d2p0)
+end // end of [my_d2pat_con1]
+
+(* ****** ****** *)
+//
+fun
+my_d2pat_sapp
+( loc0
+: loc_t
+, d2p1
+: d2pat
+, s2vs
+: s2varlst): d2pat =
+(
+case-
+d2p1.node() of
+| D2Pdap0(d2p1) =>
+  d2pat_dap0
+  (
+  d2pat_sapp(loc0, d2p1, s2vs)
+  )
+| _ (* non-D2Pdap0 *) =>
+  d2pat_sapp(loc0, d2p1, s2vs)
+)
+//
+(* ****** ****** *)
+//
+fun
 my_d2pat_dapp
 ( loc0
 : loc_t
@@ -173,7 +214,6 @@ my_d2pat_dapp
 , npf1: int
 , d2as
 : d2patlst): d2pat =
-(
 let
 (*
 val () =
@@ -226,49 +266,7 @@ d2a1.node() of
 ) (* end of [list_cons] *)
 ) (* end of [non-D2Pdap0] *)
 //
-end // end of [let]
-) (* end of [my_d2pat_dapp] *)
-//
-(* ****** ****** *)
-
-fun
-my_d2pat_con1
-( loc0
-: loc_t
-, d2c0
-: d2con): d2pat =
-let  
-val
-narg = d2c0.narg()
-val
-d2p0 = d2pat_con1(loc0, d2c0)
-in
-if
-(narg>0)
-then d2p0 else d2pat_dap0(d2p0)
-end // end of [my_d2pat_con1]
-
-(* ****** ****** *)
-//
-fun
-my_d2pat_sapp
-( loc0
-: loc_t
-, d2p1
-: d2pat
-, s2vs
-: s2varlst): d2pat =
-(
-case-
-d2p1.node() of
-| D2Pdap0(d2p1) =>
-  d2pat_dap0
-  (
-  d2pat_sapp(loc0, d2p1, s2vs)
-  )
-| _ (* non-D2Pdap0 *) =>
-  d2pat_sapp(loc0, d2p1, s2vs)
-)
+end (*let*) // end of [my_d2pat_dapp]
 //
 (* ****** ****** *)
 //
@@ -452,7 +450,7 @@ ifcase
 ) where
 {
 macdef WCARD = $SYM.WCARD_symbol
-} (* end of [isbtf] *)
+} (* end of [isany] *)
 
 (* ****** ****** *)
 
@@ -883,7 +881,7 @@ val npf2 =
 (
 case+
 d1p2.node() of
-| D1Plist(d1ps, _) =>
+| D1Pl2st(d1ps, _) =>
   list_length<d1pat>(d1ps)
 | _(* non-D2Plist *) => ~1): int
 //
@@ -892,10 +890,10 @@ val d2ps =
 case+
 d1p2.node() of
 |
-D1Plist
+D1Pl1st
 ( d1ps ) => trans12_dpatlst(d1ps)
 |
-D1Plist
+D1Pl2st
 (d1ps1, d1ps2) =>
 (
   d2ps1 + d2ps2) where
@@ -959,12 +957,18 @@ end (*let*) // end of [auxapp2(d1p0)]
 (* ****** ****** *)
 
 fun
-auxlist1
+auxl1st
 ( d1p0
 : d1pat): d2pat = let
 //
+(*
+val () =
+println!
+("auxl1st: d1p0 = ", d1p0)
+*)
+//
 val-
-D1Plist(d1ps) = d1p0.node()
+D1Pl1st(d1ps) = d1p0.node()
 //
 in
 //
@@ -983,15 +987,23 @@ d2pat_trcd1
   val d2ps = trans12_dpatlst(d1ps)
 }
 //
-end // end of [auxlist1]
+end // end of [auxl1st]
+
+(* ****** ****** *)
 
 fun
-auxlist2
+auxl2st
 ( d1p0
 : d1pat): d2pat = let
 //
+(*
+val () =
+println!
+("auxl2st: d1p0 = ", d1p0)
+*)
+//
 val-
-D1Plist
+D1Pl2st
 (d1ps1, d1ps2) = d1p0.node()
 //
 in
@@ -1004,7 +1016,7 @@ d2pat_trcd1
   val d2ps1 = trans12_dpatlst(d1ps1)
   val d2ps2 = trans12_dpatlst(d1ps2)
 }
-end // end of [auxlist2]
+end // end of [auxl2st]
 
 (* ****** ****** *)
 
@@ -1038,6 +1050,8 @@ val d2ps = trans12_dpatlst(d1ps)
 //
 end (*let*) // end of [ auxtrcd11 ]
 
+(* ****** ****** *)
+
 fun
 auxtrcd12
 ( d1p0
@@ -1070,7 +1084,7 @@ val d2ps1 = trans12_dpatlst(d1ps1)
 val d2ps2 = trans12_dpatlst(d1ps2)
 //
 } (*where*)
-end (*let*) // end of [ auxlist2 ]
+end (*let*) // end of [ auxtrcd12 ]
 
 (* ****** ****** *)
 
@@ -1092,10 +1106,8 @@ d1p0.node() of
 //
 | D1Papp2 _ => auxapp2(d1p0)
 //
-| D1Plist
-  (d1ps) => auxlist1(d1p0)
-| D1Plist
-  (xs1, xs2) => auxlist2(d1p0)
+| D1Pl1st _ => auxl1st(d1p0)
+| D1Pl2st _ => auxl2st(d1p0)
 //
 | D1Ptrcd1
   (tok, d1ps) => auxtrcd11(d1p0)
@@ -1226,11 +1238,11 @@ d2ps =
 case+
 d1p0.node() of
 |
-D1Plist
+D1Pl1st
 ( d1ps ) =>
 auxd1ps(d1ps)
 |
-D1Plist
+D1Pl2st
 (xs1, xs2) =>
 (
 npf :=
@@ -1424,11 +1436,11 @@ d2ps =
 case+
 d1p0.node() of
 |
-D1Plist
+D1Pl1st
 ( d1ps ) =>
 auxd1ps(d1ps)
 |
-D1Plist
+D1Pl2st
 (xs1, xs2) =>
 (
 npf :=
@@ -1977,7 +1989,7 @@ sym = dexpid_sym(tok)
 val
 opt = the_dexpenv_find(sym)
 //
-in
+in//let
 //
 case+ opt of
 |
@@ -2751,10 +2763,10 @@ g1ms =
 case+
 d1e2.node() of
 |
-D1Elist(d1es) =>
+D1El1st(d1es) =>
 auxd1es(d1es)
 |
-D1Elist(d1es1, d1es2) =>
+D1El2st(d1es1, d1es2) =>
 (
   g1ms1 + g1ms2
 ) where
@@ -2805,7 +2817,7 @@ val npf2 =
 (
 case+
 d1e2.node() of
-| D1Elist(d1es, _) =>
+| D1El2st(d1es, _) =>
   list_length<d1exp>(d1es)
 | _(* non-D2Elist *) => ~1): int
 //
@@ -2814,10 +2826,10 @@ val d2es =
 case+
 d1e2.node() of
 |
-D1Elist(d1es) =>
+D1El1st(d1es) =>
 trans12_dexplst(d1es)
 |
-D1Elist(d1es1, d1es2) =>
+D1El2st(d1es1, d1es2) =>
 (
   d2es1 + d2es2
 ) where
@@ -3052,7 +3064,7 @@ end // end of [auxwhere]
 (* ****** ****** *)
 
 fun
-auxlist1
+auxl1st
 ( d1e0
 : d1exp): d2exp = let
 //
@@ -3060,7 +3072,7 @@ val
 loc0 = d1e0.loc()
 //
 val-
-D1Elist(d1es) = d1e0.node()
+D1El1st(d1es) = d1e0.node()
 //
 in
 //
@@ -3079,10 +3091,10 @@ d2exp_trcd1
   val d2es = trans12_dexplst(d1es)
 }
 //
-end // end of [auxlist1]
+end // end of [auxl1st]
 
 fun
-auxlist2
+auxl2st
 ( d1e0
 : d1exp): d2exp = let
 //
@@ -3090,7 +3102,7 @@ val
 loc0 = d1e0.loc()
 //
 val-
-D1Elist
+D1El2st
 (xs1, xs2) = d1e0.node()
 //
 in
@@ -3103,7 +3115,7 @@ d2exp_trcd1
   val ys1 = trans12_dexplst(xs1)
   val ys2 = trans12_dexplst(xs2)
 }
-end // end of [auxlist2]
+end // end of [auxl2st]
 
 (* ****** ****** *)
 //
@@ -3313,12 +3325,12 @@ val d2es =
 case+
 d1e.node() of
 |
-D1Elist(d1es1) =>
+D1El1st(d1es1) =>
 (
   trans12_dexplst(d1es1)
 )
 |
-D1Elist
+D1El2st
 (d1es1, d1es2) =>
 let
   val () =
@@ -3554,10 +3566,8 @@ d1e0.node() of
 //
 | D1Ewhere _ => auxwhere(d1e0)
 //
-| D1Elist
-  ( d1es ) => auxlist1(d1e0)
-| D1Elist
-  ( _, _ ) => auxlist2(d1e0)
+| D1El1st _ => auxl1st(d1e0)
+| D1El2st _ => auxl2st(d1e0)
 //
 | D1Enone _ => auxnone(d1e0)
 | D1Eseqn _ => auxseqn(d1e0)
@@ -4019,7 +4029,7 @@ D1Cdefine
 //
 val
 sym0 = gexpid_sym(gid0)
-
+//
 val
 gmac =
 trans11_g1mdef(gmas, def1)
@@ -6234,7 +6244,7 @@ auxd1ts(d1ts) where
 {
 //
 fun
-auxd1t
+auxd1t0
 ( d1t0
 : d1tsort): sort2 = let
 //
@@ -6249,7 +6259,8 @@ val s2t0 = S2Tbas(T2BASdat(s2td))
 //
 in
   the_sortenv_add(tid, S2TXTsrt(s2t0)); s2t0
-end // end of [auxd1t]
+end // end of [auxd1t0]
+//
 and
 auxd1ts
 ( d1ts
@@ -6259,8 +6270,8 @@ auxd1ts
   (list_map<d1tsort><sort2>(d1ts))
 ) where
 {
-  implement
-  list_map$fopr<d1tsort><sort2>(d1t) = auxd1t(d1t)
+implement
+list_map$fopr<d1tsort><sort2>(d1t) = auxd1t0(d1t)
 } (* end of [auxd1ts] *)
 }
 //
@@ -6268,7 +6279,7 @@ val () =
 auxd1ts(d1ts, s2ts) where
 {
 fun
-auxd1t
+auxd1t0
 ( d1t0
 : d1tsort
 , s2t0: sort2): void = let
@@ -6308,22 +6319,24 @@ let
   s2c0 =
   s2cst_make_idst(tok, s2t1)
 (*
-  val () =
-  println!("aux_datasort: tok = ", tok)
-  val () =
-  println!("aux_datasort: s2t1 = ", s2t1)
+val () =
+println!("aux_datasort: tok = ", tok)
+val () =
+println!("aux_datasort: s2t1 = ", s2t1)
 *)
 in
   the_sexpenv_add_cst(s2c0); loop(s1cs)
 end // end of [list_cons]
-)
+//
+) (*case+*) // end of [loop]
 //
 in
 let
 val+
 D1TSORT(tok, s1cs) = d1t0.node() in loop(s1cs)
 end
-end // end of [auxd1t]
+end (*let*) // end of [auxd1t0]
+//
 and
 auxd1ts
 ( d1ts
@@ -6336,18 +6349,18 @@ list_nil() => ()
 |
 list_cons(d1t0, d1ts) =>
 let
-  val-
-  list_cons
-  (s2t0, s2ts) = s2ts
-  val () =
-  auxd1t(d1t0, s2t0) in auxd1ts(d1ts, s2ts)
-end // end of [auxd1ts]
-) (* end of [auxd1ts] *)
+val-
+list_cons
+(s2t0, s2ts) = s2ts
+val () =
+auxd1t0(d1t0, s2t0) in auxd1ts(d1ts, s2ts)
+end // end of [list_cons]
+) (*case+*) // end of [auxd1ts]
 }
 //
 in
 d2ecl_make_node(loc0, D2Cdatasort(d1cl, s2ts))
-end // end of [aux_datasort]
+end (*let*) // end of [aux_datasort]
 
 (* ****** ****** *)
 
@@ -6547,7 +6560,7 @@ in
   aux2_datype(s2c0, d1t0) in aux2_datypelst(s2cs, d1ts)
   end
 end // end of [let]
-) (* end of [aux2_datatypelst] *)
+) (* end of [aux2_datypelst] *)
 
 (* ****** ****** *)
 
@@ -7090,9 +7103,9 @@ Some(s1e0) =>
 (
 case+
 s1e0.node() of
-| S1Elist(s1es) =>
+| S1El1st(s1es) =>
   trans12_sexplst(s1es)
-| S1Elist(xs1, xs2) =>
+| S1El2st(xs1, xs2) =>
   (
     s2es1 + s2es2
   ) where
@@ -7159,14 +7172,14 @@ case+ s1is of
   (
   case+
   s1i0.node() of
-  | S1Elist(s1es) =>
+  | S1El1st(s1es) =>
     (
     list_cons(s2es, auxs1is(s1is))
     ) where
     {
       val s2es = trans12_sexplst(s1es)
     }
-  | S1Elist(xs1, xs2) =>
+  | S1El2st(xs1, xs2) =>
     (
     list_cons
     (s2es1 + s2es2, auxs1is(s1is))
@@ -7537,7 +7550,7 @@ val s2es = trans12_sexplst(s1es)
 //
 in
   ti2arg_make(loc0, s2es)
-end // end of [trans12_t1arg]
+end // end of [trans12_tiarg]
 //
 implement
 trans12_tiarglst

@@ -473,6 +473,7 @@ in
 //
 case+
 d1e0.node() of
+//
 | D1Eid0 _ => auxid0(d1e0)
 | D1Eint _ => auxint(d1e0)
 //
@@ -910,30 +911,6 @@ in
 end
 //
 and
-auxapps_2
-( g1f0
-: g1mac
-, g1ms
-: g1maclst
-) : g1mac =
-(
-case+ g1f0 of
-|
-G1Mlam0
-(gmas, body) =>
-(
-trans11_g1mac_subs(body, env0)
-) where
-{
-  val env0 =
-  g1menv_nil((*void*))
-  val env0 =
-  g1menv_extends(env0, gmas, g1ms)
-}
-| _(*non-G1Mlam*) => G1Mapps(g1f0, g1ms)
-)
-//
-and
 auxapps_1
 ( g1f0
 : g1mac
@@ -1078,6 +1055,30 @@ end // end of [isIDIV]
 // end-of-ifcase
 //
 end // end of [auxapps_1]
+//
+and
+auxapps_2
+( g1f0
+: g1mac
+, g1ms
+: g1maclst
+) : g1mac =
+(
+case+ g1f0 of
+|
+G1Mlam0
+(gmas, body) =>
+(
+trans11_g1mac_subs(body, env0)
+) where
+{
+  val env0 =
+  g1menv_nil((*void*))
+  val env0 =
+  g1menv_extends(env0, gmas, g1ms)
+}
+| _(*non-G1Mlam*) => G1Mapps(g1f0, g1ms)
+)
 //
 in(* in-of-local *)
 //
@@ -1285,11 +1286,11 @@ trans11_g1mac_subs
 (*
 val () =
 println!
-("trans11_g1mac_env: g1m0 = ", g1m0)
+("trans11_g1mac_subs: g1m0 = ", g1m0)
 *)
 }(*where*)//end of [trans11_g1mac_subs]
 
-end // end of [local]
+end // end of [local(trans11_g1mac_subs)]
 
 (* ****** ****** *)
 
@@ -1581,7 +1582,7 @@ d2exp_make_node
 (loc0, D2Edapp(d2f0, (~1), d2es))
 end
 //
-end // end of [auxapp]
+end // end of [auxapps]
 //
 in
 //

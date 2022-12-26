@@ -52,6 +52,9 @@ $(CPF) $(XATSHOME)/srcgenx/CATS/*.cats ./srcgenx/CATS/.
 HATS:: ; \
 $(CPF) $(XATSHOME)/srcgenx/HATS/*.hats ./srcgenx/HATS/.
 
+INIT:: ; \
+$(CPF) $(XATSHOME)/srcgenx/INIT/*.?ats ./srcgenx/INIT/.
+
 ######
 
 UTIL:: ; \

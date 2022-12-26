@@ -30,7 +30,13 @@ list_cons(x0, xs)
 #impltmp
 <a>(*tmp*)
 list_sing(x0) =
-list_cons(x0, list_nil())
+list_cons
+(x0, list_nil(*void*))
+#impltmp
+<a>(*tmp*)
+list_pair(x1,x2) =
+list_cons
+(x1, list_sing<a>(x2))
 
 (* ****** ****** *)
 //
@@ -180,6 +186,35 @@ case+ xs of
 | list_cons(_, _) => (true)
 ) (*case*) // end-of-[list_consq(xs)]
 //
+(* ****** ****** *)
+//
+#impltmp
+<a:type>
+list_singq
+  (xs) =
+(
+case+ xs of
+|
+list_nil
+((*void*)) => false
+|
+list_cons
+( x1, xs ) => list_nilq<>(xs)
+)
+//
+#impltmp
+<a:type>
+list_pairq
+  (xs) =
+(
+case+ xs of
+|
+list_nil
+((*void*)) => false
+|
+list_cons
+( x1, xs ) => list_singq<a>(xs)
+)
 (* ****** ****** *)
 //
 #impltmp
@@ -775,6 +810,24 @@ list_maprev_vt<a><a>(xs)
 #impltmp map$fopr<a><a>(x0) = x0
 }
 
+(* ****** ****** *)
+//
+#impltmp
+<x0>(*tmp*)
+list_filter(xs) =
+(
+list_vt2t
+(list_filter_vt<x0>(xs)))
+//
+#impltmp
+<x0>(*tmp*)
+list_filter_vt(xs) =
+let
+#typedef xs = list(x0)
+in // let
+gseq_filter_list<xs><x0>(xs)
+end (*let*) // list_filter_vt
+//
 (* ****** ****** *)
 //
 (*

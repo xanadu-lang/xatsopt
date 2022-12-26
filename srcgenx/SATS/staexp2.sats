@@ -165,7 +165,7 @@ where sort2lst = List0(sort2)
 typedef
 sort2opt = Option(sort2)
 typedef
-sort2lstst = List0(sort2lst)
+sort2lstlst = List0(sort2lst)
 typedef
 sort2lstopt = Option(sort2lst)
 
@@ -896,6 +896,11 @@ s2exp_get_node(s2exp): s2exp_node
 //
 overload .sort with s2exp_get_sort
 overload .node with s2exp_get_node
+//
+(*
+fun
+s2exp_set_sort(s2exp, sort2): void
+*)
 //
 (* ****** ****** *)
 //
