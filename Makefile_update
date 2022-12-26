@@ -20,6 +20,7 @@ update:: SATS
 update:: DATS
 update:: CATS
 update:: HATS
+update:: INIT
 update:: UTIL
 update:: CONTRIB
 
@@ -30,6 +31,7 @@ update:: PRESATS
 update:: PREDATS
 update:: PREHATS
 update:: PREDATSCATS
+update:: PREINIT
 update:: XATSLIB
 
 ######
@@ -92,10 +94,10 @@ $(CPF) $(XATSHOME)/prelude/DATS/VT/*.dats ./prelude/DATS/VT/.
 #
 PREHATS:: ; \
 $(CPF) $(XATSHOME)/prelude/HATS/*.hats ./prelude/HATS/.
-PREDATS:: ; \
+PREHATS:: ; \
 $(CPF) \
 $(XATSHOME)/prelude/HATS/CATS/JS/*.hats ./prelude/HATS/CATS/JS/.
-PREDATS:: ; \
+PREHATS:: ; \
 $(CPF) \
 $(XATSHOME)/prelude/HATS/CATS/Xint/*.hats ./prelude/HATS/CATS/Xint/.
 #
@@ -118,6 +120,11 @@ PREDATSCATS:: \
 PREDATSCATS_Xint
 PREDATSCATS_Xint:: ; \
 $(CPF) $(XATSHOME)/prelude/DATS/CATS/Xint/*.dats ./prelude/DATS/CATS/Xint/.
+#
+######
+#
+PREINIT:: ; \
+$(CPF) $(XATSHOME)/prelude/INIT/*.?ats ./prelude/INIT/.
 #
 ######
 #
