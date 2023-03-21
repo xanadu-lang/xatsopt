@@ -965,6 +965,9 @@ stropt1
 #sexpdef strn = string0
 #sexpdef strn = string1
 //
+#sexpdef strn0 = string0
+#sexpdef strn1 = string1
+//
 #typedef string = string0
 #typedef string(n:i0) = string1(n)
 //
@@ -1056,25 +1059,25 @@ a1ptr_view(a:vt,l:a0,n:i0)
 //
 datatype
 strmcon(a:type+) =
-| strmcon_nil of ((*void*))
-| strmcon_cons of (a, stream(a))
+|strmcon_nil of ((*void*))
+|strmcon_cons of (a, stream(a))
 and//datatype
 strxcon(a:type+) =
-| strxcon_cons of (a, streax(a))
+|strxcon_cons of (a, streax(a))
 //
 where
 {
 #typedef
 stream(a:t0) = lazy(strmcon(a))
 #typedef
-streax(a:t0) = lazy(strxcon(a))
-} (* where *) // [strmcom/strxcom]
+streax(a:t0) = lazy(strxcon(a)) }
+//(* where *) // [strmcom/strxcom]
 //
 (* ****** ****** *)
 #sexpdef
-strm(* a,n *) = stream(* a,n *)
+strm(* (a,n) *) = stream(*(a,n)*)
 #sexpdef
-strx(* a,n *) = streax(* a,n *)
+strx(* (a,n) *) = streax(*(a,n)*)
 (* ****** ****** *)
 //
 datavwtp
