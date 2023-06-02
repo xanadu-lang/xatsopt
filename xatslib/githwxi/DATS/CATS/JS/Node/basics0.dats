@@ -34,6 +34,22 @@ g_stdout< > = XATS2JS_NODE_g_stdout
 g_stderr< > = XATS2JS_NODE_g_stderr
 //
 (* ****** ****** *)
+//
+#impltmp
+<>(*tmp*)
+fpath_rexists
+  (path) =
+(
+XATS2JS_NODE_fs_rexists(path)
+) where
+{
+#extern
+fun
+XATS2JS_NODE_fs_rexists
+(path: strn): bool = $extnam()
+}
+//
+(* ****** ****** *)
 
 #impltmp
 <>(*tmp*)
@@ -44,7 +60,7 @@ val
 opt =
 XATS2JS_NODE_fs_readFileSync
   (path)
-in
+in//let
 if
 stropt_nilq(opt)
 then
@@ -56,7 +72,7 @@ end where
 #extern
 fun
 XATS2JS_NODE_fs_readFileSync
-(path: string): stropt = $extnam()
+(path: strn): stropt = $extnam()
 } (* end of [fpath_strmize_char] *)
 
 (* ****** ****** *)
