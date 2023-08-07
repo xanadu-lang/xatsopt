@@ -86,13 +86,26 @@ fun
 <xs:t0>
 <x0:t0>
 <ln:i0>
-gseqn_unlist(xs:list(x0,ln)): (xs)
+gseqn_unlist(list(x0,ln)): (xs)
 fun
 <xs:t0>
 <x0:t0>
 <ln:i0>
-gseqn_unrlist(xs:list(x0,ln)): (xs)
+gseqn_unrlist(list(x0,ln)): (xs)
 
+(* ****** ****** *)
+//
+fun
+<xs:t0>
+<x0:t0>
+<ln:i0>
+gseqn_unlist_vt(list_vt(x0,ln)): (xs)
+fun
+<xs:t0>
+<x0:t0>
+<ln:i0>
+gseqn_unrlist_vt(list_vt(x0,ln)): (xs)
+//
 (* ****** ****** *)
 //
 fun
@@ -257,6 +270,32 @@ gseqn1_drop
 {ln:int}
 {n0:nat|n0<ln}
 (xs:xs(ln), n0:sint(n0)): xs(ln-n0)
+//
+(* ****** ****** *)
+//
+fun
+<xs:
+i0->t0>
+<x0:t0>
+gseqn1_append
+{n1,n2:int}
+(xs1:xs(n1), xs2:xs(n2)): xs(n1+n2)
+//
+(* ****** ****** *)
+//
+fun
+<xs:
+i0->t0>
+<x0:t0>
+gseqn1_reverse
+{ln:int}(xs:xs(ln)): xs(ln)
+fun
+<xs:
+i0->t0>
+<x0:t0>
+gseqn1_rappend
+{n1,n2:int}
+(xs1:xs(n1), xs2:xs(n2)): xs(n1+n2)
 //
 (* ****** ****** *)
 //

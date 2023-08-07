@@ -37,8 +37,10 @@
 // Authoremail: gmhwxiATgmailDOTcom
 //
 (* ****** ****** *)
+(*
 #sexpdef strn = string0
 #sexpdef strn = string1
+*)
 (* ****** ****** *)
 //
 #typedef cgtz =
@@ -383,13 +385,13 @@ strntrm_concat_vt
 fun
 <n:i0>
 strn_tabulate
-( n0: int(n) ) : strn(n)
+( n0: sint(n) ) : strn(n)
 //
 fun<>
 strn_tabulate_cfr
 {n:nat}
 ( n0
-: int(n)
+: sint(n)
 , f0
 : nintlt(n) -<cfr> cgtz): strn(n)
 //

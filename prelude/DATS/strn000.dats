@@ -549,10 +549,10 @@ gseq_concat_strn<strm(strn)>(css)
 (* ****** ****** *)
 //
 #impltmp
-<n>(*tmp*)
+<n0>(*tmp*)
 strn_tabulate(n0) =
 (
-strn_vt2t(strn_vt_tabulate<n>(n0))
+strn_vt2t(strn_vt_tabulate<n0>(n0))
 )
 //
 (* ****** ****** *)

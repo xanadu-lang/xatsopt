@@ -1,76 +1,101 @@
+(***********************************************************************)
+(*                                                                     *)
+(*                         Applied Type System                         *)
+(*                                                                     *)
+(***********************************************************************)
+
+(*
+** ATS/Xanadu - Unleashing the Potential of Types!
+** Copyright (C) 2019 Hongwei Xi, ATS Trustful Software, Inc.
+** All rights reserved
+**
+** ATS is free software;  you can  redistribute it and/or modify it under
+** the terms of  the GNU GENERAL PUBLIC LICENSE (GPL) as published by the
+** Free Software Foundation; either version 3, or (at  your  option)  any
+** later version.
+** 
+** ATS is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without  even  the  implied  warranty  of MERCHANTABILITY or
+** FITNESS FOR A PARTICULAR PURPOSE.  See the  GNU General Public License
+** for more details.
+** 
+** You  should  have  received  a  copy of the GNU General Public License
+** along  with  ATS;  see the  file COPYING.  If not, please write to the
+** Free Software Foundation,  51 Franklin Street, Fifth Floor, Boston, MA
+** 02110-1301, USA.
+*)
+
 (* ****** ****** *)
 (*
-** for lists
+** HX: For lists
 *)
 (* ****** ****** *)
-
+//
+// Author: Hongwei Xi
+// (Some time in 2019)
+// Authoremail: gmhwxiATgmailDOTcom
+//
+(* ****** ****** *)
+//
 (*
 #staload
 "./../SATS/list000.sats"
-*)
-(*
 #staload
-"./../SATS/gseq000.sats"
-*)
-
+"./../SATS/gseq000.sats" *)
+//
 (* ****** ****** *)
 //
 #impltmp
 <>(*tmp*)
 list_nil_
-() = list_nil()
+((*0*)) = list_nil()
 #impltmp
 <a>(*tmp*)
 list_cons_
-(x0, xs) =
-list_cons(x0, xs)
+(x0,xs) = list_cons(x0,xs)
 //
 (* ****** ****** *)
 
 #impltmp
 <a>(*tmp*)
 list_sing(x0) =
-list_cons
-(x0, list_nil(*void*))
+list_cons(x0, list_nil(*0*))
 #impltmp
 <a>(*tmp*)
 list_pair(x1,x2) =
-list_cons
-(x1, list_sing<a>(x2))
+list_cons(x1, list_sing<a>(x2))
 
 (* ****** ****** *)
 //
 #impltmp
 <a>(*tmp*)
-list_btw(s1, f2) =
-list_vt2t
-(list_btw_vt<a>(s1, f2))
+list_btw(s1,f2) =
+list_vt2t(list_btw_vt<a>(s1,f2))
 #impltmp
 <a>(*tmp*)
-list_btwe(s1, f2) =
-list_vt2t
-(list_btwe_vt<a>(s1, f2))
+list_btwe(s1,f2) =
+list_vt2t(list_btwe_vt<a>(s1,f2))
 //
 (* ****** ****** *)
 //
 #impltmp
 <a>(*tmp*)
-list_btw_vt(s1, f2) =
+list_btw_vt(s1,f2) =
 let
 //
 #vwtpdef
-alst = list_vt(a)
+tres = list_vt( a )
 //
 fnx
 loop
 ( i0: sint
-, r0: alst): alst =
+, r0: tres): tres =
 if
 (i0 = f2)
 then r0 else
 loop(i0+1, r0) where
 {
-val x0 = g_i<a>(i0)
+val x0 = g_si<a>(i0)
 val r0 = list_vt_cons(x0, r0)
 } (*where*) // end-of(loop(i0,r0))
 //
@@ -82,18 +107,18 @@ end(*let*) // end-of-[list_btw_vt(s1,f2)]
 //
 #impltmp
 <a>(*tmp*)
-list_btwe_vt(s1, f2) =
+list_btwe_vt(s1,f2) =
 let
 //
 #vwtpdef
-alst = list_vt(a)
+tres = list_vt( a )
 //
 fnx
 loop
 ( i0: sint
-, r0: alst): alst =
+, r0: tres): tres =
 let
-val x0 = g_i<a>(i0)
+val x0 = g_si<a>(i0)
 val r0 = list_vt_cons(x0, r0)
 in//let
 if
@@ -173,8 +198,8 @@ list_nilq
   (xs) =
 (
 case+ xs of
-| list_nil() => true
-| list_cons(_, _) => false
+|list_nil() => true
+|list_cons(_, _) => false
 ) (*case*) // end-of-[list_nilq(xs)]
 #impltmp
 <>(*tmp*)
@@ -182,8 +207,8 @@ list_consq
   (xs) =
 (
 case+ xs of
-| list_nil() => false
-| list_cons(_, _) => (true)
+|list_nil() => false
+|list_cons(_, _) => (true)
 ) (*case*) // end-of-[list_consq(xs)]
 //
 (* ****** ****** *)
@@ -223,23 +248,56 @@ list_head(xs) =
 let
 val+
 list_cons
-(x0, xs) = xs in x0 end
+(x0 , xs) = xs in x0 end
 #impltmp
 <a:type>
 list_tail(xs) =
 let
 val+
 list_cons
-(x0, xs) = xs in xs end
+(x0 , xs) = xs in xs end
 //
+(*
 #impltmp
 <a:type>
 list_head_raw(xs) = (xs.0)
 (* end of [list_head_raw(xs)] *)
+*)
+//
+(*
 #impltmp
 <a:type>
 list_tail_raw(xs) = (xs.1)
 (* end of [list_tail_raw(xs)] *)
+*)
+//
+(* ****** ****** *)
+//
+#impltmp
+<a:type>
+list_head_opt(xs) =
+(
+case+ xs of
+|
+list_nil
+((*nil*)) => optn_vt_nil()
+|
+list_cons
+(x0 , xs) => optn_vt_cons(x0))
+(* end of [list_head_opt(xs)] *)
+//
+#impltmp
+<a:type>
+list_tail_opt(xs) =
+(
+case+ xs of
+|
+list_nil
+((*nil*)) => optn_vt_nil()
+|
+list_cons
+(x0 , xs) => optn_vt_cons(xs))
+(* end of [list_tail_opt(xs)] *)
 //
 (* ****** ****** *)
 //
@@ -287,28 +345,35 @@ loop
 , ys: list(a)): sint =
 (
 case+ xs of
+//
 |
 list_nil() =>
 (
 case+ ys of
-| list_nil() => 0
-| list_cons _ => -1
-)
+|
+list_nil() => (0)
+|
+list_cons _ => (-1))
+//
 |
 list_cons(x1, xs) =>
 (
 case+ ys of
-| list_nil() => 1
-| list_cons(y1, ys) =>
-  let
-  val sgn = g_cmp<a>(x1, y1)
-  in // let
-    if
-    (sgn = 0)
-    then loop(xs, ys) else sgn
-  end
-)
-)(*end-of-[loop(xs,ys)]*)
+|
+list_nil() => (1)
+|
+list_cons(y1, ys) =>
+let
+  val
+  sgn = g_cmp<a>(x1, y1)
+in // let
+  if
+  (sgn = 0)
+  then loop(xs, ys) else sgn
+end(*let*)//end-of-[list_cons]
+)(*case+*)//end-of-[list_cons]
+//
+)(*case+*)//end-of-[loop(xs,ys)]
 }(*where*)//end-of-[list_cmp(xs,ys)]
 //
 (* ****** ****** *)
@@ -329,11 +394,13 @@ loop{i,j:int}
 (
 case+ xs of
 |
-list_nil() => j0
+list_nil
+((*nil*)) => j0
 |
-list_cons(_, xs) => loop(xs, j0+1)
-)(*case+*)//end-of(loop(xs,j0))
-}(*where*)//end-of(list_length(xs))
+list_cons
+( _, xs ) => loop(xs, j0+1)
+)(*case+*)//end-of-(loop(xs, j0))
+}(*where*)//end-of-(list_length(xs))
 //
 (* ****** ****** *)
 //
@@ -360,7 +427,7 @@ if
 (i0 > 0)
 then
 loop(xs, pred(i0)) else x0
-endif // end-of(list_cons)
+endif // end-of-(list_cons)
 )(*case+*)//end-(loop(xs,i0))
 }(*where*)//end-(list_get_at(xs,i0))
 //
@@ -399,8 +466,8 @@ val ys =
 list_vt_cons(x1,ys) in auxmain(xs,i0,ys)
 end // end of [else]
 //
-end // end of [auxmain]
-} (*where*) // end of [list_fset_at]
+end // end of [auxmain(xs,i0,ys) ]
+}(*where*)//end-of-[list_fset_at(xs,i0,x0)]
 
 (* ****** ****** *)
 //
@@ -595,14 +662,14 @@ list_rappendx0_vt<a>(xs, list_vt_nil())
 #impltmp
 <x0>
 <r0>(*tmp*)
-list_foldl =
-gseq_foldl<list(x0)><x0>
+list_foldl(*(xs,r0)*) =
+gseq_foldl<list(x0)><x0><r0>(*(xs,r0)*)
 (* ****** ****** *)
 #impltmp
 <x0>
 <r0>(*tmp*)
-list_foldr =
-gseq_foldr<list(x0)><x0>
+list_foldr(*(xs,r0)*) =
+gseq_foldr<list(x0)><x0><r0>(*(xs,r0)*)
 (* ****** ****** *)
 //
 #impltmp
@@ -662,7 +729,7 @@ case+ xs of
   foreach$work<x0>(x0) in loop(xs)
   end
 )
-}(*where*)//end-of[list_foreach(xs)]
+}(*where*)//end-of-[list_foreach(xs)]
 //
 (* ****** ****** *)
 //
@@ -689,7 +756,7 @@ case+ xs of
   if
   g_cmp<x0>(x0,x1) <= 0
   then loop(x1, xs) else false ) )
-} (*where*) // end-of-[list_sortedq(xs)]
+}(*where*)//end-of-[list_sortedq(xs)]
 //
 (* ****** ****** *)
 //
@@ -763,11 +830,12 @@ in
 end
 ) (* end of [loop] *)
 //
-in
+in//let
 let
-var r0: list_vt(y0) in loop(xs, r0); r0
+var r0
+  : list_vt(y0) in loop(xs, r0); r0
 end
-end (*let*) // end of [list_map_vt(xs)]
+end (*let*) // end-of-[list_map_vt(xs)]
 //
 (* ****** ****** *)
 //
@@ -776,8 +844,7 @@ end (*let*) // end of [list_map_vt(xs)]
 list_maprev(xs) =
 (
 list_vt2t
-(list_maprev_vt<x0><y0>(xs))
-)
+(list_maprev_vt<x0><y0>(xs)))
 //
 #impltmp
 <x0><y0>
@@ -793,8 +860,8 @@ loop
 ( xs
 : list(x0, i)
 , ys
-: list_vt(y0, j)
-) : list_vt(y0, i+j) =
+: list_vt(y0, j))
+: list_vt(y0, i+j) =
 (
 case+ xs of
 |
@@ -808,9 +875,8 @@ list_cons(x0, xs) =>
   val y0 =
   map$fopr<x0><y0>(x0)
   val ys =
-  list_vt_cons( y0, ys )
-}
-) (* end of [loop] *)
+  list_vt_cons( y0, ys ) }
+) (* end of [loop(xs, ys)] *)
 //
 }(*where*)//end-(list_maprev_vt(xs))
 //
@@ -835,7 +901,7 @@ list_maprev_vt<a><a>(xs)
 ) where
 {
 #impltmp map$fopr<a><a>(x0) = x0
-}
+}(*where*)//end-of-[list_rcopy_vt]
 
 (* ****** ****** *)
 //
@@ -852,8 +918,8 @@ list_filter_vt(xs) =
 let
 #typedef xs = list(x0)
 in // let
-gseq_filter_list<xs><x0>(xs)
-end (*let*) // list_filter_vt
+  gseq_filter_list<xs><x0>(xs)
+end(*let*)//end-of-[list_filter_vt]
 //
 (* ****** ****** *)
 //
@@ -865,17 +931,19 @@ Quite an informative example:
 #impltmp
 <a>(*tmp*)
 list_tabulate_cfr
-  {n}(n0, f0) = let
+  {n}(n0, f0) =
+(
+list_tabulate<a><n>(n0)
+) where
+{
 //
 #impltmp
 tabulate$fopr<a><n>(i0) = f0(i0)
 //
-in
-  list_tabulate<a><n>(n0)
-end (*let*) // end of [list_tabulate_cfr]
+} (*where*) // end of [list_tabulate_cfr]
 //
 (* ****** ****** *)
-
+//
 #impltmp
 <a>(*tmp*)
 list_mergesort
@@ -886,7 +954,7 @@ list_vt2t(list_mergesort_vt<a>(xs))
 list_mergesort_vt
   (xs) =
 list_vt_mergesort0<a>(list_copy_vt<a>(xs))
-
+//
 (* ****** ****** *)
 //
 #impltmp
@@ -1104,19 +1172,23 @@ gseq_rlistize<list(a)><a> = list_rlistize<a>
 //
 #impltmp
 {a:t0}
-gseq_unstrm<list(a)><a> = list_make_strm<a>
+{b:vt}
+gseq_map_list
+<list(a)><a><b>(*xs*) = list_map_vt<a><b>
 #impltmp
 {a:t0}
-gseq_unstrm_vt<list(a)><a> = list_make_lstrm<a>
+{b:vt}
+gseq_map_rlist
+<list(a)><a><b>(*xs*) = list_maprev_vt<a><b>
 //
 (* ****** ****** *)
 //
 #impltmp
 {a:t0}
-gseq_map_list<list(a)><a> = list_map_vt<a>
+gseq_unstrm<list(a)><a> = list_make_strm<a>
 #impltmp
 {a:t0}
-gseq_map_rlist<list(a)><a> = list_maprev_vt<a>
+gseq_unstrm_vt<list(a)><a> = list_make_lstrm<a>
 //
 (* ****** ****** *)
 //
@@ -1138,21 +1210,23 @@ For gmap-operations
 *)
 //
 (* ****** ****** *)
+//
 #impltmp
 {k0:t0}
 {x0:t0}
 gmap_make_nil
-<list@(k0,x0)><k0><x0>
+<list@(k0,x0)><k0,x0>
   ((*void*)) =
 (
-  list_nil( (*void*) )
-)
+  list_nil((*void*)) )
+//
 (* ****** ****** *)
+//
 #impltmp
 {k0:t0}
 {x0:t0}
 gmap_keyq
-<list@(k0,x0)><k0><x0>
+<list@(k0,x0)><k0,x0>
   (kxs, key) =
 (
   loop(kxs)) where
@@ -1171,13 +1245,15 @@ if
 g_equal<k0>
 (key, kx1.0) then true else loop(kxs)
 )
-} (*where*) // end of [gmap_keyq]
+} (*where*) // end of [gmap_keyq(...)]
+//
 (* ****** ****** *)
+//
 #impltmp
 {k0:t0}
 {x0:t0}
 gmap_search_opt
-<list@(k0,x0)><k0><x0>
+<list@(k0,x0)><k0,x0>
 (kxs, key) =
 (
   loop(kxs)) where
@@ -1199,44 +1275,53 @@ g_equal<k0>
 then optn_vt_cons(kx1.1) else loop(kxs)
 )
 } (*where*)//end-of-[gmap_search_opt(...)]
+//
 (* ****** ****** *)
+//
 #impltmp
 {k0:t0}
 {x0:t0}
 gmap_insert_opt
-<list@(k0,x0)><k0><x0>
+<list@(k0,x0)><k0,x0>
 (kxs, key, itm) =
 optn_vt_nil(*void*) where
 {
 val () =
 ( kxs := list_cons((key, itm), kxs) )
 } (*where*)//end-of-[gmap_insert_opt(...)]
+//
 (* ****** ****** *)
 //
 #impltmp
 {k0:t0}
 {x0:t0}
 gmap_strmize
-<list@(k0,x0)><k0><x0> = list_strmize
+<
+list@(k0,x0)><k0,x0>(*0*) =
+list_strmize<(k0,x0)>(*0*)
 //
 #impltmp
 {k0:t0}
 {x0:t0}
 gmap_strmize_key
-<list@(k0,x0)><k0><x0>(kxs) =
+<list@(k0,x0)><k0,x0>(kxs) =
 (
-  gseq_map_strm(kxs)) where
+gseq_map_strm<kxs><k0>(kxs)
+) where
 {
+#typedef kxs = list@(k0,x0)
 #impltmp map$fopr<(k0,x0)><k0>(kx) = kx.0
 }
 #impltmp
 {k0:t0}
 {x0:t0}
 gmap_strmize_itm
-<list@(k0,x0)><k0><x0>(kxs) =
+<list@(k0,x0)><k0,x0>(kxs) =
 (
-  gseq_map_strm(kxs)) where
+gseq_map_strm<kxs><x0>(kxs)
+) where
 {
+#typedef kxs = list@(k0,x0)
 #impltmp map$fopr<(k0,x0)><x0>(kx) = kx.1
 }
 //

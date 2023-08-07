@@ -111,7 +111,7 @@ list_make_lstrm_vt(strm_vt(a)): list_vt(a)
 //
 fun<>
 list_nilq
-{a:type}{n:int}
+{a:t0}{n:i0}
 (xs: list(a, n)): bool( n=0 )
 fun<>
 list_consq
@@ -122,12 +122,12 @@ list_consq
 fun
 <a:t0>
 list_singq
-{a:type}{n:int}
+{ n:int }
 (xs: list(a, n)): bool( n=1 )
 fun
 <a:t0>
 list_pairq
-{a:type}{n:int}
+{ n:int }
 (xs: list(a, n)): bool( n=2 )
 (* ****** ****** *)
 //
@@ -331,12 +331,12 @@ fun
 <x0:t0>
 <y0:t0>
 list_map
-{n:int}(list(x0, n)): list(y0, n)
+{n:int}(list(x0,n)): list(y0,n)
 fun
 <x0:t0>
 <y0:vt>
 list_map_vt
-{n:int}(list(x0, n)): list_vt(y0, n)
+{n:int}(list(x0,n)): list_vt(y0,n)
 //
 (* ****** ****** *)
 //
@@ -353,64 +353,113 @@ fun
 <x0:t0>
 <y0:t0>
 list_maprev
-{n:int}(list(x0, n)): list(y0, n)
+{n:int}(list(x0,n)): list(y0,n)
 fun
 <x0:t0>
 <y0:vt>
 list_maprev_vt
-{n:int}(list(x0, n)): list_vt(y0, n)
+{n:int}(list(x0,n)): list_vt(y0,n)
 //
 (* ****** ****** *)
 //
 fun
-<a:t0>
+<x0:t0>
 list_copy_vt
-{n:int}(xs:list(a, n)): list_vt(a,n)
+{n:int}(list(x0,n)): list_vt(x0,n)
 fun
-<a:t0>
+<x0:t0>
 list_rcopy_vt
-{n:int}(xs:list(a, n)): list_vt(a,n)
+{n:int}(list(x0,n)): list_vt(x0,n)
 //
 (* ****** ****** *)
 fun
-<a:t0>
+<x0:t0>
 list_filter
-{n:int}(list(a, n)): listlte(a,n)
+{n:int}(list(x0,n)): listlte(x0,n)
 fun
-<a:t0>
+<x0:t0>
 list_filter_vt
-{n:int}(list(a, n)): listlte_vt(a,n)
+{n:int}(list(x0,n)): listlte_vt(x0,n)
 (* ****** ****** *)
 //
 fun
-<a:t0>
-<n:i0>
-list_tabulate(n0: int(n)): list(a, n)
+<x0:t0>
+<n0:i0>
+list_tabulate
+(n0: nint(n0)): list(x0,n0)//end-fun
 fun
-<a:t0>
+<x0:t0>
 list_tabulate_cfr
-{n:nat}
-( n0: int(n)
-, f0: nintlt(n) -<cfr> a): list(a, n)
+{n:int}
+(n0: nint(n)
+,f0: nintlt(n) -<cfr> x0): list(x0,n)
+//
+(* ****** ****** *)
+//
+(*
+HX-2023-08-03:
+For list-i-operations
+*)
 //
 (* ****** ****** *)
 //
 fun
-<a:t0>
+<x0:t0>
+list_iforall
+{n:int}(xs: list(x0, n)): bool//fun
+//
+fun
+<x0:t0>
+list_iforeach
+{n:int}(xs: list(x0, n)): void//fun
+//
+(* ****** ****** *)
+//
+fun
+<x0:t0>
+<y0:t0>
+list_imap
+{n:int}(xs: list(x0, n)): list(y0, n)
+fun
+<x0:t0>
+<y0:t0>
+list_imap_vt
+{n:int}(xs: list(x0, n)): list_vt(y0, n)
+//
+fun
+<x0:t0>
+<y0:t0>
+list_imaprev
+{n:int}(xs: list(x0, n)): list(y0, n)
+fun
+<x0:t0>
+<y0:t0>
+list_imaprev_vt
+{n:int}(xs: list(x0, n)): list_vt(y0, n)
+//
+(* ****** ****** *)
+(*
+HX-2023-08-03:
+Various special list-processing funs
+*)
+(* ****** ****** *)
+//
+fun
+<x0:t0>
 list_mergesort
-  {n:int}(xs: list(a, n)): list(a, n)
+{n:int}(xs: list(x0,n)): list(x0,n)
 fun
-<a:t0>
+<x0:t0>
 list_mergesort_vt
-  {n:int}(xs: list(a, n)): list_vt(a, n)
+{n:int}(xs: list(x0,n)): list_vt(x0,n)
 //
 (* ****** ****** *)
 //
 fun
-<a:t0>
+<x0:t0>
 list_subsetize_vt
 {n:int}
-(xs: list(a, n)): strm_vt(listlte_vt(a, n))
+(xs: list(x0,n)): strm_vt(listlte_vt(x0,n))
 //
 (* ****** ****** *)
 //
@@ -419,10 +468,8 @@ list_subsetize_vt
 //
 (* ****** ****** *)
 //
-#symload
-nil with list_nil of 000
-#symload
-cons with list_cons of 000
+#symload nil with list_nil of 000
+#symload cons with list_cons of 000
 //
 (* ****** ****** *)
 //
@@ -430,6 +477,9 @@ cons with list_cons of 000
 #symload eqzq with list_nilq of 1000
 #symload consq with list_consq of 1000
 #symload neqzq with list_consq of 1000
+//
+#symload singq with list_singq of 1000
+#symload pairq with list_pairq of 1000
 //
 (* ****** ****** *)
 //
@@ -468,11 +518,14 @@ cons with list_cons of 000
 #symload rcopy_vt with list_rcopy_vt of 1000
 //
 (* ****** ****** *)
-
+//
 #symload exists with list_exists of 1000
 #symload forall with list_forall of 1000
 #symload foreach with list_foreach of 1000
-
+//
+#symload iforall with list_iforall of 1000
+#symload iforeach with list_iforeach of 1000
+//
 (* ****** ****** *)
 #symload listize with list_listize of 1000
 #symload strmize with list_strmize of 1000
@@ -486,6 +539,11 @@ cons with list_cons of 000
 #symload maprev with list_maprev of 1000
 #symload maprev_vt with list_maprev_vt of 1000
 //
+#symload imap with list_imap of 1000
+#symload imap_vt with list_imap_vt of 1000
+#symload imaprev with list_imaprev of 1000
+#symload imaprev_vt with list_imaprev_vt of 1000
+//
 (* ****** ****** *)
 #symload mergesort with list_mergesort of 1000
 #symload mergesort_vt with list_mergesort_vt of 1000
@@ -496,18 +554,40 @@ cons with list_cons of 000
 // Sun Jul 24 01:02:26 EDT 2022
 //
 (* ****** ****** *)
+//
+fun
+<x0:t0>
+<y0:t0>
+list_map_c1fr
+{n:int}
+(xs:list(x0,n), f0:(x0)-<cfr>y0): list(y0,n)
 fun
 <x0:t0>
 <y0:t0>
 list_map_f1np
 {n:int}
-(xs:list(x0, n), f0:(x0)-<fnp>y0): list(y0, n)
+(xs:list(x0,n), f0:(x0)-<fnp>y0): list(y0,n)
+//
+(* ****** ****** *)
+//
+fun
+<x0:t0>
+<y0:vt>
+list_map_c1fr_vt
+{n:int}
+(xs:list(x0,n), f0:(x0)-<fnp>y0): list_vt(y0,n)
 fun
 <x0:t0>
 <y0:vt>
 list_map_f1np_vt
 {n:int}
-(xs:list(x0, n), f0:(x0)-<fnp>y0): list_vt(y0, n)
+(xs:list(x0,n), f0:(x0)-<fnp>y0): list_vt(y0,n)
+//
+(* ****** ****** *)
+#symload map_c1fr with list_map_c1fr of 1000
+#symload map_f1np with list_map_f1np of 1000
+#symload map_c1fr_vt with list_map_c1fr_vt of 1000
+#symload map_f1np_vt with list_map_f1np_vt of 1000
 (* ****** ****** *)
 
 (* end of [ATS3/XANADU_prelude_list000.sats] *)

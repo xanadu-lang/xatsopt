@@ -74,6 +74,7 @@ trans01_package
   (p0kg: d0parsed): d1transd
 //
 (* ****** ****** *)
+//
 fun
 trans02_package
   (p0kg: d0parsed): d2transd
@@ -96,13 +97,16 @@ trs03cmp30_package
   (p0kg: d0parsed): h0comped
 //
 (* ****** ****** *)
+//
 fun
 the_fixity_load
 (
   XATSENV: string
 ) : void =
   "ext#libxatsopt_the_fixity_load"
+//
 (* ****** ****** *)
+//
 fun
 the_basics_load
 ( XATSENV: string
@@ -119,6 +123,7 @@ the_prelude_load
   "ext#libxatsopt_the_prelude_load"
 //
 (* ****** ****** *)
+//
 fun
 the_preludes_load
 (
@@ -153,6 +158,7 @@ echo_argc_argv
 , argc: int(n), argv: !argv(n)): void
 //
 (* ****** ****** *)
+//
 fun
 xatsopt_main0
 {n:int | n >= 1}(int(n), !argv(n)): void

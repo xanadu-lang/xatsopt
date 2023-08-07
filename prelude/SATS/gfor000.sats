@@ -1,7 +1,40 @@
+(***********************************************************************)
+(*                                                                     *)
+(*                         Applied Type System                         *)
+(*                                                                     *)
+(***********************************************************************)
+
+(*
+** ATS/Xanadu - Unleashing the Potential of Types!
+** Copyright (C) 2022 Hongwei Xi, ATS Trustful Software, Inc.
+** All rights reserved
+**
+** ATS is free software;  you can  redistribute it and/or modify it under
+** the terms of  the GNU GENERAL PUBLIC LICENSE (GPL) as published by the
+** Free Software Foundation; either version 3, or (at  your  option)  any
+** later version.
+** 
+** ATS is distributed in the hope that it will be useful, but WITHOUT ANY
+** WARRANTY; without  even  the  implied  warranty  of MERCHANTABILITY or
+** FITNESS FOR A PARTICULAR PURPOSE.  See the  GNU General Public License
+** for more details.
+** 
+** You  should  have  received  a  copy of the GNU General Public License
+** along  with  ATS;  see the  file COPYING.  If not, please write to the
+** Free Software Foundation,  51 Franklin Street, Fifth Floor, Boston, MA
+** 02110-1301, USA.
+*)
+
 (* ****** ****** *)
 (*
 ** For forint-loops
 *)
+(* ****** ****** *)
+//
+// Author: Hongwei Xi
+// (Around some time in 2022)
+// Authoremail: gmhwxiATgmailDOTcom
+//
 (* ****** ****** *)
 //
 datatype
@@ -96,16 +129,16 @@ range1_rstrmize(range1(x0)): strm_vt(x0)
 //
 (* ****** ****** *)
 //
-#symload foldl with range1_foldl of 0100
+#symload foldl with range1_foldl of 1000
 //
-#symload forall with range1_forall of 0100
-#symload foreach with range1_foreach of 0100
+#symload forall with range1_forall of 1000
+#symload foreach with range1_foreach of 1000
 //
-#symload listize with range1_listize of 0100
-#symload strmize with range1_strmize of 0100
+#symload listize with range1_listize of 1000
+#symload strmize with range1_strmize of 1000
 //
-#symload rlistize with range1_rlistize of 0100
-#symload rstrmize with range1_rstrmize of 0100
+#symload rlistize with range1_rlistize of 1000
+#symload rstrmize with range1_rstrmize of 1000
 //
 (* ****** ****** *)
 

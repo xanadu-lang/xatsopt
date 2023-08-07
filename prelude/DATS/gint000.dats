@@ -57,9 +57,9 @@ Authoremail: gmhwxiATgmailDOTcom
 (* ****** ****** *)
 
 #impltmp
-g_i<sint>(i) = i // g_i: sint -> a
+g_si<sint>(i) = i // g_si: sint -> a
 #impltmp
-g_u<uint>(u) = u // g_u: uint -> a
+g_ui<uint>(u) = u // g_ui: uint -> a
 
 (* ****** ****** *)
 
@@ -206,9 +206,10 @@ let
 val xs = pred(xs)
 in//let
 if
-rforall$test<x0>(xs) then loop(xs) else false
-end
-else true // end of [else]
+rforall$test<x0>(xs)
+then loop(xs) else false
+end(*let*)// end-of-[then]
+else true // end-of-[else]
 } (* end of [gint_rforall_sint] *)
 //
 (* ****** ****** *)
@@ -317,6 +318,7 @@ strmcon_vt_cons
 }(*where*)//end-of(gint_strmize_nint)
 
 (* ****** ****** *)
+//
 #impltmp
 <>(*tmp*)
 gint_strmize_sint
@@ -324,9 +326,9 @@ gint_strmize_sint
 (
 if
 (i0 <= 0)
-then
-strm_vt_nil() else gint_strmize_nint(i0)
-)
+then strm_vt_nil((*void*))
+else gint_strmize_nint(i0))//#impltmp
+//
 (* ****** ****** *)
 //
 // HX:
@@ -337,14 +339,14 @@ strm_vt_nil() else gint_strmize_nint(i0)
 //
 (*
 #impltmp
-g_i<sint>(i) = i // see above
+g_si<sint>(i) = i // see above
 #impltmp
-g_u<uint>(u) = u // see above
+g_ui<uint>(u) = u // see above
 *)
 #impltmp
-g_i<uint>(i) = gint_sint2uint(i)
+g_si<uint>(i) = gint_sint2uint(i)
 #impltmp
-g_u<sint>(u) = gint_uint2sint(u)
+g_ui<sint>(u) = gint_uint2sint(u)
 //
 (* ****** ****** *)
 //

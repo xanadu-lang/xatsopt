@@ -40,7 +40,7 @@ the_s2exp_void = void
 #typedef
 the_s2exp_p1tr0 = p1tr0
 #typedef
-the_s2exp_p2tr0(a:vt) = p2tr(a)
+the_s2exp_p2tr0(a:vt) = p2tr0(a)
 //
 (* ****** ****** *)
 //
@@ -83,9 +83,9 @@ the_s2exp_ullint0 = ullint0
 (* ****** ****** *)
 //
 #typedef
-the_s2exp_lazy(a:t0) = lazy(a)
+the_s2exp_lazy0(a:t0) = lazy(a)
 #vwtpdef
-the_s2exp_llazy(a:vt) = lazy_vt(a)
+the_s2exp_llazy0(a:vt) = lazy_vt(a)
 //
 (* ****** ****** *)
 //
@@ -103,13 +103,17 @@ the_s2exp_loptn0(a:vt) = optn_vt(a)
 //
 (* ****** ****** *)
 //
+(*
 #vwtpdef
 the_s2exp_excptn(*void*) = excptn_vt
+*)
 //
 (* ****** ****** *)
 //
-#viewdef
-the_s2exp_a0p1tr(*void*) = a0ptr_view
+#viewdef // @
+the_s2exp_a0ptr(*void*) = a0ptr_view
+#viewdef // arrvw
+the_s2exp_a1ptr(*void*) = a1ptr_view
 //
 (* ****** ****** *)
 //
