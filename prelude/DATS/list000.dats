@@ -154,7 +154,7 @@ fnx
 loop
 {i,j:nat}.<i>.
 ( i0
-: int(i)
+: sint(i)
 , xs
 : list_vt(a, j))
 : list_vt(a, i+j) =
@@ -200,7 +200,7 @@ list_nilq
 case+ xs of
 |list_nil() => true
 |list_cons(_, _) => false
-) (*case*) // end-of-[list_nilq(xs)]
+) (*case+*)//end-of-[list_nilq(xs)]
 #impltmp
 <>(*tmp*)
 list_consq
@@ -209,7 +209,7 @@ list_consq
 case+ xs of
 |list_nil() => false
 |list_cons(_, _) => (true)
-) (*case*) // end-of-[list_consq(xs)]
+) (*case+*)//end-of-[list_consq(xs)]
 //
 (* ****** ****** *)
 //
@@ -387,10 +387,12 @@ list_length
 ) where
 {
 fnx
-loop{i,j:int}
+loop
+{i,j:int}
 ( xs
-: list(a, i)
-, j0: int(j)): int(i+j) =
+: list(a,i)
+, j0
+: sint( j )): sint(i+j) =
 (
 case+ xs of
 |
@@ -918,7 +920,7 @@ list_filter_vt(xs) =
 let
 #typedef xs = list(x0)
 in // let
-  gseq_filter_list<xs><x0>(xs)
+  gseq_filter_llist<xs><x0>(xs)
 end(*let*)//end-of-[list_filter_vt]
 //
 (* ****** ****** *)
@@ -1001,8 +1003,8 @@ map0$fopr
 (
   list_vt_cons(x0, xs))
 }
-in
-!(strm_vt_append<xs(n)>(res1, res2))
+in !
+(strm_vt_append0<xs(n)>(res1,res2))
 endlet // end of [list_cons(x0, xs)]
 )
 }(*where*)//end-of-[list_subsetize_vt(xs)]
@@ -1172,13 +1174,41 @@ gseq_rlistize<list(a)><a> = list_rlistize<a>
 //
 #impltmp
 {a:t0}
+{b:t0}
+gseq_map
+<list(a)><a>
+<list(b)><b>(*xs*) = list_map<a><b>
+#impltmp
+{a:t0}
+{b:t0}
+gseq_maprev
+<list(a)><a>
+<list(b)><b>(*xs*) = list_maprev<a><b>
+//
+#impltmp
+{a:t0}
 {b:vt}
-gseq_map_list
+gseq_map
+<list(a)><a>
+<list_vt(b)><b>(*xs*) = list_map_vt<a><b>
+#impltmp
+{a:t0}
+{b:vt}
+gseq_maprev
+<list(a)><a>
+<list_vt(b)><b>(*xs*) = list_maprev_vt<a><b>
+//
+(* ****** ****** *)
+//
+#impltmp
+{a:t0}
+{b:vt}
+gseq_map_llist
 <list(a)><a><b>(*xs*) = list_map_vt<a><b>
 #impltmp
 {a:t0}
 {b:vt}
-gseq_map_rlist
+gseq_map_rllist
 <list(a)><a><b>(*xs*) = list_maprev_vt<a><b>
 //
 (* ****** ****** *)
@@ -1198,7 +1228,7 @@ gseq_mergesort
 <list(x0)><x0>( xs ) = list_mergesort<x0>(xs)
 #impltmp
 {x0:t0}
-gseq_mergesort_list
+gseq_mergesort_llist
 <list(x0)><x0>( xs ) = list_mergesort_vt<x0>(xs)
 //
 (* ****** ****** *)
@@ -1306,7 +1336,7 @@ list_strmize<(k0,x0)>(*0*)
 gmap_strmize_key
 <list@(k0,x0)><k0,x0>(kxs) =
 (
-gseq_map_strm<kxs><k0>(kxs)
+gseq_map_lstrm<kxs><k0>(kxs)
 ) where
 {
 #typedef kxs = list@(k0,x0)
@@ -1318,7 +1348,7 @@ gseq_map_strm<kxs><k0>(kxs)
 gmap_strmize_itm
 <list@(k0,x0)><k0,x0>(kxs) =
 (
-gseq_map_strm<kxs><x0>(kxs)
+gseq_map_lstrm<kxs><x0>(kxs)
 ) where
 {
 #typedef kxs = list@(k0,x0)
@@ -1336,27 +1366,26 @@ For gseqn-operations
 (* ****** ****** *)
 //
 #impltmp
-{a:t0}{n:i0}
-gseqn_nilq<list(a,n)><a><n> = list_nilq<>
+{a:t0}
+gseqn_head<listn(a)><a> = list_head<a>
 #impltmp
-{a:t0}{n:i0}
-gseqn_consq<list(a,n)><a><n> = list_consq<>
+{a:t0}
+gseqn_tail<listn(a)><a> = list_tail<a>
 //
 (* ****** ****** *)
 //
 #impltmp
-{a:t0}{n:i0}
-gseqn_head<list(a,n)><a><n> = list_head<a>
+{a:t0}
+gseqn_nilq<listn(a)><a> = list_nilq{a}
 #impltmp
-{a:t0}{n:i0}
-gseqn_tail
-<list(a,n)><a><n><list(a,n-1)> = list_tail<a>
+{a:t0}
+gseqn_consq<listn(a)><a> = list_consq{a}
 //
 (* ****** ****** *)
 //
 #impltmp
-{a:t0}{n:i0}
-gseqn_length<list(a,n)><a><n> = list_length<a>
+{a:t0}
+gseqn_length<listn(a)><a> = list_length<a>
 //
 (* ****** ****** *)
 

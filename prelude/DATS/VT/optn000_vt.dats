@@ -1,6 +1,6 @@
 (* ****** ****** *)
 (*
-** For opts_vt
+** For optn_vt
 *)
 (* ****** ****** *)
 (*
@@ -8,28 +8,6 @@
 "./../SATS/optn.sats"
 *)
 (* ****** ****** *)
-//
-#impltmp
-<>(*tmp*)
-optn_vt_nilq(xs) =
-(
-case+ xs of
-| !
-optn_vt_nil() => true
-| !
-optn_vt_cons(x0) => false
-)
-//
-#impltmp
-<>(*tmp*)
-optn_vt_consq(xs) =
-(
-case+ xs of
-| !
-optn_vt_nil() => false
-| !
-optn_vt_cons(x0) => (true)
-)
 //
 #impltmp
 {a:vt}
@@ -47,10 +25,10 @@ case+ xs of
 optn_vt_nil() => ()
 | ~
 optn_vt_cons(x0) => g_free<a>(x0)
-)
+) (*case+*) // end of [optn_vt_free]
 //
 (* ****** ****** *)
-
+//
 #impltmp
 <a>(*tmp*)
 optn_vt_copy(xs) =
@@ -64,120 +42,243 @@ optn_vt_cons(x0) =>
 let
 val x0 =
 g_copy<a>(x0) in optn_vt_cons(x0)
-end
-) (* end of [optn_vt_copy] *)
-
+endlet // end of [optn_vt_cons(x0)]
+) (*case+*) // end of [optn_vt_copy]
+//
+#impltmp
+<a>(*tmp*)
+optn_vt_rcopy = optn_vt_copy<a>(*xs*)
+//
 (* ****** ****** *)
+//
+#impltmp
+<>(*tmp*)
+optn_vt_nilq1(xs) =
+(
+case+ xs of
+| !
+optn_vt_nil() => true
+| !
+optn_vt_cons(x0) => false)
+//
+#impltmp
+<>(*tmp*)
+optn_vt_consq1(xs) =
+(
+case+ xs of
+| !
+optn_vt_nil() => false
+| !
+optn_vt_cons(x0) => (true))
+//
+(* ****** ****** *)
+//
+#impltmp
+<a>(*tmp*)
+optn_vt_length0(xs) =
+(
+case+ xs of
+| ~
+optn_vt_nil() => ( 0 )
+| ~
+optn_vt_cons(x0) =>
+let
+val () =
+g_free<a>(x0) in 1 end )
 //
 #impltmp
 <a>(*tmp*)
 optn_vt_length1(xs) =
 (
 case+ xs of
-| !none_vt() => 0 | !some_vt(x0) => 1
-)
+| ! optn_vt_nil() => 0
+| ! optn_vt_cons(x0) => 1 )
 //
 (* ****** ****** *)
-
+//
 #impltmp
 <a>(*tmp*)
-optn_vt_forall0(xs) =
-(
-case+ xs of
-| ~optn_vt_nil() => true
-| ~optn_vt_cons(x0) => forall0$test<a>(x0)
-) (* end of [glseq_forall0] *)
-#impltmp
-<a>(*tmp*)
-optn_vt_forall1(xs) =
-(
-case+ xs of
-| !optn_vt_nil() => true
-| !optn_vt_cons(x0) => forall1$test<a>(x0)
-) (* end of [glseq_forall1] *)
-
-(* ****** ****** *)
-
-#impltmp
-<a>(*tmp*)
-optn_vt_foreach0(xs) =
-(
-case+ xs of
-| ~optn_vt_nil() => ()
-| ~optn_vt_cons(x0) => foreach0$work<a>(x0)
-) (* end of [glseq_foreach0] *)
-#impltmp
-<a>(*tmp*)
-optn_vt_foreach1(xs) =
-(
-case+ xs of
-| !optn_vt_nil() => ()
-| !optn_vt_cons(x0) => foreach1$work<a>(x0)
-) (* end of [glseq_foreach1] *)
-
-(* ****** ****** *)
-
-#impltmp
-<a>(*tmp*)
-optn_vt_listize(xs) =
+optn_vt_listize0(xs) =
 (
 case+ xs of
 | ~
-optn_vt_nil() => list_vt_nil()
+optn_vt_nil
+( (*void*) ) => list_vt_nil()
 | ~
-optn_vt_cons(x0) => list_vt_sing(x0)
-)
+optn_vt_cons
+(    x0    ) => list_vt_sing(x0))
+//
 #impltmp
 <a>(*tmp*)
-optn_vt_strmize(xs) =
+optn_vt_rlistize0(xs) =
+(
+case+ xs of
+| ~
+optn_vt_nil
+( (*void*) ) => list_vt_nil()
+| ~
+optn_vt_cons
+(    x0    ) => list_vt_sing(x0))
+//
+(* ****** ****** *)
+//
+#impltmp
+<a>(*tmp*)
+optn_vt_strmize0(xs) =
 $llazy
 (
 g_free(xs);
 case+ xs of
 | ~
-optn_vt_nil() => strmcon_vt_nil()
+optn_vt_nil() =>
+strmcon_vt_nil()
 | ~
-optn_vt_cons(x0) => strmcon_vt_sing(x0)
-)
-
-(* ****** ****** *)
-
+optn_vt_cons(x0) =>
+strmcon_vt_sing(x0))//optn_vt_strmize0
+//
 #impltmp
 <a>(*tmp*)
-optn_vt_rlistize(xs) =
+optn_vt_rstrmize0(xs) =
+$llazy
+(
+g_free(xs);
+case+ xs of
+| ~
+optn_vt_nil() =>
+strmcon_vt_nil()
+| ~
+optn_vt_cons(x0) =>
+strmcon_vt_sing(x0))//optn_vt_strmize0
+//
+(* ****** ****** *)
+//
+#impltmp
+<a>(*tmp*)
+optn_vt_forall0(xs) =
 (
 case+ xs of
 | ~
-optn_vt_nil() => list_vt_nil()
+optn_vt_nil() => (true)
 | ~
-optn_vt_cons(x0) => list_vt_sing(x0)
-)
-
+optn_vt_cons(x0) => forall0$test<a>(x0)
+) (*case+*)//end of [optn_vt_forall0(xs)]
+//
+#impltmp
+<a>(*tmp*)
+optn_vt_forall1(xs) =
+(
+case+ xs of
+| !
+optn_vt_nil() => (true)
+| !
+optn_vt_cons(x0) => forall1$test<a>(x0)
+) (*case+*)//end of [optn_vt_forall1(xs)]
+//
+(* ****** ****** *)
+//
+#impltmp
+<a>(*tmp*)
+optn_vt_foreach0(xs) =
+(
+case+ xs of
+| ~
+optn_vt_nil() => ((*void*))
+| ~
+optn_vt_cons(x0) => foreach0$work<a>(x0)
+) (*case+*)//end-of-[optn_vt_foreach0(xs)]
+//
+#impltmp
+<a>(*tmp*)
+optn_vt_foreach1(xs) =
+(
+case+ xs of
+| !
+optn_vt_nil() => ((*void*))
+| !
+optn_vt_cons(x0) => foreach1$work<a>(x0)
+) (*case+*)//end-of-[optn_vt_foreach1(xs)]
+//
+(* ****** ****** *)
+//
+#impltmp
+<a>(*tmp*)
+<b>(*tmp*)
+optn_vt_map0(xs) =
+(
+case+ xs of
+| ~
+optn_vt_nil() =>
+optn_vt_nil((*void*))
+| ~
+optn_vt_cons(x0) =>
+let
+val y0 =
+map0$fopr<a><b>(x0) in optn_vt_cons(y0)
+end//let
+) (*case+*) // end-of-[ optn_vt_map0(xs) ]
+//
+#impltmp
+<a>(*tmp*)
+<b>(*tmp*)
+optn_vt_map1(xs) =
+(
+case+ xs of
+| !
+optn_vt_nil() =>
+optn_vt_nil((*void*))
+| !
+optn_vt_cons(x0) =>
+let
+val y0 =
+map1$fopr<a><b>(x0) in optn_vt_cons(y0)
+end//let
+) (*case+*) // end-of-[ optn_vt_map1(xs) ]
+//
 (* ****** ****** *)
 //
 // For gseq-operations
 //
 (* ****** ****** *)
-
+//
 #impltmp
 {a:vt}
-glseq_forall0<optn_vt(a)><a> = optn_vt_forall0
+glseq_forall0
+<optn_vt(a)><a> = optn_vt_forall0<a>
 #impltmp
 {a:vt}
-glseq_forall1<optn_vt(a)><a> = optn_vt_forall1
-
+glseq_forall1
+<optn_vt(a)><a> = optn_vt_forall1<a>
+//
 (* ****** ****** *)
 //
 #impltmp
 {a:vt}
-glseq_listize<optn_vt(a)><a> = optn_vt_listize
+glseq_listize0
+<optn_vt(a)><a> = optn_vt_listize0<a>
 #impltmp
 {a:vt}
-glseq_strmize<optn_vt(a)><a> = optn_vt_strmize
+glseq_strmize0
+<optn_vt(a)><a> = optn_vt_strmize0<a>
 //
 #impltmp
 {a:vt}
-glseq_rlistize<optn_vt(a)><a> = optn_vt_rlistize
+glseq_rlistize0
+<optn_vt(a)><a> = optn_vt_rlistize0<a>
+//
+(* ****** ****** *)
+//
+#impltmp
+{a:vt}
+{b:vt}
+glseq_map0
+<optn_vt(a)><a>
+<optn_vt(b)><b> = optn_vt_map0<a><b>(*xs*)
+#impltmp
+{a:vt}
+{b:vt}
+glseq_map1
+<optn_vt(a)><a>
+<optn_vt(b)><b> = optn_vt_map1<a><b>(*xs*)
 //
 (* ****** ****** *)
 

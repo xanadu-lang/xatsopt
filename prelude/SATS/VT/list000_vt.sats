@@ -91,36 +91,6 @@ list_vt_pair(a, a): list_vt(a,2)
 //
 fun
 <a:vt>
-list_vt_make_nval
-{n:nat}
-(n0: int(n), x0: a): list_vt(a,n)
-//
-(* ****** ****** *)
-//
-fun
-<a:t0>
-list_vt_make_strm
-(  xs: strm(a)  ) : list_vt(a)
-fun
-<a:vt>
-list_vt_make_lstrm
-(  xs: strm_vt(a)  ) : list_vt(a)
-//
-(* ****** ****** *)
-//
-fun<>
-list_vt_nilq
-{a:vt}{n:int}
-(xs: !list_vt(a, n)): bool(n = 0)
-fun<>
-list_vt_consq
-{a:vt}{n:int}
-(xs: !list_vt(a, n)): bool(n > 0)
-//
-(* ****** ****** *)
-//
-fun
-<a:vt>
 list_vt_free(xs: ~list_vt(a)): void
 //
 (* ****** ****** *)
@@ -138,16 +108,44 @@ list_vt_rcopy
 //
 (* ****** ****** *)
 //
+fun<>
+list_vt_nilq1
+{a:vt}{n:int}
+(xs: !list_vt(a, n)): bool(n = 0)
+fun<>
+list_vt_consq1
+{a:vt}{n:int}
+(xs: !list_vt(a, n)): bool(n > 0)
+//
+(* ****** ****** *)
+//
 fun
 <a:vt>
 list_vt_length0
-{n:int}
-(xs: ~list_vt(a, n)): sint(n)
+{n:int}( ~list_vt(a, n)): sint(n)
 fun
 <a:vt>
 list_vt_length1
-{n:int}
-(xs: !list_vt(a, n)): sint(n)
+{n:int}( !list_vt(a, n)): sint(n)
+//
+(* ****** ****** *)
+//
+fun
+<a:vt>
+list_vt_make_nval
+{n:nat}
+(n0: sint(n), x0: a): list_vt(a,n)
+//
+(* ****** ****** *)
+//
+fun
+<a:t0>
+list_vt_make_strm
+(  xs : strm(a)  ) : list_vt(a)
+fun
+<a:vt>
+list_vt_make_lstrm
+(  xs : strm_vt(a)  ) : list_vt(a)
 //
 (* ****** ****** *)
 //
@@ -258,12 +256,12 @@ list_vt_foreach1(!list_vt(x0)): void
 //
 fun
 <x0:vt>
-list_vt_listize
+list_vt_listize0
 {n:int}
 (xs: ~list_vt(x0, n)): list_vt(x0, n)
 fun
 <x0:vt>
-list_vt_rlistize
+list_vt_rlistize0
 {n:int}
 (xs: ~list_vt(x0, n)): list_vt(x0, n)
 //
@@ -271,11 +269,11 @@ list_vt_rlistize
 //
 fun
 <x0:vt>
-list_vt_strmize
+list_vt_strmize0
 ( xs: ~list_vt( x0 ) ): strm_vt( x0 )
 fun
 <x0:vt>
-list_vt_rstrmize
+list_vt_rstrmize0
 ( xs: ~list_vt( x0 ) ): strm_vt( x0 )
 //
 (* ****** ****** *)
@@ -339,16 +337,17 @@ cons_vt with list_vt_cons
 
 (* ****** ****** *)
 //
-#symload
-nilq with list_vt_nilq of 1000
-#symload
-consq with list_vt_consq of 1000
 (*
 #symload
-nilq1 with list_vt_nilq of 1000
+nilq with list_vt_nilq1 of 1000
 #symload
-consq1 with list_vt_consq of 1000
+consq with list_vt_consq1 of 1000
 *)
+//
+#symload
+nilq1 with list_vt_nilq1 of 1000
+#symload
+consq1 with list_vt_consq1 of 1000
 //
 (* ****** ****** *)
 //
@@ -387,6 +386,7 @@ reverse with list_vt_reverse0 of 1000
 #symload
 rappend with list_vt_rappend0 of 1000
 *)
+//
 #symload
 reverse0 with list_vt_reverse0 of 1000
 #symload
@@ -413,17 +413,33 @@ suffixq0 with list_vt_suffixq0 of 1000
 (* ****** ****** *)
 //
 #symload
-listize with list_vt_listize of 1000
+listize0 with list_vt_listize0 of 1000
 #symload
-strmize with list_vt_strmize of 1000
+rlistize0 with list_vt_rlistize0 of 1000
 //
 (* ****** ****** *)
 //
 #symload
-rlistize with list_vt_rlistize of 1000
+strmize0 with list_vt_strmize0 of 1000
 #symload
-rstrmize with list_vt_rstrmize of 1000
+rstrmize0 with list_vt_rstrmize0 of 1000
 //
+(* ****** ****** *)
+//
+(*
+#symload map with list_vt_map0 of 1000
+*)
+#symload map0 with list_vt_map0 of 1000
+#symload map1 with list_vt_map1 of 1000
+//
+(* ****** ****** *)
+
+(*
+#symload maprev with list_vt_maprev0 of 1000
+*)
+#symload maprev0 with list_vt_maprev0 of 1000
+#symload maprev1 with list_vt_maprev1 of 1000
+
 (* ****** ****** *)
 
 (*
@@ -456,4 +472,4 @@ rstrmize with list_vt_rstrmize of 1000
 //
 (* ****** ****** *)
 
-(* end of [prelude_list000_vt.sats] *)
+(* end of [ATS3/XANADU_prelude_list000_vt.sats] *)

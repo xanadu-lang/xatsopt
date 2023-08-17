@@ -124,6 +124,22 @@ fun
 g_noteq(a, a): bool
 //
 (* ****** ****** *)
+//
+fun
+<a:vt>
+gl_equal0(~a, ~a): bool
+fun
+<a:vt>
+gl_equal1(!a, !a): bool
+//
+fun
+<a:vt>
+gl_noteq0(~a, ~a): bool
+fun
+<a:vt>
+gl_noteq1(!a, !a): bool
+//
+(* ****** ****** *)
 (*
 HX-2020-11-12:
 reference equality
@@ -144,8 +160,10 @@ widely used for equality
 #symload == with g_eqref
 #symload !== with g_neqrf
 //
+(*
 #symload === with g_eqref
 #symload !=== with g_neqrf
+*)
 //
 (* ****** ****** *)
 //
@@ -827,6 +845,33 @@ foreach0
 (xs:vt, x0:t0) = (~xs, x0 -<cfr> void) -<cfr> void
 #typedef
 foreach1
+(xs:vt, x0:t0) = (!xs, x0 -<cfr> void) -<cfr> void
+(* ****** ****** *)
+#typedef
+rstrmize
+(xs:t0, x0:t0) = ( xs) -<cfr> strm_vt(x0)
+#typedef
+rstrmize0
+(xs:vt, x0:vt) = (~xs) -<cfr> strm_vt(x0)
+(* ****** ****** *)
+#typedef
+rforall
+(xs:t0, x0:t0) = ( xs, x0 -<cfr> bool) -<cfr> bool
+#typedef
+rforall0
+(xs:vt, x0:vt) = (~xs, x0 -<cfr> bool) -<cfr> bool
+#typedef
+rforall1
+(xs:vt, x0:vt) = (!xs, x0 -<cfr> bool) -<cfr> bool
+(* ****** ****** *)
+#typedef
+rforeach
+(xs:t0, x0:t0) = ( xs, x0 -<cfr> void) -<cfr> void
+#typedef
+rforeach0
+(xs:vt, x0:t0) = (~xs, x0 -<cfr> void) -<cfr> void
+#typedef
+rforeach1
 (xs:vt, x0:t0) = (!xs, x0 -<cfr> void) -<cfr> void
 (* ****** ****** *)
 //

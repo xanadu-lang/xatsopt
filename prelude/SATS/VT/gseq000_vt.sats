@@ -18,21 +18,36 @@ glseq_cons(x0, xs): xs
 fun
 <xs:vt>
 <x0:vt>
-glseq_nilq(!xs): bool
-fun
-<xs:vt>
-<x0:vt>
-glseq_consq(!xs): bool
-//
-(*
-fun
-<xs:vt>
-<x0:vt>
 glseq_nilq1(!xs): bool
 fun
 <xs:vt>
 <x0:vt>
 glseq_consq1(!xs): bool
+//
+//
+(* ****** ****** *)
+//
+fun
+<xs:vt>
+<x0:vt>
+glseq_copy(xs: !xs): (xs)
+(*
+fun
+<xs:vt>
+<x0:vt>
+glseq_copy1(xs: !xs): (xs)
+*)
+(* ****** ****** *)
+//
+fun
+<xs:vt>
+<x0:vt>
+glseq_free(xs: ~xs): void
+(*
+fun
+<xs:vt>
+<x0:vt>
+glseq_free0(xs: ~xs): void
 *)
 //
 (* ****** ****** *)
@@ -40,22 +55,11 @@ glseq_consq1(!xs): bool
 fun
 <xs:vt>
 <x0:vt>
-glseq_copy(!xs): (xs)
+glseq_head1_raw(!xs): (x0)
 fun
 <xs:vt>
 <x0:vt>
-glseq_free(~xs): void
-//
-(* ****** ****** *)
-//
-fun
-<xs:vt>
-<x0:vt>
-glseq_head_raw(!xs): x0
-fun
-<xs:vt>
-<x0:vt>
-glseq_tail_raw(~xs): xs
+glseq_tail0_raw(~xs): (xs)
 //
 (* ****** ****** *)
 //
@@ -100,15 +104,27 @@ glseq_print1(xs: !xs): void
 fun
 <xs:vt>
 <x0:vt>
-glseq_print$beg((*void*)): void
+glseq_print0$beg((*void*)): void
 fun
 <xs:vt>
 <x0:vt>
-glseq_print$end((*void*)): void
+glseq_print1$beg((*void*)): void
 fun
 <xs:vt>
 <x0:vt>
-glseq_print$sep((*void*)): void
+glseq_print0$end((*void*)): void
+fun
+<xs:vt>
+<x0:vt>
+glseq_print1$end((*void*)): void
+fun
+<xs:vt>
+<x0:vt>
+glseq_print0$sep((*void*)): void
+fun
+<xs:vt>
+<x0:vt>
+glseq_print1$sep((*void*)): void
 //
 (* ****** ****** *)
 //
@@ -126,35 +142,42 @@ glseq_length1(!xs): nint
 fun
 <xs:vt>
 <x0:vt>
-glseq_drop0
-(xs: ~xs, n0: sint): xs
+glseq_drop0(xs: ~xs, n0: sint): xs
 fun
 <xs:vt>
 <x0:vt>
-glseq_drop1
-(xs: !xs, n0: sint): xs
+glseq_drop1(xs: !xs, n0: sint): xs
 
 (* ****** ****** *)
 //
 fun
 <xs:vt>
 <x0:vt>
-glseq_listize(~xs): list_vt(x0)
+glseq_listize0(~xs): list_vt(x0)
 fun
 <xs:vt>
 <x0:vt>
-glseq_strmize(~xs): strm_vt(x0)
+glseq_listize1(!xs): list_vt(x0)
+//
+fun
+<xs:vt>
+<x0:vt>
+glseq_strmize0(~xs): strm_vt(x0)
+fun
+<xs:vt>
+<x0:vt>
+glseq_strmize1(!xs): strm_vt(x0)
 //
 (* ****** ****** *)
 //
 fun
 <xs:vt>
 <x0:vt>
-glseq_rlistize(~xs): list_vt(x0)
+glseq_rlistize0(~xs): list_vt(x0)
 fun
 <xs:vt>
 <x0:vt>
-glseq_rstrmize(~xs): strm_vt(x0)
+glseq_rstrmize0(~xs): strm_vt(x0)
 //
 (* ****** ****** *)
 //
@@ -186,12 +209,10 @@ glseq_unrlist_vt(list_vt(x0)): (xs)
 //
 fun
 <xs:vt>
-<x0:vt>
-glseq_append0(xs, xs): xs
+<x0:vt>glseq_append0(xs, xs): xs
 fun
 <xs:vt>
-<x0:vt>
-glseq_extend0(xs, x0): xs
+<x0:vt>glseq_extend0(xs, x0): xs
 //
 (* ****** ****** *)
 fun
@@ -202,8 +223,8 @@ fun
 //
 fun
 <xs:vt>
-<x0:vt>
-glseq_reverse0(xs: xs): xs
+<x0:vt>glseq_reverse0(xs: xs): xs
+//
 fun
 <xs:vt>
 <x0:vt>
@@ -249,6 +270,15 @@ fun
 <x0:vt>
 glseq_exists1(!xs): bool
 //
+fun
+<xs:vt>
+<x0:vt>
+glseq_rexists0(~xs): bool
+fun
+<xs:vt>
+<x0:vt>
+glseq_rexists1(!xs): bool
+//
 (* ****** ****** *)
 //
 fun
@@ -278,6 +308,15 @@ fun
 <x0:vt>
 glseq_rforall1(!xs): bool
 //
+fun
+<xs:vt>
+<x0:vt>
+glseq_rforeach0(~xs): void
+fun
+<xs:vt>
+<x0:vt>
+glseq_rforeach1(!xs): void
+//
 (* ****** ****** *)
 //
 (*
@@ -303,12 +342,12 @@ fun
 <xs:vt>
 <x0:vt>
 <y0:vt>
-glseq_map0_list(~xs): list_vt(y0)
+glseq_map0_llist(~xs): list_vt(y0)
 fun
 <xs:vt>
 <x0:vt>
 <y0:vt>
-glseq_map1_list(!xs): list_vt(y0)
+glseq_map1_llist(!xs): list_vt(y0)
 //
 (* ****** ****** *)
 //
@@ -316,57 +355,52 @@ fun
 <xs:vt>
 <x0:vt>
 <y0:vt>
-glseq_map0_strm(~xs): strm_vt(y0)
+glseq_map0_lstrm(~xs): strm_vt(y0)
 fun
 <xs:vt>
 <x0:vt>
 <y0:vt>
-glseq_map1_strm(!xs): strm_vt(y0)
+glseq_map1_lstrm(!xs): strm_vt(y0)
+//
+(* ****** ****** *)
+//
+fun
+<xs:vt>
+<x0:vt>
+<y0:vt>
+glseq_map0_rllist(~xs): list_vt(y0)
+fun
+<xs:vt>
+<x0:vt>
+<y0:vt>
+glseq_map1_rllist(!xs): list_vt(y0)
 //
 (* ****** ****** *)
 //
 (*
 HX-2022-06-02:
 [copy] is just map1-identity
-[copy_list] is just [listize1]
-[copy_strm] is just [strmize1]
+[copy_llist] is just [listize1]
+[copy_lstrm] is just [strmize1]
 *)
 //
 fun
 <xs:vt>
 <x0:vt>
-glseq_copy_list(!xs): list_vt(x0)
+glseq_copy_llist(!xs): list_vt(x0)
 fun
 <xs:vt>
 <x0:vt>
-glseq_copy_strm(!xs): strm_vt(x0)
+glseq_copy_lstrm(!xs): strm_vt(x0)
 //
 fun
 <xs:vt>
 <x0:vt>
-glseq_rcopy_list(!xs): list_vt(x0)
+glseq_rcopy_llist(!xs): list_vt(x0)
 fun
 <xs:vt>
 <x0:vt>
-glseq_rcopy_strm(!xs): strm_vt(x0)
-//
-(* ****** ****** *)
-//
-fun
-<xs:vt>
-<x0:vt>
-<y0:vt>
-glseq_map0_rlist(~xs): list_vt(y0)
-fun
-<xs:vt>
-<x0:vt>
-<y0:vt>
-glseq_map0_rstrm(~xs): strm_vt(y0)
-fun
-<xs:vt>
-<x0:vt>
-<y0:vt>
-glseq_map1_rlist(!xs): list_vt(y0)
+glseq_rcopy_lstrm(!xs): strm_vt(x0)
 //
 (* ****** ****** *)
 //
@@ -377,11 +411,11 @@ HX-2022-06-02:
 fun
 <xs:vt>
 <x0:vt>
-glseq_copy_rlist(!xs): list_vt(x0)
+glseq_copy_rllist(!xs): list_vt(x0)
 fun
 <xs:vt>
 <x0:vt>
-glseq_rcopy_rlist(!xs): list_vt(x0)
+glseq_rcopy_rllist(!xs): list_vt(x0)
 //
 (* ****** ****** *)
 //
@@ -395,11 +429,11 @@ glseq_filter0(~xs): ( xs )
 fun
 <xs:vt>
 <x0:vt>
-glseq_filter0_list(~xs): list_vt(x0)
+glseq_filter0_llist(~xs): list_vt(x0)
 fun
 <xs:vt>
 <x0:vt>
-glseq_filter0_strm(~xs): strm_vt(x0)
+glseq_filter0_lstrm(~xs): strm_vt(x0)
 //
 (* ****** ****** *)
 //
@@ -407,54 +441,48 @@ fun
 <xs:vt>
 <x0:vt>
 <y0:vt>
-glseq_mapopt0_strm(~xs): strm_vt(y0)
+glseq_mapopt0_lstrm(~xs): strm_vt(y0)
 //
 fun
 <xs:vt>
 <x0:vt>
 <y0:vt>
-glseq_maplist0_strm(~xs): strm_vt(y0)
+glseq_maplist0_lstrm(~xs): strm_vt(y0)
 fun
 <xs:vt>
 <x0:vt>
 <y0:vt>
-glseq_mapoptn0_strm(~xs): strm_vt(y0)
+glseq_mapoptn0_lstrm(~xs): strm_vt(y0)
 fun
 <xs:vt>
 <x0:vt>
 <y0:vt>
-glseq_mapstrm0_strm(~xs): strm_vt(y0)
+glseq_mapstrm0_lstrm(~xs): strm_vt(y0)
 //
 (* ****** ****** *)
 //
 fun
 <x0:vt>
-glseq_add$nil
-  ( (*void*) ): (x0)
+glseq_add0$nil(): (x0)
+fun
+<xs:vt>
+<x0:vt>glseq_add0(xs): (x0)
+//
 fun
 <x0:vt>
-glseq_mul$nil
-  ( (*void*) ): (x0)
+glseq_mul0$nil(): (x0)
+fun
+<xs:vt>
+<x0:vt>glseq_mul0(xs): (x0)
 //
 fun
 <xs:vt>
 <x0:vt>
-glseq_add0(xs): (x0)
+<y0:vt>glseq_map0_add0(xs): (y0)
 fun
 <xs:vt>
 <x0:vt>
-glseq_mul0(xs): (x0)
-//
-fun
-<xs:vt>
-<x0:vt>
-<y0:vt>
-glseq_map0_add0(xs): (y0)
-fun
-<xs:vt>
-<x0:vt>
-<y0:vt>
-glseq_map0_mul0(xs): (y0)
+<y0:vt>glseq_map0_mul0(xs): (y0)
 //
 (* ****** ****** *)
 //
@@ -464,30 +492,24 @@ glseq_map0_mul0(xs): (y0)
 //
 fun
 <xs:vt>
-<x0:vt>
-glseq_iexists0(~xs): bool
+<x0:vt>glseq_iexists0(~xs): bool
 fun
 <xs:vt>
-<x0:vt>
-glseq_iexists1(!xs): bool
+<x0:vt>glseq_iexists1(!xs): bool
 //
 fun
 <xs:vt>
-<x0:vt>
-glseq_iforall0(~xs): bool
+<x0:vt>glseq_iforall0(~xs): bool
 fun
 <xs:vt>
-<x0:vt>
-glseq_iforall1(!xs): bool
+<x0:vt>glseq_iforall1(!xs): bool
 //
 fun
 <xs:vt>
-<x0:vt>
-glseq_iforeach0(~xs): void
+<x0:vt>glseq_iforeach0(~xs): void
 fun
 <xs:vt>
-<x0:vt>
-glseq_iforeach1(!xs): void
+<x0:vt>glseq_iforeach1(!xs): void
 //
 (* ****** ****** *)
 //
@@ -500,14 +522,12 @@ fun
 <xs:vt
 ,ys:vt>
 <x0:vt>
-glseq_z2cmp00
-(xs: ~xs, ys: ~ys): sint
+glseq_z2cmp00(xs: ~xs, ys: ~ys): sint
 fun
 <xs:vt
 ,ys:vt>
 <x0:vt>
-glseq_z2cmp11
-(xs: !xs, ys: !ys): sint
+glseq_z2cmp11(xs: !xs, ys: !ys): sint
 //
 (* ****** ****** *)
 //
@@ -516,8 +536,7 @@ fun
 ,ys:vt>
 <x0:vt
 ,y0:vt>
-glseq_z2forall0
-  (xs: ~xs, ys: ~ys): bool
+glseq_z2forall0(xs: ~xs, ys: ~ys): bool
 //
 (* ****** ****** *)
 //
@@ -526,15 +545,13 @@ fun
 ,ys:vt>
 <x0:vt
 ,y0:vt>
-glseq_z2forcmp0
-  (xs: ~xs, ys: ~ys): sint
+glseq_z2forcmp0(xs: ~xs, ys: ~ys): sint
 fun
 <xs:vt
 ,ys:vt>
 <x0:vt
 ,y0:vt>
-glseq_z2forcmp1
-  (xs: !xs, ys: !ys): sint
+glseq_z2forcmp1(xs: !xs, ys: !ys): sint
 //
 (* ****** ****** *)
 //
@@ -543,14 +560,75 @@ fun
 ,ys:vt>
 <x0:vt
 ,y0:vt>
-glseq_z2foreach0
-  (xs: ~xs, ys: ~ys): void
+glseq_z2foreach0(xs: ~xs, ys: ~ys): void
 //
 (* ****** ****** *)
 //
-// HX-2020-05-31:
-// symbol overloading for gseq_vt
+(*
+HX-2023-08-14:
+higher-order glseq-functions
+*)
+// lam
+// $lam $lam?
+// lamfnp lamcfr
+// llamcfp llamenv
+//
+(* ****** ****** *)
+//
+// HX: glseq_foldl0/1
+//
+(* ****** ****** *)
+fun
+<xs:vt>
+<x0:vt>
+<r0:vt>
+glseq_foldl0_c2fr
+(~xs, r0, f0: (r0, x0)-<cfr>r0): r0
+fun
+<xs:vt>
+<x0:vt>
+<r0:vt>
+glseq_foldl1_c2fr
+(!xs, r0, f0: (r0, x0)-<cfr>r0): r0
+(* ****** ****** *)
+fun
+<xs:vt>
+<x0:vt>
+<r0:vt>
+glseq_foldr0_c2fr
+(~xs, r0, f0: (x0, r0)-<cfr>r0): r0
+fun
+<xs:vt>
+<x0:vt>
+<r0:vt>
+glseq_foldr1_c2fr
+(!xs, r0, f0: (x0, r0)-<cfr>r0): r0
+(* ****** ****** *)
+//
+(*
+HX-2020-05-31:
+symbol overloading for gseq_vt
+*)
+//
+(* ****** ****** *)
+(*
+HX-2023-08-14:
+Mon Aug 14 13:03:44 EDT 2023
+On a second thought, overloading seems to work well
+with closed templates!
+*)
+(* ****** ****** *)
+//
+#symload
+foldl0_cfr with glseq_foldl0_c2fr of 0100
+#symload
+foldl1_cfr with glseq_foldl1_c2fr of 0100
+//
+#symload
+foldr0_cfr with glseq_foldr0_c2fr of 0100
+#symload
+foldr1_cfr with glseq_foldr1_c2fr of 0100
 //
 (* ****** ****** *)
 
-(* end of [prelude_gseq000_vt.sats] *)
+(* end of [ATS/XANADU_prelude_gseq000_vt.sats] *)

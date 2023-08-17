@@ -16,7 +16,7 @@ UN =
 <map>
 <key,itm>
 gmap_size(kxs) =
-strm_vt_length
+strm_vt_length0
 (gmap_strmize<map><key,itm>(kxs))
 (* ****** ****** *)
 //
@@ -80,7 +80,7 @@ g_print<key>( k0 );
 strn_print<>("->"); g_print<itm>( x0 )
 ) // end-of-[gmap_print$keyval(k0,x0)]
 (* ****** ****** *)
-
+//
 #impltmp
 <map>
 <key,itm>
@@ -95,11 +95,32 @@ case+ opt of
 | ~
 optn_vt_nil() =>
 gmap_search$exn
-<map><key,itm>((*void*))
+<map><key,itm>(kxs, k0)
 | ~
 optn_vt_cons(x0) => ( x0 ) // found!
-end (*let*)//end-of[gmap_search(kxs,k0)]
-
+end(*let*)//end-of[gmap_search(kxs,k0)]
+//
+#impltmp
+<map>
+<key,itm>
+gmap_search$exn
+  (kxs, k0) = $raise NotFoundExn((*0*))
+//
+(* ****** ****** *)
+//
+#impltmp
+<map>
+<key,itm>
+gmap_search_opt
+(kxs, k0) =
+try
+optn_vt_cons
+(
+gmap_search
+<map><key,itm>(kxs, k0)) with
+| ~NotFoundExn() => optn_vt_nil((*0*))
+end(*try*)//end-of[gmap_search_opt(...)]
+//
 (* ****** ****** *)
 //
 #impltmp
@@ -188,7 +209,7 @@ gmap_unstrm_vt
 gmap_unlist_vt(kxs) =
 gmap_unstrm_vt
 <map><key,itm>
-(list_vt_strmize<(key,itm)>(kxs))
+(list_vt_strmize0<(key,itm)>(kxs))
 //
 (* ****** ****** *)
 //

@@ -226,7 +226,7 @@ gint_listize_nint
 map$fopr<x0><y0>(x0) = x0
 //
 in
-  gint_map_list_nint<y0>( xs )
+  gint_map_llist_nint<y0>( xs )
 end // end of [gint_listize_nint]
 
 (* ****** ****** *)
@@ -244,14 +244,14 @@ map$fopr
 <x0><y0>(x0) = ( xs-1-x0 )
 //
 in
-  gint_map_list_nint<y0>( xs )
+  gint_map_llist_nint<y0>( xs )
 end // end of [gint_rlistize_nint]
 
 (* ****** ****** *)
 
 #impltmp
 <y0:vt>
-gint_map_list_nint
+gint_map_llist_nint
   {n}(xs) = let
 //
 #typedef x0 = nintlt(n)
@@ -286,7 +286,7 @@ let
 val i0 = 0
 var r0: list_vt(y0) in loop(i0, r0); r0
 end
-end (* end of [gint_map_list_nint] *)
+end (* end of [gint_map_llist_nint(xs)] *)
 
 (* ****** ****** *)
 
@@ -382,12 +382,29 @@ gseq_rforall<xs><x0> = gint_rforall_sint<>
 (* ****** ****** *)
 //
 #impltmp
+gseq_listize<xs><x0> = gint_listize_sint<>
+#impltmp
 gseq_strmize<xs><x0> = gint_strmize_sint<>
 //
 (* ****** ****** *)
 
-end // end of [local]
+endloc // end of [local(gint_... -> gseq_...)]
 
 (* ****** ****** *)
+//
+(*
+HX-2023-08-15:
+Tue Aug 15 08:23:58 EDT 2023
+*)
+//
+#impltmp
+gint_repeat_sint_c0fr
+<(*none*)>(sint, work) =
+(
+  gint_foreach_sint<>(sint)) where
+{
+  #impltmp foreach$work<nint>(_) = work() }
+//
+(* ****** ****** *)
 
-(* end of [ATS3/XANADU_prelude_gint000.dats] *)
+(* end of [ATS3/XANADU_prelude_DATS_gint000.dats] *)

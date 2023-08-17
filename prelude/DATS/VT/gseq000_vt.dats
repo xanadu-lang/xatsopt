@@ -3,14 +3,6 @@
 ** for gl-sequences
 *)
 (* ****** ****** *)
-//
-(*
-#staload
-"./..\
-/SATS/VT/gseq000_vt.sats"
-*)
-//
-(* ****** ****** *)
 #staload UN =
 "prelude/SATS/unsafex.sats"
 (* ****** ****** *)
@@ -19,7 +11,7 @@
 <xs><x0>
 glseq_copy(xs) =
 glseq_unlist_vt<xs><x0>
-(glseq_copy_list<xs><x0>(xs))
+(glseq_copy_llist<xs><x0>(xs))
 
 (* ****** ****** *)
 
@@ -40,28 +32,31 @@ foreach0$work<x0> = g_free<x0>
 <xs><x0>
 glseq_uncons_exn
   (xs) =
+(
 if
-glseq_nilq<xs><x0>(xs)
+glseq_nilq1<xs><x0>(xs)
 then let
-val
-() = g_free<xs>(xs)
+val () = g_free<xs>(xs)
 in
-$raise SubscriptExn()
+(
+  $raise SubscriptExn())
 end // end of [then]
 else
-glseq_uncons_raw<xs><x0>(xs)
+glseq_uncons_raw<xs><x0>(xs))
 //
 #impltmp
 <xs><x0>
 glseq_uncons_opt
   (xs) =
+(
 if
-glseq_nilq<xs><x0>(xs)
+glseq_nilq1<xs><x0>(xs)
 then
-optn_vt_nil((*void*))
+(
+  optn_vt_nil((*void*)))
 else
 optn_vt_cons
-(glseq_uncons_raw<xs><x0>(xs))
+(glseq_uncons_raw<xs><x0>(xs)))
 //
 (* ****** ****** *)
 
@@ -89,18 +84,56 @@ z2forcmp0$fcmp<x0,x0> = gl_cmp00<x0>
 }(*where*) // [glseq_cmp00/z2forcmp0]
 
 (* ****** ****** *)
-
+//
+#impltmp
+<xs><x0>
+glseq_print0(xs) =
+let
+//
+val () =
+glseq_print0$beg
+<xs><x0>((*void*))
+//
+val () =
+(
+glseq_iforeach0<xs><x0>(xs)
+) where
+{
+//
+#impltmp
+iforeach0$work<x0>
+  (i0, x0) =
+(
+  gl_print0<x0>(x0)
+) where
+{
+val () =
+  if
+  (i0 > 0)
+  then
+  glseq_print0$sep<xs><x0>() }
+//
+} (* where *)
+//
+val () =
+glseq_print0$end<xs><x0>((*0*))
+//
+endlet // end of [glseq_print0(xs)]
+//
+(* ****** ****** *)
+//
 #impltmp
 <xs><x0>
 glseq_print1(xs) =
 let
 //
 val () =
-glseq_print$beg<xs><x0>()
+glseq_print1$beg
+<xs><x0>((*void*))
 //
 val () =
 (
-  glseq_iforeach1<xs><x0>(xs)
+glseq_iforeach1<xs><x0>(xs)
 ) where
 {
 //
@@ -111,29 +144,39 @@ iforeach1$work<x0>
   gl_print1<x0>(x0)
 ) where
 {
-  val () =
+val () =
   if
   (i0 > 0)
-  then glseq_print$sep<xs><x0>()
-} (* where *)
+  then
+  glseq_print1$sep<xs><x0>() }
 //
 } (* where *)
 //
 val () =
-glseq_print$end<xs><x0>((*void*))
+glseq_print1$end<xs><x0>((*0*))
 //
-endlet (* end of [glseq_print1] *)
-
+endlet // end of [glseq_print1(xs)]
+//
 (* ****** ****** *)
 #impltmp
 <xs><x0>
-glseq_print$beg() = strn_print("(")
+glseq_print0$beg() = strn_print("(")
 #impltmp
 <xs><x0>
-glseq_print$end() = strn_print(")")
+glseq_print0$end() = strn_print(")")
 #impltmp
 <xs><x0>
-glseq_print$sep() = strn_print(";")
+glseq_print0$sep() = strn_print(";")
+(* ****** ****** *)
+#impltmp
+<xs><x0>
+glseq_print1$beg() = strn_print("(")
+#impltmp
+<xs><x0>
+glseq_print1$end() = strn_print(")")
+#impltmp
+<xs><x0>
+glseq_print1$sep() = strn_print(";")
 (* ****** ****** *)
 //
 #impltmp
@@ -179,37 +222,38 @@ foldl1$fopr
 (*
 #impltmp
 <xs><x0>
-glseq_listize(xs) =
-strm_vt_listize<x0>
-(glseq_strmize<xs><x0>(xs))
+glseq_listize0(xs) =
+strm_vt_listize0
+  (glseq_strmize0<xs><x0>(xs))
 *)
+#impltmp
+<xs><x0>
+glseq_listize0(xs) =
+let
+#impltmp
+map0$fopr<x0><x0>(x0) = x0
+in//let
+glseq_map0_llist<xs><x0><x0>(xs)
+end(*let*)//end(glseq_listize0(xs))
+//
+(* ****** ****** *)
+//
 (*
 #impltmp
 <xs><x0>
-glseq_rlistize(xs) =
-strm_vt_rlistize<x0>
-(glseq_strmize<xs><x0>(xs))
+glseq_rlistize0(xs) =
+strm_vt_rlistize0
+  (glseq_strmize0<xs><x0>(xs))
 *)
-//
 #impltmp
 <xs><x0>
-glseq_listize(xs) =
+glseq_rlistize0(xs) =
 let
 #impltmp
 map0$fopr<x0><x0>(x0) = x0
-in
-glseq_map0_list<xs><x0><x0>(xs)
-end(*let*)//end(glseq_listize(xs))
-//
-#impltmp
-<xs><x0>
-glseq_rlistize(xs) =
-let
-#impltmp
-map0$fopr<x0><x0>(x0) = x0
-in
-glseq_map0_rlist<xs><x0><x0>(xs)
-end(*let*)//end(glseql_rlistize(xs))
+in//let
+glseq_map0_rllist<xs><x0><x0>(xs)
+end(*let*)//end(glseql_rlistize0(xs))
 //
 (* ****** ****** *)
 
@@ -277,7 +321,7 @@ end // end of [foreach1$work]
 //
 #impltmp
 <xs><x0><y0>
-glseq_map0_list
+glseq_map0_llist
   (xs) = let
 //
 #vwtpdef
@@ -311,13 +355,13 @@ glseq_foldl0<xs><x0><r0>(xs, p0)
 in//let
 $UN.p2tr_set<yy>
 (pz,list_vt_nil()); $UN.castlin01(r0)
-end(*let*)//end-[glseq_map0_list/foldl]
+end(*let*)//end-[glseq_map0_llist/foldl]
 //
 (* ****** ****** *)
 //
 #impltmp
 <xs><x0><y0>
-glseq_map0_rlist
+glseq_map0_rllist
   (xs) = let
 //
 #vwtpdef r0 = list_vt(y0)
@@ -335,13 +379,13 @@ foldl0$fopr
 list_vt_cons(map0$fopr<x0><y0>(x0), r0)
 }
 //
-end(*let*)//end-[glseq_map0_rlist/foldl0]
+end(*let*)//end-[glseq_map0_rllist/foldl0]
 //
 (* ****** ****** *)
 //
 #impltmp
 <xs><x0><y0>
-glseq_map1_list
+glseq_map1_llist
   (xs) = let
 //
 #vwtpdef
@@ -375,70 +419,67 @@ glseq_foldl1<xs><x0><r0>(xs, p0)
 in
 $UN.p2tr_set<yy>
 (pz,list_vt_nil()); $UN.castlin01(r0)
-end(*let*)//end-[glseq_map1_list/foldl]
+end(*let*)//end-[glseq_map1_llist/foldl]
 //
 (* ****** ****** *)
 //
 #impltmp
 <xs><x0>
-glseq_copy_list
+glseq_copy_llist
   (xs) =
 let
   #impltmp
   map1$fopr<x0><x0>(x0) = x0
 in
-  glseq_map1_list<xs><x0><x0>(xs)
-end(*let*)//end-of-[glseq_copy_list/map1]
+(
+  glseq_map1_llist<xs><x0><x0>( xs ))
+end(*let*)//end-of-[glseq_copy_llist/map1]
 //
 (* ****** ****** *)
-
+//
 #impltmp
 <xs><x0><y0>
-glseq_map0_strm(xs) =
-let
-val xs =
-glseq_strmize<xs><x0>(xs)
-in(*in-of-let*)
+glseq_map0_lstrm(xs) =
 (
-  strm_vt_map0<x0><y0>(xs)
-)
-end(*let*)//end-[glseq_map0_strm/strmize]
-
+  strm_vt_map0<x0><y0>(xs) ) where
+{
+  val xs = glseq_strmize0<xs><x0>(xs)
+}(*where*)//end-[glseq_map0_lstrm/strmize0]
+//
 #impltmp
 <xs><x0><y0>
-glseq_map1_strm(xs) =
+glseq_map1_lstrm(xs) =
 let
   val xs = g_copy<xs>(xs)
 in//let
 (
-  glseq_map0_strm<xs><x0><y0>(xs)
+  glseq_map0_lstrm<xs><x0><y0>(xs)
 ) where
 {
   #impltmp
   map0$fopr<x0><y0>(x0) =
-  (  free(x0); y0  ) where
-  { val y0 = map1$fopr<x0><y0>(x0) }
-}
-end(*let*)//end-[glseq_map0_strm/strmize]
-
+  ( g_free(x0); y0 ) where
+  { val y0 = map1$fopr<x0><y0>(x0) } }
+end(*let*)//end-[glseq_map1_lstrm/strmize0]
+//
 (* ****** ****** *)
 //
 #impltmp
 <xs><x0>
-glseq_copy_strm
+glseq_copy_lstrm
   (xs) =
 let
   #impltmp
   map1$fopr<x0><x0>(x0) = x0
 in//let
-  glseq_map1_strm<xs><x0><x0>(xs)
-end(*let*)//end-of-[glseq_copy_strm/map1]
+  glseq_map1_lstrm<xs><x0><x0>(xs)
+end(*let*)//end-of-[glseq_copy_lstrm/map1]
 //
 (* ****** ****** *)
 //
 #impltmp
 <xs><x0><y0>
-glseq_map1_rlist
+glseq_map1_rllist
   (xs) = let
 //
 #vwtpdef r0 = list_vt(y0)
@@ -451,12 +492,11 @@ glseq_foldl1
 {
 #impltmp
 foldl1$fopr
-< x0 >< r0 >
-(r0, x0) =
+< x0 >< r0 >(r0, x0) =
 list_vt_cons(map1$fopr<x0><y0>(x0), r0)
 }
 //
-end(*let*)//end-of(glseq_map0_rlist/foldl0)
+end(*let*)//end-of(glseq_map0_rllist/foldl0)
 //
 (* ****** ****** *)
 //
@@ -465,24 +505,28 @@ end(*let*)//end-of(glseq_map0_rlist/foldl0)
 glseq_filter0
   (  xs  ) =
 glseq_unstrm_vt<xs><x0>
-(glseq_filter0_strm<xs><x0>(xs))
+(glseq_filter0_lstrm<xs><x0>(xs))
 //
 (* ****** ****** *)
 //
 #impltmp
 <xs><x0>
-glseq_filter0_list
+glseq_filter0_llist
   (  xs  ) =
-strm_vt_listize<x0>
-(glseq_filter0_strm<xs><x0>(xs))
+(
+strm_vt_listize0
+(
+glseq_filter0_lstrm<xs><x0>(xs)))
 //
 (* ****** ****** *)
 //
 #impltmp
 <xs><x0>
-glseq_filter0_strm
+glseq_filter0_lstrm
   (  xs  ) =
-strm_vt_filter0<x0>(glseq_strmize<xs><x0>(xs))
+(
+  strm_vt_filter0
+  (glseq_strmize0<xs><x0>(xs)) )
 //
 (* ****** ****** *)
 //
@@ -490,7 +534,16 @@ strm_vt_filter0<x0>(glseq_strmize<xs><x0>(xs))
 <xs><x0>
 glseq_forall0
   (  xs  ) =
-strm_vt_forall0<x0>(glseq_strmize<xs><x0>(xs))
+(
+  strm_vt_forall0
+  (glseq_strmize0<xs><x0>(xs)) )
+#impltmp
+<xs><x0>
+glseq_forall1
+  (  xs  ) =
+(
+  strm_vt_forall0
+  (glseq_strmize1<xs><x0>(xs)) )
 //
 (* ****** ****** *)
 //
@@ -503,10 +556,26 @@ glseq_exists0
   forall0$test<x0>(x0) =
   not(exists0$test<x0>(x0))
 //
-in
-if
-glseq_forall0<xs><x0>(xs) then false else true
+in//let
+if // if
+glseq_forall0
+<xs><x0>( xs ) then false else true
 end(*let*)//end-of(glseq_exists0/forall0)
+//
+#impltmp
+<xs><x0>
+glseq_exists1
+  (  xs  ) = let
+//
+  #impltmp
+  forall1$test<x0>(x0) =
+  not(exists1$test<x0>(x0))
+//
+in//let
+if // if
+glseq_forall1
+<xs><x0>( xs ) then false else true
+end(*let*)//end-of(glseq_exists1/forall1)
 //
 (* ****** ****** *)
 //
@@ -578,13 +647,14 @@ glseq_append0
 let
 val
 xs1 =
-glseq_strmize<xs><x0>(xs1)
+glseq_strmize0<xs><x0>(xs1)
 val
 xs2 =
-glseq_strmize<xs><x0>(xs2)
+glseq_strmize0<xs><x0>(xs2)
 in//let
+(
   glseq_unstrm_vt<xs><x0>
-  (strm_vt_append<x0>(xs1,xs2))
+  (strm_vt_append0<x0>(xs1, xs2)) )
 end (*let*)//end-[glseq_append0(xs,ys)]
 //
 (* ****** ****** *)
@@ -602,9 +672,10 @@ glseq_rappend0
 glseq_reverse0(xs) =
 let
 val xs =
-glseq_rstrmize<xs><x0>(xs)
+glseq_rstrmize0<xs><x0>(xs)
 in//let
-  glseq_unstrm_vt<xs><x0>( xs )
+(
+  glseq_unstrm_vt<xs><x0>(xs) )
 end(*let*)// end-of(glseq_reverse0(xs))
 //
 (* ****** ****** *)
@@ -639,14 +710,15 @@ glseq_rappend0
   (xs1, xs2) =
 let
 val
-xs1 =
-glseq_strmize<xs><x0>(xs1)
-val
 xs2 =
-glseq_rstrmize<xs><x0>(xs2)
+glseq_strmize0<xs><x0>(xs2)
+val
+xs1 =
+glseq_rstrmize0<xs><x0>(xs1)
 in//let
+(
   glseq_unstrm_vt<xs><x0>
-  (strm_vt_append<x0>(xs1,xs2))
+  (strm_vt_append0<x0>(xs1, xs2)) )
 end(*let*)//end(glseq_rappend0(xs1,xs2))
 //
 (* ****** ****** *)
@@ -674,10 +746,10 @@ end (*let*) // end-of-[ glseq_mul0(xs) ]
 (* ****** ****** *)
 #impltmp
 <x0>
-glseq_add$nil = gl_0<x0> // add-unit
+glseq_add0$nil = gl_0<x0> // add-unit
 #impltmp
 <x0>
-glseq_mul$nil = gl_1<x0> // mul-unit
+glseq_mul0$nil = gl_1<x0> // mul-unit
 (* ****** ****** *)
 //
 #impltmp
@@ -695,7 +767,7 @@ gl_add00<y0>
 //
 in//let
 glseq_foldl0
-<xs><x0><y0>(xs, glseq_add$nil<y0>())
+<xs><x0><y0>(xs, glseq_add0$nil<y0>())
 endlet//end-of-[glseq_map0_add0(xs)/foldl]
 //
 #impltmp
@@ -713,7 +785,7 @@ gl_mul00<y0>
 //
 in//let
 glseq_foldl0
-<xs><x0><y0>(xs, glseq_mul$nil<y0>())
+<xs><x0><y0>(xs, glseq_mul0$nil<y0>())
 endlet//end-of-[glseq_map0_mul0(xs)/foldl]
 //
 (* ****** ****** *)
@@ -895,13 +967,13 @@ glseq_z2forall0
 (
 strm_vt_z2forall0<x0,y0>
 (
-  glseq_strmize<xs><x0>(xs)
+  glseq_strmize0<xs><x0>(xs)
 ,
-  glseq_strmize<ys><y0>(ys))
+  glseq_strmize0<ys><y0>(ys))
 ) (*where*)//end-of-[glseq_z2forall0]
 
 (* ****** ****** *)
-
+//
 #impltmp
 <xs,ys>
 <x0,y0>
@@ -910,11 +982,13 @@ glseq_z2forcmp0
 (
 strm_vt_z2forcmp0<x0,y0>
 (
-  glseq_strmize<xs><x0>(xs)
+  glseq_strmize0<xs><x0>(xs)
 ,
-  glseq_strmize<ys><y0>(ys))
+  glseq_strmize0<ys><y0>(ys))
 ) (*where*)//end-of-[glseq_z2forcmp0]
-
+//
+(* ****** ****** *)
+//
 #impltmp
 <xs,ys>
 <x0,y0>
@@ -923,20 +997,21 @@ glseq_z2forcmp1
 (
 strm_vt_z2forcmp0<x0,y0>
 (
-  glseq_copy_strm<xs><x0>(xs)
+  glseq_copy_lstrm<xs><x0>(xs)
 ,
-  glseq_copy_strm<ys><y0>(ys))
+  glseq_copy_lstrm<ys><y0>(ys))
 ) where
 {
 #impltmp
-z2forcmp0$fcmp<x0,y0>(x0, y0) =
+z2forcmp0$fcmp<x0,y0>
+  (x0, y0) =
 (
-free(x0); free(y0); sgn) where
+g_free(x0); g_free(y0); sgn) where
 {
 val
 sgn = z2forcmp1$fcmp<x0,y0>(x0, y0)}
 } (*where*)//end-of-[glseq_z2forcmp1]
-
+//
 (* ****** ****** *)
 //
 (*
@@ -954,16 +1029,80 @@ glseq_copy = g_copy<xs> // [gseq_copy]
 (* ****** ****** *)
 //
 #impltmp
-{xs:t0}
-{x0:t0}
-glseq_listize<xs><x0> = gseq_listize<xs><x0>
-#impltmp
-{xs:t0}
-{x0:t0}
-glseq_strmize<xs><x0> = gseq_strmize<xs><x0>
+{xs:t0}{x0:t0}
+glseq_strmize0<xs><x0> = gseq_strmize<xs><x0>
+//
 #impltmp
 {xs:t0}{x0:t0}
-glseq_rlistize<xs><x0> = gseq_rlistize<xs><x0>
+glseq_rstrmize0<xs><x0> = gseq_rstrmize<xs><x0>
+//
+(* ****** ****** *)
+//
+(*
+HX-2023-08-14:
+Higher-order glseq-functions
+Mon Aug 14 13:42:54 EDT 2023
+*)
+//
+(* ****** ****** *)
+//
+#impltmp
+<xs:vt>
+<x0:vt>
+<r0:vt>
+glseq_foldl0_c2fr
+( xs, r0, f0 ) =
+(
+glseq_foldl0
+<xs><x0><r0>(xs, r0)) where
+{
+#impltmp
+foldl0$fopr<x0><r0>(r0, x0) = f0(r0, x0)
+}(*where*)//end-of[glseq_foldl0_c2fr(xs,r0,f0)]
+//
+#impltmp
+<xs:vt>
+<x0:vt>
+<r0:vt>
+glseq_foldl1_c2fr
+( xs, r0, f0 ) =
+(
+glseq_foldl1
+<xs><x0><r0>(xs, r0)) where
+{
+#impltmp
+foldl1$fopr<x0><r0>(r0, x0) = f0(r0, x0)
+}(*where*)//end-of[glseq_foldl1_c2fr(xs,r0,f0)]
+//
+(* ****** ****** *)
+//
+#impltmp
+<xs:vt>
+<x0:vt>
+<r0:vt>
+glseq_foldr0_c2fr
+( xs, r0, f0 ) =
+(
+glseq_foldr0
+<xs><x0><r0>(xs, r0)) where
+{
+#impltmp
+foldr0$fopr<x0><r0>(x0, r0) = f0(x0, r0)
+}(*where*)//end-of[glseq_foldr0_c2fr(xs,r0,f0)]
+//
+#impltmp
+<xs:vt>
+<x0:vt>
+<r0:vt>
+glseq_foldr1_c2fr
+( xs, r0, f0 ) =
+(
+glseq_foldr1
+<xs><x0><r0>(xs, r0)) where
+{
+#impltmp
+foldr1$fopr<x0><r0>(x0, r0) = f0(x0, r0)
+}(*where*)//end-of[glseq_foldr1_c2fr(xs,r0,f0)]
 //
 (* ****** ****** *)
 

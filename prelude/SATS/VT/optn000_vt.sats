@@ -37,41 +37,94 @@
 //
 (* ****** ****** *)
 //
-fun<>
-optn_vt_nilq
-{a:vt}{b:b0}
-(xs: !optn_vt(a, b)): bool(b=ff)
-fun<>
-optn_vt_consq
-{a:vt}{b:b0}
-(xs: !optn_vt(a, b)): bool(b=tt)
+(*
+HX:
+these are functions
+instead of constructors
+*)
 //
-(* ****** ****** *)
-
+fun<>
+optn_vt_nil_
+{a:vt}(): optn_vt(a, ff)
 fun
 <a:vt>
-optn_vt_free(~optn_vt(a)): void
-
+optn_vt_cons_
+( x0 : a ): optn_vt(a, tt)
+//
 (* ****** ****** *)
-
+//
+fun
+<a:vt>
+optn_vt_sing(x:a): optn_vt(a,tt)
+//
+(* ****** ****** *)
+//
+fun
+<a:vt>
+optn_vt_free(~optn_vt(a)):(void)
+//
+(* ****** ****** *)
+//
 fun
 <a:vt>
 optn_vt_copy
 {n:b0}
 (xs: !optn_vt(a,n)): optn_vt(a,n)
-
+fun
+<a:vt>
+optn_vt_rcopy
+{n:b0}
+(xs: !optn_vt(a,n)): optn_vt(a,n)
+//
+(* ****** ****** *)
+//
+fun<>
+optn_vt_nilq1
+{a:vt}{n:b0}
+(xs: !optn_vt(a, n)): bool(n=ff)
+fun<>
+optn_vt_consq1
+{a:vt}{n:b0}
+(xs: !optn_vt(a, n)): bool(n=tt)
+//
 (* ****** ****** *)
 //
 fun
 <a:vt>
 optn_vt_length0
-{b:bool}
-(xs: ~optn_vt(a, b)): int(b2i(b))
+{n:b0}
+(xs: ~optn_vt(a,n)): sint(b2i(n))
 fun
 <a:vt>
 optn_vt_length1
-{b:bool}
-(xs: !optn_vt(a, b)): int(b2i(b))
+{n:b0}
+(xs: !optn_vt(a,n)): sint(b2i(n))
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+optn_vt_listize0
+{n:b0}
+(
+xs: ~optn_vt(x0,n)): list_vt(x0,b2i(n))
+fun
+<x0:vt>
+optn_vt_rlistize0
+{n:b0}
+(
+xs: ~optn_vt(x0,n)): list_vt(x0,b2i(n))
+//
+(* ****** ****** *)
+//
+fun
+<x0:vt>
+optn_vt_strmize0
+(xs: ~optn_vt( x0 )): strm_vt(   x0   )
+fun
+<x0:vt>
+optn_vt_rstrmize0
+(xs: ~optn_vt( x0 )): strm_vt(   x0   )
 //
 (* ****** ****** *)
 //
@@ -94,25 +147,28 @@ optn_vt_foreach1(xs: !optn_vt(x0)): void
 (* ****** ****** *)
 //
 fun
-<a:vt>
-optn_vt_listize
-{b:b0}
-(~optn_vt(a, b)): list_vt(a, b2i(b))
+<x0:vt>
+<y0:vt>
+optn_vt_map0
+{n:b0}(xs: ~optn_vt(x0,n)): optn_vt(y0,n)
 fun
-<a:vt>
-optn_vt_strmize
-{b:b0}(xs: ~optn_vt(a, b)): strm_vt(a)
+<x0:vt>
+<y0:vt>
+optn_vt_maprev0
+{n:b0}(xs: ~optn_vt(x0,n)): optn_vt(y0,n)
+//
 (* ****** ****** *)
 //
 fun
-<a:vt>
-optn_vt_rlistize
-{b:b0}
-(~optn_vt(a, b)): list_vt(a, b2i(b))
+<x0:vt>
+<y0:vt>
+optn_vt_map1
+{n:b0}(xs: !optn_vt(x0,n)): optn_vt(y0,n)
 fun
-<a:vt>
-optn_vt_strmize0
-{b:b0}(xs: ~optn_vt(a, b)): strm_vt(a)
+<x0:vt>
+<y0:vt>
+optn_vt_maprev1
+{n:b0}(xs: !optn_vt(x0,n)): optn_vt(y0,n)
 //
 (* ****** ****** *)
 //
@@ -128,14 +184,16 @@ some_vt with optn_vt_cons
 //
 (* ****** ****** *)
 //
+(*
 #symload
-nilq with optn_vt_nilq of 1000
+nilq with optn_vt_nilq1 of 1000
 #symload
-eqzq with optn_vt_nilq of 1000
+consq with optn_vt_consq1 of 1000
+*)
 #symload
-consq with optn_vt_consq of 1000
+nilq1 with optn_vt_nilq1 of 1000
 #symload
-neqzq with optn_vt_consq of 1000
+consq1 with optn_vt_consq1 of 1000
 //
 (* ****** ****** *)
 //
@@ -151,17 +209,49 @@ length1 with optn_vt_length1 of 1000
 (* ****** ****** *)
 //
 #symload
-listize with optn_vt_listize of 1000
+listize0 with optn_vt_listize0 of 1000
 #symload
-listize with optn_vt_strmize of 1000
+listize0 with optn_vt_strmize0 of 1000
 //
 (* ****** ****** *)
 //
 #symload
-rstrmize with optn_vt_rlistize of 1000
+rstrmize0 with optn_vt_rlistize0 of 1000
 #symload
-rlistize with optn_vt_rlistize of 1000
+rlistize0 with optn_vt_rlistize0 of 1000
+//
+(* ****** ****** *)
+//
+(*
+#symload map with optn_vt_map0 of 1000
+*)
+#symload map0 with optn_vt_map0 of 1000
+#symload map1 with optn_vt_map1 of 1000
+//
+(* ****** ****** *)
+//
+(*
+#symload maprev with optn_vt_maprev0 of 1000
+*)
+#symload maprev0 with optn_vt_maprev0 of 1000
+#symload maprev1 with optn_vt_maprev1 of 1000
+//
+(* ****** ****** *)
+//
+(*
+#symload forall with optn_vt_forall0 of 1000
+*)
+#symload forall0 with optn_vt_forall0 of 1000
+#symload forall1 with optn_vt_forall1 of 1000
+//
+(* ****** ****** *)
+//
+(*
+#symload foreach with optn_vt_foreach0 of 1000
+*)
+#symload foreach0 with optn_vt_foreach0 of 1000
+#symload foreach1 with optn_vt_foreach1 of 1000
 //
 (* ****** ****** *)
 
-(* end of [prelude_optn000_vt.sats] *)
+(* end of [ATS3/XANADU_prelude_optn000_vt.sats] *)

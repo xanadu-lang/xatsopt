@@ -103,13 +103,12 @@ strxcon_vt_uncons_cfr
 fun
 <a:vt>
 strm_vt_nil
-((*void*)): strm_vt( a )
+((*void*)): strm_vt(a)
 fun
 <a:vt>
 strm_vt_cons
 ( x0: (a)
-, xs
-: strm_vt(a)): strm_vt( a )
+, xs: strm_vt(a)): strm_vt(a)
 
 (* ****** ****** *)
 
@@ -146,10 +145,10 @@ Sun Jul  3 13:07:07 EDT 2022
 *)
 fun
 <a:vt>
-strm_vt_from(x0:a): strm_vt(a)
+strm_vt_from(x0: a): strm_vt(a)
 fun
 <a:vt>
-strm_vt_from$next(x0: !a): (a)
+strm_vt_from$next(x0: !a): ( a )
 (*
 HX-2022-07-03:
 The default for [$next]:
@@ -172,30 +171,49 @@ strx_vt_from$next(x0) = g_succ(x0)
 //
 fun
 <a:vt>
-strm_vt_length(strm_vt(a)): nint
+strm_vt_length0
+(xs: strm_vt(a)): ( nint )
 //
 (* ****** ****** *)
 //
 fun
 <a:vt>
-strm_vt_listize
-(xs: strm_vt(a)): list_vt(a)
-fun
-<a:vt>
-strm_vt_strmize
+strm_vt_strmize0
 (xs: strm_vt(a)): strm_vt(a)
 //
 fun
 <a:vt>
-strm_vt_rlistize
+strm_vt_listize0
+(xs: strm_vt(a)): list_vt(a)
+fun
+<a:vt>
+strm_vt_rlistize0
 (xs: strm_vt(a)): list_vt(a)
 //
 (* ****** ****** *)
 //
 fun
 <a:vt>
-strx_vt_strmize
+strx_vt_strmize0
 (xs: strx_vt(a)): strm_vt(a)
+//
+(* ****** ****** *)
+//
+fun
+<a:vt>
+strq_vt_strmize0
+(xs: strq_vt(a)): strm_vt(a)
+//
+fun
+<a:vt>
+strq_vt_listize0
+{n:i0}
+(xs: strq_vt(a,n)): list_vt(a,n)
+fun
+<a:vt>
+strq_vt_rlistize0
+{n:i0}
+(xs: strq_vt(a,n)): list_vt(a,n)
 //
 (* ****** ****** *)
 //
@@ -212,17 +230,17 @@ strm_vt_range_lte
 //
 fun
 <a:vt>
-strm_vt_extend
+strm_vt_extend0
 (xs: strm_vt(a), x0: a): strm_vt(a)
 fun
 <a:vt>
-strm_vt_append
+strm_vt_append0
 (strm_vt(a), strm_vt(a)): strm_vt(a)
 (* ****** ****** *)
 //
 fun
 <a:vt>
-strm_vt_concat
+strm_vt_concat0
 (xss: strm_vt(strm_vt(a))): strm_vt(a)
 //
 (* ****** ****** *)
@@ -232,14 +250,14 @@ strm_vt_concat
 //
 fun
 <a:vt>
-strm_vt_prefixq
+strm_vt_prefixq0
 ( xs1: strm_vt(a)
 , xs2: strm_vt(a)): bool//endfun
 //
 (* ****** ****** *)
 fun
 <x0:vt>
-strm_vt_fset_at
+strm_vt_fset0_at
 ( xs: strm_vt(x0)
 , i0: nint, x0: x0): strm_vt(x0)
 (* ****** ****** *)
@@ -247,19 +265,21 @@ strm_vt_fset_at
 fun
 <xs:vt>
 <x0:vt>
-strm_vt_gappend
-  (xs1: xs, xs2: xs): strm_vt(x0)
+strm_vt_gappend0
+(xs1: ~xs, xs2: ~xs): strm_vt(x0)
+//
 fun
 <xs:vt>
 <x0:vt>
-strm_vt_gconcat
+strm_vt_gconcat0
   (xss: strm_vt(xs)): strm_vt(x0)
 //
 (* ****** ****** *)
 //
 fun
 <x0:vt>
-strm_vt_sortedq(strm_vt(x0)): bool
+strm_vt_sortedq0
+  (xs: strm_vt(x0)): bool//end-fun
 //
 (* ****** ****** *)
 //
@@ -334,25 +354,25 @@ strx_vt_filter0
 (* ****** ****** *)
 //
 fun
-<a:vt>
+<x0:vt>
 strm_vt_dropif0
-(xs: strm_vt(a)): strm_vt(a)
+  (xs: strm_vt(x0)): strm_vt(x0)
 //
 fun
-<a:vt>
+<x0:vt>
 strm_vt_takeif0
-(xs: strm_vt(a)): strm_vt(a)
+  (xs: strm_vt(x0)): strm_vt(x0)
 //
 fun
-<a:vt>
+<x0:vt>
 strm_vt_drop0//based on [idrop0]
 ( xs
-: strm_vt(a),n0:sint):strm_vt(a)
+: strm_vt(x0),n0:sint):strm_vt(x0)
 fun
-<a:vt>
+<x0:vt>
 strm_vt_take0//based on [itake0]
 ( xs
-: strm_vt(a),n0:sint):strm_vt(a)
+: strm_vt(x0),n0:sint):strm_vt(x0)
 //
 (* ****** ****** *)
 //
@@ -446,7 +466,7 @@ strx_vt_sieve0
 //
 fun
 <x0:vt>
-strm_vt_group0_list
+strm_vt_group0_llist
 ( xs
 : strm_vt(x0)): strm_vt(list_vt(x0))
 //
@@ -503,12 +523,12 @@ strx_vt_imapopt0
 (* ****** ****** *)
 fun
 <a:vt>
-strm_vt_istrmize
+strm_vt_istrmize0
 ( xs
 : strm_vt(a)): strm_vt(@(nint, a))
 fun
 <a:vt>
-strx_vt_istrmize
+strx_vt_istrmize0
 ( xs
 : strx_vt(a)): strm_vt(@(nint, a))
 (* ****** ****** *)
@@ -554,7 +574,7 @@ strm_vt_z2map0//seq
 fun
 <x0:vt
 ,y0:vt>
-strm_vt_z2strmize
+strm_vt_z2strmize0
 ( xs: strm_vt(x0)
 , ys: strm_vt(y0)): strm_vt(@(x0,y0))
 //
@@ -596,8 +616,10 @@ strm_vt_z2iforeach0
 //
 (* ****** ****** *)
 //
-#symload nil_vt with strmcon_vt_nil
-#symload cons_vt with strmcon_vt_cons
+#symload
+nil_vt with strmcon_vt_nil
+#symload
+cons_vt with strmcon_vt_cons
 //
 (* ****** ****** *)
 //
@@ -607,50 +629,50 @@ strm_vt_z2iforeach0
 //
 (* ****** ****** *)
 //
-#symload length with strm_vt_length of 1000
+#symload
+length0 with strm_vt_length0 of 1000
+(* ****** ****** *)
+#symload
+extend0 with strm_vt_extend0 of 1000
+#symload
+append0 with strm_vt_append0 of 1000
+(* ****** ****** *)
+#symload
+concat0 with strm_vt_concat0 of 1000
+(* ****** ****** *)
+#symload
+prefixq0 with strm_vt_prefixq0 of 1000
+(* ****** ****** *)
+#symload
+gconcat0 with strm_vt_gconcat0 of 1000
+(* ****** ****** *)
+//
+#symload
+listize0 with strm_vt_listize0 of 1000
 //
 (* ****** ****** *)
 //
-(*
-#symload extend with strm_vt_extend of 1000
-#symload append with strm_vt_append of 1000
-#symload concat with strm_vt_concat of 1000
-*)
+#symload
+strmize0 with strm_vt_strmize0 of 1000
+#symload
+strmize0 with strx_vt_strmize0 of 1000
 //
 (* ****** ****** *)
-#symload length0 with strm_vt_length of 1000
-#symload extend0 with strm_vt_extend of 1000
-#symload append0 with strm_vt_append of 1000
-#symload concat0 with strm_vt_concat of 1000
-(* ****** ****** *)
-
-#symload prefixq with strm_vt_prefixq of 1000
-
-(* ****** ****** *)
-
-#symload gconcat with strm_vt_gconcat of 1000
-
-(* ****** ****** *)
 //
-#symload listize with strm_vt_listize of 1000
-//
-(* ****** ****** *)
-#symload strmize with strm_vt_strmize of 1000
-#symload strmize with strx_vt_strmize of 1000
-(* ****** ****** *)
-//
-#symload rlistize with strm_vt_rlistize of 1000
+#symload
+rlistize0 with strm_vt_rlistize0 of 1000
 //
 (* ****** ****** *)
 #symload map0 with strm_vt_map0 of 1000
 #symload map0 with strx_vt_map0 of 1000
 (* ****** ****** *)
 #symload drop0 with strm_vt_drop0 of 1000
-#symload dropif0 with strm_vt_dropif0 of 1000
-#symload idropif0 with strm_vt_idropif0 of 1000
-(* ****** ****** *)
 #symload take0 with strm_vt_take0 of 1000
+(* ****** ****** *)
+#symload dropif0 with strm_vt_dropif0 of 1000
 #symload takeif0 with strm_vt_takeif0 of 1000
+(* ****** ****** *)
+#symload idropif0 with strm_vt_idropif0 of 1000
 #symload itakeif0 with strm_vt_itakeif0 of 1000
 (* ****** ****** *)
 #symload foldl0 with strm_vt_foldl0 of 1000

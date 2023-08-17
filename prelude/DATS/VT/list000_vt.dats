@@ -39,67 +39,6 @@ list_vt_cons(x1, list_vt_nil()))
 //
 (* ****** ****** *)
 
-#impltmp
-<a>(*tmp*)
-list_vt_make_nval
-  (n0, x0) = let
-//
-fnx
-loop{i:nat}.<i>.
-( i0
-: int(i)
-, r0
-: &(?list_vt(a)) >> list_vt(a, i)
-) : void =
-if
-(i0 = 0)
-then
-(r0 := list_vt_nil())
-else let
-  val x1 = g_copy<a>(x0)
-  val () =
-  (r0 := list_vt_cons(x1, _))
-in
-  loop(pred(i0), r0.1); $fold(r0)
-end // end of [else]
-//
-in
-let
-var r0: list_vt(a) in loop(n0, r0); r0
-end
-end (* end of [list_vt_make_nval] *)
-
-(* ****** ****** *)
-
-#impltmp
-<a>(*tmp*)
-list_vt_make_strm = strm_listize<a>
-#impltmp
-<a>(*tmp*)
-list_vt_make_lstrm = strm_vt_listize<a>
-
-(* ****** ****** *)
-//
-#impltmp
-<>(*tmp*)
-list_vt_nilq
-  (xs) =
-(
-case+ xs of
-| !list_vt_nil() => true
-| !list_vt_cons(_, _) => false
-)
-#impltmp
-<>(*tmp*)
-list_vt_consq
-  (xs) =
-(
-case+ xs of
-| !list_vt_nil() => false
-| !list_vt_cons(_, _) => (true)
-)
-//
-(* ****** ****** *)
 //
 #impltmp
 <a>(*tmp*)
@@ -166,7 +105,27 @@ list_vt_rcopy(xs) =
 list_vt_rappend10<a>(xs, list_vt_nil())
 
 (* ****** ****** *)
-
+//
+#impltmp
+<>(*tmp*)
+list_vt_nilq1
+  (xs) =
+(
+case+ xs of
+| !list_vt_nil() => true
+| !list_vt_cons(_, _) => false)
+//
+#impltmp
+<>(*tmp*)
+list_vt_consq1
+  (xs) =
+(
+case+ xs of
+| !list_vt_nil() => false
+| !list_vt_cons(_, _) => (true))
+//
+(* ****** ****** *)
+//
 #impltmp
 <a>(*tmp*)
 list_vt_length1
@@ -188,6 +147,48 @@ list_vt_nil() => ln
 list_vt_cons(_, xs) => loop(xs, ln+1)
 )
 } (*where*) // end of [length_vt_length1]
+//
+(* ****** ****** *)
+
+#impltmp
+<a>(*tmp*)
+list_vt_make_nval
+  (n0, x0) = let
+//
+fnx
+loop{i:nat}.<i>.
+( i0
+: int(i)
+, r0
+: &(?list_vt(a)) >> list_vt(a, i)
+) : void =
+if
+(i0 = 0)
+then
+(r0 := list_vt_nil())
+else let
+  val x1 = g_copy<a>(x0)
+  val () =
+  (r0 := list_vt_cons(x1, _))
+in
+(
+  loop(pred(i0), r0.1); $fold(r0) )
+end // end of [else]
+//
+in
+let
+var r0: list_vt(a) in loop(n0, r0); r0
+end
+end (* end of [list_vt_make_nval] *)
+
+(* ****** ****** *)
+
+#impltmp
+<a>(*tmp*)
+list_vt_make_strm = strm_listize<a>
+#impltmp
+<a>(*tmp*)
+list_vt_make_lstrm = strm_vt_listize0<a>
 
 (* ****** ****** *)
 //
@@ -197,8 +198,10 @@ list_vt_extend0
   (xs, x0) =
 let
 val ys =
-list_vt_sing<a>(x0) in
-list_vt_append0<a>(xs, ys)
+list_vt_sing<a>(x0)
+in//let
+(
+  list_vt_append0<a>(xs, ys) )
 end (*let*)//end-of-(list_vt_extend0(xs))
 //
 (* ****** ****** *)
@@ -565,10 +568,10 @@ end // end of [list_vt_cons]
 //
 #impltmp
 <a>(*tmp*)
-list_vt_listize(xs) = xs
+list_vt_listize0(xs) = xs
 #impltmp
 <a>(*tmp*)
-list_vt_rlistize(xs) =
+list_vt_rlistize0(xs) =
 (
   list_vt_reverse0< a >( xs )
 )
@@ -577,7 +580,7 @@ list_vt_rlistize(xs) =
 
 #impltmp
 <a>(*tmp*)
-list_vt_strmize(xs) =
+list_vt_strmize0(xs) =
 let
 fun
 auxmain
@@ -593,7 +596,7 @@ list_vt_nil() => strmcon_vt_nil()
 list_vt_cons(x0, xs) =>
   strmcon_vt_cons(x0, auxmain(xs))
 )
-in auxmain(xs) end // list_vt_strmize
+in auxmain(xs) end // list_vt_strmize0
 
 (* ****** ****** *)
 //
@@ -699,7 +702,7 @@ end
   val zs = split(ys, n1)
   val ys = amain(ys, n1)
   val zs = amain(zs, n2)
-}
+} (*where*) // end of [amain(xs, n0)]
 //
 and
 split
@@ -713,11 +716,12 @@ then
 split(ys.1, n1-1)
 else
 let
-val zs = ys.1
-in 
-  ys.1 := list_vt_nil(); zs
-end // end of [else]
-)
+val zs = ys.1 in//let
+(
+ys.1 :=
+list_vt_nil<a>(); zs)
+endlet // end of [else]
+) (* ift *) // end of [split(ys, n1)]
 //
 and
 merge
@@ -749,7 +753,7 @@ let
 val nd = ys
 val ys = ys1
 val () = $fold(zs)
-in
+in//let
   xs := nd;
   merge(ys, zs, xs.1); $fold(xs)
 end
@@ -758,17 +762,18 @@ let
 val nd = zs
 val zs = zs1
 val () = $fold(ys)
-in
+in//let
   xs := nd;
   merge(ys, zs, xs.1); $fold(xs)
 end
 end // list_vt_cons
-) (* list_vt_cons] *)
-) (* end of [merge] *)
+) (*case+*) // list_vt_cons(y0,ys1)]
+) (*case+*) // end of [merge(ys,zs,xs)]
 //
-in
-  amain(xs, list_vt_length1<a>(xs))
-end (* end of [list_vt_mergesort0] *)
+in//let
+(
+   amain(xs, list_vt_length1<a>(xs)) )
+end (*let*) // end of [list_vt_mergesort0]
 
 (* ****** ****** *)
 
@@ -787,15 +792,15 @@ auxmain1
 ( xs: xs(n)
 , n0: int(n))
 : strm_vt(xs(n)) =
+(
 if
 n0 >= 2
 then let
 val
 ys = list_vt_nil()
-in
+in//let
 auxmain2(xs, ys, n0, 0)
-end
-else strm_vt_sing( xs )
+end else strm_vt_sing(xs))
 //
 and
 auxmain2
@@ -809,6 +814,7 @@ auxmain2
 $llazy
 (
 case+ xs of
+//
 | ~
 list_vt_nil() =>
 (
@@ -816,8 +822,8 @@ strmcon_vt_nil()
 ) where
 {
 val () =
-list_vt_free<a>(ys)
-}
+list_vt_free<a>(ys)}
+//
 | ~
 list_vt_cons(x0, xs) =>
 let
@@ -837,9 +843,10 @@ strm_vt_map0
 #sexpdef n1 = n0-1
 #impltmp
 map0$fopr
-<xs(n1)><xs(n0)>(xx) = list_vt_cons(x0, xx)
+<xs(n1)>
+<xs(n0)>(xx) = list_vt_cons(x0, xx)
 }
-in
+in//let
 let
   val
   ys =
@@ -847,15 +854,15 @@ let
   val
   res2 =
   auxmain2(xs, ys, i0-1, j0+1)
-in
-  !(strm_vt_append(res1, res2))
-end
-end
-) (* end of [auxmain2] *)
+in//let
+  !(strm_vt_append0(res1, res2)) end
+end//let
+) (*case+*) // end of [auxmain2(...)]
 //
 in
-auxmain1(xs, list_vt_length1<a>(xs))
-end (* end of [list_vt_permutize0] *)
+(
+  auxmain1(xs, list_vt_length1<a>(xs)) )
+end (*let*) // end of [list_vt_permutize0(xs)]
 
 (* ****** ****** *)
 //
@@ -900,7 +907,7 @@ list_vt_cons(x1, xs1) =>
   end // end of [let]
 )
 ) (* end of [auxloop] *)
-} (*where*) // end of [list_vt_prefixq0]
+} (*where*) // end of [list_vt_prefixq0(...)]
 //
 (* ****** ****** *)
 //
@@ -915,7 +922,7 @@ let
   list_vt_reverse0(xs2)
 in
   list_vt_prefixq0<a>(xs1, xs2)
-end (*let*) // end of [list_vt_suffixq0]
+end (*let*) // end of [list_vt_suffixq0(...)]
 //
 (* ****** ****** *)
 (*
@@ -945,12 +952,12 @@ For implementing glseq-ops
 //
 #impltmp
 {a:vt}
-glseq_nilq
-<list_vt(a)><a> = list_vt_nilq{a}
+glseq_nilq1
+<list_vt(a)><a> = list_vt_nilq1{a}
 #impltmp
 {a:vt}
-glseq_consq
-<list_vt(a)><a> = list_vt_consq{a}
+glseq_consq1
+<list_vt(a)><a> = list_vt_consq1{a}
 //
 (* ****** ****** *)
 //
@@ -960,8 +967,8 @@ glseq_uncons_raw
 <list_vt(a)><a>(xs) =
 let
   val x0 = xs.0
-  val () = xs := xs.1 in x0
-end // end-of(glseq_uncons_raw)
+  val () = xs := xs.1 in ( x0 )
+end // end-of(glseq_uncons_raw(xs))
 //
 (* ****** ****** *)
 //
@@ -969,6 +976,9 @@ end // end-of(glseq_uncons_raw)
 {a:vt}
 glseq_copy
 <list_vt(a)><a> = list_vt_copy<a>
+//
+(* ****** ****** *)
+//
 #impltmp
 {a:vt}
 glseq_free
@@ -978,11 +988,11 @@ glseq_free
 //
 #impltmp
 {a:vt}
-glseq_listize
+glseq_listize0
 <list_vt(a)><a>(xs) = xs
 #impltmp
 {a:vt}
-glseq_rlistize
+glseq_rlistize0
 <list_vt(a)><a>(xs) =
 ( list_vt_reverse0<a>( xs ) )
 //
@@ -990,8 +1000,8 @@ glseq_rlistize
 //
 #impltmp
 {a:vt}
-glseq_strmize
-<list_vt(a)><a> = list_vt_strmize<a>
+glseq_strmize0
+<list_vt(a)><a> = list_vt_strmize0<a>
 //
 (* ****** ****** *)
 //
@@ -1025,21 +1035,25 @@ glseq_foreach1
 //
 #impltmp
 {a:vt}
-glseq_map0_list
-<list_vt(a)><a> = list_vt_map0< a >
+{b:vt}
+glseq_map0_llist
+<list_vt(a)><a><b> = list_vt_map0<a><b>
 #impltmp
 {a:vt}
-glseq_map0_rlist
-<list_vt(a)><a> = list_vt_maprev0< a >
+{b:vt}
+glseq_map0_rllist
+<list_vt(a)><a><b> = list_vt_maprev0<a><b>
 //
 #impltmp
 {a:vt}
-glseq_map1_list
-<list_vt(a)><a> = list_vt_map1< a >
+{b:vt}
+glseq_map1_llist
+<list_vt(a)><a><b> = list_vt_map1<a><b>
 #impltmp
 {a:vt}
-glseq_map1_rlist
-<list_vt(a)><a> = list_vt_maprev1< a >
+{b:vt}
+glseq_map1_rllist
+<list_vt(a)><a><b> = list_vt_maprev1<a><b>
 //
 (* ****** ****** *)
 
