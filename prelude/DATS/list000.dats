@@ -45,6 +45,11 @@
 //
 (* ****** ****** *)
 //
+#staload UN =
+"prelude/SATS/unsafex.sats"
+//
+(* ****** ****** *)
+//
 #impltmp
 <>(*tmp*)
 list_nil_
@@ -182,13 +187,13 @@ list_make_strm_vt(xs) =
 //
 #impltmp
 <a>(*tmp*)
-list_make_lstrm(xs) =
+list_make0_lstrm(xs) =
 list_vt2t
-(list_make_lstrm_vt<a>(xs))
+(list_make0_lstrm_vt<a>(xs))
 #impltmp
 <a>(*tmp*)
-list_make_lstrm_vt(xs) =
-(list_vt_make_lstrm<a>(xs))
+list_make0_lstrm_vt(xs) =
+(list_vt_make0_lstrm<a>(xs))
 //
 (* ****** ****** *)
 //
@@ -1036,6 +1041,57 @@ list_map_vt<x0><y0>(xs)) where
 } (*where*)//end-[list_map_f1np_vt(xs,f0)]
 (* ****** ****** *)
 //
+#impltmp
+<x0>(*tmp*)
+list_make_fwork
+  (fwork) =
+list_vt2t
+(list_make_fwork_vt<x0>(fwork))
+#impltmp
+<x0>(*tmp*)
+list_rmake_fwork
+  (fwork) =
+list_vt2t
+(list_rmake_fwork_vt<x0>(fwork))
+//
+#impltmp
+<x0>(*tmp*)
+list_make_fwork_vt
+  (fwork) =
+(
+  list_vt_reverse0<x0>(xs)) where
+{
+val xs = list_rmake_fwork_vt<x0>(fwork) }
+//
+#impltmp
+<x0>(*tmp*)
+list_rmake_fwork_vt
+  (fwork) =
+let
+//
+#vwtpdef
+xs = list_vt(x0)
+//
+var r0: xs =
+list_vt_nil((*0*))
+val p0 = $addr(r0)
+//
+in
+//
+(
+$UN.p2tr_get<xs>(p0)) where
+{
+val () = fwork
+(
+lam//cfr
+(x0:x0):void =>
+$UN.p2tr_set<xs>
+(p0,list_vt_cons(x0,$UN.p2tr_get<xs>(p0))))}
+//  
+end//let//end-of-[list_rmake_fwork_vt(fwork)]
+//
+(* ****** ****** *)
+//
 // For gseq-operations
 //
 (* ****** ****** *)
@@ -1215,10 +1271,39 @@ gseq_map_rllist
 //
 #impltmp
 {a:t0}
-gseq_unstrm<list(a)><a> = list_make_strm<a>
+gseq_make_list
+<list(a)><a>(xs) = xs // identity
+//
 #impltmp
 {a:t0}
-gseq_unstrm_vt<list(a)><a> = list_make_lstrm<a>
+gseq_make_strm
+<list(a)><a>(*xs*) = list_make_strm<a>(*xs*)
+//
+#impltmp
+{a:t0}
+gseq_make0_lstrm
+<list(a)><a>(*xs*) = list_make0_lstrm<a>(*xs*)
+//
+(* ****** ****** *)
+//
+#impltmp
+{a:t0}
+gseq_rmake_list
+<list(a)><a>(*xs*) = list_reverse<a>(*xs*)
+//
+(*
+#impltmp
+{a:t0}
+gseq_rmake_strm
+<list(a)><a>(*xs*) = list_rmake_strm<a>(*xs*)
+*)
+//
+(*
+#impltmp
+{a:t0}
+gseq_rmake0_lstrm
+<list(a)><a>(*xs*) = list_rmake0_lstrm<a>(*xs*)
+*)
 //
 (* ****** ****** *)
 //

@@ -120,17 +120,19 @@ a0ref_set0
 //
 fun
 <a:vt> // copy+get
-a0ref_cget(A0: a0ref(a)): (a)
+a0ref_cget
+  (A0: a0ref(a)): (a)
 fun
-<x0:vt> // set+free
-a0ref_setf(a0ref(x0), x0): void
+<a:vt> // set+free
+a0ref_setf
+  (A0: a0ref(a), x0: a): void
 //
 (* ****** ****** *)
 //
 fun
-<x0:vt>
+<a:vt>
 a0ref_exch
-(a0ref(x0), x0(*new*)): x0(*old*)
+(a0ref(a), a(*new*)): a(*old*)
 //
 (* ****** ****** *)
 //
@@ -166,7 +168,7 @@ a1ref_make_list
 //
 fun
 <a:vt>
-a1ref_make_list_vt
+a1ref_make0_llist
 {n:i0}
 (xs: list_vt(a, n)): a1ref(a, n)
 //

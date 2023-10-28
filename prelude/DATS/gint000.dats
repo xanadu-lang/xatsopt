@@ -141,6 +141,49 @@ gint_consq_uint<>(xs) = (xs >= 1u)
 *)
 //
 (* ****** ****** *)
+//
+#impltmp
+<r0:vwtp>
+gint_foldl_sint
+(xs , r0) =
+loop(x0, r0) where
+{
+//
+val x0 = 0
+//
+#typedef x0 = sint
+//
+fun
+loop(x0: x0, r0: r0): r0 =
+if
+x0 >= xs then r0 else
+loop(x0+1, foldl$fopr<x0><r0>(r0, x0))
+//
+} (*where*) // end-of-[gint_foldl_sint]
+//
+(* ****** ****** *)
+//
+#impltmp
+<r0:vwtp>
+gint_foldr_sint
+(xs , r0) =
+loop(x0, r0) where
+{
+//
+val x0 = xs
+//
+#typedef x0 = sint
+//
+fun
+loop(x0: x0, r0: r0): r0 =
+if
+(x0 <= 0) then r0 else
+(loop
+ (x0-1, foldr$fopr<x0><r0>(x0-1, r0)))
+//
+} (*where*) // end-of-[gint_foldr_sint]
+//
+(* ****** ****** *)
 
 #impltmp
 gint_forall_sint<>
@@ -213,6 +256,26 @@ else true // end-of-[else]
 } (* end of [gint_rforall_sint] *)
 //
 (* ****** ****** *)
+//
+#impltmp
+<>(*tmp*)
+gint_listize_sint
+  {i}(xs) =
+( if
+  (xs <= 0)
+  then list_vt_nil()
+  else gint_listize_nint(xs) )
+//
+#impltmp
+<>(*tmp*)
+gint_rlistize_sint
+  {i}(xs) =
+( if
+  (xs <= 0)
+  then list_vt_nil()
+  else gint_rlistize_nint(xs) )
+//
+(* ****** ****** *)
 
 #impltmp
 <>(*tmp*)
@@ -250,7 +313,7 @@ end // end of [gint_rlistize_nint]
 (* ****** ****** *)
 
 #impltmp
-<y0:vt>
+<y0:vwtp>
 gint_map_llist_nint
   {n}(xs) = let
 //

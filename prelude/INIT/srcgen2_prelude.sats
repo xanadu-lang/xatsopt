@@ -48,8 +48,9 @@
 //
 (* ****** ****** *)
 //
-#include "prelude/SATS/optn000.sats"
+#include "prelude/SATS/arrn000.sats"
 #include "prelude/SATS/list000.sats"
+#include "prelude/SATS/optn000.sats"
 #include "prelude/SATS/strm000.sats"
 #include "prelude/SATS/tupl000.sats"
 //
@@ -78,8 +79,9 @@
 //
 (* ****** ****** *)
 //
-#include "prelude/SATS/VT/optn000_vt.sats"
+#include "prelude/SATS/VT/arrn000_vt.sats"
 #include "prelude/SATS/VT/list000_vt.sats"
+#include "prelude/SATS/VT/optn000_vt.sats"
 #include "prelude/SATS/VT/strm000_vt.sats"
 #include "prelude/SATS/VT/tupl000_vt.sats"
 //
@@ -92,8 +94,16 @@
 #include "prelude/SATS/VT/synoug0_vt.sats"
 (* ****** ****** *)
 //
+(*
+(*
+HX-2023-08-18:
+This does not work as 
+the type definitions in the above included
+files are not yet accessible!
+*)
 #staload
 UNSF(*unsafe*) = "prelude/SATS/unsafex.sats"
+*)
 //
 (* ****** ****** *)
 
