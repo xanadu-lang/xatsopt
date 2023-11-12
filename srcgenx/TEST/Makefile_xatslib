@@ -22,20 +22,20 @@ all:: all_githwxi
 all_libcats:: ; \
 $(XATSOPT) -s $(XATSLIB)/libcats/SATS/libcats.sats
 ######
-all_libcats:: ; \
-$(XATSOPT) -d $(XATSLIB)/libcats/DATS/g00iout.dats
-all_libcats:: ; \
-$(XATSOPT) -d $(XATSLIB)/libcats/DATS/stdiout.dats
-all_libcats:: ; \
-$(XATSOPT) -d $(XATSLIB)/libcats/DATS/fpath00.dats
-all_libcats:: ; \
-$(XATSOPT) -d $(XATSLIB)/libcats/DATS/rand000.dats
-######
 all_githwxi:: ; \
 $(XATSOPT) -s $(XATSLIB)/githwxi/SATS/githwxi.sats
 ######
+all_libcats:: ; \
+$(XATSOPT) -d $(XATSLIB)/githwxi/DATS/genv000.dats
+all_libcats:: ; \
+$(XATSOPT) -d $(XATSLIB)/githwxi/DATS/g00iout.dats
+all_libcats:: ; \
+$(XATSOPT) -d $(XATSLIB)/githwxi/DATS/f00path.dats
+######
 all_githwxi:: ; \
 $(XATSOPT) -d $(XATSLIB)/githwxi/DATS/mygist0.dats
+all_libcats:: ; \
+$(XATSOPT) -d $(XATSLIB)/githwxi/DATS/myrand0.dats
 all_githwxi:: ; \
 $(XATSOPT) -d $(XATSLIB)/githwxi/DATS/mytest0.dats
 ######
@@ -47,4 +47,4 @@ all_githwxi:: ; \
 $(XATSOPT) -d $(XATSLIB)/githwxi/DATS/parcmb1.dats
 ######
 
-###### end of [Makefile_xatslib] ######
+############ end of [Makefile_xatslib] ############
