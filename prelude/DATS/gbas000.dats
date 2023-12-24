@@ -34,7 +34,6 @@ Please do see
 the circular beauty :)
 *)
 //
-(*
 #impltmp
 {a:t0}
 g_equal<a>
@@ -42,7 +41,6 @@ g_equal<a>
 (
 not(g_noteq<a>(x, y))
 )
-*)
 //
 #impltmp
 {a:t0}
@@ -54,10 +52,10 @@ not(g_equal<a>(x, y))
 //
 (* ****** ****** *)
 //
+(*
 #impltmp
 {a:t0}
 g_equal<a> = g_eq<a>
-(*
 #impltmp
 {a:t0}
 g_noteq<a> = g_neq<a>
@@ -65,7 +63,6 @@ g_noteq<a> = g_neq<a>
 //
 (* ****** ****** *)
 //
-(*
 #impltmp
 {a:t0}
 g_eqref<a>
@@ -73,7 +70,6 @@ g_eqref<a>
 (
 not(g_neqrf<a>(x, y))
 )
-*)
 //
 #impltmp
 {a:t0}
@@ -100,38 +96,6 @@ gl_print1<a> = g_print<a>
 (* ****** ****** *)
 //
 #impltmp
-{x0:t0}
-scanl$fopr<x0> = g_add<x0>
-#impltmp
-{x0:t0}
-scanr$fopr<x0> = g_add<x0>
-//
-#impltmp
-{x0:vt}
-scanl0$fopr<x0> = gl_add00<x0>
-#impltmp
-{x0:vt}
-scanl1$fopr<x0> = gl_add01<x0>
-//
-#impltmp
-{x0:vt}
-scanr0$fopr<x0> = gl_add00<x0>
-#impltmp
-{x0:vt}
-scanr1$fopr<x0> = gl_add10<x0>
-//
-(* ****** ****** *)
-//
-#impltmp
-{x0:t0}
-xscanl$fopr<x0><x0> = g_add<x0>
-#impltmp
-{x0:t0}
-xscanr$fopr<x0><x0> = g_add<x0>
-//
-(* ****** ****** *)
-//
-#impltmp
 <x0><y0>
 mapoptn$fopr(x0) =
 if
@@ -142,12 +106,10 @@ then
 ) where
 {
   val y0 =
-  map$fopr<x0><y0>(x0)
-}
+  map$fopr<x0><y0>(x0) }
 else
 (
-  optn_vt_nil((*void*))
-)
+  optn_vt_nil((*void*)) )
 //
 (* ****** ****** *)
 //

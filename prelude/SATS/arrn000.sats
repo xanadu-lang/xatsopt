@@ -48,7 +48,9 @@ Authoremail: gmhwxiATgmailDOTcom
 (* ****** ****** *)
 //
 #abstbox
-a0ref_vt_x0(a:vt)
+a0ref_vt_x0
+(elem:vwtp)
+//
 #typedef
 a0ref(a:vt) = a0ref_vt_x0(a)
 //
@@ -57,23 +59,11 @@ a0ref(a:vt) = a0ref_vt_x0(a)
 (* ****** ****** *)
 //
 #abstbox
-a1ref_vt_i0_x0(a:vt, n:i0)
+a1ref_vt_i0_x0
+(elem:vt,ntot:i0)
 //
 #typedef
-a1ref//
-(a:vt,n:i0) = a1ref_vt_i0_x0(a,n)
-//
-(* ****** ****** *)
-//
-#abstbox
-a1refsz_vt_i0_x0(a:vt, n:i0)
-//
-#typedef
-a1refsz
-(a:vt,n:i0) = a1refsz_vt_i0_x0(a,n)
-//
-#typedef
-a1refsz(a:vt) = [n:i0] a1refsz(a, n)
+a1ref(a:vt,n:i0) = a1ref_vt_i0_x0(a, n)
 //
 (* ****** ****** *)
 // HX: 2-dimensional
@@ -81,14 +71,14 @@ a1refsz(a:vt) = [n:i0] a1refsz(a, n)
 //
 #abstbox
 a2ref_vt_i0_i0_x0
-(a:vt, nrow:i0, ncol:i0)
+(elem:vt,nrow:i0,ncol:i0)
 //
 #typedef
 a2ref
 (a:vt
-,m:i0,n:i0) =
-a2ref_vt_i0_i0_x0(a, m, n)
+,m:i0,n:i0) = a2ref_vt_i0_i0_x0(a, m, n)
 //
+(* ****** ****** *)
 (* ****** ****** *)
 //
 fun
@@ -282,7 +272,7 @@ fun
 <a:vt>
 a1ref_listize
 {n:i0}
-(A0: a1ref(a, n)): list_vt(a,n)
+(A0: a1ref(a, n)): list_vt(a, n)
 //
 (* ****** ****** *)
 //
@@ -290,38 +280,38 @@ fun
 <a:vt>
 a1ref_rlistize
 {n:i0}
-(A0: a1ref(a, n)): list_vt(a,n)
+(A0: a1ref(a, n)): list_vt(a, n)
 //
 (* ****** ****** *)
 //
 fun
 <x0:t0>
 a1ref_forall
-{n:i0}(A0: a1ref(x0, n)): bool
+{n:i0}(A0: a1ref(x0, n)): (bool)
 fun
 <x0:vt>
 a1ref_forall1
-{n:i0}(A0: a1ref(x0, n)): bool
+{n:i0}(A0: a1ref(x0, n)): (bool)
 //
 fun
 <x0:t0>
 a1ref_foreach
-{n:i0}(A0: a1ref(x0, n)): void
+{n:i0}(A0: a1ref(x0, n)): (void)
 fun
 <x0:vt>
 a1ref_foreach1
-{n:i0}(A0: a1ref(x0, n)): void
+{n:i0}(A0: a1ref(x0, n)): (void)
 //
 (* ****** ****** *)
 //
 fun
 <x0:t0>
 a1ref_rforall
-{n:i0}(A0: a1ref(x0, n)): bool
+{n:i0}(A0: a1ref(x0, n)): (bool)
 fun
 <x0:vt>
 a1ref_rforall1
-{n:i0}(A0: a1ref(x0, n)): bool
+{n:i0}(A0: a1ref(x0, n)): (bool)
 //
 (* ****** ****** *)
 //

@@ -42,7 +42,9 @@ Authoremail: gmhwxiATgmailDOTcom
 (* ****** ****** *)
 //
 #absvtbx
-a0ptr_vt_vx(a:vt)
+a0ptr_vt_vx
+(elem:vwtp)
+//
 #vwtpdef
 a0ptr(a:vt) = a0ptr_vt_vx(a)
 //
@@ -51,23 +53,16 @@ a0ptr(a:vt) = a0ptr_vt_vx(a)
 (* ****** ****** *)
 //
 #absvtbx
-a1ptr_vt_i0_vx(a:vt, n:i0)
-//
-#vwtpdef
-a1ptr//
-(a:vt,n:i0) = a1ptr_vt_i0_vx(a,n)
-//
-(* ****** ****** *)
-//
+a1ptr_vt_i0_vx
+(elem:vt,ntot:i0)
 #absvtbx
-a1ptrsz_vt_i0_vx(a:vt, n:i0)
+a1psz_vt_i0_vx
+(elem:vt,ntot:i0)
 //
 #vwtpdef
-a1ptrsz
-(a:vt,n:i0) = a1ptrsz_vt_i0_vx(a,n)
-//
+a1ptr(a:vt,n:i0) = a1ptr_vt_i0_vx(a, n)
 #vwtpdef
-a1ptrsz(a:vt) = [n:i0] a1ptrsz(a, n)
+a1psz(a:vt,n:i0) = a1psz_vt_i0_vx(a, n)
 //
 (* ****** ****** *)
 // HX: 2-dimensional
@@ -75,14 +70,29 @@ a1ptrsz(a:vt) = [n:i0] a1ptrsz(a, n)
 //
 #absvtbx
 a2ptr_vt_i0_i0_vx
-(a:vt, nrow:i0, ncol:i0)
+(elem:vt,nrow:i0,ncol:i0)
+#absvtbx
+a2psz_vt_i0_i0_vx
+(elem:vt,nrow:i0,ncol:i0)
 //
 #vwtpdef
 a2ptr
 (a:vt
-,m:i0,n:i0) =
-a2ptr_vt_i0_i0_vx(a, m, n)
+,m:i0,n:i0) = a2ptr_vt_i0_i0_vx(a, m, n)
+#vwtpdef
+a2psz
+(a:vt
+,m:i0,n:i0) = a2psz_vt_i0_i0_vx(a, m, n)
 //
+(* ****** ****** *)
+(* ****** ****** *)
+//
+#vwtpdef
+a1psz(a:vt) = [n:i0] a1psz(a, n)
+#vwtpdef
+a2psz(a:vt) = [m:i0;n:i0] a2psz(a, m, n)
+//
+(* ****** ****** *)
 (* ****** ****** *)
 //
 fcast
@@ -279,8 +289,21 @@ a1ptr_make_list
 fun
 <a:vt>
 a1ptr_make0_llist
+{n:i0}(list_vt(a,n)): a1ptr(a, n)
+//
+(* ****** ****** *)
+//
+fun
+<a:t0>
+a1ptr_make_listn
 {n:i0}
-(xs: list_vt(a,n)): a1ptr(a, n)
+(list(a,n), sint(n)): a1ptr(a, n)
+//
+fun
+<a:vt>
+a1ptr_make0_llistn
+{n:i0}
+(list_vt(a,n), sint(n)): a1ptr(a, n)
 //
 (* ****** ****** *)
 //
@@ -316,6 +339,9 @@ a1ptr_set_at
 ( A0:
 ! a1ptr(a, n)
 , i0: nintlt(n), x0: a(*new*)): void
+//
+(* ****** ****** *)
+//
 fun
 <a:vt>
 a1ptr_set_at_raw
@@ -408,13 +434,13 @@ a1ptr_print1
 //
 fun
 <a:vt>
-a1ptr_strmize
+a1ptr_strmize0
 {n:i0}
 ( A0:
 ~ a1ptr(a,n), sz: sint(n)): strm_vt(a)
 fun
 <a:vt>
-a1ptr_rstrmize
+a1ptr_rstrmize0
 {n:i0}
 ( A0:
 ~ a1ptr(a,n), sz: sint(n)): strm_vt(a)
@@ -423,13 +449,13 @@ a1ptr_rstrmize
 //
 fun
 <a:vt>
-a1ptr_listize
+a1ptr_listize0
 {n:i0}
 ( A0:
 ~ a1ptr(a,n), sz: sint(n)): list_vt(a,n)
 fun
 <a:vt>
-a1ptr_rlistize
+a1ptr_rlistize0
 {n:i0}
 ( A0:
 ~ a1ptr(a,n), sz: sint(n)): list_vt(a,n)

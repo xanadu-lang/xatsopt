@@ -6,7 +6,7 @@
 
 (*
 ** ATS/Xanadu - Unleashing the Potential of Types!
-** Copyright (C) 2018 Hongwei Xi, ATS Trustful Software, Inc.
+** Copyright (C) 2020 Hongwei Xi, ATS Trustful Software, Inc.
 ** All rights reserved
 **
 ** ATS is free software;  you can  redistribute it and/or modify it under
@@ -27,101 +27,117 @@
 
 (* ****** ****** *)
 //
-// Author: Hongwei Xi
-// Start Time: March, 2020
-// Authoremail: gmhwxiATgmailDOTcom
-//
-(* ****** ****** *)
-//
-#impltmp
-bool_print<>(b0) =
-if
-(b0)
-then g_print<string>("true")
-else g_print<string>("false")
-endif//end-of-[bool_print(b0)]
-//
-(* ****** ****** *)
-//
-#impltmp
-bool_parse<>(rep) =
-(
-case+ rep of
-| "false" => false
-(*
-| "False" => false
-| "FALSE" => false
-| "" => false | "0" => false
-| "ff" => false | "Ff" => false | "FF" => false
-| "nil" => false | "Nil" => false | "NIL" => false
-| "none" => false | "None" => false | "NONE" => false
-| "null" => false | "Null" => false | "NULL" => false
-*)
-| _ (* else *) => true
-)
-//
-(* ****** ****** *)
-//
-#impltmp
-<(*tmp*)>
-bool2sint(b0) =
-(if b0 then 1 else 0)
-//
-(* ****** ****** *)
-//
-#impltmp
-<xy>(*tmp*)
-bool_ifval
-(b0, x1, y2) =
-(if b0 then x1 else y2)
+// For pure arrays in C
 //
 (* ****** ****** *)
 //
 (*
-HX:
-For implementing g-ops
+Author: Hongwei Xi
+Wed Dec 20 22:43:58 EST 2023
+Authoremail: gmhwxiATgmailDOTcom
 *)
 //
 (* ****** ****** *)
+// HX: 1-dimensional
+(* ****** ****** *)
 //
-#impltmp
-g_cmp
-<bool>
-(b1, b2) =
-if (b1)
-then (if b2 then 0 else 1)
-else (if b2 then -1 else 0)
+#abstbox
+a1rsz_vt_i0_x0
+(elem:vt, ntot:i0)
+//
+#typedef
+a1rsz(a:vt,n:i0) = a1rsz_vt_i0_x0(a, n)
+//
+(* ****** ****** *)
+// HX: 2-dimensional
+(* ****** ****** *)
+//
+#abstbox
+a2rsz_vt_i0_i0_x0
+(elem:vt,nrow:i0,ncol:i0)
+//
+#typedef
+a2rsz
+(a:vt
+,m:i0,n:i0) = a2rsz_vt_i0_i0_x0(a, m, n)
+//
+(* ****** ****** *)
+(* ****** ****** *)
+#typedef
+a1rsz(a:vt) = [n:i0] a1rsz(a, n)
+#typedef
+a2rsz(a:vt) = [m:i0;n:i0] a2rsz(a, m, n)
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun<>
+a1rsz_getref
+{a:vt}
+{n:i0}
+(AZ: a1rsz(a, n)): a1ref(a, n)
+//
+fun<>
+a1rsz_length
+{a:vt}
+{n:i0}(AZ: a1rsz(a, n)): nint(n)
 //
 (* ****** ****** *)
 //
-#impltmp
-g_eqref<bool> = g_equal<bool>
-#impltmp
-g_neqrf<bool> = g_noteq<bool>
+fun
+<a:vt>
+a1rsz_make_refsize
+{n:int}
+(a1ref(a, n), sint(n)): a1rsz(a, n)
 //
 (* ****** ****** *)
 //
-#impltmp
-g_print<bool> = bool_print<(*nil*)>
+fun
+<a:t0>
+a1rsz_make_list
+{n:i0}
+( xs: list(a, n) ): a1rsz(a, n)
+//
+fun
+<a:vt>
+a1rsz_make0_llist
+{n:i0}
+(xs: list_vt(a, n)): a1rsz(a, n)
+//
+(* ****** ****** *)
+(* ****** ****** *)
+//
+fun
+<a:vt>
+a1rsz_strmize
+{n:i0}
+(AZ: a1rsz(a, n)): strm_vt(a)
+//
+fun
+<a:vt>
+a1rsz_listize
+{n:i0}
+(AZ: a1rsz(a, n)): list_vt(a, n)
 //
 (* ****** ****** *)
 //
-(*
-HX:
-For implementing
-some verbs in [gbas.sats]
-*)
-//
-#impltmp forall$test<bool>(x0) = x0
-#impltmp forall0$test<bool>(x0) = x0
-#impltmp forall1$test<bool>(x0) = x0
+fun
+<a:vt>
+a1rsz_rlistize
+{n:i0}
+(AZ: a1rsz(a, n)): list_vt(a, n)
 //
 (* ****** ****** *)
 //
-#impltmp exists$test<bool>(x0) = x0
-#impltmp exists0$test<bool>(x0) = x0
-#impltmp exists1$test<bool>(x0) = x0
-//
+fun
+<x0:t0>
+a1rsz_forall
+{n:i0}(A0: a1rsz(x0, n)): (bool)
+fun
+<x0:vt>
+a1rsz_forall1
+{n:i0}(A0: a1rsz(x0, n)): (bool)
+
+(* ****** ****** *)
 (* ****** ****** *)
 
-(* end of [ATS3/XANADU_prelude_bool000.dats] *)
+(* end of [ATS3/XANADU_prelude_arrn001.sats] *)
